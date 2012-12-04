@@ -17,8 +17,9 @@ function init() {
 	stage.addChild(circle);
 	
 	var image = new Image();
-	image.src = "img/spider.png";
-	image.onload = handleImageLoad;	
+	
+	image.onload = handleImageLoad;
+	image.src = "img/spider.png";	
 }
 
 function handleImageLoad(event){
