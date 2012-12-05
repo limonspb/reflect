@@ -19,13 +19,19 @@
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<script src="lib/easeljs-0.5.0.min.js"></script>
-		<script src="lib/filters.js"></script>
-		<script src="main.js"></script>		
+		<script src="extend.js"></script>
+		
+		<script src="cutsprite.js"></script>
+		
+		
+		<script src="main.js"></script>
+		
+				
 	</head>
 
 	<body onLoad="init();">
-		<canvas id="reflectCanvas" width="500" height="500" style="border:1px solid;">
-			alternate contentt
+		<canvas id="reflectCanvas" width="500" height="500" style="border:1px solid;" onclick="onCanvasClick()">
+			alternate content
 		</canvas>
 	</body>
 </html>
