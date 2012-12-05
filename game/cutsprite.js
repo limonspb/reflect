@@ -1,19 +1,20 @@
-function CutSprite(a_img, a_width, a_height, a_numframes){
-	//holder = stage.addChild(new createjs.Container());
+function CutSprite(a_img, a_width, a_height, a_numframes){	
 	CutSprite.superclass.constructor.apply(this, arguments);
 	this.imgs = [];
 	this.bitmaps = [];
 	this.numframes = a_numframes;
 	this.imgWidth = a_width;
 	this.imgHeight = a_height;
-	this.explode = false;
-	//this.x = 0;
-	//this.y = 0;
+	this.averageSize = (a_width+a_height)/2;
+	this.explode = false; //move parts or not
+	
 	var data = {
 			images: [a_img],
 			frames: {width:a_width,height:a_height},			
 		};
+		
 	var spriteSheet = new createjs.SpriteSheet(data);
+	
 	for (var i=0; i<a_numframes; i++){		
 		this.imgs.push( createjs.SpriteSheetUtils.extractFrame(spriteSheet, i) );
 		this.bitmaps.push(new createjs.Bitmap( this.imgs[i] ));
@@ -33,8 +34,9 @@ CutSprite.prototype.placeBitmaps = function(){
 		this.bitmaps[i].regY = this.imgHeight/2;
 		this.bitmaps[i].rotation = 0;
 		this.bitmaps[i].vangle = i*Math.PI*2/this.numframes - Math.PI/2;		
-		this.bitmaps[i].v = 200 + Math.random()*100;
-		this.bitmaps[i].rotationV = Math.random()*12 - 6;				
+		this.bitmaps[i].v = this.averageSize + Math.random()*this.averageSize/2;
+		this.maxRotationSpeedX2 = 6;
+		this.bitmaps[i].rotationV = Math.random()*this.maxRotationSpeedX2 - this.maxRotationSpeedX2/2;				
 	}
 	
 }
@@ -43,12 +45,16 @@ CutSprite.prototype.onTick = function(elapsedTime){
 	if (! this.explode) return;
 	for (var i=0; i<this.numframes; i++){
 		if (this.bitmaps[i].v > 0){
-			this.bitmaps[i].v-=elapsedTime/1000 * 600;	
+			this.bitmaps[i].v-=elapsedTime/1000 * this.averageSize*3;
 		}else{
 			this.bitmaps[i].v = 0;			
 		}
-		if (this.bitmaps[i].rotationV>0){
-			this.bitmaps[i].rotationV-=elapsedTime/1000 * 12;
+		
+		if (Math.abs(this.bitmaps[i].rotationV)>elapsedTime/1000 * this.maxRotationSpeedX2){
+			this.bitmaps[i].rotationV =
+				this.bitmaps[i].rotationV
+					- (this.bitmaps[i].rotationV > 0)*elapsedTime/1000 * this.maxRotationSpeedX2
+					+ (this.bitmaps[i].rotationV < 0)*elapsedTime/1000 * this.maxRotationSpeedX2;
 		}else{
 			this.bitmaps[i].rotationV = 0;
 		}

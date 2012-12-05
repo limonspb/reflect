@@ -13,41 +13,19 @@ function init() {
 	
 	var image = new Image();
 	image.src = "img/spider.png";
-	image.onload = handleImageLoad;
-	
-	
-	// stage.addChild(new createjs.Shape()).setTransform(100,100).graphics.f("red").dc(0,0,50);
+	image.onload = handleImageLoad;	
 }
 
 function handleImageLoad(event){
 	var image = event.target;
-	var bitmap;
-	
-	
-	
-	var data = {
-			images: [image],
-			frames: {width:64,height:64},
-			//animations: {www:[0,3]}
-		};
-	var spriteSheet = new createjs.SpriteSheet(data);
-	img = createjs.SpriteSheetUtils.extractFrame(spriteSheet, 3);
-	
-	bitmap = new createjs.Bitmap(img);
-	bitmap.x = 100;
-	stage.addChild(bitmap);
 	
 	test = new CutSprite(image,200,200,9);
 	test.x = 200;
 	test.y = 200;	
-	stage.addChild(test);
-	
-	
+	stage.addChild(test);	
 	
 	createjs.Ticker.addListener(window);	
-	createjs.Ticker.setFPS(60);
-	
-	
+	createjs.Ticker.setFPS(60);	
 }
 
 function onCanvasClick(){
@@ -62,8 +40,6 @@ function onCanvasClick(){
 			
 			
 function tick(elapsedTime) {
-	// time based
-	//elapsedTime
 	circle.vy+=400*elapsedTime/1000;
 	circle.y+=circle.vy*elapsedTime/1000;
 	circle.x+=circle.vx*elapsedTime/1000;
@@ -71,7 +47,6 @@ function tick(elapsedTime) {
 	if (circle.x > stage.canvas.width-50) { circle.x = stage.canvas.width-50; circle.vx = -circle.vx;}
 	if (circle.x < 50) { circle.x = 50; circle.vx = -circle.vx;}
 	if (circle.y > stage.canvas.height-50) {circle.y = stage.canvas.height-50; circle.vy = -circle.vy;}
-	//test.tick(elapsedTime);		
 	
 	stage.update(elapsedTime);
 }			
