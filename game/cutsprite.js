@@ -1,3 +1,7 @@
+//
+//CutSprite - a class for exploding based on png images - peaces of the sprite
+//
+
 function CutSprite(a_img, a_width, a_height, a_numframes){	
 	CutSprite.superclass.constructor.apply(this, arguments);
 	this.imgs = [];
