@@ -1,6 +1,3 @@
-/**
- * @author limon
- */
 var stage, circle, filter, test;
 function init() {
 	stage = new createjs.Stage("reflectCanvas");
