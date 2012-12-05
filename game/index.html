@@ -19,8 +19,11 @@
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<script src="lib/easeljs-0.5.0.min.js"></script>
+		<script src="lib/preloadjs-0.2.0.min.js"></script>
 		<script src="extend.js"></script>
 		
+		<script src="Global.js"></script>
+		<script src="Camera.js"></script>
 		<script src="cutsprite.js"></script>
 		
 		
@@ -29,8 +32,8 @@
 				
 	</head>
 
-	<body onLoad="init();">
-		<canvas id="reflectCanvas" width="500" height="500" style="border:1px solid;" onclick="onCanvasClick()">
+	<body onLoad="init();" onkeydown="bodyKeyDown(event)" onkeyup="bodyKeyUp(event)">
+		<canvas id="reflectCanvas" style="border:1px solid;" width="700px" height="500px" onclick="onCanvasClick()">
 			alternate content
 		</canvas>
 	</body>
