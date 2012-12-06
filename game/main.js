@@ -92,11 +92,11 @@ function handleFileError(event) {
 	console.log('error');
 }
 
-function bodyKeyDown(){
+function bodyKeyDown(event){
 	keys[event.keyCode] = true;
 }
 
-function bodyKeyUp(){
+function bodyKeyUp(event){
 	keys[event.keyCode] = false;
 }
 
