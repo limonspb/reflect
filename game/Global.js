@@ -5,5 +5,6 @@ var global = {
 	gameWidth:0,
 	gameHeight:0,
 	levelWidth:1500,
-	levelHeight:1500
+	levelHeight:1500,
+	preloader : null
 };

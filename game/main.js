@@ -6,32 +6,31 @@ var keys = [];
 var circle, filter, test;
 
 
-var greenImgs = [
+global.preloader.sources = [
 	"img/image0.jpg",
     "img/image1.jpg",
     "img/image2.jpg",
-    "img/image3.jpg"    
+    "img/spider.png",
+    "img/image3.jpg"       
+];
+global.preloader.names = [
+	"name0",
+	"name1",
+	"name2",
+	"spider",
+	"name3"
+	
 ];
 
 var map = new Array();
-var preload;
-var loader;
-var manifest = new Array();
+
 
 function init() {
-	manifest = greenImgs.slice(0);
-	console.log(manifest.length);
 	
-	preload = new createjs.PreloadJS();
-			preload.onFileLoad = handleFileLoad;
-			preload.onProgress = handleOverallProgress;
-			preload.onFileProgress = handleFileProgress;
-			preload.onError = handleFileError;
-			preload.setMaxConnections(5);	
-	
-	while (manifest.length > 0) {
-				loadAnother();
-	}	
+
+	global.preloader.onComplete = handleImageLoad;
+	global.preloader.onProgress = function(prg){ console.log("OLOLO : "+prg.toString())};
+	global.preloader.go();
 	
 	
 	global.canvas = document.getElementById("reflectCanvas");
@@ -46,50 +45,7 @@ function init() {
 	circle.vy = 0;	
 				
 	circle.shadow = new createjs.Shadow("#454", 10, 15, 14);
-	global.stage.addChild(circle);
-	
-	var image = new Image();
-	
-	image.onload = handleImageLoad;
-	image.src = "img/spider.png";	
-	
-	
-	
-	
-	
-}
-
-
-function loadAnother() {
-			// Get the next manifest item, and load it
-			var item = manifest.shift();
-			preload.loadFile(item);
-
-		}
-
-function handleFileLoad(event) {
-			
-			// Get a reference to the loaded image (<img/>)
-			var img = event.result;
-			console.log('image loaded');
-}
-
-
-function handleOverallProgress(event) {
-			console.log('TOTAL: '+preload.progress);
-			
-			
-			
-}
-
-
-function handleFileProgress(event) {
-		
-}
-
-
-function handleFileError(event) {
-	console.log('error');
+	global.stage.addChild(circle);	
 }
 
 function bodyKeyDown(event){
@@ -101,16 +57,15 @@ function bodyKeyUp(event){
 }
 
 function handleImageLoad(event){
-	var image = event.target;
 	
-	test = new CutSprite(image,200,200,9);
+	
+	test = new CutSprite(global.preloader.imgs.spider,200,200,9);
 	test.x = 200;
 	test.y = 200;	
 	global.stage.addChild(test);	
 	
 	createjs.Ticker.addListener(window);	
 	createjs.Ticker.setFPS(60);	
-	
 }
 
 
