@@ -5,38 +5,19 @@
 var keys = [];
 var circle, filter, test;
 
-
-global.preloader.sources = [
-	"img/image0.jpg",
-    "img/image1.jpg",
-    "img/image2.jpg",
-    "img/spider.png",
-    "img/image3.jpg"       
-];
-global.preloader.names = [
-	"name0",
-	"name1",
-	"name2",
-	"spider",
-	"name3"
-	
-];
-
 var map = new Array();
 
-
-function init() {
-	
-
-	global.preloader.onComplete = handleImageLoad;
-	global.preloader.onProgress = function(prg){ console.log("OLOLO : "+prg.toString())};
-	global.preloader.go();
-	
-	
+function init() {	
 	global.canvas = document.getElementById("reflectCanvas");
+	global.canvas.height = $(window).height()-8;
+	global.canvas.width = $(window).width()-8;
 	global.stage = new createjs.Stage(global.canvas);
 	global.gameWidth = global.canvas.width;
 	global.gameHeight = global.canvas.height;
+	
+	global.preloader.onComplete = handleImageLoad;
+	global.preloader.go();	
+	
 	circle = new createjs.Shape();
 	circle.graphics.beginFill("red").drawCircle(0, 0, 50);
 	circle.x = 181;
@@ -81,12 +62,7 @@ function onCanvasClick(){
 			
 			
 function tick(elapsedTime) {
-	//console.log('tick');
-
 	circle.vy+=400*elapsedTime/1000;
-	
-//	circle.y+=circle.vy*elapsedTime/1000;
-//	circle.x+=circle.vx*elapsedTime/1000;
 
 	if (keys[87]){
 		circle.y-=6;
@@ -99,11 +75,7 @@ function tick(elapsedTime) {
 	}
 	if (keys[68]){
 		circle.x+=6;
-	}
-				
-	//if (circle.x > global.stage.canvas.width-50) { circle.x = global.stage.canvas.width-50; circle.vx = -circle.vx;}
-	//if (circle.x < 50) { circle.x = 50; circle.vx = -circle.vx;}
-	//if (circle.y > global.stage.canvas.height-50) {circle.y = global.stage.canvas.height-50; circle.vy = -circle.vy;}
+	}				
 	
 	global.camera.setLookAt(circle.x,circle.y);
 	global.camera.applyTransform();

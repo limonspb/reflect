@@ -18,11 +18,19 @@
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel='stylesheet' type='text/css' href='style.css'>
+
+		
 		<script src="lib/easeljs-0.5.0.min.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
 		<script src="lib/preloadjs-0.2.0.min.js"></script>
 		<script src="extend.js"></script>
+		<script src="functions.js"></script>
 		
 		<script src="Global.js"></script>
+		<script src="BaseScene.js"></script>
+		<script src="SceneController.js"></script>
+		
 		<script src="Preload.js"></script>
 		<script src="Camera.js"></script>
 		<script src="cutsprite.js"></script>
@@ -34,8 +42,17 @@
 	</head>
 
 	<body onLoad="init();" onkeydown="bodyKeyDown(event)" onkeyup="bodyKeyUp(event)">
-		<canvas id="reflectCanvas" style="border:1px solid;" width="700px" height="500px" onclick="onCanvasClick()">
+		<canvas id="reflectCanvas" width="700px" height="500px" onclick="onCanvasClick()">
 			alternate content
 		</canvas>
+		<div id="preloader">
+				<div id = "loading">
+					Loading, please wait...
+				</div>
+			<div id="backBar">
+				<div id = "bar">
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

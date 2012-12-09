@@ -1,0 +1,48 @@
+*{
+	margin : 0px;
+	padding : 0px;
+	font-family:Helvetica,arial;
+}
+
+body{
+	margin : 0px;
+	padding : 0px;	
+}
+
+#reflectCanvas{
+	border:1px solid;
+}
+
+#preloader{
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	width : 100%;
+	height : 100%;
+	border : 0px solid;
+}
+
+#backBar{
+	width : 300px;
+	height : 30px;
+	margin-left : auto;
+	margin-right : auto;
+	
+	background-color : #DDDDDD;
+	border : 1px solid #00AA00;
+}
+#loading{
+	width : 300px;
+	
+	margin-left : auto;
+	margin-right : auto;
+	margin-top : 80px;
+	
+		
+}
+
+#bar{
+	width : 0px;
+	height : 30px;
+	background-color : #00AA00;
+}

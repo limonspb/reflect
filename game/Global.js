@@ -6,5 +6,6 @@ var global = {
 	gameHeight:0,
 	levelWidth:1500,
 	levelHeight:1500,
-	preloader : null
+	preloader : null,
+	sceneController : null
 };

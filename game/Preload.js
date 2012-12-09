@@ -1,7 +1,8 @@
 function Preloader(){
 	this.sources;
+	this.manifest;
 	this.names;
-	this.imgs = {};
+	this.imgs = {};	
 	
 	this.pr = new createjs.PreloadJS();
 	this.pr.owner = this;
@@ -9,14 +10,15 @@ function Preloader(){
 	this.pr.onProgress = this.onProgress;
 	this.onComplete = null;
 	this.pr.onComplete = function(event){
-		if(event.target.owner.onComplete) event.target.owner.onComplete()
+		$("#preloader").fadeOut();
+		if(event.target.owner.onComplete) event.target.owner.onComplete();		
 	};
 	
 	this.onProgress = null;
 	
 	//this.pr.onFileProgress = handleFileProgress;
 	//this.pr.onError = handleFileError;
-	this.pr.setMaxConnections(5);		
+	this.pr.setMaxConnections(1);		
 };
 
 
@@ -29,8 +31,6 @@ Preloader.prototype.getSourceIndex = function(str){
 
 
 Preloader.prototype.onFileLoad = 	function(event){
-		console.log('file loaded: '+event.id);
-		console.log(event.target.toString());
 		var n = event.target.owner.getSourceIndex(event.id);
 		if (n>=0){
 			event.target.owner.imgs[event.target.owner.names[n]] = event.result;
@@ -39,17 +39,69 @@ Preloader.prototype.onFileLoad = 	function(event){
 
 
 
-Preloader.prototype.go = function(){
-	this.pr.loadManifest(this.sources,true);
+Preloader.prototype.go = function(){	
+	//this.pr.loadManifest(this.sources,true);
+	this.manifest = this.sources.slice(0);
+	
+	while (this.manifest.length > 0) {
+	    var item = this.manifest.shift();
+	    this.pr.loadFile(item);
+    }	
 };
 
-Preloader.prototype.onProgress = function(event){
+Preloader.prototype.onProgress = function(event){	
+	$("#bar").width(event.target.progress*300);
 	if (event.target.owner.onProgress){
 		event.target.owner.onProgress(event.target.progress);
-	}else{
-		console.log('TOTAL: '+event.target.progress);	
-	}
-	
+	}else{		
+	}	
 };
 
 global.preloader = new Preloader();
+
+
+global.preloader.sources = [
+	"img/image0.jpg",
+    "img/image1.jpg",
+    "img/image2.jpg",
+    "img/spider.png",    
+    "img/image3.jpg",   
+	"img/image0.jpg",
+    "img/image1.jpg",
+    "img/image2.jpg",
+    "img/spider.png",    
+    "img/image3.jpg",   
+	"img/image0.jpg",
+    "img/image1.jpg",
+    "img/image2.jpg",
+    "img/spider.png",    
+    "img/image3.jpg",   
+	"img/image0.jpg",
+    "img/image1.jpg",
+    "img/image2.jpg",
+    "img/spider.png",    
+    "img/image3.jpg"   
+];
+global.preloader.names = [
+	"name0",
+	"name1",
+	"name2",
+	"spider",
+	"name3",	
+	"name0",
+	"name1",
+	"name2",
+	"spider",
+	"name3",	
+	"name0",
+	"name1",
+	"name2",
+	"spider",
+	"name3",	
+	"name0",
+	"name1",
+	"name2",
+	"spider",
+	"name3"	
+];
+
