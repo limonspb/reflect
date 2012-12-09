@@ -57,7 +57,7 @@ Preloader.prototype.onProgress = function(event){
 	}	
 };
 
-global.preloader = new Preloader();
+//global.preloader = new Preloader();
 
 
 global.preloader.sources = [

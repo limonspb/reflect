@@ -17,9 +17,10 @@ function init() {
 	global.gameWidth = global.canvas.width;
 	global.gameHeight = global.canvas.height;
 	
-	global.preloader.onComplete = handleImageLoad;
-	global.preloader.go();	
+	global.preloader = new Preloader();
 	
+	global.preloader.onComplete = handleImageLoad;
+	global.preloader.go();
 }
 
 function bodyKeyDown(event){
