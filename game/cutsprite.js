@@ -22,7 +22,7 @@ function CutSprite(a_img, a_width, a_height, a_numframes){
 	for (var i=0; i<a_numframes; i++){		
 		this.imgs.push( createjs.SpriteSheetUtils.extractFrame(spriteSheet, i) );
 		this.bitmaps.push(new createjs.Bitmap( this.imgs[i] ));
-		this.addChild(this.bitmaps[i]);		
+		this.addChild(this.bitmaps[i]);	
 	}	
 	
 	this.placeBitmaps();

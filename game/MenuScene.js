@@ -15,7 +15,10 @@ function MenuScene(){
 	
 	this.bNewGame.y = (global.gameHeight - this.bNewGame.height*3 - 15*2)/2;
 	this.bSettings.y = this.bNewGame.y + this.bNewGame.height + 15;
-	this.bCredits.y = this.bSettings.y + this.bSettings.height + 15; 	
+	this.bCredits.y = this.bSettings.y + this.bSettings.height + 15;
+	
+	this.bCredits.onClick = this.onCreditsClick;
+	this.bNewGame.onClick = this.onNewGameClick;
 }
 extend(MenuScene,BaseScene);
 
@@ -23,4 +26,14 @@ MenuScene.prototype.show = function(){
 	global.stage.addChild(this.cMainMenu);
 }
 
+MenuScene.prototype.hide = function(){
+	global.stage.removeChild(this.cMainMenu);
+}
 
+MenuScene.prototype.onCreditsClick = function(){
+	global.sceneController.switchScene(SceneController.eventTypes.CREDITS);
+}
+
+MenuScene.prototype.onNewGameClick = function(){
+	global.sceneController.switchScene(SceneController.eventTypes.NEW_GAME);
+}
