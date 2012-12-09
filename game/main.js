@@ -12,6 +12,7 @@ function init() {
 	global.canvas.height = $(window).height()-8;
 	global.canvas.width = $(window).width()-8;
 	global.stage = new createjs.Stage(global.canvas);
+	global.stage.enableMouseOver()
 	global.gameWidth = global.canvas.width;
 	global.gameHeight = global.canvas.height;
 	
@@ -26,7 +27,7 @@ function init() {
 	circle.vy = 0;	
 				
 	circle.shadow = new createjs.Shadow("#454", 10, 15, 14);
-	global.stage.addChild(circle);	
+	global.stage.addChild(circle);		
 }
 
 function bodyKeyDown(event){
@@ -38,7 +39,8 @@ function bodyKeyUp(event){
 }
 
 function handleImageLoad(event){
-	
+	global.sceneController = new SceneController();
+	global.sceneController.menuScene.show();
 	
 	test = new CutSprite(global.preloader.imgs.spider,200,200,9);
 	test.x = 200;

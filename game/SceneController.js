@@ -1,5 +1,6 @@
 function SceneController(){
 	this.currentScene;
+	this.menuScene = new MenuScene();
 }
 
 SceneController.prototype.closeCurrent = function(){
@@ -9,6 +10,6 @@ SceneController.prototype.closeCurrent = function(){
 	}
 }
 
-global.sceneController = new SceneController();
+
 
 
