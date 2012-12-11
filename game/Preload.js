@@ -1,8 +1,10 @@
-function Preloader(){
+Preloader = function(){
 	this.sources;
 	this.manifest;
 	this.names;
-	this.imgs = {};	
+	this.imgs = {};
+
+	this.initConstants();
 	
 	this.pr = new createjs.PreloadJS();
 	this.pr.owner = this;
@@ -60,48 +62,51 @@ Preloader.prototype.onProgress = function(event){
 //global.preloader = new Preloader();
 
 
-global.preloader.sources = [
-	"img/image0.jpg",
-    "img/image1.jpg",
-    "img/image2.jpg",
-    "img/spider.png",    
-    "img/back.jpg",   
-	"img/image0.jpg",
-    "img/image1.jpg",
-    "img/image2.jpg",
-    "img/spider.png",    
-    "img/image3.jpg",   
-	"img/image0.jpg",
-    "img/image1.jpg",
-    "img/image2.jpg",
-    "img/spider.png",    
-    "img/image3.jpg",   
-	"img/image0.jpg",
-    "img/image1.jpg",
-    "img/image2.jpg",
-    "img/spider.png",    
-    "img/image3.jpg"   
-];
-global.preloader.names = [
-	"name0",
-	"name1",
-	"name2",
-	"spider",
-	"back",	
-	"name0",
-	"name1",
-	"name2",
-	"spider",
-	"name3",	
-	"name0",
-	"name1",
-	"name2",
-	"spider",
-	"name3",	
-	"name0",
-	"name1",
-	"name2",
-	"spider",
-	"name3"	
-];
+Preloader.prototype.initConstants = function()
+{
+    this.sources = [
+        "img/image0.jpg",
+        "img/image1.jpg",
+        "img/image2.jpg",
+        "img/spider.png",
+        "img/back.jpg",
+        "img/image0.jpg",
+        "img/image1.jpg",
+        "img/image2.jpg",
+        "img/spider.png",
+        "img/image3.jpg",
+        "img/image0.jpg",
+        "img/image1.jpg",
+        "img/image2.jpg",
+        "img/spider.png",
+        "img/image3.jpg",
+        "img/image0.jpg",
+        "img/image1.jpg",
+        "img/image2.jpg",
+        "img/spider.png",
+        "img/image3.jpg"
+    ];
+    this.names = [
+        "name0",
+        "name1",
+        "name2",
+        "spider",
+        "back",
+        "name0",
+        "name1",
+        "name2",
+        "spider",
+        "name3",
+        "name0",
+        "name1",
+        "name2",
+        "spider",
+        "name3",
+        "name0",
+        "name1",
+        "name2",
+        "spider",
+        "name3"
+    ];
+};
 
