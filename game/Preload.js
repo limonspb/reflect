@@ -40,7 +40,6 @@ Preloader.prototype.onFileLoad = 	function(event){
 		if (n>=0){
 			event.target.owner.imgs[event.target.owner.names[n]] = event.result;
 		}		
-		console.log(event.target.owner.names[n]);
 };
 
 
@@ -78,7 +77,7 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/image2.jpg","name2");
    this.addImage("img/spider.png","spider");
    this.addImage("img/back.jpg","back");
-   this.addImage("img/back/pattern.png","BackGround");
+   this.addImage("img/back/pattern.png","pattern");
    this.addImage("img/back/cloud_1.png","cloud_1");
    this.addImage("img/back/cloud_2.png","cloud_2");
    this.addImage("img/back/cloud_3.png","cloud_3");

@@ -10,6 +10,7 @@ function GameScene(){
 	this.hero.x = 300;
 	this.hero.y = 300;
 	
+	this.backGround = new BackGround();
 	
 	this.back = new createjs.Bitmap( global.preloader.imgs.back );
 }
@@ -19,8 +20,9 @@ extend(GameScene,BaseScene);
 GameScene.prototype.show = function(){
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
-	global.stage.addChildAt(this.back,0);	
+	//global.stage.addChildAt(this.back,0);	
 	global.stage.addChild(this.hero);
+	global.stage.addChildAt(this.backGround,0);
 	
 	createjs.Ticker.addListener(this);	
 }
@@ -28,7 +30,8 @@ GameScene.prototype.show = function(){
 GameScene.prototype.hide = function(){
 	$('body').unbind();
 	global.stage.removeChild(this.hero);
-	global.stage.removeChild(this.back);
+	//global.stage.removeChild(this.back);
+	global.stage.removeChild(this.backGround);
 	
 	createjs.Ticker.removeListener(this);
 	global.camera.setLookAt(0,0);
