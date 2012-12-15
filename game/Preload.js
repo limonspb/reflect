@@ -69,44 +69,14 @@ Preloader.prototype.initConstants = function()
         "img/image1.jpg",
         "img/image2.jpg",
         "img/spider.png",
-        "img/back.jpg",
-        "img/image0.jpg",
-        "img/image1.jpg",
-        "img/image2.jpg",
-        "img/spider.png",
-        "img/image3.jpg",
-        "img/image0.jpg",
-        "img/image1.jpg",
-        "img/image2.jpg",
-        "img/spider.png",
-        "img/image3.jpg",
-        "img/image0.jpg",
-        "img/image1.jpg",
-        "img/image2.jpg",
-        "img/spider.png",
-        "img/image3.jpg"
+        "img/back.jpg"
     ];
     this.names = [
         "name0",
         "name1",
         "name2",
         "spider",
-        "back",
-        "name0",
-        "name1",
-        "name2",
-        "spider",
-        "name3",
-        "name0",
-        "name1",
-        "name2",
-        "spider",
-        "name3",
-        "name0",
-        "name1",
-        "name2",
-        "spider",
-        "name3"
+        "back"
     ];
 };
 

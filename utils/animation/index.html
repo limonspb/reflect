@@ -7,24 +7,28 @@
 		<script>
 			var canvas;
 			var stage;
+			var img;
 			function init(){
+				img = new Image();
+				img.src = "1.png";
+				
 				canvas = document.getElementById("animation");
 				stage = new createjs.Stage(canvas);
 				createjs.Ticker.addListener(window);	
-				createjs.Ticker.setFPS(60);
+				createjs.Ticker.setFPS(50);
 				
 				
 				var ss = new createjs.SpriteSheet({ "animations": {
-				"run": [0, 40]},
-				"images": ["1.png"],
+				"run": [0, Math.floor(img.width/img.height)-1]},
+				"images": [img],
 				"frames": {
 					"regX": 0,
 					"regY": 0,
-					"height": 71,
-					"width": 15}
+					"height": img.height,
+					"width": img.height}
 				});
 				
-				ss.getAnimation("run").frequency = 2;
+				ss.getAnimation("run").frequency = 10;
 				
 				var bitmapAnimation = new createjs.BitmapAnimation(ss);
 				bitmapAnimation.scaleY = bitmapAnimation.scaleX = 2;
