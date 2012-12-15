@@ -5,7 +5,13 @@
 
 function EnemyUnit()
 {
-	this.rotationSpeed;
+	EnemyUnit.superclass.constructor.apply(this);
+	
+	this.health = EnemyUnit.superclass.health;
+	this.speed = EnemyUnit.superclass.speed;
+	this.rotationSpeed = EnemyUnit.superclass.rotationSpeed;
+	this.view = EnemyUnit.superclass.view;
+	
 	this.damage;
 	this.bulletType;
 	this.bulletRespawn;
@@ -16,6 +22,11 @@ extend(EnemyUnit,BaseUnit);
 
 
 EnemyUnit.prototype.move = function ()
+{
+	
+}
+
+EnemyUnit.prototype.shoot = function ()
 {
 	
 }

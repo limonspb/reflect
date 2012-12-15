@@ -3,6 +3,7 @@
  */
 
 
+
 function HeroUnit()
 {
 	HeroUnit.superclass.constructor.apply(this);
@@ -18,24 +19,57 @@ function HeroUnit()
 	this.FORWARD = false;
 	this.BACK = false;
 	
-	this.direction;
 	
-	this.setView();
+	this.initView();
 }
+
 
 extend(HeroUnit,BaseUnit);
 
-HeroUnit.prototype.setView = function ()
+/**
+ * Инициализация отображения юнита
+ */
+HeroUnit.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("red").drawRoundRect ( -30 , -20 , 60 , 40 , 10 );
+	this.view = new createjs.Container();
 	
 	
-	this.addChild(this.view);
+	this.body = new createjs.Shape();
+	this.body.graphics.beginFill("red").drawRect ( -20 , -20 , 40 , 40 , 10 );
+	
+	this.sheild = new createjs.Shape();
+	this.sheild.graphics.beginFill("green").drawRect ( 25 , -25 , 10 , 50 , 5 );
+	
+	this.addChild(this.body);
+	
+	this.addChild(this.sheild);
+	
+	//this.addChild(this.view);
 	
 	this.rotationSpeed = 100;
+	//this.speed = 500;
 }
 
+/**
+ * Поворот щита относительно мыши
+ */
+HeroUnit.prototype.mouseMove = function (event) {
+	
+	this.dx = this.x - event.pageX - global.camera.lookAtX;
+	this.dy = this.y - event.pageY - global.camera.lookAtY;
+	
+	//console.log("THIS " + this.x, this.y);
+	//console.log("CLIENT " + event.pageX, event.pageY);
+	
+	this.angle = Math.atan2(this.dy, this.dx)*180/Math.PI;
+	this.sheild.rotation = 180 + this.angle - this.rotation;
+}
+
+
+/**
+ * Движение юнита
+ * @param {Number} elapsedTime	время прошедшее с последнего тика
+ */
 HeroUnit.prototype.move = function (elapsedTime)
 {
 	this.speed = 0;
@@ -59,14 +93,10 @@ HeroUnit.prototype.move = function (elapsedTime)
 		this.rotation += this.rotationSpeed*elapsedTime/1000;
 	}
 	
+	
 	this.angle = this.rotation/180 * Math.PI;
 	
 	
 	this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
 	this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
-}
-
-HeroUnit.prototype.setDirectionMove = function(direction)
-{
-	this.direction = direction;
 }
