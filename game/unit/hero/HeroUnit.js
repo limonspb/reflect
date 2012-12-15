@@ -41,7 +41,7 @@ HeroUnit.prototype.move = function (elapsedTime)
 	this.speed = 0;
 	if (this.FORWARD)
 	{
-		this.speed = 100;
+		this.speed = 300;
 		this.rotationSpeed = Math.abs(this.rotationSpeed);
 	}
 	else if (this.BACK)
