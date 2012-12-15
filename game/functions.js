@@ -9,3 +9,11 @@ function sleep(millisecondi)
         if(now.getTime() > exitTime) return;
     }
 }
+
+// функция генерирует целое случайное число от m до n
+function randomNumber (m,n)
+{
+  m = parseInt(m);
+  n = parseInt(n);
+  return Math.floor( Math.random() * (n - m + 1) ) + m;
+}
