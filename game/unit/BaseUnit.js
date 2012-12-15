@@ -9,6 +9,7 @@ function BaseUnit()
 	this.view;
 }
 
+extend(BaseUnit,createjs.Container);
 
 BaseUnit.prototype.move = function() { }
 BaseUnit.prototype.setView = function() { }

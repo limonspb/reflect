@@ -16,5 +16,6 @@ function Keyboard()
 	
 	this.ESC = 27;
 	this.P = 80;
+	
 	this.M = 77;
 }
