@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EaselJS demo: Time based animation</title>
+	
+	<script src="../../game/lib/easeljs-0.5.0.min.js"></script>
+  	<script src="../../game/lib/jquery-1.8.3.min.js"></script>
+	<script>
+		
+		var stage, timeCircle, tickCircle;
+		var speed;
+		function init() {
+			stage = new createjs.Stage("demoCanvas");
+			
+			timeCircle = new createjs.Shape();
+			timeCircle.graphics.beginFill("red").drawCircle(0, 0, 40);
+			timeCircle.y = 50;
+			stage.addChild(timeCircle);
+			
+			tickCircle = new createjs.Shape();
+			tickCircle.graphics.beginFill("blue").drawCircle(0, 0, 40);
+			tickCircle.y = 150;
+			stage.addChild(tickCircle);
+			
+			//createjs.Ticker.addListener(window);
+			createjs.Ticker.setFPS(50);
+		}
+		
+		function tick(elapsedTime) {
+			// time based
+			timeCircle.x = timeCircle.x + elapsedTime/1000*speed;
+			if (timeCircle.x > stage.canvas.width) { timeCircle.x = 0; }
+			
+			// not time based:
+			tickCircle.x = tickCircle.x + speed/20;  // 100 / 20 = 5
+			if (tickCircle.x > stage.canvas.width) { tickCircle.x = 0; }
+			
+			console.log("total time: "+createjs.Ticker.getTime());
+			
+			stage.update();
+		}
+		function onPlay()
+		{
+			speed = document.getElementById("inputSpeed").value;
+			createjs.Ticker.addListener(window);
+			
+			console.log("total time: "+createjs.Ticker.getTime());
+		}
+		function onStop()
+		{
+			createjs.Ticker.removeListener(window);
+		}
+	</script>
+</head>
+<body onLoad="init();">
+	<input type="text" id="inputSpeed"/>
+	<button name="playBtn" onclick="onPlay();">play</button>
+	<button name="stopBtn" onclick="onStop();">stop</button>
+	<br />
+	
+	<canvas id="demoCanvas" width="800" height="200">
+		alternate content
+	</canvas>
+</body>
+</html>
