@@ -22,7 +22,14 @@ function HeroUnit()
 	
 	this.initView();
 }
-
+$('body').mousemove(this.onMouseMove);
+GameScene.prototype.onMouseMove = function(event)
+{
+	//console.log("move");
+	hero = global.sceneController.gameScene.hero;
+	
+	hero.mouseMove(event);
+}
 
 extend(HeroUnit,BaseUnit);
 
