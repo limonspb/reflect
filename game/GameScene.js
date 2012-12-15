@@ -7,6 +7,9 @@ function GameScene(){
 	//this.circle.shadow = new createjs.Shadow("#454", 5, 5, 14);
 	
 	this.hero = new HeroUnit();
+	this.hero.x = 300;
+	this.hero.y = 300;
+	
 	
 	this.back = new createjs.Bitmap( global.preloader.imgs.back );
 }
@@ -35,13 +38,43 @@ GameScene.prototype.hide = function(){
 
 GameScene.prototype.onBodyKeyDown = function(event){
 	keys[event.keyCode] = true;
-	//console.log(event.keyCode);
+	
+	hero = global.sceneController.gameScene.hero;
+	
+	if (event.keyCode == global.keyboard.W || event.keyCode == global.keyboard.ARROW_UP){
+		hero.FORWARD = true;
+	}
+	if (event.keyCode == global.keyboard.S || event.keyCode == global.keyboard.ARROW_DOWN){
+		hero.BACK = true;
+	}
+	if (event.keyCode == global.keyboard.A || event.keyCode == global.keyboard.ARROW_LEFT){
+		hero.LEFT = true;
+	}
+	if (event.keyCode == global.keyboard.D || event.keyCode == global.keyboard.ARROW_RIGHT){
+		hero.RIGHT = true;
+	}		
+	
 }
 GameScene.prototype.onBodyKeyUp = function(event){
 	keys[event.keyCode] = false;
 	if (event.keyCode == global.keyboard.ESC || event.keyCode == global.keyboard.P){
 		global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 	}
+	
+	hero = global.sceneController.gameScene.hero;
+	
+	if (event.keyCode == global.keyboard.W || event.keyCode == global.keyboard.ARROW_UP){
+		hero.FORWARD = false;
+	}
+	if (event.keyCode == global.keyboard.S || event.keyCode == global.keyboard.ARROW_DOWN){
+		hero.BACK = false;
+	}
+	if (event.keyCode == global.keyboard.A || event.keyCode == global.keyboard.ARROW_LEFT){
+		hero.LEFT = false;
+	}
+	if (event.keyCode == global.keyboard.D || event.keyCode == global.keyboard.ARROW_RIGHT){
+		hero.RIGHT = false;
+	}	
 }
 
 
@@ -49,20 +82,8 @@ GameScene.prototype.onBodyKeyUp = function(event){
 GameScene.prototype.tick = function(elapsedTime){	
 	//this.circle.vy+=400*elapsedTime/1000;
 
-	
+	this.hero.move(elapsedTime);
 
-	if (keys[global.keyboard.W] || keys[global.keyboard.ARROW_UP]){
-		this.hero.y-=6;
-	}
-	if (keys[global.keyboard.S] || keys[global.keyboard.ARROW_DOWN]){
-		this.hero.y+=6;
-	}
-	if (keys[global.keyboard.A] || keys[global.keyboard.ARROW_LEFT]){
-		this.hero.x-=6;
-	}
-	if (keys[global.keyboard.D] || keys[global.keyboard.ARROW_RIGHT]){
-		this.hero.x+=6;
-	}				
 	
 	global.camera.setLookAt(this.hero.x,this.hero.y);
 	global.camera.applyTransform();
