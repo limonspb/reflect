@@ -1,7 +1,8 @@
 Preloader = function(){
-	this.sources;
+	this.sources = [];
 	this.manifest;
-	this.names;
+	this.names = [];
+	
 	this.imgs = {};
 
 	this.initConstants();
@@ -62,23 +63,17 @@ Preloader.prototype.onProgress = function(event){
 //global.preloader = new Preloader();
 
 
-
+Preloader.prototype.addImage = function(src, name){
+	this.sources.push(src);
+	this.names.push(name);
+}
 
 Preloader.prototype.initConstants = function()
 {
-    this.sources = [
-        "img/image0.jpg",
-        "img/image1.jpg",
-        "img/image2.jpg",
-        "img/spider.png",
-        "img/back.jpg"
-    ];
-    this.names = [
-        "name0",
-        "name1",
-        "name2",
-        "spider",
-        "back"
-    ];
+   this.addImage("img/image0.jpg","name0");
+   this.addImage("img/image1.jpg","name1");
+   this.addImage("img/image2.jpg","name2");
+   this.addImage("img/spider.png","spider");
+   this.addImage("img/back.jpg","back");
 };
 
