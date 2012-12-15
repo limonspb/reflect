@@ -62,6 +62,8 @@ Preloader.prototype.onProgress = function(event){
 //global.preloader = new Preloader();
 
 
+
+
 Preloader.prototype.initConstants = function()
 {
     this.sources = [
