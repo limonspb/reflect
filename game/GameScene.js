@@ -38,28 +38,33 @@ GameScene.prototype.hide = function(){
 }
 
 GameScene.prototype.onBodyKeyDown = function(event){
-	keys[event.keyCode] = true;	
+	keys[event.keyCode] = true;
+	//console.log(event.keyCode);
 }
 GameScene.prototype.onBodyKeyUp = function(event){
 	keys[event.keyCode] = false;
-	if (event.keyCode == 27){
+	if (event.keyCode == global.keyboard.ESC || event.keyCode == global.keyboard.P){
 		global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 	}
 }
 
+
+
 GameScene.prototype.tick = function(elapsedTime){	
 	this.circle.vy+=400*elapsedTime/1000;
 
-	if (keys[87]){
+	
+
+	if (keys[global.keyboard.W] || keys[global.keyboard.ARROW_UP]){
 		this.circle.y-=6;
 	}
-	if (keys[83]){
+	if (keys[global.keyboard.S] || keys[global.keyboard.ARROW_DOWN]){
 		this.circle.y+=6;
 	}
-	if (keys[65]){
+	if (keys[global.keyboard.A] || keys[global.keyboard.ARROW_LEFT]){
 		this.circle.x-=6;
 	}
-	if (keys[68]){
+	if (keys[global.keyboard.D] || keys[global.keyboard.ARROW_RIGHT]){
 		this.circle.x+=6;
 	}				
 	

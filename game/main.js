@@ -17,6 +17,7 @@ function init() {
 	global.gameWidth = global.canvas.width;
 	global.gameHeight = global.canvas.height;
 	
+	global.keyboard = new Keyboard();
 	global.preloader = new Preloader();
 	
 	global.preloader.onComplete = handleImageLoad;
