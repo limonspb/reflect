@@ -8,17 +8,32 @@
 			var canvas;
 			var stage;
 			var img;
+			var back;
+			var ss;
+			var count = 0;
+			var backSprite;
 			function init(){
 				img = new Image();
 				img.src = "1.png";
-				
+				img.onload = imageLoad;				
+
+				back = new Image();
+				back.src = "back.png";
+				back.onload = imageLoad;
+			}
+			
+			function imageLoad(){
+				count+=1;
+				if (count!=2) return;
 				canvas = document.getElementById("animation");
 				stage = new createjs.Stage(canvas);
 				createjs.Ticker.addListener(window);	
 				createjs.Ticker.setFPS(50);
+
+				backSprite = new createjs.Bitmap(back);				
+
 				
-				
-				var ss = new createjs.SpriteSheet({ "animations": {
+				ss = new createjs.SpriteSheet({ "animations": {
 				"run": [0, Math.floor(img.width/img.height)-1]},
 				"images": [img],
 				"frames": {
@@ -34,17 +49,24 @@
 				bitmapAnimation.scaleY = bitmapAnimation.scaleX = 2;
 				
 				bitmapAnimation.gotoAndPlay("run");
+				bitmapAnimation.x = 100;
+				bitmapAnimation.y = 100;
+				stage.addChild(bitmapAnimation);
+				stage.addChildAt(backSprite,0);				
 				
-				stage.addChild(bitmapAnimation);				
 			}
 			
 			function tick(dt){
+				ss.getAnimation("run").frequency = document.getElementById("frequency").value;
 				stage.update();				
 			}
 		</script>
 	</head>
 	<body onload="init()">
-		<canvas id="animation">
+		Frequency:<br>
+		<input type="text" id="frequency" value = "10"/>
+		<br>
+		<canvas id="animation" width="500px" height="500px" style="border:1px solid;">
 		</canvas>
 	</body>
 </html>
