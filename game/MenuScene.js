@@ -1,8 +1,8 @@
 function MenuScene(){
 	this.backGround = new BackGround();
 	
-	this.bNewGame = new MenuButton('New game',"#DDD",150);
-	this.bSettings = new MenuButton('Settings',"#DDD",150);
+	this.bNewGame = new MenuButton('Play',"#DDD",150);
+	this.bSettings = new MenuButton('Info',"#DDD",150);
 	this.bCredits = new MenuButton('Credits',"#DDD",150);
 	
 	this.cMainMenu = new createjs.Container();
