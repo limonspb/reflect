@@ -14,6 +14,7 @@ function HeroUnit()
 	this.RIGHT = false;
 	this.FORWARD = false;
 	this.BACK = false;
+	this.bodySize;
 	
 	this.a_c = 0;
 	this.a_c_max_foward = 1000;
@@ -42,7 +43,7 @@ HeroUnit.prototype.initView = function ()
 	this.rotation = 270;
 	this.view = new createjs.Container();
 	
-	
+	this.bodySize = global.preloader.imgs.player.height;
 	this.ss = new createjs.SpriteSheet({ "animations": {
 		"run": [0, 9]},
 		"images": [global.preloader.imgs.player],
@@ -52,10 +53,9 @@ HeroUnit.prototype.initView = function ()
 		"height": global.preloader.imgs.player.height,
 		"width": global.preloader.imgs.player.height
 		}
-	});
-	console.log(global.preloader.imgs.player.width);
+	});	
 				
-	this.ss.getAnimation("run").frequency = 5;
+	this.ss.getAnimation("run").frequency = 0;
 				
 	this.body = new createjs.BitmapAnimation(this.ss);
 				
@@ -142,9 +142,31 @@ HeroUnit.prototype.move = function (elapsedTime)
 	
 	var vx_c = this.v_c * Math.cos(this.angle);
 	var vy_c = this.v_c * Math.sin(this.angle);
+	this.ss.getAnimation("run").frequency = Math.ceil(11 - this.v_c/this.max_v_c_forward * 10);
+	if (this.v_c == 0){
+		this.ss.getAnimation("run").frequency = 100000;
+	}
 	
 	this.x += vx_c*dt;
 	this.y += vy_c*dt;
+	
+	if (this.x<this.bodySize){
+		this.vx_c = 0;
+		this.x = this.bodySize;
+	}else
+	if (this.x> global.levelWidth - this.bodySize){
+		this.vx_c = 0;
+		this.x = global.levelWidth - this.bodySize;
+	}
+
+	if (this.y<this.bodySize){
+		this.vy_c = 0;
+		this.y = this.bodySize;
+	}else
+	if (this.y> global.levelHeight - this.bodySize){
+		this.vy_c = 0;
+		this.y = global.levelHeight - this.bodySize;		
+	}
 	
 	this.rotationSheild();
 }
