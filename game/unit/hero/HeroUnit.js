@@ -15,6 +15,19 @@ function HeroUnit()
 	this.FORWARD = false;
 	this.BACK = false;
 	
+	this.a_c = 0;
+	this.a_c_max_foward = 1000;
+	this.a_c_max_backward = -1000;
+	this.a_c_triction = 500;
+	this.v_c = 0;
+	this.max_v_c_forward = 300; 
+	this.max_v_c_backward = -100;
+	
+	this.ar_c = 0; 
+	this.ar_c_max = 1000; 
+	this.ar_c_triction = 1000;
+	this.vr_c = 0;
+	this.vr_c_max = 300; 
 	
 	this.initView();
 }
@@ -26,11 +39,29 @@ extend(HeroUnit,BaseUnit);
  */
 HeroUnit.prototype.initView = function ()
 {
+	this.rotation = 270;
 	this.view = new createjs.Container();
 	
 	
-	this.body = new createjs.Shape();
-	this.body.graphics.beginFill("red").drawRect ( -20 , -20 , 40 , 40 , 10 );
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 9]},
+		"images": [global.preloader.imgs.player],
+		"frames": {
+		"regX": global.preloader.imgs.player.height/2,
+		"regY": global.preloader.imgs.player.height/2,
+		"height": global.preloader.imgs.player.height,
+		"width": global.preloader.imgs.player.height
+		}
+	});
+	console.log(global.preloader.imgs.player.width);
+				
+	this.ss.getAnimation("run").frequency = 5;
+				
+	this.body = new createjs.BitmapAnimation(this.ss);
+				
+	this.body.gotoAndPlay("run");	
+	this.body.rotation = 90;
+	
 	
 	this.sheild = new createjs.Shape();
 	this.sheild.graphics.beginFill("green").drawRect ( 25 , -25 , 10 , 50 , 5 );
@@ -38,11 +69,8 @@ HeroUnit.prototype.initView = function ()
 	this.addChild(this.body);
 	
 	this.addChild(this.sheild);
-	
-	//this.addChild(this.view);
-	
+		
 	this.rotationSpeed = 200;
-	//this.speed = 500;
 }
 
 
@@ -52,31 +80,71 @@ HeroUnit.prototype.initView = function ()
  */
 HeroUnit.prototype.move = function (elapsedTime)
 {
-	this.speed = 0;
-	if (this.FORWARD)
-	{
-		this.speed = 300;
-		this.rotationSpeed = Math.abs(this.rotationSpeed);
+	var dt = elapsedTime/1000;
+	
+	if (this.FORWARD){
+		this.a_c = this.a_c_max_foward;
 	}
-	else if (this.BACK)
-	{
-		this.speed = -100;
-		this.rotationSpeed = -Math.abs(this.rotationSpeed);
+	else if (this.BACK){
+		this.a_c = this.a_c_max_backward;
+	}else{
+		if (this.v_c > 0){
+			this.a_c = -this.a_c_triction;
+		}else if (this.v_c < 0){
+			this.a_c = this.a_c_triction;			
+		}else{
+			this.a_c = 0;
+		}
 	}
 	
-	if (this.LEFT)
-	{
-		this.rotation -= this.rotationSpeed*elapsedTime/1000;
+	if (this.LEFT){
+		this.ar_c = -this.ar_c_max;	
 	}
-	else if (this.RIGHT)
-	{
-		this.rotation += this.rotationSpeed*elapsedTime/1000;
+	else if (this.RIGHT){
+		this.ar_c = this.ar_c_max;	
+	}else{
+		if (this.vr_c > 0){
+			this.ar_c = -this.ar_c_triction;
+		}else if (this.vr_c < 0){
+			this.ar_c = this.ar_c_triction;			
+		}else{
+			this.ar_c = 0;
+		}		
 	}
 	
-	this.angle = this.rotation/180 * Math.PI;
+	var tempvrc = this.vr_c;
+	this.vr_c += this.ar_c * dt;
+	if (tempvrc * this.vr_c < 0){
+		this.vr_c = 0;
+	}
+	if (this.vr_c > this.vr_c_max ){
+		this.vr_c = this.vr_c_max;
+	}else if (this.vr_c < -this.vr_c_max){
+		this.vr_c = -this.vr_c_max;		
+	}
 	
-	this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
-	this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
+	this.rotation+=this.vr_c * dt;
+	
+	
+	this.angle = this.rotation/180 * Math.PI;	
+	
+	var tempvc = this.v_c;
+	this.v_c += this.a_c * dt;
+	if (tempvc * this.v_c < 0){
+		this.v_c = 0;
+	}
+	if (this.v_c > this.max_v_c_forward){
+		this.v_c = this.max_v_c_forward;
+	}else
+	if (this.v_c < this.max_v_c_backward){
+		this.v_c = this.max_v_c_backward;
+	}
+	
+	var vx_c = this.v_c * Math.cos(this.angle);
+	var vy_c = this.v_c * Math.sin(this.angle);
+	
+	this.x += vx_c*dt;
+	this.y += vy_c*dt;
 	
 	this.rotationSheild();
 }
