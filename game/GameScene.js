@@ -27,9 +27,9 @@ function GameScene(){
 	this.container.addChild(global.hero);
 	
 	
-	this.bullet = global.BulletFactory.getBullet(BulletTypes.SHOT_GUN);
-	this.bullet.init(0,50,250);
-	this.container.addChild(this.bullet);
+	global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
+	
+	this.container.addChild(global.BulletFactory.bulletsCont);
 	
 	
 	this.backGround = new BackGround();
@@ -100,7 +100,7 @@ GameScene.prototype.onBodyKeyUp = function(event){
 
 
 
-GameScene.prototype.tick = function(elapsedTime){	
+GameScene.prototype.tick = function(elapsedTime) {	
 	//this.circle.vy+=400*elapsedTime/1000;
 
 	global.hero.move(elapsedTime);
@@ -110,7 +110,7 @@ GameScene.prototype.tick = function(elapsedTime){
 		this.enemies[i].move(elapsedTime);
 	}
 
-	this.bullet.move(elapsedTime);
+	global.BulletFactory.moveBullets(elapsedTime);
 	
 	global.camera.setLookAt(global.hero.x,global.hero.y);
 	global.camera.applyTransform();

@@ -18,7 +18,7 @@ ShotGunBullet.prototype.init = function(angle, x, y)
 ShotGunBullet.prototype.initView = function(x,y)
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("0").drawRect ( -10 , -5 , 20 , 10);
+	this.view.graphics.beginFill("red").drawRect ( -10 , -5 , 20 , 10);
 	
 	this.addChild(this.view);
 	
@@ -29,7 +29,7 @@ ShotGunBullet.prototype.initView = function(x,y)
 ShotGunBullet.prototype.initOptions = function(angle)
 {
 	this.rotation = angle;
-	this.speed = 10;
+	this.speed = 500;
 	this.type = BulletTypes.SHOT_GUN;
 }
 

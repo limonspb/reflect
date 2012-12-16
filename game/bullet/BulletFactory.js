@@ -6,14 +6,17 @@
 function BulletFactory()
 {
 	this.bullets = [];
+	this.bulletsCont = new createjs.Container();
 }
 
-BulletFactory.prototype.getBullet = function(type)
+
+BulletFactory.prototype.addBullet = function(type, angle, x, y)
 {
+	var bullet;
 	switch(type)
 	{
 		case BulletTypes.SHOT_GUN:
-			return new ShotGunBullet();
+			bullet = new ShotGunBullet();
 			break;
 		case BulletTypes.MACHINE_GUN:
 			
@@ -22,12 +25,36 @@ BulletFactory.prototype.getBullet = function(type)
 			
 			break;
 	}
+	if (bullet)
+	{
+		bullet.init(angle,x,y);
+		this.bulletsCont.addChild(bullet);
+		this.bullets.push(bullet);
+	}
 }
 
 BulletFactory.prototype.moveBullets = function(elapsedTime)
 {
-	for (var i = 0; i < this.bullets.length; ++i)
+	var len = this.bullets.length;
+	for (var i = 0; i < len; ++i)
 	{
 		this.bullets[i].move(elapsedTime);
+		console.log(this.bullets[i].checkOutOfStage());
+		if(!this.bullets[i].checkOutOfStage())
+		{
+			this.bullets[i].x = 50;
+			this.bullets[i].y = 250;
+			this.rotation = 0;
+			
+			console.log(this.bullets[i].x , this.bullets[i].y);
+			
+			/*if (this.bulletsCont.contains(this.bullets[i]))
+			{
+				this.bulletsCont.removeChild(this.bullets[i]);
+				//TODO clear bullet
+				this.bullets.splice(i,1);
+				len--;
+			}*/
+		}
 	}
 }
