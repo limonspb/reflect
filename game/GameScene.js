@@ -14,7 +14,7 @@ function GameScene(){
 	global.hero.x = 300;
 	global.hero.y = 300;
 
-	for (var i = 0; i < 1; ++i)
+	for (var i = 0; i < 10; ++i)
 	{
 		var enemy = global.EnemyFactory.getEnemy(EnemyTypes.SIMPLE_ENEMY);
 		enemy.x = Math.random()*global.gameWidth;
