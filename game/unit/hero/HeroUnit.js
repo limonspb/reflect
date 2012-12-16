@@ -45,7 +45,7 @@ HeroUnit.prototype.initView = function ()
 	
 	//this.addChild(this.view);
 	
-	this.rotationSpeed = 100;
+	this.rotationSpeed = 200;
 	//this.speed = 500;
 }
 

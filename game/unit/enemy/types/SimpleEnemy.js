@@ -7,16 +7,6 @@ function SimpleEnemy()
 {
 	SimpleEnemy.superclass.constructor.apply(this);
 	
-	this.health = SimpleEnemy.superclass.health;
-	this.speed = SimpleEnemy.superclass.speed;
-	this.rotationSpeed = SimpleEnemy.superclass.rotationSpeed;
-	this.view = SimpleEnemy.superclass.view;
-	
-	this.damage = SimpleEnemy.superclass.damage;
-	this.bulletType = SimpleEnemy.superclass.bulletType;
-	this.bulletRespawn = SimpleEnemy.superclass.bulletRespawn;
-	this.range = SimpleEnemy.superclass.range;
-	
 	this.initView();
 }
 
@@ -49,8 +39,8 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 	
 	this.angle = this.rotation/180 * Math.PI;
 	
-	//this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
-	//this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
+	this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
+	this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
 }
 
 SimpleEnemy.prototype.shoot = function ()

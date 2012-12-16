@@ -11,12 +11,11 @@ function GameScene(){
 	global.hero.x = 300;
 	global.hero.y = 300;
 
-	for (var i = 0; i < 10; ++i)
+	for (var i = 0; i < 1; ++i)
 	{
 		var enemy = new SimpleEnemy();
-		enemy.x = Math.random()*600 + 200;
-		enemy.y = Math.random()*600 + 200; 
-		
+		enemy.x = Math.random()*600;
+		enemy.y = Math.random()*600;
 		this.enemies.push(enemy);
 		this.container.addChildAt(enemy,0);
 	}
@@ -24,7 +23,6 @@ function GameScene(){
 	this.backGround = new BackGround();
 
 	this.back = new createjs.Bitmap( global.preloader.imgs.back );
-	
 	
 	
 	this.container.addChild(global.hero);
@@ -99,8 +97,11 @@ GameScene.prototype.tick = function(elapsedTime){
 	//this.circle.vy+=400*elapsedTime/1000;
 
 	global.hero.move(elapsedTime);
-	
-
+		
+	for (var i = 0; i < this.enemies.length; ++i)
+	{
+		this.enemies[i].move(elapsedTime);
+	}
 
 	global.camera.setLookAt(global.hero.x,global.hero.y);
 	global.camera.applyTransform();
