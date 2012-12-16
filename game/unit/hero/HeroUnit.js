@@ -93,6 +93,6 @@ HeroUnit.prototype.rotationSheild = function ()
 	this.dx = this.x - global.stage.mouseX - global.camera.lookAtX;
 	this.dy = this.y - global.stage.mouseY - global.camera.lookAtY;
 	
-	this.angle = Math.atan2(this.dy, this.dx)*180/Math.PI;
-	this.sheild.rotation = 180 + this.angle - this.rotation;
+	this.sheildAngle = Math.atan2(this.dy, this.dx)*180/Math.PI;
+	this.sheild.rotation = 180 + this.sheildAngle - this.rotation;
 }

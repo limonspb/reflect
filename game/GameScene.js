@@ -1,23 +1,35 @@
 
 
 function GameScene(){
-
+	this.container = new createjs.Container();
+	
 	this.keys = [];
 	this.enemies = [];
 
 	
-	this.hero = new HeroUnit();
-	this.hero.x = 300;
-	this.hero.y = 300;
+	global.hero = new HeroUnit();
+	global.hero.x = 300;
+	global.hero.y = 300;
 
-	this.enemy = new SimpleEnemy();
-	this.enemy.x = 500;
-	this.enemy.y = 300;
-
+	for (var i = 0; i < 10; ++i)
+	{
+		var enemy = new SimpleEnemy();
+		enemy.x = Math.random()*600 + 200;
+		enemy.y = Math.random()*600 + 200; 
+		
+		this.enemies.push(enemy);
+		this.container.addChildAt(enemy,0);
+	}
 
 	this.backGround = new BackGround();
 
 	this.back = new createjs.Bitmap( global.preloader.imgs.back );
+	
+	
+	
+	this.container.addChild(global.hero);
+	
+	this.container.addChildAt(this.backGround,0);
 }
 
 extend(GameScene,BaseScene);
@@ -26,17 +38,15 @@ GameScene.prototype.show = function(){
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
 
-	global.stage.addChild(this.hero);
-	global.stage.addChildAt(this.backGround,0);
+	
+	global.stage.addChild(this.container);
 
 	createjs.Ticker.addListener(this);	
 }
 
 GameScene.prototype.hide = function(){
 	$('body').unbind();
-	global.stage.removeChild(this.hero);
-
-	global.stage.removeChild(this.backGround);
+	global.stage.removeChild(this.container);
 
 	createjs.Ticker.removeListener(this);
 	global.camera.setLookAt(0,0);
@@ -47,19 +57,18 @@ GameScene.prototype.hide = function(){
 GameScene.prototype.onBodyKeyDown = function(event){
 	keys[event.keyCode] = true;
 
-	hero = global.sceneController.gameScene.hero;
 
 	if (event.keyCode == global.keyboard.W || event.keyCode == global.keyboard.ARROW_UP){
-		hero.FORWARD = true;
+		global.hero.FORWARD = true;
 	}
 	if (event.keyCode == global.keyboard.S || event.keyCode == global.keyboard.ARROW_DOWN){
-		hero.BACK = true;
+		global.hero.BACK = true;
 	}
 	if (event.keyCode == global.keyboard.A || event.keyCode == global.keyboard.ARROW_LEFT){
-		hero.LEFT = true;
+		global.hero.LEFT = true;
 	}
 	if (event.keyCode == global.keyboard.D || event.keyCode == global.keyboard.ARROW_RIGHT){
-		hero.RIGHT = true;
+		global.hero.RIGHT = true;
 	}		
 
 }
@@ -69,19 +78,18 @@ GameScene.prototype.onBodyKeyUp = function(event){
 		global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 	}
 
-	hero = global.sceneController.gameScene.hero;
 
 	if (event.keyCode == global.keyboard.W || event.keyCode == global.keyboard.ARROW_UP){
-		hero.FORWARD = false;
+		global.hero.FORWARD = false;
 	}
 	if (event.keyCode == global.keyboard.S || event.keyCode == global.keyboard.ARROW_DOWN){
-		hero.BACK = false;
+		global.hero.BACK = false;
 	}
 	if (event.keyCode == global.keyboard.A || event.keyCode == global.keyboard.ARROW_LEFT){
-		hero.LEFT = false;
+		global.hero.LEFT = false;
 	}
 	if (event.keyCode == global.keyboard.D || event.keyCode == global.keyboard.ARROW_RIGHT){
-		hero.RIGHT = false;
+		global.hero.RIGHT = false;
 	}	
 }
 
@@ -90,10 +98,11 @@ GameScene.prototype.onBodyKeyUp = function(event){
 GameScene.prototype.tick = function(elapsedTime){	
 	//this.circle.vy+=400*elapsedTime/1000;
 
-	this.hero.move(elapsedTime);
+	global.hero.move(elapsedTime);
+	
 
 
-	global.camera.setLookAt(this.hero.x,this.hero.y);
+	global.camera.setLookAt(global.hero.x,global.hero.y);
 	global.camera.applyTransform();
 
 

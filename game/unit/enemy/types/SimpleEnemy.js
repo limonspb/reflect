@@ -43,9 +43,14 @@ SimpleEnemy.prototype.initView = function ()
 }
 
 
-SimpleEnemy.prototype.move = function ()
+SimpleEnemy.prototype.move = function (elapsedTime)
 {
+	this.rotation = SimpleEnemy.superclass.getAngleToUnit.apply(this, [global.hero]);
 	
+	this.angle = this.rotation/180 * Math.PI;
+	
+	//this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
+	//this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
 }
 
 SimpleEnemy.prototype.shoot = function ()

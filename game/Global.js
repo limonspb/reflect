@@ -8,5 +8,6 @@ var global = {
 	levelHeight:1500,
 	preloader : null,
 	sceneController : null,
-	keyboard: null
+	keyboard: null,
+	hero: null
 };
