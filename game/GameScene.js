@@ -3,12 +3,17 @@
 function GameScene(){
 
 	this.keys = [];
+	this.enemies = [];
 
-	//this.circle.shadow = new createjs.Shadow("#454", 5, 5, 14);
-
+	
 	this.hero = new HeroUnit();
 	this.hero.x = 300;
 	this.hero.y = 300;
+
+	this.enemy = new SimpleEnemy();
+	this.enemy.x = 500;
+	this.enemy.y = 300;
+
 
 	this.backGround = new BackGround();
 

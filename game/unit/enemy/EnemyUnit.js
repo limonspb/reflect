@@ -20,7 +20,6 @@ function EnemyUnit()
 
 extend(EnemyUnit,BaseUnit);
 
-
 EnemyUnit.prototype.move = function ()
 {
 	
