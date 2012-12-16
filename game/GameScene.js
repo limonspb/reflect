@@ -5,6 +5,7 @@ function GameScene(){
 	
 	global.EnemyFactory = new EnemyFactory();
 	global.BulletFactory = new BulletFactory();
+	global.BonusFactory = new BonusFactory();
 	
 	this.keys = [];
 	this.enemies = [];
@@ -13,8 +14,9 @@ function GameScene(){
 	global.hero = new HeroUnit();
 	global.hero.x = 300;
 	global.hero.y = 300;
+	this.container.addChild(global.hero);
 
-	for (var i = 0; i < 10; ++i)
+	for (var i = 0; i < 0; ++i)
 	{
 		var enemy = global.EnemyFactory.getEnemy(EnemyTypes.SIMPLE_ENEMY);
 		enemy.x = Math.random()*global.gameWidth;
@@ -23,17 +25,14 @@ function GameScene(){
 		this.container.addChildAt(enemy,0);
 	}
 	
-	
-	this.container.addChild(global.hero);
-	
-	
 	global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
-	
 	this.container.addChild(global.BulletFactory.bulletsCont);
+	
+	this.container.addChild(global.BonusFactory.bonusesCont);
+	this.bonusTime = 0;
 	
 	
 	this.backGround = new BackGround();
-	
 	this.container.addChildAt(this.backGround,0);
 }
 
@@ -111,6 +110,15 @@ GameScene.prototype.tick = function(elapsedTime) {
 	}
 
 	global.BulletFactory.moveBullets(elapsedTime);
+	
+	this.bonusTime += elapsedTime;
+	if (this.bonusTime >= 2000)
+	{
+		global.BonusFactory.addBonus(BonusTypes.SMALL_MED_KIT, Math.random()*600, Math.random()*600);
+		this.bonusTime = 0;
+	}
+	
+	
 	
 	global.camera.setLookAt(global.hero.x,global.hero.y);
 	global.camera.applyTransform();
