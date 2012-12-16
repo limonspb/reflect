@@ -45,8 +45,6 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 			this.bullets[i].y = 250;
 			this.rotation = 0;
 			
-			console.log(this.bullets[i].x , this.bullets[i].y);
-			
 			/*if (this.bulletsCont.contains(this.bullets[i]))
 			{
 				this.bulletsCont.removeChild(this.bullets[i]);
