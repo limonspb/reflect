@@ -49,21 +49,6 @@ HeroUnit.prototype.initView = function ()
 	//this.speed = 500;
 }
 
-/**
- * Поворот щита относительно мыши
- */
-HeroUnit.prototype.mouseMove = function (event) {
-	
-	this.dx = this.x - event.pageX - global.camera.lookAtX;
-	this.dy = this.y - event.pageY - global.camera.lookAtY;
-	
-	//console.log("THIS " + this.x, this.y);
-	//console.log("CLIENT " + event.pageX, event.pageY);
-	
-	this.angle = Math.atan2(this.dy, this.dx)*180/Math.PI;
-	this.sheild.rotation = 180 + this.angle - this.rotation;
-}
-
 
 /**
  * Движение юнита
@@ -92,10 +77,22 @@ HeroUnit.prototype.move = function (elapsedTime)
 		this.rotation += this.rotationSpeed*elapsedTime/1000;
 	}
 	
-	
 	this.angle = this.rotation/180 * Math.PI;
-	
 	
 	this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
 	this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
+	
+	this.rotationSheild();
+}
+	
+/**
+ * Поворот щита относительно курсора
+ */
+HeroUnit.prototype.rotationSheild = function ()
+{
+	this.dx = this.x - global.stage.mouseX - global.camera.lookAtX;
+	this.dy = this.y - global.stage.mouseY - global.camera.lookAtY;
+	
+	this.angle = Math.atan2(this.dy, this.dx)*180/Math.PI;
+	this.sheild.rotation = 180 + this.angle - this.rotation;
 }

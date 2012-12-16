@@ -20,7 +20,6 @@ extend(GameScene,BaseScene);
 GameScene.prototype.show = function(){
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
-	$('body').mousemove(this.onMouseMove);
 
 	global.stage.addChild(this.hero);
 	global.stage.addChildAt(this.backGround,0);
@@ -38,14 +37,6 @@ GameScene.prototype.hide = function(){
 	global.camera.setLookAt(0,0);
 	global.camera.applyTransform();
 
-}
-
-GameScene.prototype.onMouseMove = function(event)
-{
-	//console.log("move");
-	hero = global.sceneController.gameScene.hero;
-	
-	hero.mouseMove(event);
 }
 
 GameScene.prototype.onBodyKeyDown = function(event){
@@ -102,5 +93,4 @@ GameScene.prototype.tick = function(elapsedTime){
 
 
 	global.stage.update(elapsedTime);
-
 }
