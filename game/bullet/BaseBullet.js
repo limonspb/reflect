@@ -7,6 +7,10 @@ function BaseBullet()
 {
 	BaseBullet.superclass.constructor.apply(this);
 	
+	this.futureX;
+	this.futureY;
+	this.futureRotation;
+	
 	this.view;
 	this.speed;
 	this.type;

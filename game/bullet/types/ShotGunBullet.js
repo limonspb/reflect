@@ -22,23 +22,24 @@ ShotGunBullet.prototype.initView = function(x,y)
 	
 	this.addChild(this.view);
 	
-	this.x = x;
-	this.y = y;
+	this.x = this.futureX = x;
+	this.y = this.futureY = y;
 }
 
 ShotGunBullet.prototype.initOptions = function(angle)
 {
-	this.rotation = angle;
+	this.rotation = this.futureRotation = angle;
 	this.speed = 500;
 	this.type = BulletTypes.SHOT_GUN;
 }
 
 ShotGunBullet.prototype.move = function(elapsedTime)
 {
-	this.angle = this.rotation/180*Math.PI;
+	this.x = this.futureX;
+	this.y = this.futureY;
+	this.rotation = this.futureRotation;
 	
-	this.x += this.speed*Math.cos(this.angle)*elapsedTime/1000;
-	this.y += this.speed*Math.sin(this.angle)*elapsedTime/1000;
-	
-	//console.log(this.x, this.y);
+	this.angle = this.futureRotation/180*Math.PI;
+	this.futureX += this.speed*Math.cos(this.angle)*elapsedTime/1000;
+	this.futureY += this.speed*Math.sin(this.angle)*elapsedTime/1000;
 }
