@@ -16,90 +16,32 @@ function BackGround(){
 		}		
 	}
 	
-	for (var i = 0; i < 20; i++){		
-		for (var j=1; j<=3; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["cloud_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			var scale = Math.random() + 0.5;
-			temp.scaleX = scale;
-			temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-
-	
-	for (var i = 0; i < 5; i++){		
-		for (var j=1; j<8; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["big_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			var scale = Math.random()/2 + 0.5;
-			temp.scaleX = scale;
-			temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-
-	for (var i = 0; i < 10; i++){		
-		for (var j=1; j<=3; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["lit_mount_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			var scale = Math.random()/3 + 0.7;
-			temp.scaleX = scale;
-			temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-
-	for (var i = 0; i < 10; i++){		
-		for (var j=1; j<=2; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["mount_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			var scale = Math.random()/3 + 0.7;
-			temp.scaleX = scale;
-			temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-
-	for (var i = 0; i < 100; i++){		
-		for (var j=1; j<=2; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["small_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			//var scale = Math.random()/4 + 0.75;
-			//temp.scaleX = scale;
-			//temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-	
-	for (var i = 0; i < 400; i++){		
-		for (var j=3; j<=5; j++){
-			var temp =  new createjs.Bitmap(global.preloader.imgs["small_"+j]);		
-			temp.x = randomNumber(0, global.levelWidth);
-			temp.y = randomNumber(0, global.levelHeight);
-			//temp.rotation = randomNumber(0, 360);
-			//var scale = Math.random()/4 + 0.75;
-			//temp.scaleX = scale;
-			//temp.scaleY = scale;
-			this.addChild(temp);	
-		}		
-	}
-
+	this.addPict("cloud_",20,1,3,false,1, 0.5);
+	this.addPict("big_",5,1,8,false,0.5, 0.5);
+	this.addPict("lit_mount_",10,1,3,false,0.33, 0.7);
+	this.addPict("mount_",10,1,2,false,0.33, 0.7);
+	this.addPict("small_",100,1,2,false,0.25, 0.75);
+	this.addPict("small_",400,3,5,false,0.25, 0.75);
 
 	this.cache(0,0,global.levelWidth,global.levelHeight);
-
-
 }
 
 
 extend(BackGround,createjs.Container);
+
+BackGround.prototype.addPict = function(a_name,N,i_min,i_max,b_rotation,scale_Mult, scale_Summ){
+	for (var i = 0; i < N; i++){		
+		for (var j=i_min; j<=i_max; j++){
+			var temp =  new createjs.Bitmap(global.preloader.imgs[a_name+j.toString()]);		
+			temp.x = randomNumber(0, global.levelWidth);
+			temp.y = randomNumber(0, global.levelHeight);
+			if (b_rotation)
+				temp.rotation = randomNumber(0, 360);				
+			var scale = Math.random()*scale_Mult + scale_Summ;
+			temp.scaleX = scale;
+			temp.scaleY = scale;
+			this.addChild(temp);	
+		}		
+	}	
+	
+}
