@@ -26,9 +26,9 @@ BaseBullet.prototype.blow = function() { }
 
 BaseBullet.prototype.checkOutOfStage = function()
 {
-	if (this.x > global.gameWidth) { return false; }
+	if (this.x > global.levelWidth) { return false; }
 	else if (this.x < 0) { return false; }
-	if (this.y >= global.gameHeight) { return false; }
+	if (this.y >= global.levelHeight) { return false; }
 	else if (this.y < 0) { return false; }
 	
 	return true;

@@ -10,17 +10,8 @@ function EnemyUnit()
 	this.damage;
 	this.bulletType;
 	this.bulletRespawn;
+	this.respawnCount = 0;
 	this.range;
 }
 
 extend(EnemyUnit,BaseUnit);
-
-EnemyUnit.prototype.move = function ()
-{
-	
-}
-
-EnemyUnit.prototype.shoot = function ()
-{
-	
-}
