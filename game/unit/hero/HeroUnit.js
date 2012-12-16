@@ -1,14 +1,8 @@
-/**
- * @author ProBigi
- */
-
-
-
 function HeroUnit()
 {
 	HeroUnit.superclass.constructor.apply(this);
 	
-	this.angle;
+	this.angle;		
 	
 	this.LEFT = false;
 	this.RIGHT = false;
@@ -28,7 +22,11 @@ function HeroUnit()
 	this.ar_c_max = 1000; 
 	this.ar_c_triction = 1000;
 	this.vr_c = 0;
-	this.vr_c_max = 300; 
+	this.vr_c_max = 300;
+	
+	this.shieldWidth;
+	this.shieldHeight;
+	this.shieldDist;
 	
 	this.initView();
 }
@@ -64,7 +62,10 @@ HeroUnit.prototype.initView = function ()
 	
 	
 	this.sheild = new createjs.Shape();
-	this.sheild.graphics.beginFill("green").drawRect ( 25 , -25 , 10 , 50 , 5 );
+	this.shieldWidth = 50;
+	this.shieldHeight = 10;
+	this.shieldDist = 25;
+	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldDist , this.shieldHeight , this.shieldWidth );
 	
 	this.addChild(this.body);
 	
@@ -169,8 +170,9 @@ HeroUnit.prototype.move = function (elapsedTime)
 	}
 	
 	this.rotationSheild();
-}
+	this.reflect();
 	
+}	
 /**
  * Поворот щита относительно курсора
  */
@@ -181,4 +183,20 @@ HeroUnit.prototype.rotationSheild = function ()
 	
 	this.sheildAngle = Math.atan2(this.dy, this.dx)*180/Math.PI;
 	this.sheild.rotation = 180 + this.sheildAngle - this.rotation;
+}
+
+
+HeroUnit.prototype.reflect = function(){		
+	for (var i=0; i<global.BulletFactory.bullets.length; i++){
+		var bullet = global.BulletFactory.bullets[i];
+		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
+			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){
+				this.hardReflect(bullet);		
+			}			
+		}				
+	}
+}
+
+HeroUnit.prototype.hardReflect = function(b){
+	
 }

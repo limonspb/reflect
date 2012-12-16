@@ -78,9 +78,12 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/spider.png","spider");
    this.addImage("img/back.jpg","back");
    this.addImage("img/back/pattern.png","pattern");
-   this.addImage("img/back/cloud_1.png","cloud_1");
-   this.addImage("img/back/cloud_2.png","cloud_2");
-   this.addImage("img/back/cloud_3.png","cloud_3");
+   for (var i=1; i <= 15; i++){
+	   this.addImage("img/back/cloud_"+ i.toString() + ".png","cloud_"+i.toString());   	
+   }
+   for (var i=1; i <= 14; i++){
+	   this.addImage("img/back/line_"+ i.toString() + ".png","line_"+i.toString());   	
+   }
    this.addImage("img/back/big_1.png","big_1");
    this.addImage("img/back/big_2.png","big_2");
    this.addImage("img/back/big_3.png","big_3");
