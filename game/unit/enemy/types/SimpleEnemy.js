@@ -19,7 +19,7 @@ extend(SimpleEnemy,EnemyUnit);
 SimpleEnemy.prototype.initView = function ()
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("blue").drawRect ( -20 , -20 , 40 , 40 , 10 );
+	this.view.graphics.beginFill("blue").drawRect ( -20 , -20 , 40 , 40 );
 	
 	this.addChild(this.view);
 	
@@ -35,7 +35,7 @@ SimpleEnemy.prototype.initView = function ()
 
 SimpleEnemy.prototype.move = function (elapsedTime)
 {
-	this.rotation = SimpleEnemy.superclass.getAngleToUnit.apply(this, [global.hero]);
+	this.rotation = this.getAngleToUnit.apply(this, [global.hero]);
 	
 	this.angle = this.rotation/180 * Math.PI;
 	

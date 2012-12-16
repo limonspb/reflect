@@ -9,5 +9,8 @@ var global = {
 	preloader : null,
 	sceneController : null,
 	keyboard: null,
-	hero: null
+	hero: null,
+	EnemyFactory: null,
+	BulletFactory: null
+	
 };
