@@ -8,8 +8,6 @@ function HeroUnit()
 {
 	HeroUnit.superclass.constructor.apply(this);
 	
-	this.rotationSpeed = HeroUnit.superclass.rotationSpeed;
-	this.view = HeroUnit.superclass.view;
 	this.angle;
 	
 	this.LEFT = false;
