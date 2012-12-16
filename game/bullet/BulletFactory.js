@@ -39,7 +39,6 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 	for (var i = 0; i < len; ++i)
 	{
 		this.bullets[i].move(elapsedTime);
-		console.log(this.bullets[i].checkOutOfStage());
 		if(!this.bullets[i].checkOutOfStage())
 		{
 			this.bullets[i].x = 50;
