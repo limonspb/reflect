@@ -5,7 +5,7 @@ function GameScene(){
 	
 	global.EnemyFactory = new EnemyFactory();
 	global.BulletFactory = new BulletFactory();
-	global.BonusFactory = new BonusFactory();
+	global.BonusManager = new BonusManager();
 	
 	this.keys = [];
 	this.enemies = [];
@@ -38,8 +38,6 @@ function GameScene(){
 	this.container.addChild(global.BulletFactory.bulletsCont);
 	
 	this.container.addChild(global.BonusFactory.bonusesCont);
-	this.bonusTime = 0;
-	
 	
 	this.backGround = new BackGround();
 	this.container.addChildAt(this.backGround,0);
@@ -130,13 +128,8 @@ GameScene.prototype.tick = function(elapsedTime) {
 
 	global.BulletFactory.moveBullets(elapsedTime);
 	
-	this.bonusTime += elapsedTime;
-	if (this.bonusTime >= 2000)
-	{
-		global.BonusFactory.addBonus(BonusTypes.SMALL_MED_KIT, Math.random()*600, Math.random()*600);
-		this.bonusTime = 0;
-	}
 	
+	global.BonusManager.update(elapsedTime);
 	
 	
 	global.camera.setLookAt(global.hero.x,global.hero.y);
