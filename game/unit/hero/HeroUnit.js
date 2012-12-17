@@ -27,15 +27,69 @@ function HeroUnit()
 	this.shieldWidth;
 	this.shieldHeight;
 	this.shieldDist;
+	this.sh_segments = [{},{},{},{}];
 	
 	this.initView();
+	
+	this.sh_TopLeft = {};
+	this.sh_TopRight = {};
+	this.sh_BottomRight = {};
+	this.sh_BottomLeft = {};
 }
 
 extend(HeroUnit,BaseUnit);
 
-/**
- * Инициализация отображения юнита
- */
+HeroUnit.prototype.countShieldCorners = function(){
+	this.sh_TopLeft.x = -this.shieldWidth/2;
+	this.sh_TopLeft.y = -this.shieldDist - this.shieldHeight;
+	
+	this.sh_TopRight.x = this.shieldWidth/2;
+	this.sh_TopRight.y = -this.shieldDist  - this.shieldHeight;
+	
+	this.sh_BottomLeft.x = -this.shieldWidth/2;
+	this.sh_BottomLeft.y = -this.shieldDist;
+	
+	this.sh_BottomRight.x = this.shieldWidth/2;
+	this.sh_BottomRight.y = -this.shieldDist;
+
+	var alpha = (this.sheildAngle-90)/180 * Math.PI;
+	this.sh_TopLeft = rotateVec(this.sh_TopLeft, alpha);
+	this.sh_TopRight = rotateVec(this.sh_TopRight, alpha);	
+	this.sh_BottomLeft = rotateVec(this.sh_BottomLeft, alpha);	
+	this.sh_BottomRight = rotateVec(this.sh_BottomRight,alpha);
+	
+	this.sh_TopLeft.x += this.x;	
+	this.sh_TopRight.x += this.x;	
+	this.sh_BottomLeft.x += this.x;	
+	this.sh_BottomRight.x += this.x;
+		
+	this.sh_TopLeft.y += this.y;	
+	this.sh_TopRight.y += this.y;	
+	this.sh_BottomLeft.y += this.y;	
+	this.sh_BottomRight.y += this.y;
+	
+	this.sh_segments[0].x1 = this.sh_TopLeft.x; 	
+	this.sh_segments[0].y1 = this.sh_TopLeft.y; 	
+	this.sh_segments[0].x2 = this.sh_TopRight.x; 	
+	this.sh_segments[0].y2 = this.sh_TopRight.y; 	
+
+	this.sh_segments[1].x1 = this.sh_TopRight.x; 	
+	this.sh_segments[1].y1 = this.sh_TopRight.y; 	
+	this.sh_segments[1].x2 = this.sh_BottomRight.x; 	
+	this.sh_segments[1].y2 = this.sh_BottomRight.y; 	
+
+	this.sh_segments[2].x1 = this.sh_BottomRight.x; 	
+	this.sh_segments[2].y1 = this.sh_BottomRight.y; 	
+	this.sh_segments[2].x2 = this.sh_BottomLeft.x; 	
+	this.sh_segments[2].y2 = this.sh_BottomLeft.y; 	
+
+	this.sh_segments[3].x1 = this.sh_BottomLeft.x; 	
+	this.sh_segments[3].y1 = this.sh_BottomLeft.y; 	
+	this.sh_segments[3].x2 = this.sh_TopLeft.x; 	
+	this.sh_segments[3].y2 = this.sh_TopLeft.y;
+}
+
+
 HeroUnit.prototype.initView = function ()
 {
 	this.rotation = 270;
@@ -62,10 +116,11 @@ HeroUnit.prototype.initView = function ()
 	
 	
 	this.sheild = new createjs.Shape();
-	this.shieldWidth = 50;
-	this.shieldHeight = 10;
+	this.shieldWidth = 150;
+	this.shieldHeight = 150;
 	this.shieldDist = 25;
-	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldDist , this.shieldHeight , this.shieldWidth );
+	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
+	
 	
 	this.addChild(this.body);
 	
@@ -79,7 +134,7 @@ HeroUnit.prototype.initView = function ()
  * Движение юнита
  * @param {Number} elapsedTime	время прошедшее с последнего тика
  */
-HeroUnit.prototype.move = function (elapsedTime)
+HeroUnit.prototype.move = function(elapsedTime)
 {
 	var dt = elapsedTime/1000;
 	
@@ -172,6 +227,7 @@ HeroUnit.prototype.move = function (elapsedTime)
 	this.rotationSheild();
 	this.reflect();
 	
+	this.countShieldCorners();	
 }	
 /**
  * Поворот щита относительно курсора
@@ -198,5 +254,36 @@ HeroUnit.prototype.reflect = function(){
 }
 
 HeroUnit.prototype.hardReflect = function(b){
+	var s = {};
+	s.x1 = b.x;
+	s.x2 = b.futureX;
+	s.y1 = b.y;
+	s.y2 = b.futureY;
+	
+	var X = [];
+	var min_d = 9999;
+	var d;
+	var n_i = -1;
+	for (var i=0; i<4; i++){
+		X[i] = intersectSegments_obj(s,this.sh_segments[i]);
+		if (X[i]){
+			d = Math.sqrt( (b.x-X[i].x)*(b.x-X[i].x) + (b.y-X[i].y)*(b.y-X[i].y));
+			if (d< min_d){
+				min_d = d;
+				n_i = i;
+			}
+		}		
+	}
+	if (n_i != -1){
+		console.log(n_i);
+		var vecV = {};
+		vecV.x = cos(b.angle);
+		vecV.y = sin(b.angle);
+		
+		var vecP = {};
+		vecP.x = this.sh_segments[n_i].x1 - this.sh_segments[n_i].x2; 
+		vecP.y = this.sh_segments[n_i].y1 - this.sh_segments[n_i].y2; 
+	}
+	
 	
 }

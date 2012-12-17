@@ -42,7 +42,7 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		if(!this.bullets[i].checkOutOfStage())
 		{
 			this.bullets[i].x = this.bullets[i].futureX = 50;
-			this.bullets[i].y = this.bullets[i].futureY = 250;
+			this.bullets[i].y = this.bullets[i].futureYwd = 250;
 			this.bullets[i].rotation = this.bullets[i].futureRotation = 0;
 			
 				

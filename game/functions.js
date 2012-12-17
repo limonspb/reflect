@@ -27,8 +27,7 @@ function getLine(x1,y1,x2,y2){
 	}else{
 		var C = y1*(x2 - x1) - x1*(y2 - y1);
 		return {A : A, B:B, C:C};		
-	}
-	
+	}	
 }
 
 function intersectLines(A1,B1,C1,A2,B2,C2){
@@ -52,12 +51,29 @@ function intersectSegments(x1,y1,x2,y2,x3,y3,x4,y4){
 		if (p == null){
 			return p;
 		}else{
-			if ( (Math.abs(x2 - p.x) <= Math.abs(x2-x1)) &&  (Math.abs(x1 - p.x) <= Math.abs(x2-x1))){
+			if (  (  (Math.abs(x2 - p.x) <= Math.abs(x2-x1)) &&  (Math.abs(x1 - p.x) <= Math.abs(x2-x1))  ) &&
+				  (  (Math.abs(x4 - p.x) <= Math.abs(x4-x3)) &&  (Math.abs(x3 - p.x) <= Math.abs(x4-x3))  )   ){
 				return p;
 			}else{
 				return null;
 			}
 		}
-	}
-	
+	}	
+}
+
+function intersectSegments_obj(s1,s2){
+	return intersectSegments(
+								s1.x1,s1.y1,
+								s1.x2,s1.y2,
+								s2.x1,s2.y1,
+								s2.x2,s2.y2
+							);
+}
+
+
+function rotateVec(vec, angle){
+	var r = {};
+	r.x =   vec.x * Math.cos(angle) - vec.y * Math.sin(angle);
+	r.y =   vec.x * Math.sin(angle) + vec.y * Math.cos(angle);
+	return r;
 }

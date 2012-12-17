@@ -15,14 +15,14 @@ function BackGround(){
 			this.addChild(temp);			
 		}		
 	}
-	
-	this.addPict("cloud_",10,1,15,false,1, 0.5);
-	this.addPict("line_",10,1,14,false,0.33, 0.7);
-	this.addPict("small_",100,1,2,false,0.25, 0.75);
-	this.addPict("small_",400,3,5,false,0.25, 0.75);
+
 	this.addPict("lit_mount_",10,1,3,false,0.33, 0.7);
 	this.addPict("mount_",10,1,2,false,0.33, 0.7);
 	this.addPict("big_",5,1,7,false,0.5, 0.5);
+	this.addPict("cloud_",10,1,15,false,1, 0.5);
+	this.addPict("small_",100,1,2,false,0.25, 0.75);
+	this.addPict("small_",400,3,5,false,0.25, 0.75);
+	this.addPict("line_",10,1,14,false,0.33, 0.7);
 
 	this.cache(0,0,global.levelWidth,global.levelHeight);
 }
