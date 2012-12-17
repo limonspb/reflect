@@ -2,6 +2,7 @@
  * @author ProBigi
  */
 
+
 function BaseBonus()
 {
 	BaseBonus.superclass.constructor.apply(this);
@@ -25,10 +26,10 @@ BaseBonus.prototype.show = function()
 
 BaseBonus.prototype.hide = function()
 {
-	createjs.Tween.removeTweens(this.view);
+	createjs.Tween.removeTweens(this);
 	
-	var tween = createjs.Tween.get(this.view, {loop:false});	
-	tween.to( { scaleX:0, scaleY: 0 },500,createjs.Ease.bounceIn).call(this.onComplete);
+	var tween = createjs.Tween.get(this, {loop:false});	
+	tween.to( { scaleX:0, scaleY: 0 },500,createjs.Ease.bounceIn).wait(1).call(this.onComplete);
 }
 
 BaseBonus.prototype.onComplete = function()

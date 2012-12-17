@@ -23,7 +23,7 @@ Preloader = function(){
 	
 	//this.pr.onFileProgress = handleFileProgress;
 	//this.pr.onError = handleFileError;
-	this.pr.setMaxConnections(5);		
+	this.pr.setMaxConnections(1);	
 };
 
 
