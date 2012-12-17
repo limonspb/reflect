@@ -277,8 +277,8 @@ HeroUnit.prototype.hardReflect = function(b){
 	if (n_i != -1){
 		console.log(n_i);
 		var vecV = {};
-		vecV.x = cos(b.angle);
-		vecV.y = sin(b.angle);
+		vecV.x = Math.cos(b.angle);
+		vecV.y = Math.sin(b.angle);
 		
 		var vecP = {};
 		vecP.x = this.sh_segments[n_i].x1 - this.sh_segments[n_i].x2; 
