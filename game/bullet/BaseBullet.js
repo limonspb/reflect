@@ -30,7 +30,7 @@ BaseBullet.prototype.checkOutOfStage = function()
 	else if (this.x < 0) { return false; }
 	if (this.y >= global.levelHeight) { return false; }
 	else if (this.y < 0) { return false; }
-	
+		
 	return true;
 }
 

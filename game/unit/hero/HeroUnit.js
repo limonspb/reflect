@@ -24,8 +24,8 @@ function HeroUnit()
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth = 70;
-	this.shieldHeight = 10;
+	this.shieldWidth = 300;
+	this.shieldHeight = 300;
 	this.shieldDist = 25;
 	this.sh_segments = [{},{},{},{}];
 	
@@ -41,7 +41,7 @@ function HeroUnit()
 
 extend(HeroUnit,BaseUnit);
 
-HeroUnit.prototype.countShieldCorners = function(){
+HeroUnit.prototype.countShieldCorners = function(angle){
 	this.sh_TopLeft.x = -this.shieldWidth/2;
 	this.sh_TopLeft.y = -this.shieldDist - this.shieldHeight;
 	
@@ -54,7 +54,7 @@ HeroUnit.prototype.countShieldCorners = function(){
 	this.sh_BottomRight.x = this.shieldWidth/2;
 	this.sh_BottomRight.y = -this.shieldDist;
 
-	var alpha = (this.sheildAngle-90)/180 * Math.PI;
+	var alpha = (angle-90)/180 * Math.PI;
 	this.sh_TopLeft = rotateVec(this.sh_TopLeft, alpha);
 	this.sh_TopRight = rotateVec(this.sh_TopRight, alpha);	
 	this.sh_BottomLeft = rotateVec(this.sh_BottomLeft, alpha);	
@@ -75,10 +75,10 @@ HeroUnit.prototype.countShieldCorners = function(){
 		this.sh_old_segments[i] = clone(this.sh_segments[i]);
 	}
 	
-	this.sh_segments[0].x1 = this.sh_TopLeft.x; 	
-	this.sh_segments[0].y1 = this.sh_TopLeft.y; 	
+	this.sh_segments[0].x1 = this.sh_TopLeft.x;	
+	this.sh_segments[0].y1 = this.sh_TopLeft.y;
 	this.sh_segments[0].x2 = this.sh_TopRight.x; 	
-	this.sh_segments[0].y2 = this.sh_TopRight.y; 	
+	this.sh_segments[0].y2 = this.sh_TopRight.y;
 
 	this.sh_segments[1].x1 = this.sh_TopRight.x; 	
 	this.sh_segments[1].y1 = this.sh_TopRight.y; 	
@@ -231,7 +231,7 @@ HeroUnit.prototype.move = function(elapsedTime)
 	this.rotationSheild();
 	this.reflect();
 	
-	this.countShieldCorners();	
+	this.countShieldCorners(this.sheildAngle);	
 }	
 /**
  * Поворот щита относительно курсора
