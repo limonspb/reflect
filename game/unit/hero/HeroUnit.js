@@ -19,14 +19,14 @@ function HeroUnit()
 	this.max_v_c_backward = -100;
 	
 	this.ar_c = 0; 
-	this.ar_c_max = 1000; 
-	this.ar_c_triction = 1000;
+	this.ar_c_max = 5000; 
+	this.ar_c_triction = 5000;
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth;
-	this.shieldHeight;
-	this.shieldDist;
+	this.shieldWidth = 70;
+	this.shieldHeight = 10;
+	this.shieldDist = 25;
 	this.sh_segments = [{},{},{},{}];
 	
 	this.initView();
@@ -35,6 +35,8 @@ function HeroUnit()
 	this.sh_TopRight = {};
 	this.sh_BottomRight = {};
 	this.sh_BottomLeft = {};
+	
+	this.sh_old_segments = [{},{},{},{}];
 }
 
 extend(HeroUnit,BaseUnit);
@@ -67,6 +69,11 @@ HeroUnit.prototype.countShieldCorners = function(){
 	this.sh_TopRight.y += this.y;	
 	this.sh_BottomLeft.y += this.y;	
 	this.sh_BottomRight.y += this.y;
+
+//	this.sh_old_segments = this.sh_segments.slice(0); //save old segments
+	for (var i=0; i<4; i++){
+		this.sh_old_segments[i] = clone(this.sh_segments[i]);
+	}
 	
 	this.sh_segments[0].x1 = this.sh_TopLeft.x; 	
 	this.sh_segments[0].y1 = this.sh_TopLeft.y; 	
@@ -86,7 +93,7 @@ HeroUnit.prototype.countShieldCorners = function(){
 	this.sh_segments[3].x1 = this.sh_BottomLeft.x; 	
 	this.sh_segments[3].y1 = this.sh_BottomLeft.y; 	
 	this.sh_segments[3].x2 = this.sh_TopLeft.x; 	
-	this.sh_segments[3].y2 = this.sh_TopLeft.y;
+	this.sh_segments[3].y2 = this.sh_TopLeft.y;	
 }
 
 
@@ -116,9 +123,6 @@ HeroUnit.prototype.initView = function ()
 	
 	
 	this.sheild = new createjs.Shape();
-	this.shieldWidth = 150;
-	this.shieldHeight = 150;
-	this.shieldDist = 25;
 	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
 	
 	
@@ -246,43 +250,104 @@ HeroUnit.prototype.reflect = function(){
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
 		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
-			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){
-				this.hardReflect(bullet);		
-			}			
-		}				
-	}
+			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){				
+					this.hardReflect(bullet);	
+			}				
+		}			
+	}				
 }
 
+
 HeroUnit.prototype.hardReflect = function(b){
+	
+	
+	var get_sh_segments_array = function(begin, end, count /*segments arrays*/){
+		var dx1 = [];
+		var dx2 = [];
+		var dy1 = [];
+		var dy2 = [];
+		for (var i=0; i<4; i++){
+			dx1[i] = (end[i].x1 - begin[i].x1)/(count - 1);
+			dx2[i] = (end[i].x2 - begin[i].x2)/(count - 1);
+			dy1[i] = (end[i].y1 - begin[i].y1)/(count - 1);
+			dy2[i] = (end[i].y2 - begin[i].y2)/(count - 1);
+		}
+		//console.log(dx1[0]);
+		var res = [];
+		for (var i=0; i<count; i++){
+			res[i] = [{},{},{},{}];
+			for (var j=0; j<4; j++){
+				res[i][j].x1 = begin[j].x1 + dx1[j]*i;
+				res[i][j].x2 = begin[j].x2 + dx2[j]*i;
+				res[i][j].y1 = begin[j].y1 + dy1[j]*i;
+				res[i][j].y2 = begin[j].y2 + dy2[j]*i;
+			}
+		}
+		return res;		
+	}	
+	
+	var segments_arr = get_sh_segments_array(this.sh_segments, this.sh_old_segments, 150);
+	//console.log(this.sh_segments[0].x1 - this.sh_old_segments[0].x1);		
+	
 	var s = {};
 	s.x1 = b.x;
 	s.x2 = b.futureX;
 	s.y1 = b.y;
 	s.y2 = b.futureY;
 	
-	var X = [];
-	var min_d = 9999;
-	var d;
-	var n_i = -1;
-	for (var i=0; i<4; i++){
-		X[i] = intersectSegments_obj(s,this.sh_segments[i]);
-		if (X[i]){
-			d = Math.sqrt( (b.x-X[i].x)*(b.x-X[i].x) + (b.y-X[i].y)*(b.y-X[i].y));
-			if (d< min_d){
-				min_d = d;
-				n_i = i;
-			}
+	var Xsegment = null;
+	var XX;
+	
+	for (var seg_i = 0; seg_i<segments_arr.length; seg_i++){
+		var X = [];
+		var min_d = 9999;
+		var d;
+		var n_i = -1;
+			
+		for (var i=0; i<4; i++){
+			X[i] = intersectSegments_obj(s,segments_arr[seg_i][i]);
+			if (X[i]){
+				d = Math.sqrt( (b.x-X[i].x)*(b.x-X[i].x) + (b.y-X[i].y)*(b.y-X[i].y));
+				//console.log(segments_arr);
+				if (d< min_d){
+					min_d = d;
+					n_i = i;
+				}
+			}		
+		}
+		if (n_i != -1){
+			Xsegment = segments_arr[seg_i][n_i];
+			XX = X[n_i];
+			
+			break;
 		}		
 	}
-	if (n_i != -1){
-		console.log(n_i);
+	
+	if (Xsegment){
+		//console.log(n_i);
 		var vecV = {};
 		vecV.x = Math.cos(b.angle);
 		vecV.y = Math.sin(b.angle);
 		
 		var vecP = {};
-		vecP.x = this.sh_segments[n_i].x1 - this.sh_segments[n_i].x2; 
-		vecP.y = this.sh_segments[n_i].y1 - this.sh_segments[n_i].y2; 
+		vecP.x = Xsegment.x1 - Xsegment.x2; 
+		vecP.y = Xsegment.y1 - Xsegment.y2;
+		var vecN  = {};
+		vecN.x = -vecP.y;
+		vecN.y = vecP.x;
+		vecN = normalVec(vecN);
+		vecP = normalVec(vecP);
+		
+		var resV = {};
+		var sMult = vecV.x * vecP.x + vecV.y*vecP.y;
+		resV.x = 2*vecP.x*sMult - vecV.x;
+		resV.y = 2*vecP.y*sMult - vecV.y;
+		
+	
+		b.futureRotation = Math.atan2(resV.y, resV.x)*180/Math.PI;						
+		
+		b.futureX = XX.x + vecN.x;
+		b.futureY = XX.y + vecN.y;		
 	}
 	
 	

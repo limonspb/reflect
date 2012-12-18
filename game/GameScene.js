@@ -25,7 +25,7 @@ function GameScene(){
 		this.container.addChild(this.circles[i]);		
 	}
 
-	for (var i = 0; i < 0; ++i)
+	for (var i = 0; i < 10; ++i)
 	{
 		var enemy = global.EnemyFactory.getEnemy(EnemyTypes.SIMPLE_ENEMY);
 		enemy.x = Math.random()*global.gameWidth;
@@ -111,14 +111,14 @@ GameScene.prototype.tick = function(elapsedTime) {
 
 	global.hero.move(elapsedTime);
 	
-	this.circles[0].x = global.hero.sh_TopLeft.x;
+	/*this.circles[0].x = global.hero.sh_TopLeft.x;
 	this.circles[0].y = global.hero.sh_TopLeft.y;		
 	this.circles[1].x = global.hero.sh_TopRight.x;
 	this.circles[1].y = global.hero.sh_TopRight.y;		
 	this.circles[2].x = global.hero.sh_BottomLeft.x;
 	this.circles[2].y = global.hero.sh_BottomLeft.y;		
 	this.circles[3].x = global.hero.sh_BottomRight.x;
-	this.circles[3].y = global.hero.sh_BottomRight.y;	
+	this.circles[3].y = global.hero.sh_BottomRight.y;*/	
 	
 		
 	for (var i = 0; i < this.enemies.length; ++i)

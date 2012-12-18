@@ -77,3 +77,22 @@ function rotateVec(vec, angle){
 	r.y =   vec.x * Math.sin(angle) + vec.y * Math.cos(angle);
 	return r;
 }
+
+function normalVec(vec){
+	var d = Math.sqrt(vec.x*vec.x + vec.y*vec.y);
+	var r = {x:0,y:0};
+	if (d!=0){
+		r.x = vec.x/d;
+		r.y = vec.y/d;
+	}
+	return r;
+}
+
+function clone(obj){
+    if(obj == null || typeof(obj) != 'object')
+        return obj;
+    var temp = new obj.constructor(); 
+    for(var key in obj)
+        temp[key] = clone(obj[key]);
+    return temp;
+}
