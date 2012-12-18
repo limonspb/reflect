@@ -50,11 +50,6 @@ EnemyUnit.prototype.initPosition = function() {
 		this.x = global.gameWidth + this.width + 20;
 		this.y = Math.random() * global.gameHeight;
 	}
-	
-	//this.x = Math.random() * global.gameWidth;
-	//this.y = Math.random() * global.gameHeight;
-	
-	console.log(this.x, this.y);
 }
 
 EnemyUnit.prototype.move = function(elapsedTime) { }
