@@ -3,13 +3,11 @@
 function GameScene(){
 	this.container = new createjs.Container();
 	
-	global.EnemyFactory = new EnemyFactory();
+	global.EnemyManager = new EnemyManager();
 	global.BulletFactory = new BulletFactory();
 	global.BonusManager = new BonusManager();
 	
 	this.keys = [];
-	this.enemies = [];
-
 	
 	global.hero = new HeroUnit();
 	global.hero.x = 300;
@@ -25,18 +23,11 @@ function GameScene(){
 		this.container.addChild(this.circles[i]);		
 	}
 
-	for (var i = 0; i < 0; ++i)
-	{
-		var enemy = global.EnemyFactory.getEnemy(EnemyTypes.SIMPLE_ENEMY);
-		enemy.x = Math.random()*global.gameWidth;
-		enemy.y = Math.random()*global.gameHeight;
-		this.enemies.push(enemy);
-		this.container.addChildAt(enemy,0);
-	}
 	
 	global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
 	this.container.addChild(global.BulletFactory.bulletsCont);
 	
+	this.container.addChild(global.EnemyFactory.enemiesCont);
 	this.container.addChild(global.BonusFactory.bonusesCont);
 	
 	this.backGround = new BackGround();
@@ -121,13 +112,9 @@ GameScene.prototype.tick = function(elapsedTime) {
 	this.circles[3].y = global.hero.sh_BottomRight.y;*/	
 	
 		
-	for (var i = 0; i < this.enemies.length; ++i)
-	{
-		this.enemies[i].move(elapsedTime);
-	}
-
-	global.BulletFactory.moveBullets(elapsedTime);
+	global.EnemyManager.update(elapsedTime);
 	
+	global.BulletFactory.moveBullets(elapsedTime);
 	
 	global.BonusManager.update(elapsedTime);
 	

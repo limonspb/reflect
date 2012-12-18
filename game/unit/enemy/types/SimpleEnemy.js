@@ -7,9 +7,6 @@ function SimpleEnemy()
 {
 	SimpleEnemy.superclass.constructor.apply(this);
 	
-	
-	this.initView();
-	this.initOptions();
 }
 
 extend(SimpleEnemy,EnemyUnit);
@@ -22,6 +19,9 @@ SimpleEnemy.prototype.initView = function ()
 {
 	this.view = new createjs.Shape();
 	this.view.graphics.beginFill("blue").drawRect ( -20 , -20 , 40 , 40 );
+	
+	this.width = 40;
+	this.height = 40;
 	
 	this.addChild(this.view);
 }
