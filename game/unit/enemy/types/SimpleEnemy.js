@@ -32,14 +32,14 @@ SimpleEnemy.prototype.initOptions = function ()
 	this.rotationSpeed = 60;
 	this.health = 10;
 	this.damage = 15;
-	this.bulletRespawn = 1000;
+	this.bulletRespawn = 3000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.range = 1000;
 }
 
 SimpleEnemy.prototype.move = function (elapsedTime)
 {
-	this.rotation = this.getAngleToUnit.apply(this, [global.hero]);
+	this.rotation = this.getAngleToObject(global.hero);
 	
 	this.angle = this.rotation/180 * Math.PI;
 	
@@ -55,8 +55,8 @@ SimpleEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
-		var angle = this.getAngleToUnit.apply(this, [global.hero]);
-		global.BulletFactory.addBullet(this.bulletType, angle, this.x, this.y);
+		var angle = this.getAngleToObject.apply(this, [global.hero]);
+		this.bullet = global.BulletFactory.addBullet(this.bulletType, angle, this.x, this.y);
 		
 		this.respawnCount = 0;
 	}

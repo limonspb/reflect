@@ -24,8 +24,8 @@ function HeroUnit()
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth = 300;
-	this.shieldHeight = 300;
+	this.shieldWidth = 50; //300
+	this.shieldHeight = 10;
 	this.shieldDist = 25;
 	this.sh_segments = [{},{},{},{}];
 	

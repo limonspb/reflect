@@ -12,6 +12,7 @@ function EnemyUnit()
 	this.bulletRespawn;
 	this.respawnCount = 0;
 	this.range;
+	this.bullet;
 }
 
 extend(EnemyUnit,BaseUnit);

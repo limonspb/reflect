@@ -30,6 +30,8 @@ BulletFactory.prototype.addBullet = function(type, angle, x, y)
 		bullet.init(angle,x,y);
 		this.bulletsCont.addChild(bullet);
 		this.bullets.push(bullet);
+		
+		return bullet;
 	}
 }
 

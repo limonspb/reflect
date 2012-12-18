@@ -14,15 +14,6 @@ function GameScene(){
 	global.hero.y = 300;
 	this.container.addChild(global.hero);
 	
-	this.circles = [];
-	for (i=0; i<4; i++){
-		this.circles[i] = new createjs.Shape();
-		this.circles[i].graphics.beginFill("red").drawCircle(0, 0, 4);
-		this.circles[i].x = 100;
-		this.circles[i].y = 100;
-		this.container.addChild(this.circles[i]);		
-	}
-
 	
 	global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
 	this.container.addChild(global.BulletFactory.bulletsCont);
@@ -98,18 +89,8 @@ GameScene.prototype.onBodyKeyUp = function(event){
 
 
 GameScene.prototype.tick = function(elapsedTime) {	
-	//this.circle.vy+=400*elapsedTime/1000;
 
 	global.hero.move(elapsedTime);
-	
-	/*this.circles[0].x = global.hero.sh_TopLeft.x;
-	this.circles[0].y = global.hero.sh_TopLeft.y;		
-	this.circles[1].x = global.hero.sh_TopRight.x;
-	this.circles[1].y = global.hero.sh_TopRight.y;		
-	this.circles[2].x = global.hero.sh_BottomLeft.x;
-	this.circles[2].y = global.hero.sh_BottomLeft.y;		
-	this.circles[3].x = global.hero.sh_BottomRight.x;
-	this.circles[3].y = global.hero.sh_BottomRight.y;*/	
 	
 		
 	global.EnemyManager.update(elapsedTime);
