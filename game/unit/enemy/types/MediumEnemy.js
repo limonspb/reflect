@@ -24,18 +24,27 @@ MediumEnemy.prototype.initView = function ()
 	this.view = new createjs.Shape();
 	this.view.graphics.setStrokeStyle(1, 'round', 'round');
 	this.view.graphics.beginStroke(('#000000'));
-	this.view.graphics.beginFill("green").drawCircle ( -5 , -5 , 10 );
+	this.view.graphics.beginFill("green").drawCircle ( 0 , 0 , 10 );
 	this.view.graphics.endStroke();
     this.view.graphics.endFill();
-    this.view.graphics.setStrokeStyle(1, 'round', 'round');
-    this.view.graphics.beginStroke(('#000000'));
-    this.view.graphics.moveTo(-5,-5);
-    this.view.graphics.lineTo(10,0);
+    
+    this.gun = new createjs.Shape();
+    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
+    this.gun.graphics.beginStroke(('#000000'));
+    this.gun.graphics.moveTo(0,0);
+    this.gun.graphics.lineTo(15,0);
+    this.gun.graphics.endStroke();
+    this.gun.graphics.endFill();
 	
 	this.width = 10;
 	this.height = 10;
 	
+	this.centre = new createjs.Shape();
+	this.centre.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	
 	this.addChild(this.view);
+	this.addChild(this.gun);
+	this.addChild(this.centre);
 }
 
 /**
@@ -58,12 +67,14 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	var dx;
 	var dy;
 	
+	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
+	
 	this.backTime -= elapsedTime;
 	if (this.backTime > 0)
 	{
-		this.rotation = this.bulletAngle;
+		this.view.rotation = this.bulletAngle;
 		
-		this.angle = this.rotation/180 * Math.PI;
+		this.angle = this.view.rotation/180 * Math.PI;
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
@@ -73,19 +84,18 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	}
 	else
 	{
-		this.rotation = this.getAngleToObject(global.hero);
-		this.angle = this.rotation/180 * Math.PI;
-		this.speed = Math.abs(this.speed);
+		this.view.rotation = this.getAngleToObject(global.hero);
 		
+		this.angle = this.view.rotation/180 * Math.PI;
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-		
 		
 		this.x += dx; 
 		this.y += dy;
 		
 		this.backTime = 0;
 	}
+	
 	
 	
 	this.respawnCount += elapsedTime;
@@ -97,12 +107,12 @@ MediumEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
-		var angle = this.getAngleToObject(global.hero);
-		this.bullet = global.BulletFactory.addBullet(this.bulletType, angle, this.x, this.y);
+		//var angle = this.getAngleToObject(global.hero);
+		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
 		
 		this.respawnCount = 0;
 		
-		this.bulletAngle = angle;
+		this.bulletAngle = this.gun.rotation;
 		this.backTime = 200;
 	}
 }

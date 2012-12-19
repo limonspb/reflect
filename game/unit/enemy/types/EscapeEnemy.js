@@ -53,7 +53,6 @@ EscapeEnemy.prototype.initView = function ()
 EscapeEnemy.prototype.initOptions = function ()
 {
 	this.speed = Math.random()*30 + 130;
-	//this.speed = 10;
 	this.rotationSpeed = 150;
 	this.health = 50;
 	this.damage = 40;
@@ -79,9 +78,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 	
 	this.view.rotation = this.getAngleToObject(global.hero);
 	
-	
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
-	
 	
 	this.angle = this.view.rotation/180 * Math.PI;
 	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
@@ -93,12 +90,8 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		dy = 0;
 	} 
 	
-	
-	
 	this.x += dx;
 	this.y += dy;
-	
-	//console.log(this.x, this.y);
 	
 	this.respawnCount += elapsedTime;
 	
