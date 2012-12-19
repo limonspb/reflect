@@ -19,6 +19,7 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.smallMedkitUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
+	
 }
 
 /**
@@ -36,4 +37,9 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 		global.BonusFactory.addBonus(BonusTypes.SMALL_MED_KIT, x, y);
 		this.bonusTime = 0;
 	}
+}
+
+BonusManager.prototype.checkPickUp = function()
+{
+	var len = global.BonusFactory.bonuses.length;
 }
