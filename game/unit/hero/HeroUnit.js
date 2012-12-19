@@ -24,77 +24,121 @@ function HeroUnit()
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth = 300;
-	this.shieldHeight = 300;
+	this.shieldWidth = 150;
+	this.shieldHeight = 10;
 	this.shieldDist = 25;
 	this.sh_segments = [{},{},{},{}];
 	
+	this.old_x = this.x;
+	this.old_y = this.y;
+	
+	this.old_x = 300;
+	this.old_y = 300;
+	
 	this.initView();
-	
-	this.sh_TopLeft = {};
-	this.sh_TopRight = {};
-	this.sh_BottomRight = {};
-	this.sh_BottomLeft = {};
-	
+		
 	this.sh_old_segments = [{},{},{},{}];
+	this.sh_old_angle = 90;
 }
 
 extend(HeroUnit,BaseUnit);
 
-HeroUnit.prototype.countShieldCorners = function(angle){
-	this.sh_TopLeft.x = -this.shieldWidth/2;
-	this.sh_TopLeft.y = -this.shieldDist - this.shieldHeight;
-	
-	this.sh_TopRight.x = this.shieldWidth/2;
-	this.sh_TopRight.y = -this.shieldDist  - this.shieldHeight;
-	
-	this.sh_BottomLeft.x = -this.shieldWidth/2;
-	this.sh_BottomLeft.y = -this.shieldDist;
-	
-	this.sh_BottomRight.x = this.shieldWidth/2;
-	this.sh_BottomRight.y = -this.shieldDist;
-
-	var alpha = (angle-90)/180 * Math.PI;
-	this.sh_TopLeft = rotateVec(this.sh_TopLeft, alpha);
-	this.sh_TopRight = rotateVec(this.sh_TopRight, alpha);	
-	this.sh_BottomLeft = rotateVec(this.sh_BottomLeft, alpha);	
-	this.sh_BottomRight = rotateVec(this.sh_BottomRight,alpha);
-	
-	this.sh_TopLeft.x += this.x;	
-	this.sh_TopRight.x += this.x;	
-	this.sh_BottomLeft.x += this.x;	
-	this.sh_BottomRight.x += this.x;
-		
-	this.sh_TopLeft.y += this.y;	
-	this.sh_TopRight.y += this.y;	
-	this.sh_BottomLeft.y += this.y;	
-	this.sh_BottomRight.y += this.y;
-
-//	this.sh_old_segments = this.sh_segments.slice(0); //save old segments
+HeroUnit.prototype.archiveShieldSegments = function(){
 	for (var i=0; i<4; i++){
 		this.sh_old_segments[i] = clone(this.sh_segments[i]);
 	}
-	
-	this.sh_segments[0].x1 = this.sh_TopLeft.x;	
-	this.sh_segments[0].y1 = this.sh_TopLeft.y;
-	this.sh_segments[0].x2 = this.sh_TopRight.x; 	
-	this.sh_segments[0].y2 = this.sh_TopRight.y;
-
-	this.sh_segments[1].x1 = this.sh_TopRight.x; 	
-	this.sh_segments[1].y1 = this.sh_TopRight.y; 	
-	this.sh_segments[1].x2 = this.sh_BottomRight.x; 	
-	this.sh_segments[1].y2 = this.sh_BottomRight.y; 	
-
-	this.sh_segments[2].x1 = this.sh_BottomRight.x; 	
-	this.sh_segments[2].y1 = this.sh_BottomRight.y; 	
-	this.sh_segments[2].x2 = this.sh_BottomLeft.x; 	
-	this.sh_segments[2].y2 = this.sh_BottomLeft.y; 	
-
-	this.sh_segments[3].x1 = this.sh_BottomLeft.x; 	
-	this.sh_segments[3].y1 = this.sh_BottomLeft.y; 	
-	this.sh_segments[3].x2 = this.sh_TopLeft.x; 	
-	this.sh_segments[3].y2 = this.sh_TopLeft.y;	
 }
+
+HeroUnit.prototype.setActualShieldSegments = function(){
+	this.archiveShieldSegments();
+	this.sh_segments = this.countShieldSegments(this.sheildAngle, this.x,this.y);
+}
+
+HeroUnit.prototype.getSieldSegmentsArray_usingOldandNow = function(count){
+	var posArr = this.getPositionArray(count);
+	var angleArr = this.getRotationShieldArray(count);
+	var res = [];
+	for (var i=0; i<count; i++){
+		res[i] = {};
+		res[i] = this.countShieldSegments(angleArr[i], posArr[i].x, posArr[i].y);		
+	}
+	return res;
+	
+}
+
+HeroUnit.prototype.getPositionArray = function(count){
+	var res = [];
+	var dx = (this.x - this.old_x)/(count-1);
+	var dy = (this.y - this.old_y)/(count-1);
+	for (var i=0; i<count; i++){
+		res[i] = {};
+		res[i].x = this.old_x + dx*i;
+		res[i].y = this.old_y + dy*i;
+	}	
+	return res;	
+}
+
+HeroUnit.prototype.countShieldSegments = function(angle,px,py){
+	var sh_TopLeft = {};
+	var sh_TopRight = {};
+	var sh_BottomRight = {};
+	var sh_BottomLeft = {};
+
+	
+	sh_TopLeft.x = -this.shieldWidth/2;
+	sh_TopLeft.y = -this.shieldDist - this.shieldHeight;
+	
+	sh_TopRight.x = this.shieldWidth/2;
+	sh_TopRight.y = -this.shieldDist  - this.shieldHeight;
+	
+	sh_BottomLeft.x = -this.shieldWidth/2;
+	sh_BottomLeft.y = -this.shieldDist;
+	
+	sh_BottomRight.x = this.shieldWidth/2;
+	sh_BottomRight.y = -this.shieldDist;
+
+	var alpha = (angle-90)/180 * Math.PI;
+	sh_TopLeft = rotateVec(sh_TopLeft, alpha);
+	sh_TopRight = rotateVec(sh_TopRight, alpha);	
+	sh_BottomLeft = rotateVec(sh_BottomLeft, alpha);	
+	sh_BottomRight = rotateVec(sh_BottomRight,alpha);
+	
+	sh_TopLeft.x += px;
+	sh_TopRight.x += px;
+	sh_BottomLeft.x += px;
+	sh_BottomRight.x += px;
+		
+	sh_TopLeft.y += py;	
+	sh_TopRight.y += py;	
+	sh_BottomLeft.y += py;	
+	sh_BottomRight.y += py;
+	
+	sh_segments = [{},{},{},{}];
+	
+	sh_segments[0].x1 = sh_TopLeft.x;	
+	sh_segments[0].y1 = sh_TopLeft.y;
+	sh_segments[0].x2 = sh_TopRight.x; 	
+	sh_segments[0].y2 = sh_TopRight.y;
+
+	sh_segments[1].x1 = sh_TopRight.x; 	
+	sh_segments[1].y1 = sh_TopRight.y; 	
+	sh_segments[1].x2 = sh_BottomRight.x; 	
+	sh_segments[1].y2 = sh_BottomRight.y; 	
+
+	sh_segments[2].x1 = sh_BottomRight.x; 	
+	sh_segments[2].y1 = sh_BottomRight.y; 	
+	sh_segments[2].x2 = sh_BottomLeft.x; 	
+	sh_segments[2].y2 = sh_BottomLeft.y; 	
+
+	sh_segments[3].x1 = sh_BottomLeft.x; 	
+	sh_segments[3].y1 = sh_BottomLeft.y; 	
+	sh_segments[3].x2 = sh_TopLeft.x; 	
+	sh_segments[3].y2 = sh_TopLeft.y;	
+	
+	return sh_segments;
+}
+
+
 
 
 HeroUnit.prototype.initView = function ()
@@ -104,7 +148,7 @@ HeroUnit.prototype.initView = function ()
 	
 	this.bodySize = global.preloader.imgs.player.height;
 	this.ss = new createjs.SpriteSheet({ "animations": {
-		"run": [0, 9]},
+		"run": [0, 2]},
 		"images": [global.preloader.imgs.player],
 		"frames": {
 		"regX": global.preloader.imgs.player.height/2,
@@ -207,6 +251,10 @@ HeroUnit.prototype.move = function(elapsedTime)
 		this.ss.getAnimation("run").frequency = 100000;
 	}
 	
+	this.old_x = this.x;
+	this.old_y = this.y;
+	
+	
 	this.x += vx_c*dt;
 	this.y += vy_c*dt;
 	
@@ -228,10 +276,15 @@ HeroUnit.prototype.move = function(elapsedTime)
 		this.y = global.levelHeight - this.bodySize;		
 	}
 	
-	this.rotationSheild();
-	this.reflect();
 	
-	this.countShieldCorners(this.sheildAngle);	
+	this.rotationSheild();
+	this.setActualShieldSegments();
+	
+	
+	this.reflect(elapsedTime);
+	
+	//this.countShieldCorners2(this.sheildAngle, this.x,this.y);
+	
 }	
 /**
  * Поворот щита относительно курсора
@@ -241,24 +294,36 @@ HeroUnit.prototype.rotationSheild = function ()
 	this.dx = this.x - global.stage.mouseX - global.camera.lookAtX;
 	this.dy = this.y - global.stage.mouseY - global.camera.lookAtY;
 	
-	this.sheildAngle = Math.atan2(this.dy, this.dx)*180/Math.PI;
+	this.sh_old_angle = this.sheildAngle;
+	this.sheildAngle = Math.atan2(this.dy, this.dx)*180/Math.PI;	
 	this.sheild.rotation = 180 + this.sheildAngle - this.rotation;
 }
 
+HeroUnit.prototype.getRotationShieldArray = function(count){
+	var res = [];
+	var dangle2 = (this.sheildAngle - this.sh_old_angle)/(count-1);
+	var dangle = getAngleDiff_grad(this.sh_old_angle, this.sheildAngle)/(count - 1);
+	console.log(dangle, dangle2);	
+	for (var i=0; i<count; i++){
+		res[i] = this.sh_old_angle + dangle*i;
+	}	
+	return res;	
+}
 
-HeroUnit.prototype.reflect = function(){		
+
+HeroUnit.prototype.reflect = function(elapsedTime){		
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
 		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
 			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){				
-					this.hardReflect(bullet);	
+					this.hardReflect(bullet, elapsedTime);	
 			}				
 		}			
 	}				
 }
 
 
-HeroUnit.prototype.hardReflect = function(b){
+HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 	
 	
 	var get_sh_segments_array = function(begin, end, count /*segments arrays*/){
@@ -286,7 +351,9 @@ HeroUnit.prototype.hardReflect = function(b){
 		return res;		
 	}	
 	
-	var segments_arr = get_sh_segments_array(this.sh_segments, this.sh_old_segments, 150);
+	//var segments_arr = get_sh_segments_array(this.sh_segments, this.sh_old_segments, 150);
+	var segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);
+	//console.log(segments_arr);
 	//console.log(this.sh_segments[0].x1 - this.sh_old_segments[0].x1);		
 	
 	var s = {};
@@ -297,6 +364,9 @@ HeroUnit.prototype.hardReflect = function(b){
 	
 	var Xsegment = null;
 	var XX;
+	
+	var XsegmentNumber = -1;
+	var distanceFromCornerToX;
 	
 	for (var seg_i = 0; seg_i<segments_arr.length; seg_i++){
 		var X = [];
@@ -318,7 +388,8 @@ HeroUnit.prototype.hardReflect = function(b){
 		if (n_i != -1){
 			Xsegment = segments_arr[seg_i][n_i];
 			XX = X[n_i];
-			
+			XsegmentNumber = n_i;
+			distanceFromCornerToX = Math.sqrt((XX.x - Xsegment.x1)*(XX.x - Xsegment.x1) + (XX.y - Xsegment.y1)*(XX.y - Xsegment.y1));			
 			break;
 		}		
 	}
@@ -335,8 +406,8 @@ HeroUnit.prototype.hardReflect = function(b){
 		var vecN  = {};
 		vecN.x = -vecP.y;
 		vecN.y = vecP.x;
-		vecN = normalVec(vecN);
-		vecP = normalVec(vecP);
+		vecN = vec_normal(vecN);
+		vecP = vec_normal(vecP);
 		
 		var resV = {};
 		var sMult = vecV.x * vecP.x + vecV.y*vecP.y;
@@ -346,8 +417,23 @@ HeroUnit.prototype.hardReflect = function(b){
 	
 		b.futureRotation = Math.atan2(resV.y, resV.x)*180/Math.PI;						
 		
-		b.futureX = XX.x + vecN.x;
-		b.futureY = XX.y + vecN.y;		
+		//vec of the side to move bullet
+		var side = vec_Get(this.sh_segments[XsegmentNumber].x1, this.sh_segments[XsegmentNumber].y1, this.sh_segments[XsegmentNumber].x2, this.sh_segments[XsegmentNumber].y2);
+		var perp = vec_Perp(side);
+		perp = vec_normal(perp);
+		side = vec_Scale(side, distanceFromCornerToX);
+		var pointtomove = vec_Summ({x:this.sh_segments[XsegmentNumber].x1, y:this.sh_segments[XsegmentNumber].y1}, side);
+		perp = vec_Scale(perp, b.speed*elapsedTime/1000);
+		pointtomove = vec_Summ(pointtomove, perp);
+		//console.log(side, XsegmentNumber);
+		
+		b.futureX = pointtomove.x;
+		b.futureY = pointtomove.y;	
+		
+		
+		//b.futureX = XX.x + vecN.x;
+		//b.futureY = XX.y + vecN.y;	
+		
 	}
 	
 	

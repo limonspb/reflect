@@ -78,7 +78,7 @@ function rotateVec(vec, angle){
 	return r;
 }
 
-function normalVec(vec){
+function vec_normal(vec){
 	var d = Math.sqrt(vec.x*vec.x + vec.y*vec.y);
 	var r = {x:0,y:0};
 	if (d!=0){
@@ -95,4 +95,61 @@ function clone(obj){
     for(var key in obj)
         temp[key] = clone(obj[key]);
     return temp;
+}
+
+function vec_Get(x1,y1, x2,y2){
+	return {x: x2-x1, y:y2-y1};
+}
+
+function vec_Length(v){
+	return Math.sqrt(v.x*v.x + v.y*v.y);
+}
+
+function vec_Scale(v,new_length){
+	var d = vec_Length(v);
+	if (d==0){
+		return {x:0, y:0};
+	}else{
+		var res = {};
+		res.x = v.x/d*new_length;
+		res.y = v.y/d*new_length;
+		return res;
+	}
+}
+
+function vec_Summ(v1,v2){
+	return {x : v1.x+v2.x, y : v1.y + v2.y};
+}
+
+function vec_Perp(v){
+	return {x : v.y, y : -v.x};
+}
+
+function getAngleDiff_grad(angle1,angle2){
+	var a1 = angle1;
+	var a2 = angle2;
+	while (a1>0) a1-=360;
+	while (a2>0) a2-=360;
+	while (a1<0) a1+=360;
+	while (a2<0) a2+=360;	
+	
+	var d1 = a2 - a1;
+	var d2;
+	if (a1 >= a2){		
+		d2 = a2 + (360 - a1);
+	}else{
+		d2 = -(360 - a2) - a1;				
+	}	
+	
+	var ad1 = Math.abs(d1);
+	var ad2 = Math.abs(d2);	
+	
+	var res;
+	
+	if (ad1 <= ad2)
+		res = d1
+	else
+		res = d2;
+		
+	return res;
 }

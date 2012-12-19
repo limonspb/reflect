@@ -25,7 +25,7 @@ function GameScene(){
 		this.container.addChild(this.circles[i]);		
 	}
 
-	for (var i = 0; i < 0; ++i)
+	for (var i = 0; i < 10; ++i)
 	{
 		var enemy = global.EnemyFactory.getEnemy(EnemyTypes.SIMPLE_ENEMY);
 		enemy.x = Math.random()*global.gameWidth;
