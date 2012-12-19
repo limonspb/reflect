@@ -14,7 +14,6 @@ function GameScene(){
 	global.hero.y = 300;
 	this.container.addChild(global.hero);
 	
-	
 	global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
 	this.container.addChild(global.BulletFactory.bulletsCont);
 	
