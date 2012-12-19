@@ -1,35 +1,43 @@
 /**
+ * Убегающий враг
  * @author ProBigi
  */
 
 
-function SimpleEnemy()
+function EscapeEnemy()
 {
-	SimpleEnemy.superclass.constructor.apply(this);
+	EscapeEnemy.superclass.constructor.apply(this);
 	
+	
+	this.moveBackState;
+	this.dist;
 }
 
-extend(SimpleEnemy,EnemyUnit);
+extend(EscapeEnemy,EnemyUnit);
 
 
 /**
- * Инициализация отображения юнита
+ * Создание отображения
  */
-SimpleEnemy.prototype.initView = function ()
+EscapeEnemy.prototype.initView = function ()
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("blue").drawRect ( -25 , -20 , 40 , 40 );
-	
-	this.gun = new createjs.Shape();
+	this.view.graphics.setStrokeStyle(1, 'round', 'round');
+	this.view.graphics.beginStroke(('#000000'));
+	this.view.graphics.beginFill("#FFD700").drawCircle ( 0 , 0 , 15 );
+	this.view.graphics.endStroke();
+    this.view.graphics.endFill();
+    
+    this.gun = new createjs.Shape();
     this.gun.graphics.setStrokeStyle(1, 'round', 'round');
     this.gun.graphics.beginStroke(('#000000'));
     this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(20,0);
+    this.gun.graphics.lineTo(15,0);
     this.gun.graphics.endStroke();
     this.gun.graphics.endFill();
 	
-	this.width = 40;
-	this.height = 40;
+	this.width = 15;
+	this.height = 15;
 	
 	this.centre = new createjs.Shape();
 	this.centre.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -39,24 +47,34 @@ SimpleEnemy.prototype.initView = function ()
 	this.addChild(this.centre);
 }
 
-SimpleEnemy.prototype.initOptions = function ()
+/**
+ * Задание параметров
+ */
+EscapeEnemy.prototype.initOptions = function ()
 {
-	this.speed = Math.random()*30 + 40;
-	this.rotationSpeed = 60;
-	this.health = 10;
-	this.damage = 15;
-	this.bulletRespawn = 3500;
+	this.speed = Math.random()*30 + 130;
+	this.rotationSpeed = 150;
+	this.health = 50;
+	this.damage = 40;
+	this.bulletRespawn = 6500;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 0;
-	this.maxRange = 1000;
+	this.minRange = 150;
+	this.maxRange = 700;
 }
 
-SimpleEnemy.prototype.move = function (elapsedTime)
+EscapeEnemy.prototype.move = function (elapsedTime)
 {
 	this.dist = this.getDistanceToObject(global.hero);
 	
 	var dx = 0;
 	var dy = 0;
+	
+	this.speed = Math.abs(this.speed);
+		
+	if (this.dist <= this.minRange)
+	{
+		this.speed = -Math.abs(this.speed);
+	}
 	
 	if (!this.pauseMove(elapsedTime))
 	{
@@ -66,6 +84,12 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
+		if (this.getDistanceToObject(global.hero) <= this.minRange+2 && this.getDistanceToObject(global.hero) > this.minRange)
+		{
+			dx = 0;
+			dy = 0;
+		} 
+		
 		this.x += dx;
 		this.y += dy;
 	}
@@ -73,10 +97,11 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
 	
 	this.respawnCount += elapsedTime;
+	
 	this.shoot();
 }
 
-SimpleEnemy.prototype.shoot = function ()
+EscapeEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
@@ -89,5 +114,3 @@ SimpleEnemy.prototype.shoot = function ()
 		}
 	}
 }
-	
-

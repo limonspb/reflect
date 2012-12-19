@@ -11,6 +11,7 @@ var global = {
 	keyboard: null,
 	hero: null,
 	EnemyFactory: null,
+	EnemyManager: null,
 	BulletFactory: null,
 	BonusFactory: null,
 	BonusManager: null

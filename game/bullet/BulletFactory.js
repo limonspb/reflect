@@ -30,6 +30,8 @@ BulletFactory.prototype.addBullet = function(type, angle, x, y)
 		bullet.init(angle,x,y);
 		this.bulletsCont.addChild(bullet);
 		this.bullets.push(bullet);
+		
+		return bullet;
 	}
 }
 
@@ -41,11 +43,6 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		this.bullets[i].move(elapsedTime);
 		if(!this.bullets[i].checkOutOfStage())
 		{
-			//this.bullets[i].x = this.bullets[i].futureX = 250;
-			//this.bullets[i].y = this.bullets[i].futureY = 10;
-			//this.bullets[i].speed = 500;
-			//this.bullets[i].rotation = this.bullets[i].futureRotation = 50;
-			
 				
 			if (this.bulletsCont.contains(this.bullets[i]))
 			{
@@ -53,9 +50,7 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 				//TODO clear bullet
 				this.bullets.splice(i,1);
 				len--;
-			}
-			
-			
+			}			
 		}
 	}
 }

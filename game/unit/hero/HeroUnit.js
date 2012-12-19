@@ -303,7 +303,7 @@ HeroUnit.prototype.getRotationShieldArray = function(count){
 	var res = [];
 	var dangle2 = (this.sheildAngle - this.sh_old_angle)/(count-1);
 	var dangle = getAngleDiff_grad(this.sh_old_angle, this.sheildAngle)/(count - 1);
-	console.log(dangle, dangle2);	
+	//console.log(dangle, dangle2);	
 	for (var i=0; i<count; i++){
 		res[i] = this.sh_old_angle + dangle*i;
 	}	
