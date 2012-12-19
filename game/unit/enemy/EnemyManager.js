@@ -9,13 +9,13 @@ function EnemyManager()
 	
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 7000;
+	this.timeToAddSimple = 12000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 12000;
+	this.timerToAddMedium = 13000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 10000;
+	this.timerToAddEscape = 14000;
 }
 
 EnemyManager.prototype.update = function(elapsedTime)

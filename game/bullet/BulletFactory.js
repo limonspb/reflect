@@ -43,7 +43,6 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		this.bullets[i].move(elapsedTime);
 		if(!this.bullets[i].checkOutOfStage())
 		{
-				
 			if (this.bulletsCont.contains(this.bullets[i]))
 			{
 				this.bulletsCont.removeChild(this.bullets[i]);

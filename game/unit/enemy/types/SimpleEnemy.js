@@ -31,12 +31,12 @@ SimpleEnemy.prototype.initView = function ()
 	this.width = 40;
 	this.height = 40;
 	
-	this.centre = new createjs.Shape();
-	this.centre.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	this.center = new createjs.Shape();
+	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
 	
 	this.addChild(this.view);
 	this.addChild(this.gun);
-	this.addChild(this.centre);
+	this.addChild(this.center);
 }
 
 SimpleEnemy.prototype.initOptions = function ()
