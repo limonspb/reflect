@@ -20,7 +20,7 @@ ShotGunBullet.prototype.initView = function(x,y)
 	this.view = new createjs.Shape();
 	this.view.graphics.beginFill("red").drawRect ( -10 , -5 , 20 , 10);
 	
-	this.addChild(this.view);
+	this.addChild(this.view);	
 	
 	this.x = this.futureX = x;
 	this.y = this.futureY = y;
