@@ -14,6 +14,9 @@ function EnemyUnit()
 	this.minRange;
 	this.maxRange;
 	this.bullet;
+	
+	this.pauseCount = Math.random() * 20000 + 3000;;
+	this.pauseTime = Math.random()*10000 + 3000;
 }
 
 extend(EnemyUnit,BaseUnit);
@@ -60,6 +63,29 @@ EnemyUnit.prototype.initPosition = function() {
 EnemyUnit.prototype.move = function(elapsedTime) { }
 
 EnemyUnit.prototype.shoot = function() { }
+
+EnemyUnit.prototype.pauseMove = function(elapsedTime)
+{
+	this.pauseCount -= elapsedTime;
+	var pause;
+	
+	if (this.pauseCount <= 0) { 
+		pause = true;
+	}
+	if (pause == true && this.pauseTime > 0)
+	{
+		this.pauseTime -= elapsedTime;
+	}
+	else if (this.pauseTime <= 0)
+	{
+		this.pauseCount = Math.random() * 20000 + 3000;;
+		this.pauseTime = Math.random()*10000 + 3000;
+		pause = false;
+	}
+	else { pause = false; }
+	
+	return pause;
+}
 
 /**
  * Получить направление поворота относительно элемента к герою

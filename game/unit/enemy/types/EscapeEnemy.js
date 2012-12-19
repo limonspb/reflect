@@ -56,7 +56,7 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.rotationSpeed = 150;
 	this.health = 50;
 	this.damage = 40;
-	this.bulletRespawn = 1000;
+	this.bulletRespawn = 6500;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
@@ -66,8 +66,8 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 {
 	this.dist = this.getDistanceToObject(global.hero);
 	
-	var dx;
-	var dy;
+	var dx = 0;
+	var dy = 0;
 	
 	this.speed = Math.abs(this.speed);
 		
@@ -76,22 +76,25 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		this.speed = -Math.abs(this.speed);
 	}
 	
-	this.view.rotation = this.getAngleToObject(global.hero);
+	if (!this.pauseMove(elapsedTime))
+	{
+		this.view.rotation = this.getAngleToObject(global.hero);
+		
+		this.angle = this.view.rotation/180 * Math.PI;
+		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+		
+		if (this.getDistanceToObject(global.hero) <= this.minRange+2 && this.getDistanceToObject(global.hero) > this.minRange)
+		{
+			dx = 0;
+			dy = 0;
+		} 
+		
+		this.x += dx;
+		this.y += dy;
+	}
 	
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
-	
-	this.angle = this.view.rotation/180 * Math.PI;
-	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
-	dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-	
-	if (this.getDistanceToObject(global.hero) <= this.minRange+2 && this.getDistanceToObject(global.hero) > this.minRange)
-	{
-		dx = 0;
-		dy = 0;
-	} 
-	
-	this.x += dx;
-	this.y += dy;
 	
 	this.respawnCount += elapsedTime;
 	

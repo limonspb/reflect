@@ -64,39 +64,41 @@ MediumEnemy.prototype.initOptions = function ()
 
 MediumEnemy.prototype.move = function (elapsedTime)
 {
-	var dx;
-	var dy;
+	var dx = 0;
+	var dy = 0;
+	
+	if (!this.pauseMove(elapsedTime))
+	{
+		this.backTime -= elapsedTime;
+		if (this.backTime > 0)
+		{
+			this.view.rotation = this.bulletAngle;
+			
+			this.angle = this.view.rotation/180 * Math.PI;
+			dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+			dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+			
+			
+			this.x -= dx*7;
+			this.y -= dy*7;
+		}
+		else
+		{
+			this.view.rotation = this.getAngleToObject(global.hero);
+			
+			this.angle = this.view.rotation/180 * Math.PI;
+			dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+			dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+			
+			this.x += dx; 
+			this.y += dy;
+			
+			this.backTime = 0;
+		}
+	}
+	
 	
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
-	
-	this.backTime -= elapsedTime;
-	if (this.backTime > 0)
-	{
-		this.view.rotation = this.bulletAngle;
-		
-		this.angle = this.view.rotation/180 * Math.PI;
-		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
-		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-		
-		
-		this.x -= dx*7;
-		this.y -= dy*7;
-	}
-	else
-	{
-		this.view.rotation = this.getAngleToObject(global.hero);
-		
-		this.angle = this.view.rotation/180 * Math.PI;
-		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
-		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-		
-		this.x += dx; 
-		this.y += dy;
-		
-		this.backTime = 0;
-	}
-	
-	
 	
 	this.respawnCount += elapsedTime;
 	
