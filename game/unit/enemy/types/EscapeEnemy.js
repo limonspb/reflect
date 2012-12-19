@@ -1,0 +1,120 @@
+/**
+ * Убегающий враг
+ * @author ProBigi
+ */
+
+
+function EscapeEnemy()
+{
+	EscapeEnemy.superclass.constructor.apply(this);
+	
+	
+	this.moveBackState;
+	this.dist;
+}
+
+extend(EscapeEnemy,EnemyUnit);
+
+
+/**
+ * Создание отображения
+ */
+EscapeEnemy.prototype.initView = function ()
+{
+	this.view = new createjs.Shape();
+	this.view.graphics.setStrokeStyle(1, 'round', 'round');
+	this.view.graphics.beginStroke(('#000000'));
+	this.view.graphics.beginFill("#FFD700").drawCircle ( 0 , 0 , 15 );
+	this.view.graphics.endStroke();
+    this.view.graphics.endFill();
+    
+    this.gun = new createjs.Shape();
+    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
+    this.gun.graphics.beginStroke(('#000000'));
+    this.gun.graphics.moveTo(0,0);
+    this.gun.graphics.lineTo(15,0);
+    this.gun.graphics.endStroke();
+    this.gun.graphics.endFill();
+	
+	this.width = 15;
+	this.height = 15;
+	
+	this.centre = new createjs.Shape();
+	this.centre.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	
+	this.addChild(this.view);
+	this.addChild(this.gun);
+	this.addChild(this.centre);
+}
+
+/**
+ * Задание параметров
+ */
+EscapeEnemy.prototype.initOptions = function ()
+{
+	this.speed = Math.random()*30 + 130;
+	//this.speed = 10;
+	this.rotationSpeed = 150;
+	this.health = 50;
+	this.damage = 40;
+	this.bulletRespawn = 1000;
+	this.bulletType = BulletTypes.SHOT_GUN;
+	this.minRange = 150;
+	this.maxRange = 700;
+}
+
+EscapeEnemy.prototype.move = function (elapsedTime)
+{
+	this.dist = this.getDistanceToObject(global.hero);
+	
+	var dx;
+	var dy;
+	
+	this.speed = Math.abs(this.speed);
+		
+	if (this.dist <= this.minRange)
+	{
+		this.speed = -Math.abs(this.speed);
+	}
+	
+	this.view.rotation = this.getAngleToObject(global.hero);
+	
+	
+	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
+	
+	
+	this.angle = this.view.rotation/180 * Math.PI;
+	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+	dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+	
+	if (this.getDistanceToObject(global.hero) <= this.minRange+2 && this.getDistanceToObject(global.hero) > this.minRange)
+	{
+		dx = 0;
+		dy = 0;
+	} 
+	
+	
+	
+	this.x += dx;
+	this.y += dy;
+	
+	//console.log(this.x, this.y);
+	
+	this.respawnCount += elapsedTime;
+	
+	this.shoot();
+}
+
+EscapeEnemy.prototype.shoot = function ()
+{
+	if (this.respawnCount >= this.bulletRespawn)
+	{
+		if (this.dist <= this.maxRange && this.dist >= this.minRange)
+		{
+			//var angle = this.getAngleToObject(global.hero);
+			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+			
+			this.respawnCount = 0;
+		}
+	}
+}

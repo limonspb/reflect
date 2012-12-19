@@ -19,6 +19,9 @@ EnemyFactory.prototype.addEnemy = function(type)
 		case EnemyTypes.MEDIUM_ENEMY:
 			enemy = new MediumEnemy();
 			break;
+		case EnemyTypes.ESCAPE_ENEMY:
+			enemy = new EscapeEnemy();
+			break;
 	}
 	if (enemy)
 	{

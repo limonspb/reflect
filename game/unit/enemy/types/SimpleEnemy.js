@@ -34,7 +34,8 @@ SimpleEnemy.prototype.initOptions = function ()
 	this.damage = 15;
 	this.bulletRespawn = 3000;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.range = 1000;
+	this.minRange = 0;
+	this.maxRange = 1000;
 }
 
 SimpleEnemy.prototype.move = function (elapsedTime)
