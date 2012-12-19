@@ -44,7 +44,7 @@ function handleImageLoad(event){
 	//global.stage.addChild(test);	
 	
 	createjs.Ticker.addListener(window);	
-	createjs.Ticker.setFPS(50);	
+	createjs.Ticker.setFPS(30);	
 }
 
 
