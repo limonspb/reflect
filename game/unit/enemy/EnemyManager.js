@@ -22,9 +22,9 @@ EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	//this.checkAddSimpleEnemy(elapsedTime);
-	//this.checkAddMediumEnemy(elapsedTime);
-	//this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddSimpleEnemy(elapsedTime);
+	this.checkAddMediumEnemy(elapsedTime);
+	this.checkAddEscapeEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
