@@ -84,7 +84,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (this.getDistanceToObject(global.hero) <= this.minRange+2 && this.getDistanceToObject(global.hero) > this.minRange)
+		if (this.getDistanceToObject(global.hero) <= this.minRange+5 && this.getDistanceToObject(global.hero) > this.minRange)
 		{
 			dx = 0;
 			dy = 0;

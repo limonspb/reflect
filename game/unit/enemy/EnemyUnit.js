@@ -13,6 +13,7 @@ function EnemyUnit()
 	this.respawnCount = 0;
 	this.minRange;
 	this.maxRange;
+	
 	this.bullet;
 	
 	this.pauseCount = Math.random() * 20000 + 3000;;
@@ -40,21 +41,24 @@ EnemyUnit.prototype.initOptions = function() { }
 EnemyUnit.prototype.initPosition = function() {
 	var random = Math.random();
 	if (random <= .25) {
-		this.x = Math.random()*global.gameWidth;
-		this.y = global.camera.lookAtY - this.height - 20;
+		this.x = Math.random()*global.levelWidth;
+		this.y = - this.height - 20;
 	}
 	else if (random > .25 && random < .5) {
-		this.x = Math.random()*global.gameWidth;
-		this.y = global.gameHeight + this.height + 20;
+		this.x = Math.random()*global.levelWidth;
+		this.y = global.levelHeight + this.height + 20;
 	}
 	else if (random > .5 && random < .75) {
-		this.x = global.camera.lookAtX - this.width - 20;
-		this.y = Math.random() * global.gameHeight;
+		this.x = - this.width - 20;
+		this.y = Math.random() * global.levelHeight;
 	}
 	else if (random >= .75) {
-		this.x = global.gameWidth + this.width + 20;
-		this.y = Math.random() * global.gameHeight;
+		this.x = global.levelWidth + this.width + 20;
+		this.y = Math.random() * global.levelHeight;
 	}
+	
+	//console.log("R " + random);
+	//console.log(this.x, this.y);
 	
 	//this.x = Math.random() * global.gameWidth;
 	//this.y = Math.random() * global.gameHeight;

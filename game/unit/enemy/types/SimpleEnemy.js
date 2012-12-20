@@ -48,7 +48,7 @@ SimpleEnemy.prototype.initOptions = function ()
 	this.damage = 15;
 	this.bulletRespawn = 3500;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 0;
+	this.minRange = 50;
 	this.maxRange = 1000;
 }
 
@@ -66,6 +66,12 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 		this.angle = this.view.rotation/180 * Math.PI;
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+		
+		if (this.getDistanceToObject(global.hero) <= this.minRange+5/* && this.getDistanceToObject(global.hero) > this.minRange*/)
+		{
+			dx = 0;
+			dy = 0;
+		} 
 		
 		this.x += dx;
 		this.y += dy;

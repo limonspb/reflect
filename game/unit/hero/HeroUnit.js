@@ -160,6 +160,9 @@ HeroUnit.prototype.initView = function ()
 		"width": global.preloader.imgs.player.height
 		}
 	});	
+			
+	this.width = global.preloader.imgs.player.width;
+	this.height = global.preloader.imgs.player.height;
 				
 	this.ss.getAnimation("run").frequency = 0;
 				

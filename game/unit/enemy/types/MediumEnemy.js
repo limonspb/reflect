@@ -58,7 +58,7 @@ MediumEnemy.prototype.initOptions = function ()
 	this.damage = 30;
 	this.bulletRespawn = 5000;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 0;
+	this.minRange = 50;
 	this.maxRange = 500;
 }
 
@@ -67,35 +67,51 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	var dx = 0;
 	var dy = 0;
 	
-	if (!this.pauseMove(elapsedTime))
+	var dt = 1;
+	
+	this.backTime -= elapsedTime;
+	if (this.backTime > 0)
 	{
-		this.backTime -= elapsedTime;
-		if (this.backTime > 0)
+		this.view.rotation = this.bulletAngle;
+		
+		this.angle = this.view.rotation/180 * Math.PI;
+		
+		dt = -7;
+	}
+	else
+	{
+		this.view.rotation = this.getAngleToObject(global.hero);
+		
+		this.angle = this.view.rotation/180 * Math.PI;
+		
+		this.backTime = 0;
+	}
+	
+	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+	dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+	
+	if (this.pauseMove(elapsedTime) || this.getDistanceToObject(global.hero) <= this.minRange+5)
+	{
+		if (dt > 0)
 		{
-			this.view.rotation = this.bulletAngle;
-			
-			this.angle = this.view.rotation/180 * Math.PI;
-			dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
-			dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-			
-			
-			this.x -= dx*7;
-			this.y -= dy*7;
-		}
-		else
-		{
-			this.view.rotation = this.getAngleToObject(global.hero);
-			
-			this.angle = this.view.rotation/180 * Math.PI;
-			dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
-			dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
-			
-			this.x += dx; 
-			this.y += dy;
-			
-			this.backTime = 0;
+			dx = 0;
+			dy = 0;
 		}
 	}
+	
+	/*if (this.getDistanceToObject(global.hero) <= this.minRange+5/* && this.getDistanceToObject(global.hero) > this.minRange)
+	{
+		if (dt > 0)
+		{
+			dx = 0;
+			dy = 0;
+		}
+	}*/
+		
+	
+	this.x += dx*dt; 
+	this.y += dy*dt;
+	
 	
 	
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
