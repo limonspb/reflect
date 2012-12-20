@@ -39,6 +39,9 @@ function HeroUnit()
 		
 	this.sh_old_segments = [{},{},{},{}];
 	this.sh_old_angle = 90;
+	
+	this.segments_arr;
+	this.segments_arr_counted = false;
 }
 
 extend(HeroUnit,BaseUnit);
@@ -133,7 +136,7 @@ HeroUnit.prototype.countShieldSegments = function(angle,px,py){
 	sh_segments[3].x1 = sh_BottomLeft.x; 	
 	sh_segments[3].y1 = sh_BottomLeft.y; 	
 	sh_segments[3].x2 = sh_TopLeft.x; 	
-	sh_segments[3].y2 = sh_TopLeft.y;	
+	sh_segments[3].y2 = sh_TopLeft.y;
 	
 	return sh_segments;
 }
@@ -178,14 +181,7 @@ HeroUnit.prototype.initView = function ()
 }
 
 
-/**
- * Движение юнита
- * @param {Number} elapsedTime	время прошедшее с последнего тика
- */
-HeroUnit.prototype.move = function(elapsedTime)
-{
-	var dt = elapsedTime/1000;
-	
+HeroUnit.prototype.keyControlling = function(){
 	if (this.FORWARD){
 		this.a_c = this.a_c_max_foward;
 	}
@@ -214,7 +210,13 @@ HeroUnit.prototype.move = function(elapsedTime)
 		}else{
 			this.ar_c = 0;
 		}		
-	}
+	}	
+}
+
+HeroUnit.prototype.move = function(elapsedTime)
+{
+	var dt = elapsedTime/1000;
+	this.keyControlling();
 	
 	var tempvrc = this.vr_c;
 	this.vr_c += this.ar_c * dt;
@@ -274,23 +276,17 @@ HeroUnit.prototype.move = function(elapsedTime)
 	if (this.y> global.levelHeight - this.bodySize){
 		this.vy_c = 0;
 		this.y = global.levelHeight - this.bodySize;		
-	}
-	
+	}	
 	
 	this.rotationSheild();
-	this.setActualShieldSegments();
+	this.setActualShieldSegments();	
 	
-	
-	this.reflect(elapsedTime);
-	
-	//this.countShieldCorners2(this.sheildAngle, this.x,this.y);
-	
+	this.reflect(elapsedTime);	
 }	
 /**
  * Поворот щита относительно курсора
  */
-HeroUnit.prototype.rotationSheild = function ()
-{
+HeroUnit.prototype.rotationSheild = function (){
 	this.dx = this.x - global.stage.mouseX - global.camera.lookAtX;
 	this.dy = this.y - global.stage.mouseY - global.camera.lookAtY;
 	
@@ -303,59 +299,34 @@ HeroUnit.prototype.getRotationShieldArray = function(count){
 	var res = [];
 	var dangle2 = (this.sheildAngle - this.sh_old_angle)/(count-1);
 	var dangle = getAngleDiff_grad(this.sh_old_angle, this.sheildAngle)/(count - 1);
-	//console.log(dangle, dangle2);	
+	
 	for (var i=0; i<count; i++){
 		res[i] = this.sh_old_angle + dangle*i;
 	}	
-	return res;	
+	return res;
 }
 
 
-HeroUnit.prototype.reflect = function(elapsedTime){		
+HeroUnit.prototype.reflect = function(elapsedTime){
+	this.segments_arr_counted = false;	
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
 		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
 			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){				
-					this.hardReflect(bullet, elapsedTime);	
+					this.hardReflect(bullet, elapsedTime);
 			}				
 		}			
-	}				
+	}	
 }
 
 
+
+
 HeroUnit.prototype.hardReflect = function(b, elapsedTime){
-	
-	
-	var get_sh_segments_array = function(begin, end, count /*segments arrays*/){
-		var dx1 = [];
-		var dx2 = [];
-		var dy1 = [];
-		var dy2 = [];
-		for (var i=0; i<4; i++){
-			dx1[i] = (end[i].x1 - begin[i].x1)/(count - 1);
-			dx2[i] = (end[i].x2 - begin[i].x2)/(count - 1);
-			dy1[i] = (end[i].y1 - begin[i].y1)/(count - 1);
-			dy2[i] = (end[i].y2 - begin[i].y2)/(count - 1);
-		}
-		//console.log(dx1[0]);
-		var res = [];
-		for (var i=0; i<count; i++){
-			res[i] = [{},{},{},{}];
-			for (var j=0; j<4; j++){
-				res[i][j].x1 = begin[j].x1 + dx1[j]*i;
-				res[i][j].x2 = begin[j].x2 + dx2[j]*i;
-				res[i][j].y1 = begin[j].y1 + dy1[j]*i;
-				res[i][j].y2 = begin[j].y2 + dy2[j]*i;
-			}
-		}
-		return res;		
-	}	
-	
-	//var segments_arr = get_sh_segments_array(this.sh_segments, this.sh_old_segments, 150);
-	var segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);
-	//console.log(segments_arr);
-	//console.log(this.sh_segments[0].x1 - this.sh_old_segments[0].x1);		
-	
+	if (!this.segments_arr_counted){
+		this.segments_arr_counted = true;
+		segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);		
+	}
 	var s = {};
 	s.x1 = b.x;
 	s.x2 = b.futureX;
@@ -377,8 +348,7 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		for (var i=0; i<4; i++){
 			X[i] = intersectSegments_obj(s,segments_arr[seg_i][i]);
 			if (X[i]){
-				d = Math.sqrt( (b.x-X[i].x)*(b.x-X[i].x) + (b.y-X[i].y)*(b.y-X[i].y));
-				//console.log(segments_arr);
+				d = Math.sqrt( (b.x-X[i].x)*(b.x-X[i].x) + (b.y-X[i].y)*(b.y-X[i].y));				
 				if (d< min_d){
 					min_d = d;
 					n_i = i;
@@ -394,8 +364,7 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		}		
 	}
 	
-	if (Xsegment){
-		//console.log(n_i);
+	if (Xsegment){		
 		var vecV = {};
 		vecV.x = Math.cos(b.angle);
 		vecV.y = Math.sin(b.angle);
@@ -417,7 +386,6 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 	
 		b.futureRotation = Math.atan2(resV.y, resV.x)*180/Math.PI;						
 		
-		//vec of the side to move bullet
 		var side = vec_Get(this.sh_segments[XsegmentNumber].x1, this.sh_segments[XsegmentNumber].y1, this.sh_segments[XsegmentNumber].x2, this.sh_segments[XsegmentNumber].y2);
 		var perp = vec_Perp(side);
 		perp = vec_normal(perp);
@@ -425,16 +393,8 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		var pointtomove = vec_Summ({x:this.sh_segments[XsegmentNumber].x1, y:this.sh_segments[XsegmentNumber].y1}, side);
 		perp = vec_Scale(perp, b.speed*elapsedTime/1000);
 		pointtomove = vec_Summ(pointtomove, perp);
-		//console.log(side, XsegmentNumber);
 		
 		b.futureX = pointtomove.x;
-		b.futureY = pointtomove.y;	
-		
-		
-		//b.futureX = XX.x + vecN.x;
-		//b.futureY = XX.y + vecN.y;	
-		
-	}
-	
-	
+		b.futureY = pointtomove.y;		
+	}	
 }

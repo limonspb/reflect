@@ -153,3 +153,32 @@ function getAngleDiff_grad(angle1,angle2){
 		
 	return res;
 }
+
+
+
+
+function get_sh_segments_array(begin, end, count /*segments arrays*/){
+	var dx1 = [];
+	var dx2 = [];
+	var dy1 = [];
+	var dy2 = [];
+	for (var i=0; i<4; i++){
+		dx1[i] = (end[i].x1 - begin[i].x1)/(count - 1);
+		dx2[i] = (end[i].x2 - begin[i].x2)/(count - 1);
+		dy1[i] = (end[i].y1 - begin[i].y1)/(count - 1);
+		dy2[i] = (end[i].y2 - begin[i].y2)/(count - 1);
+	}
+	
+	var res = [];
+	for (var i=0; i<count; i++){
+		res[i] = [{},{},{},{}];
+		for (var j=0; j<4; j++){
+			res[i][j].x1 = begin[j].x1 + dx1[j]*i;
+			res[i][j].x2 = begin[j].x2 + dx2[j]*i;
+			res[i][j].y1 = begin[j].y1 + dy1[j]*i;
+			res[i][j].y2 = begin[j].y2 + dy2[j]*i;
+		}
+	}
+	return res;	
+}	
+
