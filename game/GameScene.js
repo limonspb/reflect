@@ -10,8 +10,8 @@ function GameScene(){
 	this.keys = [];
 	
 	global.hero = new HeroUnit();
-	global.hero.x = 300;
-	global.hero.y = 300;
+	global.hero.x = 1000;
+	global.hero.y = 1000;
 	this.container.addChild(global.hero);
 	
 	//global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
