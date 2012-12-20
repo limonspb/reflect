@@ -15,15 +15,15 @@ function EnemyManager()
 	this.timerToAddMedium = 7000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 9000;
+	this.timerToAddEscape = 1000;
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	this.checkAddSimpleEnemy(elapsedTime);
-	this.checkAddMediumEnemy(elapsedTime);
+	//this.checkAddSimpleEnemy(elapsedTime);
+	//this.checkAddMediumEnemy(elapsedTime);
 	this.checkAddEscapeEnemy(elapsedTime);
 }
 

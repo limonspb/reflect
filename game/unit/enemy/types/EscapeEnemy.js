@@ -60,6 +60,8 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
+	
+	this.wtf = 1;
 }
 
 EscapeEnemy.prototype.move = function (elapsedTime)
@@ -88,11 +90,14 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		{
 			dx = 0;
 			dy = 0;
-		} 
+		}
+		
 		
 		this.x += dx;
 		this.y += dy;
 	}
+	
+	
 	
 	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
 	

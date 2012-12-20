@@ -14,7 +14,7 @@ function BaseUnit()
 	this.height;
 }
 
-extend(BaseUnit,createjs.Container);
+extend(BaseUnit,GameObject);
 
 BaseUnit.prototype.move = function(elapsedTime) { }
 BaseUnit.prototype.initView = function() { }
@@ -28,11 +28,11 @@ BaseUnit.prototype.getAngleToObject = function(object) {
 	return (180 + this.angle);
 }
 
-BaseUnit.prototype.getDistanceToObject = function(object) {
+/*BaseUnit.prototype.getDistanceToObject = function(object) {
 	var dx = this.x - object.x;
 	var dy = this.y - object.y;
 	
 	var dist = Math.sqrt(dx*dx + dy*dy);
 	
 	return dist;
-}
+}*/

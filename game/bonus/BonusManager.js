@@ -14,12 +14,10 @@ function BonusManager()
 BonusManager.prototype.update = function(elapsedTime)
 {
 	
-	
-	
 	this.smallMedkitUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
-	
+	this.checkPickUp()
 }
 
 /**
@@ -29,7 +27,7 @@ BonusManager.prototype.update = function(elapsedTime)
 BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 {
 	this.bonusTime += elapsedTime;
-	if (this.bonusTime >= 2000)
+	if (this.bonusTime >= 1000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -42,4 +40,28 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 BonusManager.prototype.checkPickUp = function()
 {
 	var len = global.BonusFactory.bonuses.length;
+	
+	for (var i = 0; i < len; i++)
+	{
+		var bonus = global.BonusFactory.bonuses[i];
+		
+		//var pt = bonus.globalToLocal(bonus.x, bonus.y);
+		
+		
+		//console.log(bonus.getDistanceToObject(global.hero));
+		
+		//console.log(bonus.width, global.hero.width);
+		
+		//bonus.alpha = 1;
+		
+		if (bonus.getDistanceToObject(global.hero) <= bonus.width)
+		{
+			console.log("HIT TEST BONUS " + i);
+			bonus.alpha = 0.2;
+			
+			bonus.pickUp();
+			break;
+		}
+		
+	}
 }

@@ -11,6 +11,9 @@ function BonusFactory()
 
 BonusFactory.prototype.addBonus = function(type, x, y)
 {
+	
+	if (this.bonuses.length >= 1) { return; }
+	
 	var bonus;
 	switch(type)
 	{
