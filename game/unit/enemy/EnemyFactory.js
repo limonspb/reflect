@@ -10,7 +10,7 @@ function EnemyFactory()
 
 EnemyFactory.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 50) { return; }
+	if (this.enemies.length >= 1) { return; }
 	
 	var enemy;
 	switch(type)

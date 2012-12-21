@@ -9,13 +9,13 @@ function EnemyManager()
 	
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 5000;
+	this.timeToAddSimple = 1000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 7000;
+	this.timerToAddMedium = 1000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 9000;
+	this.timerToAddEscape = 1000;
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
@@ -23,8 +23,8 @@ EnemyManager.prototype.update = function(elapsedTime)
 	this.move(elapsedTime);
 	
 	this.checkAddSimpleEnemy(elapsedTime);
-	this.checkAddMediumEnemy(elapsedTime);
-	this.checkAddEscapeEnemy(elapsedTime);
+	//this.checkAddMediumEnemy(elapsedTime);
+	//this.checkAddEscapeEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)

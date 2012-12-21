@@ -101,7 +101,12 @@ EnemyUnit.prototype.getRotation = function(item)
 	
 	//console.log(item.rotation);
 	
-	var angle = this.getAngleToObject(global.hero) - item.rotation;
+	
+	//var angle = this.getAngleToObject(global.hero) - item.rotation;
+	var angle = global.hero.getChanceFireAngle(this.x, this.y, 500) - item.rotation;
+	//var angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 200) - item.rotation;
+		
+	
 	
 	if (angle < -360 || angle >  360) { angle %= 360; }
 	
