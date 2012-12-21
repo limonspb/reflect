@@ -8,13 +8,16 @@ function EnemyManager()
 	global.EnemyFactory = new EnemyFactory();
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 1000;
+	this.timeToAddSimple = 5000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 1000;
+	this.timerToAddMedium = 7000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 1000;
+	this.timerToAddEscape = 9000;
+	
+	this.timerAddStrongEnemy = 0;
+	this.timerToAddStrong = 11000;
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
@@ -22,8 +25,9 @@ EnemyManager.prototype.update = function(elapsedTime)
 	this.move(elapsedTime);
 	
 	this.checkAddSimpleEnemy(elapsedTime);
-	//this.checkAddMediumEnemy(elapsedTime);
-	//this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddMediumEnemy(elapsedTime);
+	this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddStrongEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
@@ -71,5 +75,18 @@ EnemyManager.prototype.checkAddEscapeEnemy = function(elapsedTime)
 			global.EnemyFactory.addEnemy(EnemyTypes.ESCAPE_ENEMY);
 		}
 		this.timerAddEscapeEnemy = 0;
+	}
+}
+
+EnemyManager.prototype.checkAddStrongEnemy = function(elapsedTime)
+{
+	this.timerAddStrongEnemy += elapsedTime;
+	if (this.timerAddStrongEnemy >= this.timerToAddStrong)
+	{
+		for (var i = 0; i < 1; i++)
+		{
+			global.EnemyFactory.addEnemy(EnemyTypes.STRONG_ENEMY);
+		}
+		this.timerAddStrongEnemy = 0;
 	}
 }

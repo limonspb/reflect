@@ -56,7 +56,7 @@ MediumEnemy.prototype.initOptions = function ()
 	this.rotationSpeed = 200;
 	this.health = 30;
 	this.damage = 30;
-	this.bulletRespawn = 5000;
+	this.bulletRespawn = 3500;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 350;
 	this.maxRange = 500;
@@ -114,7 +114,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	
 	
 	
-	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
+	this.gun.rotation += this.getGunRotation(this.gun, ShotType.STUPID_SHOT)*elapsedTime/1000;
 	
 	this.respawnCount += elapsedTime;
 	

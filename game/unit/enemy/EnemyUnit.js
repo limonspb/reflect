@@ -2,6 +2,14 @@
  * @author ProBigi
  */
 
+var ShotType = {
+	
+	FORWARD_SHOT: 0,
+	STUPID_SHOT: 1,
+	CLEVER_SHOT: 2
+	
+}
+
 
 function EnemyUnit()
 {
@@ -18,6 +26,17 @@ function EnemyUnit()
 	
 	this.pauseCount = Math.random() * 20000 + 3000;;
 	this.pauseTime = Math.random()*10000 + 3000;
+	
+	
+	//for spiral moving
+	this.velocity;
+	this.disared;
+	this.position;
+	this.steering;
+	this.MAX_FORCE;
+	this.MAX_VELOCITY;
+	this.mass;
+	
 }
 
 extend(EnemyUnit,BaseUnit);
@@ -63,14 +82,15 @@ EnemyUnit.prototype.initPosition = function() {
 	//this.x = Math.random() * global.gameWidth;
 	//this.y = Math.random() * global.gameHeight;
 	
-	this.x = global.hero.x;
-	this.y = global.hero.y;
+	//this.x = global.hero.x;
+	//this.y = global.hero.y;
 }
 
 EnemyUnit.prototype.move = function(elapsedTime) { }
 
 EnemyUnit.prototype.shoot = function() { }
 
+/** Расчет случайной остановки на случайное время юнита*/
 EnemyUnit.prototype.pauseMove = function(elapsedTime)
 {
 	this.pauseCount -= elapsedTime;
@@ -98,24 +118,33 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
  * Получить направление поворота относительно элемента к герою
  * @param {Object} item
  */
-EnemyUnit.prototype.getRotation = function(item)
+EnemyUnit.prototype.getGunRotation = function(item, shotType)
 {
 	if (item.rotation < -360 || item.rotation >  360) { item.rotation %= 360; }
 	
-	//console.log(item.rotation);
-	
+	var angle;
+	switch(shotType)
+	{
+		case ShotType.FORWARD_SHOT:
+			angle = this.getAngleToObject(global.hero) - item.rotation;
+			break;
+		case ShotType.STUPID_SHOT:
+			angle = global.hero.getChanceFireAngle(this.x, this.y, 50+ Math.random()*200) - item.rotation;
+			break;
+		case ShotType.CLEVER_SHOT:
+			angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 500) - item.rotation;
+			break;
+	}
+	//console.log(shotType, angle);
 	
 	//var angle = this.getAngleToObject(global.hero) - item.rotation;
-	var angle = global.hero.getChanceFireAngle(this.x, this.y, 500) - item.rotation;
+	//var angle = global.hero.getChanceFireAngle(this.x, this.y, 500) - item.rotation;
 	//var angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 200) - item.rotation;
-		
-	
 	
 	if (angle < -360 || angle >  360) { angle %= 360; }
 	
 	if (Math.abs(angle) > 180) { angle = -angle; }
 	
-	//console.log(angle);
 	
 	var minAngle = 5;
 	var rot;
@@ -136,3 +165,47 @@ EnemyUnit.prototype.getRotation = function(item)
     
 	return (rot);
 }
+
+
+/** Поиск цели*/
+EnemyUnit.prototype.seek = function(target) {
+	
+	this.disared = target.subtract(this.position);
+	this.disared.normalize();
+	this.disared.scaleBy(this.MAX_VELOCITY);
+	
+	var force = this.disared.subtract(this.velocity);
+	
+	return force;
+}
+
+/** Срез направления вектора*/
+EnemyUnit.prototype.truncate = function(vector, max) {
+	var i = max / vector.length();
+	
+	i = i < 1.0 ? 1.0 : i;
+	
+	vector.scaleBy(i);
+}
+
+/** Задание координат движения по дуге*/
+EnemyUnit.prototype.update = function(target) {
+	//var target = global.hero.getChanceFireCoords(this.x,this.y, this.speed);
+	//var target = global.hero.getChanceFireCoords(this.x,this.y, this.speed);
+	//console.log(target.x,target.y);
+	this.steering = this.seek(new Vec2(target.x, target.y));
+	
+	this.truncate(this.steering, this.MAX_FORCE);
+	this.steering.scaleBy(1 / this.mass);
+	
+	this.velocity = this.velocity.addV(this.steering);
+	this.truncate(this.velocity, this.MAX_VELOCITY);
+	
+	this.position = this.position.addV(this.velocity);
+	
+	this.view.rotation = Math.atan2(this.y - this.position.y, this.x - this.position.x)*180/Math.PI
+	
+	this.x = this.position.x;
+	this.y = this.position.y;
+}
+
