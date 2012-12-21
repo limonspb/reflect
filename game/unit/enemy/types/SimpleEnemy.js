@@ -146,5 +146,5 @@ SimpleEnemy.prototype.update = function() {
 	this.x = this.position.x;
 	this.y = this.position.y;
 	
-	console.log(this.x, this.y);	
+	//console.log(this.x, this.y);	
 }

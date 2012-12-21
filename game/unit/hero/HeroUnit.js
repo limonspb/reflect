@@ -276,20 +276,20 @@ HeroUnit.prototype.move = function(elapsedTime)
 	this.y += vy_c*dt;
 	
 	if (this.x<this.bodySize){
-		//this.vx_c = 0;
+		this.vx_c = 0;
 		this.x = this.bodySize;
 	}else
 	if (this.x> global.levelWidth - this.bodySize){
-		//this.vx_c = 0;
+		this.vx_c = 0;
 		this.x = global.levelWidth - this.bodySize;
 	}
 
 	if (this.y<this.bodySize){
-		//this.vy_c = 0;
+		this.vy_c = 0;
 		this.y = this.bodySize;
 	}else
 	if (this.y> global.levelHeight - this.bodySize){
-		//this.vy_c = 0;
+		this.vy_c = 0;
 		this.y = global.levelHeight - this.bodySize;		
 	}	
 	

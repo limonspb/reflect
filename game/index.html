@@ -69,11 +69,15 @@
 		
 		<script src="view/BackGround.js"></script>
 		
-		<script src="BaseScene.js"></script>		
-		<script src="MenuScene.js"></script>
-		<script src="CreditsScene.js"></script>
-		<script src="GameScene.js"></script>
-		<script src="SceneController.js"></script>
+		<script src="scenes/BaseScene.js"></script>		
+		<script src="scenes/MenuScene.js"></script>
+		<script src="scenes/CreditsScene.js"></script>
+		<script src="scenes/InfoScene.js"></script>
+		<script src="scenes/GameScene.js"></script>
+		<script src="scenes/SettingsScene.js"></script>
+		<script src="scenes/RecordsScene.js"></script>
+		
+		<script src="scenes/SceneController.js"></script>
 		
 		<script src="Preload.js"></script>
 		<script src="Camera.js"></script>
@@ -90,23 +94,82 @@
 			alternate content
 		</canvas>
 		<div id="preloader">
-				<div id = "loading">
+				<div id="loading">
 					Loading, please wait...
 				</div>
 			<div id="backBar">
-				<div id = "bar">
+				<div id="bar">
 				</div>
 			</div>
 		</div>
 		
-		<div id="MainMenu" class="scene">
+		<div id="mainMenu" class="scene">
 			<div>Main menu</div>
+			<div id="playButton" class="button ">
+				Play
+			</div>
+			<div id="creditsButton" class="button ">
+				Credits
+			</div>
+			<div id="infoButton" class="button ">
+				Info
+			</div>
+			<div id="settingsButton" class="button ">
+				Settings
+			</div>		
+			<div id="recordsButton" class="button ">
+				Records
+			</div>		
 		</div>
-		<div id="Credits" class="scene">
+		<div id="credits" class="scene">
 			<div>
 				Credits
 			</div>
-			<div id="backButton">
+			<div>
+				Blablabla
+			</div>
+			<div id="backButton_credits" class="button">
+				Back
+			</div>
+		</div>
+		<div id = "info" class="scene">
+			<div>
+				info and help of the game. <br> Bonuses, mobs etc.
+			</div>
+			<div id="backButton_info" class="button">
+				Back
+			</div>
+		</div>
+		<div id="settings" class="scene">
+			<div>
+				Settings <br> Shiha-shiha =)
+			</div>
+			<div id="backButton_settings" class="button">
+				Back
+			</div>
+		</div>
+		<div id="records" class="scene">
+			<div>
+				<table border = "1px">
+					<tr>
+						<td>
+							Shiha
+						</td>
+						<td>
+							Shiha
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Shiha
+						</td>
+						<td>
+							Shiha
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="backButton_records" class="button">
 				Back
 			</div>
 		</div>
