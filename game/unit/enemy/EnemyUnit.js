@@ -30,8 +30,8 @@ extend(EnemyUnit,BaseUnit);
  */
 EnemyUnit.prototype.init = function() {
 	this.initView();
-	this.initOptions();
 	this.initPosition();
+	this.initOptions();
 }
 
 EnemyUnit.prototype.initView = function() { }
@@ -62,6 +62,9 @@ EnemyUnit.prototype.initPosition = function() {
 	
 	//this.x = Math.random() * global.gameWidth;
 	//this.y = Math.random() * global.gameHeight;
+	
+	this.x = global.hero.x;
+	this.y = global.hero.y;
 }
 
 EnemyUnit.prototype.move = function(elapsedTime) { }
