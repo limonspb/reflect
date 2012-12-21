@@ -4,6 +4,9 @@
  * 
  * HeroUnit.prototype.getChanceFireAngle_simple = function(x,y,N)
  * returns stupid angle to the hero position + N pixels in his direction
+ * 
+ * HeroUnit.prototype.getChanceFireCoords = function(x,y,v)
+ * returns {} with x and y
  *  
  */
 
@@ -415,6 +418,11 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 
 
 HeroUnit.prototype.getChanceFireAngle = function(x,y,v){
+	var toV = this.getChanceFireCoords(x,y,v); 	
+	return Math.atan2(toV.y -y, toV.x - x)*180/Math.PI;
+}
+
+HeroUnit.prototype.getChanceFireCoords = function(x,y,v){
 	var vec = vec_Get(x,y,this.x,this.y);
 	var d = vec_Length(vec);
 	var toV = {x:0, y:0};
@@ -424,9 +432,10 @@ HeroUnit.prototype.getChanceFireAngle = function(x,y,v){
 	}
 	toV.x = this.x + Math.cos(this.angle)*d*this.v_c/vv;
 	toV.y = this.y + Math.sin(this.angle)*d*this.v_c/vv;	
-	
-	return Math.atan2(toV.y -y, toV.x - x)*180/Math.PI;
+
+	return toV;	
 }
+
 
 HeroUnit.prototype.getChanceFireAngle_simple = function(x,y,N){
 	var toV = {x:0, y:0};	
