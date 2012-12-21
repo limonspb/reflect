@@ -56,7 +56,7 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.rotationSpeed = 150;
 	this.health = 50;
 	this.damage = 40;
-	this.bulletRespawn = 6500;
+	this.bulletRespawn = 2500;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
@@ -99,7 +99,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 	
 	
 	
-	this.gun.rotation += this.getRotation(this.gun)*elapsedTime/1000;
+	this.gun.rotation += this.getGunRotation(this.gun, ShotType.CLEVER_SHOT)*elapsedTime/1000;
 	
 	this.respawnCount += elapsedTime;
 	

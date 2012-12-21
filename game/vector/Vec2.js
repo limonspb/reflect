@@ -24,7 +24,7 @@ this.subS = function(value) { return new Vec2(this.x-value, this.y-value); }
 /* vector - vector */
 this.subV = function(vec_) { return new Vec2(this.x-vec_.x,this.y-vec_.y); }
 /* vec2 - vec1 */
-this.subtract = function(vec_) { return new Vec2(vec_.x - this.x, vec_.y - this.y); }
+this.subtract = function(vec_) { return new Vec2(this.x - vec_.x, this.y - vec_.y); }
 
 /* vector absolute */
 this.abs = function() { return new Vec2(Math.abs(this.x),Math.abs(this.y)); }

@@ -10,7 +10,7 @@ function EnemyFactory()
 
 EnemyFactory.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 1) { return; }
+	if (this.enemies.length >= 50) { return; }
 	
 	var enemy;
 	switch(type)
@@ -23,6 +23,15 @@ EnemyFactory.prototype.addEnemy = function(type)
 			break;
 		case EnemyTypes.ESCAPE_ENEMY:
 			enemy = new EscapeEnemy();
+			break;
+		case EnemyTypes.STRONG_ENEMY:
+			enemy = new StrongEnemy();
+			break;
+		case EnemyTypes.SMART_ENEMY:
+			enemy = new SmartEnemy();
+			break;
+		case EnemyTypes.TANK_ENEMY:
+			enemy = new TankEnemy();
 			break;
 	}
 	if (enemy)
