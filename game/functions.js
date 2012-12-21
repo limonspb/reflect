@@ -180,5 +180,8 @@ function get_sh_segments_array(begin, end, count /*segments arrays*/){
 		}
 	}
 	return res;	
-}	
+}
+
+
+
 

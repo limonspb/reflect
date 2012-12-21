@@ -1,3 +1,12 @@
+/*
+ * HeroUnit.prototype.getChanceFireAngle = function(x,y,v)
+ * returns clever angle to move or fire
+ * 
+ * HeroUnit.prototype.getChanceFireAngle_simple = function(x,y,N)
+ * returns stupid angle to the hero position + N pixels in his direction
+ *  
+ */
+
 function HeroUnit()
 {
 	HeroUnit.superclass.constructor.apply(this);
@@ -235,7 +244,7 @@ HeroUnit.prototype.move = function(elapsedTime)
 	this.rotation+=this.vr_c * dt;
 	
 	
-	this.angle = this.rotation/180 * Math.PI;	
+	this.angle = this.rotation/180 * Math.PI;
 	
 	var tempvc = this.v_c;
 	this.v_c += this.a_c * dt;
@@ -264,27 +273,29 @@ HeroUnit.prototype.move = function(elapsedTime)
 	this.y += vy_c*dt;
 	
 	if (this.x<this.bodySize){
-		this.vx_c = 0;
+		//this.vx_c = 0;
 		this.x = this.bodySize;
 	}else
 	if (this.x> global.levelWidth - this.bodySize){
-		this.vx_c = 0;
+		//this.vx_c = 0;
 		this.x = global.levelWidth - this.bodySize;
 	}
 
 	if (this.y<this.bodySize){
-		this.vy_c = 0;
+		//this.vy_c = 0;
 		this.y = this.bodySize;
 	}else
 	if (this.y> global.levelHeight - this.bodySize){
-		this.vy_c = 0;
+		//this.vy_c = 0;
 		this.y = global.levelHeight - this.bodySize;		
 	}	
 	
 	this.rotationSheild();
 	this.setActualShieldSegments();	
 	
-	this.reflect(elapsedTime);	
+	this.reflect(elapsedTime);
+	
+	//console.log(this.getChanceFireAngle(0, 0, 1500));
 }	
 /**
  * Поворот щита относительно курсора
@@ -398,6 +409,29 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		pointtomove = vec_Summ(pointtomove, perp);
 		
 		b.futureX = pointtomove.x;
-		b.futureY = pointtomove.y;		
+		b.futureY = pointtomove.y;	
 	}	
 }
+
+
+HeroUnit.prototype.getChanceFireAngle = function(x,y,v){
+	var vec = vec_Get(x,y,this.x,this.y);
+	var d = vec_Length(vec);
+	var toV = {x:0, y:0};
+	var vv = v;
+	if (vv==0){
+		vv = 1;
+	}
+	toV.x = this.x + Math.cos(this.angle)*d*this.v_c/vv;
+	toV.y = this.y + Math.sin(this.angle)*d*this.v_c/vv;	
+	
+	return Math.atan2(toV.y -y, toV.x - x)*180/Math.PI;
+}
+
+HeroUnit.prototype.getChanceFireAngle_simple = function(x,y,N){
+	var toV = {x:0, y:0};	
+	toV.x = this.x + Math.cos(this.angle)*N;
+	toV.y = this.y + Math.sin(this.angle)*N;	
+	return Math.atan2(toV.y -y, toV.x - x)*180/Math.PI;
+}
+

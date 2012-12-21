@@ -43,12 +43,12 @@ SimpleEnemy.prototype.initView = function ()
 SimpleEnemy.prototype.initOptions = function ()
 {
 	this.speed = Math.random()*30 + 40;
-	this.rotationSpeed = 60;
+	this.rotationSpeed = 200;
 	this.health = 10;
 	this.damage = 15;
-	this.bulletRespawn = 3500;
+	this.bulletRespawn = 1000;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 50;
+	this.minRange = 300;
 	this.maxRange = 1000;
 	
 	

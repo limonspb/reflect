@@ -7,15 +7,14 @@ function EnemyManager()
 {
 	global.EnemyFactory = new EnemyFactory();
 	
-	
 	this.timerAddSimpleEnemy = 0;
 	this.timeToAddSimple = 1000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 7000;
+	this.timerToAddMedium = 1000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 10000;
+	this.timerToAddEscape = 1000;
 }
 
 EnemyManager.prototype.update = function(elapsedTime)

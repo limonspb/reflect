@@ -53,12 +53,12 @@ MediumEnemy.prototype.initView = function ()
 MediumEnemy.prototype.initOptions = function ()
 {
 	this.speed = Math.random()*30 + 80;
-	this.rotationSpeed = 100;
+	this.rotationSpeed = 200;
 	this.health = 30;
 	this.damage = 30;
 	this.bulletRespawn = 5000;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 50;
+	this.minRange = 350;
 	this.maxRange = 500;
 }
 
