@@ -15,8 +15,7 @@ RecordsScene.prototype.show = function(){
             });
             
 
-	this.sendRecord('test', 111);
-	
+	this.sendRecord('test', 111);	
 }
 
 RecordsScene.prototype.hide = function(){

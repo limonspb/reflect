@@ -62,3 +62,11 @@ body{
 .button:hover{
 	background-color: #CCCCCC;
 }
+
+#lifePanel{
+	display : none;
+	position : absolute;
+	top : 0px;
+	left : 0px;
+	border : 1px solid;
+}
