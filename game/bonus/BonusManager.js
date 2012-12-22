@@ -48,13 +48,14 @@ BonusManager.prototype.checkPickUp = function()
 		//var pt = bonus.globalToLocal(bonus.x, bonus.y);
 		
 		
-		//console.log(bonus.getDistanceToObject(global.hero));
 		
 		//console.log(bonus.width, global.hero.width);
 		
 		//bonus.alpha = 1;
 		
-		if (bonus.getDistanceToObject(global.hero) <= bonus.width)
+		
+		
+		if (getDistanceToObject(bonus, global.hero) <= bonus.width)
 		{
 			console.log("HIT TEST BONUS " + i);
 			bonus.alpha = 0.2;

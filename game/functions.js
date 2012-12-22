@@ -182,6 +182,14 @@ function get_sh_segments_array(begin, end, count /*segments arrays*/){
 	return res;	
 }
 
-
+/** Определение расстояния между двумя объектами*/
+function getDistanceToObject(object1, object2) {
+	var dx = object1.x - object2.x;
+	var dy = object1.y - object2.y;
+	
+	var dist = Math.sqrt(dx*dx + dy*dy);
+	
+	return dist;
+}
 
 

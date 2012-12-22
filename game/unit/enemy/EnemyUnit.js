@@ -129,10 +129,10 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 			angle = this.getAngleToObject(global.hero) - item.rotation;
 			break;
 		case ShotType.STUPID_SHOT:
-			angle = global.hero.getChanceFireAngle(this.x, this.y, 50+ Math.random()*200) - item.rotation;
+			angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 50+ Math.random()*100) - item.rotation;
 			break;
 		case ShotType.CLEVER_SHOT:
-			angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 500) - item.rotation;
+			angle = global.hero.getChanceFireAngle(this.x, this.y, 500) - item.rotation;
 			break;
 	}
 	//console.log(shotType, angle);

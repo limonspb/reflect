@@ -65,7 +65,7 @@ SimpleEnemy.prototype.initOptions = function ()
 
 SimpleEnemy.prototype.move = function (elapsedTime)
 {
-	this.dist = this.getDistanceToObject(global.hero);
+	this.dist = getDistanceToObject(this, global.hero);
 	
 	var dx = 0;
 	var dy = 0;
@@ -78,7 +78,7 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (this.getDistanceToObject(global.hero) <= this.minRange+5)
+		if (getDistanceToObject(this, global.hero) <= this.minRange+5)
 		{
 			dx = 0;
 			dy = 0;

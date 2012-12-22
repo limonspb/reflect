@@ -66,7 +66,7 @@ EscapeEnemy.prototype.initOptions = function ()
 
 EscapeEnemy.prototype.move = function (elapsedTime)
 {
-	this.dist = this.getDistanceToObject(global.hero);
+	this.dist = getDistanceToObject(this, global.hero);
 	
 	var dx = 0;
 	var dy = 0;
@@ -86,7 +86,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (this.getDistanceToObject(global.hero) <= this.minRange+5 && this.getDistanceToObject(global.hero) > this.minRange)
+		if (getDistanceToObject(this, global.hero) <= this.minRange+5 && getDistanceToObject(this, global.hero) > this.minRange)
 		{
 			dx = 0;
 			dy = 0;

@@ -17,7 +17,7 @@ function GameScene(){
 	//global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
 	this.container.addChild(global.BulletFactory.bulletsCont);
 	
-	this.container.addChild(global.EnemyFactory.enemiesCont);
+	this.container.addChild(global.EnemyManager.enemiesCont);
 	this.container.addChild(global.BonusFactory.bonusesCont);
 	
 	this.backGround = new BackGround();

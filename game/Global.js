@@ -10,7 +10,6 @@ var global = {
 	sceneController : null,
 	keyboard: null,
 	hero: null,
-	EnemyFactory: null,
 	EnemyManager: null,
 	BulletFactory: null,
 	BonusFactory: null,

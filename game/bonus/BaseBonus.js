@@ -12,7 +12,7 @@ function BaseBonus()
 	this.showTime;
 }
 
-extend(BaseBonus,GameObject);
+extend(BaseBonus,createjs.Container);
 
 BaseBonus.prototype.init = function(x,y) { }
 

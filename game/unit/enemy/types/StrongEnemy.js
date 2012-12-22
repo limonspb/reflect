@@ -64,7 +64,7 @@ StrongEnemy.prototype.initOptions = function ()
 
 StrongEnemy.prototype.move = function (elapsedTime)
 {
-	this.dist = this.getDistanceToObject(global.hero);
+	this.dist = getDistanceToObject(this, global.hero);
 	
 	if (!this.pauseMove(elapsedTime))
 	{
