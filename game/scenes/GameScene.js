@@ -22,11 +22,16 @@ function GameScene(){
 	
 	this.backGround = new BackGround();
 	this.container.addChildAt(this.backGround,0);
+	
+	this.lifePanel = new LifePanel();
+	this.lifePanel.setMaxLife(100);
+	this.lifePanel.setCurLife(100);
 }
 
 extend(GameScene,BaseScene);
 
 GameScene.prototype.show = function(){
+	this.lifePanel.show();
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
 
@@ -37,6 +42,7 @@ GameScene.prototype.show = function(){
 }
 
 GameScene.prototype.hide = function(){
+	this.lifePanel.hide();
 	$('body').unbind();
 	global.stage.removeChild(this.container);
 

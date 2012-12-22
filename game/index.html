@@ -73,6 +73,8 @@
 		
 		<script src="view/BackGround.js"></script>
 		
+		<script src="scenes/gameScenePanels/LifePanel.js"></script>
+		
 		<script src="scenes/BaseScene.js"></script>		
 		<script src="scenes/MenuScene.js"></script>
 		<script src="scenes/CreditsScene.js"></script>
@@ -169,7 +171,7 @@
 -->
 		<div id="records" class="scene">
 			<div>
-				<table border = "1px">
+				<table border = "1px" id="recordTable">
 					<tr>
 						<td>
 							Shiha loves tag table
@@ -195,5 +197,13 @@
 <!--
 	===========================================================================================================
 -->
+		  
+		<div id="lifePanel">
+			<div id="innerLifePanel">
+				<span id="currentLife">54</span>
+				<span id="lifeSlash">/</span>
+				<span id="maxLife">100</span>
+			</div>
+		</div>
 	</body>
 </html>
