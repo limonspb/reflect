@@ -40,13 +40,14 @@ BaseUnit.prototype.checkHitBullet = function()
 	{
 		var bull = global.BulletFactory.bullets[i];
 		
-		//if (bull == this.bullet) { continue; }
+		if (bull == this.bullet) { continue; }
 		
 		if (getDistanceToObject(this, bull) <= this.size*0.75)
 		{
 			//console.log("HIT TEST BULLET " + i);
 			
-			if (this == global.hero)
+			//Without friendly fire
+			/*if (this == global.hero)
 			{
 				//if (!bull.isMy)
 				//{
@@ -67,7 +68,14 @@ BaseUnit.prototype.checkHitBullet = function()
 			
 					this.checkDestroy();
 				}
-			}
+			}*/
+			
+			global.BulletFactory.removeBullet(i);
+			len--;
+			
+			this.health -= bull.damage;
+	
+			this.checkDestroy();
 			
 		}
 		

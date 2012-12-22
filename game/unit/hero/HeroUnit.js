@@ -208,7 +208,7 @@ HeroUnit.prototype.initView = function ()
 
 HeroUnit.prototype.initOptions = function ()
 {
-	this.MAX_HEALTH = 100;
+	this.MAX_HEALTH = 10000;
 	this.health = this.MAX_HEALTH;
 	//this.speed;
 }
@@ -503,7 +503,8 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		b.futureY = pointtomove.y;
 		
 		//если пуля попала в щит, она становится моей
-		b.setMyBullet();
+		//это для бонуса двойного урона
+		if (global.BulletFactory.doubleDamage) { b.setMyBullet(); }
 	}
 }
 
