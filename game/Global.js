@@ -12,7 +12,6 @@ var global = {
 	hero: null,
 	EnemyManager: null,
 	BulletFactory: null,
-	BonusFactory: null,
 	BonusManager: null,
 	staticControl : false
 	

@@ -146,7 +146,7 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 	if (Math.abs(angle) > 180) { angle = -angle; }
 	
 	
-	var minAngle = 5;
+	var minAngle = 10;
 	var rot;
 	if (Math.abs(angle) <= minAngle)
     {
