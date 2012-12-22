@@ -14,6 +14,7 @@ function BonusManager()
 	this.plusToLifeBonusTime = 0;
 	this.freezBonusTime = 0;
 	this.doubleDamageBonusTime = 0;
+	this.speedUpBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -38,6 +39,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 			break;
 		case BonusTypes.DOUBLE_DAMAGE:
 			bonus = new DoubleDamageBonus();
+			break;
+		case BonusTypes.SPEED_UP:
+			bonus = new SpeedUpBonus();
 			break;
 	}
 	if (bonus)
@@ -69,6 +73,7 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.plusToLifeUpdate(elapsedTime);
 	this.freezUpdate(elapsedTime);
 	this.doubleDamageUpdate(elapsedTime);
+	this.speedUpUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
 	this.checkPickUp()
@@ -140,6 +145,19 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.DOUBLE_DAMAGE, x, y);
 		this.doubleDamageBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.speedUpUpdate = function(elapsedTime)
+{
+	this.speedUpBonusTime += elapsedTime;
+	if (this.speedUpBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.SPEED_UP, x, y);
+		this.speedUpBonusTime = 0;
 	}
 }
 

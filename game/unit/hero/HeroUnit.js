@@ -210,7 +210,12 @@ HeroUnit.prototype.initOptions = function ()
 {
 	this.MAX_HEALTH = 10000;
 	this.health = this.MAX_HEALTH;
-	//this.speed;
+	
+	this.current_forward = this.max_v_c_forward;
+	this.current_backward = this.max_v_c_backward;
+	
+	this.speedyMode = false;
+	this.speedTime;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -385,6 +390,17 @@ HeroUnit.prototype.move = function(elapsedTime)
 	
 	
 	this.checkHitBullet();
+	
+	if (this.speedyMode)
+	{
+		this.speedTime -= elapsedTime;
+		if (this.speedTime <= 0)
+		{
+			this.speedyMode = false;
+			this.max_v_c_forward = this.current_forward;
+			this.max_v_c_backward = this.current_backward;
+		}
+	}
 	
 	//console.log(this.getChanceFireAngle(0, 0, 1500));
 }	

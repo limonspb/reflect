@@ -8,6 +8,7 @@ var BonusTypes = {
 	MEDIUM_MED_KIT:1,
 	PLUS_TO_LIFE:2,
 	FREEZ:3,
-	DOUBLE_DAMAGE:4
+	DOUBLE_DAMAGE:4,
+	SPEED_UP:5
 	
 }
