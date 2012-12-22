@@ -47,5 +47,6 @@ DoubleDamageBonus.prototype.testRemove = function()
 
 DoubleDamageBonus.prototype.includeBonus = function()
 {
+	global.BulletFactory.doubleDamageTime = this.damageTime;
 	global.BulletFactory.doubleDamage = true;
 }

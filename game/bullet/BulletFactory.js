@@ -8,7 +8,7 @@ function BulletFactory()
 	this.bullets = [];
 	this.bulletsCont = new createjs.Container();
 	
-	this.doubleDamageTime = 15000;
+	this.doubleDamageTime = 0;
 	this.doubleDamage = false;
 }
 
@@ -60,7 +60,6 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		if (this.doubleDamageTime <= 0)
 		{
 			this.doubleDamage = false;
-			this.doubleDamageTime = 15000;
 		}
 	}
 }

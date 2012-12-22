@@ -429,7 +429,7 @@ HeroUnit.prototype.getRotationShieldArray = function(count){
 
 
 HeroUnit.prototype.reflect = function(elapsedTime){
-	this.segments_arr_counted = false;	
+	this.segments_arr_counted = false;
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
 		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
