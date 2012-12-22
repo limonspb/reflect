@@ -3,7 +3,7 @@
 
   function dbconnect(){ //янедхмъеляъ я ад
 	$user="aasdasdasdas";
-	$pass="asdasdasd";
+	$pass="sdfsdfsd";
 	$connection=0;
 	$connection = mysql_connect('localhost', $user, $pass);
 	if (!mysql_select_db($user, $connection)){
