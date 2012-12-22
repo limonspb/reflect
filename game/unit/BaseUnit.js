@@ -77,7 +77,7 @@ BaseUnit.prototype.checkHitBullet = function()
 
 BaseUnit.prototype.checkDestroy = function()
 {
-	console.log("HEALTH " + this.health);
+	//console.log("HEALTH " + this.health);
 	
 	if (this == global.hero)
 	{
@@ -88,6 +88,7 @@ BaseUnit.prototype.checkDestroy = function()
 	{
 		if (this == global.hero)
 		{
+			this.alpha = 0;
 			//TODO вывод окна об окончании игры
 		}
 		else

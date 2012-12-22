@@ -44,4 +44,5 @@ BaseBonus.prototype.pickUp = function()
 	global.BonusManager.removeBonus(this);
 	
 	//TODO метод действия бонуса
+	this.includeBonus();
 }

@@ -15,7 +15,7 @@ function BonusManager()
 BonusManager.prototype.addBonus = function(type, x, y)
 {
 	
-	if (this.bonuses.length >= 1) { return; }
+	//if (this.bonuses.length >= 1) { return; }
 	
 	var bonus;
 	switch(type)
@@ -84,7 +84,7 @@ BonusManager.prototype.checkPickUp = function()
 		
 		if (getDistanceToObject(bonus, global.hero) <= bonus.width)
 		{
-			console.log("HIT TEST BONUS " + i);
+			//console.log("HIT TEST BONUS " + i);
 			bonus.alpha = 0.2;
 			
 			bonus.pickUp();
