@@ -26,12 +26,15 @@ function GameScene(){
 	this.lifePanel = new LifePanel();
 	this.lifePanel.setMaxLife(100);
 	this.lifePanel.setCurLife(100);
+	
+	this.bonusPanel = new BonusPanel();
 }
 
 extend(GameScene,BaseScene);
 
 GameScene.prototype.show = function(){
 	this.lifePanel.show();
+	this.bonusPanel.show();
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
 
@@ -43,6 +46,7 @@ GameScene.prototype.show = function(){
 
 GameScene.prototype.hide = function(){
 	this.lifePanel.hide();
+	this.bonusPanel.hide();
 	$('body').unbind();
 	global.stage.removeChild(this.container);
 
