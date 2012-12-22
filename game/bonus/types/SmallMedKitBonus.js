@@ -6,6 +6,8 @@ function SmallMedKitBonus()
 {
 	SmallMedKitBonus.superclass.constructor.apply(this);
 	
+	
+	this.updateHealth = 20;
 }
 
 extend(SmallMedKitBonus, BaseBonus);
@@ -39,4 +41,13 @@ SmallMedKitBonus.prototype.init = function(x,y)
 SmallMedKitBonus.prototype.testRemove = function()
 {
 	this.hide();
+}
+
+SmallMedKitBonus.prototype.includeBonus = function()
+{
+	global.hero.health += this.updateHealth;
+	
+	if (global.hero.health > global.hero.MAX_HEALTH) { global.hero.health = global.hero.MAX_HEALTH; }
+	
+	global.hero.alpha = global.hero.health/global.hero.MAX_HEALTH;
 }

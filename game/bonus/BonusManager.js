@@ -5,10 +5,47 @@
 
 function BonusManager()
 {
-	global.BonusFactory = new BonusFactory();
+	this.bonuses = [];
+	this.bonusesCont = new createjs.Container();
 	
 	
 	this.bonusTime = 0;
+}
+
+BonusManager.prototype.addBonus = function(type, x, y)
+{
+	
+	//if (this.bonuses.length >= 1) { return; }
+	
+	var bonus;
+	switch(type)
+	{
+		case BonusTypes.SMALL_MED_KIT:
+			bonus = new SmallMedKitBonus();
+			break;
+		case BonusTypes.MEDIUM_MED_KIT:
+			bonus = new MediumMedKitBonus();
+			break;
+	}
+	if (bonus)
+	{
+		bonus.init(x,y);
+		this.bonusesCont.addChild(bonus);
+		this.bonuses.push(bonus);
+	}
+}
+
+BonusManager.prototype.removeBonus = function(bonus)
+{
+	var index = this.bonuses.indexOf(bonus,0);
+	
+	if (index != -1)
+	{
+		//TODO clear Bonus
+		if (this.bonusesCont.contains(bonus)) { this.bonusesCont.removeChild(bonus); }
+		this.bonuses.splice(index, 1);
+	}
+	
 }
 
 BonusManager.prototype.update = function(elapsedTime)
@@ -32,36 +69,26 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
 		
-		global.BonusFactory.addBonus(BonusTypes.SMALL_MED_KIT, x, y);
+		this.addBonus(BonusTypes.SMALL_MED_KIT, x, y);
 		this.bonusTime = 0;
 	}
 }
 
 BonusManager.prototype.checkPickUp = function()
 {
-	var len = global.BonusFactory.bonuses.length;
+	var len = this.bonuses.length;
 	
 	for (var i = 0; i < len; i++)
 	{
-		var bonus = global.BonusFactory.bonuses[i];
+		var bonus = this.bonuses[i];
 		
-		//var pt = bonus.globalToLocal(bonus.x, bonus.y);
-		
-		
-		//console.log(bonus.getDistanceToObject(global.hero));
-		
-		//console.log(bonus.width, global.hero.width);
-		
-		//bonus.alpha = 1;
-		
-		if (bonus.getDistanceToObject(global.hero) <= bonus.width)
+		if (getDistanceToObject(bonus, global.hero) <= bonus.width)
 		{
-			console.log("HIT TEST BONUS " + i);
+			//console.log("HIT TEST BONUS " + i);
 			bonus.alpha = 0.2;
 			
 			bonus.pickUp();
 			break;
 		}
-		
 	}
 }

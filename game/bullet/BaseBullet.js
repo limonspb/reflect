@@ -14,6 +14,9 @@ function BaseBullet()
 	this.view;
 	this.speed;
 	this.type;
+	this.damage;
+	
+	this.isMy = false;
 }
 
 extend(BaseBullet, createjs.Container);

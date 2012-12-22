@@ -22,8 +22,6 @@ function EnemyUnit()
 	this.minRange;
 	this.maxRange;
 	
-	this.bullet;
-	
 	this.pauseCount = Math.random() * 20000 + 3000;;
 	this.pauseTime = Math.random()*10000 + 3000;
 	
@@ -129,10 +127,10 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 			angle = this.getAngleToObject(global.hero) - item.rotation;
 			break;
 		case ShotType.STUPID_SHOT:
-			angle = global.hero.getChanceFireAngle(this.x, this.y, 50+ Math.random()*200) - item.rotation;
+			angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 50+ Math.random()*100) - item.rotation;
 			break;
 		case ShotType.CLEVER_SHOT:
-			angle = global.hero.getChanceFireAngle_simple(this.x, this.y, 500) - item.rotation;
+			angle = global.hero.getChanceFireAngle(this.x, this.y, 500) - item.rotation;
 			break;
 	}
 	//console.log(shotType, angle);
@@ -146,7 +144,7 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 	if (Math.abs(angle) > 180) { angle = -angle; }
 	
 	
-	var minAngle = 5;
+	var minAngle = 10;
 	var rot;
 	if (Math.abs(angle) <= minAngle)
     {

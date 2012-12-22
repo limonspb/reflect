@@ -6,15 +6,19 @@ function BaseUnit()
 {
 	BaseUnit.superclass.constructor.apply(this);
 	
+	this.MAX_HEALTH;
 	this.health;
 	this.speed;
 	this.rotationSpeed;
 	this.view;
 	this.width;
 	this.height;
+	this.size;
+	
+	this.bullet;
 }
 
-extend(BaseUnit,GameObject);
+extend(BaseUnit, createjs.Container);
 
 BaseUnit.prototype.move = function(elapsedTime) { }
 BaseUnit.prototype.initView = function() { }
@@ -28,11 +32,73 @@ BaseUnit.prototype.getAngleToObject = function(object) {
 	return (180 + this.angle);
 }
 
-/*BaseUnit.prototype.getDistanceToObject = function(object) {
-	var dx = this.x - object.x;
-	var dy = this.y - object.y;
+BaseUnit.prototype.checkHitBullet = function()
+{
+	var len = global.BulletFactory.bullets.length;
 	
-	var dist = Math.sqrt(dx*dx + dy*dy);
+	for (var i = 0; i < len; i++)
+	{
+		var bull = global.BulletFactory.bullets[i];
+		
+		//if (bull == this.bullet) { continue; }
+		
+		if (getDistanceToObject(this, bull) <= this.size*0.75)
+		{
+			//console.log("HIT TEST BULLET " + i);
+			
+			if (this == global.hero)
+			{
+				//if (!bull.isMy)
+				//{
+					global.BulletFactory.removeBullet(i);
+					len--;
+					
+					this.health -= bull.damage;
+			
+					this.checkDestroy();
+				//}
+			} else {
+				if (bull.isMy)
+				{
+					global.BulletFactory.removeBullet(i);
+					len--;
+					
+					this.health -= bull.damage;
+			
+					this.checkDestroy();
+				}
+			}
+			
+		}
+		
+	}
 	
-	return dist;
-}*/
+}
+
+BaseUnit.prototype.checkDestroy = function()
+{
+	//console.log("HEALTH " + this.health);
+	
+	if (this == global.hero)
+	{
+		this.alpha = this.health/this.MAX_HEALTH;
+	}
+	
+	if (this.health <= 0)
+	{
+		if (this == global.hero)
+		{
+			this.alpha = 0;
+			//TODO вывод окна об окончании игры
+		}
+		else
+		{
+			var index = global.EnemyManager.enemies.indexOf(this);
+			if (index != -1)
+			{
+				global.EnemyManager.removeEnemy(this);
+			}
+		}
+	}
+}
+

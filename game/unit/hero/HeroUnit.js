@@ -48,6 +48,7 @@ function HeroUnit()
 	this.old_y = 300;
 	
 	this.initView();
+	this.initOptions();
 		
 	this.sh_old_segments = [{},{},{},{}];
 	this.sh_old_angle = 90;
@@ -156,8 +157,6 @@ HeroUnit.prototype.countShieldSegments = function(angle,px,py){
 }
 
 
-
-
 HeroUnit.prototype.initView = function ()
 {
 	this.rotation = 270;
@@ -177,6 +176,9 @@ HeroUnit.prototype.initView = function ()
 			
 	this.width = global.preloader.imgs.player.width;
 	this.height = global.preloader.imgs.player.height;
+	
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 				
 	this.ss.getAnimation("run").frequency = 0;
 				
@@ -202,6 +204,13 @@ HeroUnit.prototype.initView = function ()
 	this.addChild(this.sheild);
 		
 	this.rotationSpeed = 200;
+}
+
+HeroUnit.prototype.initOptions = function ()
+{
+	this.MAX_HEALTH = 100;
+	this.health = this.MAX_HEALTH;
+	//this.speed;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -374,6 +383,9 @@ HeroUnit.prototype.move = function(elapsedTime)
 	
 	this.reflect(elapsedTime);
 	
+	
+	this.checkHitBullet();
+	
 	//console.log(this.getChanceFireAngle(0, 0, 1500));
 }	
 /**
@@ -488,8 +500,11 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		pointtomove = vec_Summ(pointtomove, perp);
 		
 		b.futureX = pointtomove.x;
-		b.futureY = pointtomove.y;	
-	}	
+		b.futureY = pointtomove.y;
+		
+		//если пуля попала в щит, она становится моей
+		b.setMyBullet();
+	}
 }
 
 

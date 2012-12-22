@@ -12,7 +12,7 @@ function BaseBonus()
 	this.showTime;
 }
 
-extend(BaseBonus,GameObject);
+extend(BaseBonus,createjs.Container);
 
 BaseBonus.prototype.init = function(x,y) { }
 
@@ -34,14 +34,15 @@ BaseBonus.prototype.hide = function()
 
 BaseBonus.prototype.onComplete = function()
 {
-	global.BonusFactory.removeBonus(this);
+	global.BonusManager.removeBonus(this);
 }
 
 BaseBonus.prototype.pickUp = function()
 {
 	createjs.Tween.removeTweens(this);
 	
-	global.BonusFactory.removeBonus(this);
+	global.BonusManager.removeBonus(this);
 	
 	//TODO метод действия бонуса
+	this.includeBonus();
 }

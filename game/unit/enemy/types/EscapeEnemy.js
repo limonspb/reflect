@@ -38,6 +38,8 @@ EscapeEnemy.prototype.initView = function ()
 	
 	this.width = 15;
 	this.height = 15;
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -55,8 +57,8 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.speed = Math.random()*30 + 130;
 	this.rotationSpeed = 150;
 	this.health = 50;
-	this.damage = 40;
-	this.bulletRespawn = 2500;
+	this.damage = 12;
+	this.bulletRespawn = 2500 + Math.random()*1000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
@@ -66,7 +68,7 @@ EscapeEnemy.prototype.initOptions = function ()
 
 EscapeEnemy.prototype.move = function (elapsedTime)
 {
-	this.dist = this.getDistanceToObject(global.hero);
+	this.dist = getDistanceToObject(this, global.hero);
 	
 	var dx = 0;
 	var dy = 0;
@@ -86,7 +88,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (this.getDistanceToObject(global.hero) <= this.minRange+5 && this.getDistanceToObject(global.hero) > this.minRange)
+		if (getDistanceToObject(this, global.hero) <= this.minRange+5 && getDistanceToObject(this, global.hero) > this.minRange)
 		{
 			dx = 0;
 			dy = 0;
@@ -104,6 +106,8 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 	this.respawnCount += elapsedTime;
 	
 	this.shoot();
+	
+	this.checkHitBullet();
 }
 
 EscapeEnemy.prototype.shoot = function ()
@@ -114,6 +118,7 @@ EscapeEnemy.prototype.shoot = function ()
 		{
 			//var angle = this.getAngleToObject(global.hero);
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+			this.bullet.damage = this.damage;
 			
 			this.respawnCount = 0;
 		}

@@ -45,11 +45,16 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		{
 			if (this.bulletsCont.contains(this.bullets[i]))
 			{
-				this.bulletsCont.removeChild(this.bullets[i]);
-				//TODO clear bullet
-				this.bullets.splice(i,1);
+				this.removeBullet(i);
 				len--;
 			}			
 		}
 	}
+}
+
+BulletFactory.prototype.removeBullet = function(index)
+{
+	this.bulletsCont.removeChild(this.bullets[index]);
+	//TODO clear bullet
+	this.bullets.splice(index,1);
 }

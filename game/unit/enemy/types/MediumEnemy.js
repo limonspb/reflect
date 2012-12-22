@@ -38,6 +38,8 @@ MediumEnemy.prototype.initView = function ()
 	
 	this.width = 10;
 	this.height = 10;
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -55,10 +57,10 @@ MediumEnemy.prototype.initOptions = function ()
 	this.speed = Math.random()*30 + 80;
 	this.rotationSpeed = 200;
 	this.health = 30;
-	this.damage = 30;
-	this.bulletRespawn = 3500;
+	this.damage = 10;
+	this.bulletRespawn = 3500 + Math.random()*1500;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 350;
+	this.minRange = 50;
 	this.maxRange = 500;
 }
 
@@ -90,7 +92,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 	dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 	
-	if (this.pauseMove(elapsedTime) || this.getDistanceToObject(global.hero) <= this.minRange+5)
+	if (this.pauseMove(elapsedTime) || getDistanceToObject(this, global.hero) <= this.minRange+5)
 	{
 		if (dt > 0)
 		{
@@ -99,19 +101,18 @@ MediumEnemy.prototype.move = function (elapsedTime)
 		}
 	}
 	
-	/*if (this.getDistanceToObject(global.hero) <= this.minRange+5/* && this.getDistanceToObject(global.hero) > this.minRange)
+	if (getDistanceToObject(this, global.hero) <= this.minRange+5)
 	{
 		if (dt > 0)
 		{
 			dx = 0;
 			dy = 0;
 		}
-	}*/
+	}
 		
 	
 	this.x += dx*dt; 
 	this.y += dy*dt;
-	
 	
 	
 	this.gun.rotation += this.getGunRotation(this.gun, ShotType.STUPID_SHOT)*elapsedTime/1000;
@@ -119,6 +120,8 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	this.respawnCount += elapsedTime;
 	
 	this.shoot();
+	
+	this.checkHitBullet();
 }
 
 MediumEnemy.prototype.shoot = function ()
@@ -127,6 +130,7 @@ MediumEnemy.prototype.shoot = function ()
 	{
 		//var angle = this.getAngleToObject(global.hero);
 		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+		this.bullet.damage = this.damage;
 		
 		this.respawnCount = 0;
 		
