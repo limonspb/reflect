@@ -1,19 +1,22 @@
 function RecordsScene(){
 	$("#backButton_records").bind('click',this.onBackCkick);
-	
-	 jQuery.ajax({
-            type: "GET", // метод передачи данных, можно пропустить - по умолчанию и так get
-            url: "http://hahaton.ru/html5games/reflect/table/index.php", // путь к файлу, который будем читать
-            dataType: "xml", // тип данных, с которыми работаем
-            success: this.onRecordsCome,
-            data: {mode: 'showall'}
-            });
-		
+	this.place = -1;		
 }
 extend(RecordsScene,BaseScene);
 
 RecordsScene.prototype.show = function(){
 	$("#records").fadeIn();
+	 jQuery.ajax({
+	            type: "GET", // метод передачи данных, можно пропустить - по умолчанию и так get
+	            url: "http://hahaton.ru/html5games/reflect/table/index.php", // путь к файлу, который будем читать
+	            dataType: "xml", // тип данных, с которыми работаем
+	            success: this.onRecordsCome,
+	            data: {mode: 'showall'}
+            });
+            
+
+	this.sendRecord('test', 111);
+	
 }
 
 RecordsScene.prototype.hide = function(){
@@ -30,7 +33,25 @@ RecordsScene.prototype.onRecordsCome = function(xml){
 	jQuery(xml).find('name').each(function(){
 		var name = jQuery(this).attr('name');
 		var count = jQuery(this).attr('count');
-		$('#recordTable').append('<tr><td>' + name + '</td><td>' + count + '</td></tr>');
-		console.log(name, count);
+		$('#recordTable').append('<tr><td>' + htmlEntities(name) + '</td><td>' + htmlEntities(count) + '</td></tr>');
+		//console.log(name, count);
 	});
+}
+
+RecordsScene.prototype.sendRecord = function(name,count){
+	jQuery.ajax({
+		type: "GET", // метод передачи данных, можно пропустить - по умолчанию и так get
+		url: "http://hahaton.ru/html5games/reflect/table/index.php", // путь к файлу, который будем читать
+		dataType: "xml", // тип данных, с которыми работаем
+		success: this.onMyPlaceCome,
+		data:   {
+					mode : 'sdaoOIJASDLknasd0O0OOO000OO00Llll111ll1l1l1l111l1l0o0o0oOooolaJASNDinasid',
+					name : name,
+					count : count
+			}
+	});
+}
+
+RecordsScene.prototype.onMyPlaceCome = function(xml){
+	this.place = jQuery(xml).find('reply').attr('place');
 }
