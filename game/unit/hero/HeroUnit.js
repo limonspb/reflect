@@ -503,7 +503,8 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		b.futureY = pointtomove.y;
 		
 		//если пуля попала в щит, она становится моей
-		b.setMyBullet();
+		//это для бонуса двойного урона
+		if (global.BulletFactory.doubleDamage) { b.setMyBullet(); }
 	}
 }
 

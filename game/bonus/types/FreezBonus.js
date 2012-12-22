@@ -19,8 +19,6 @@ FreezBonus.prototype.init = function(x,y)
     this.width = global.preloader.imgs.freez.width;
 	this.height = global.preloader.imgs.freez.height;
 	
-	var scale = 0.6;
-	
 	this.view.x = -this.width/2*this.scale;
 	this.view.y = -this.height/2*this.scale;
 	this.view.scaleX = this.view.scaleY = this.scale;
@@ -34,7 +32,7 @@ FreezBonus.prototype.init = function(x,y)
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.type = BonusTypes.SMALL_MED_KIT;
+	this.type = BonusTypes.FREEZ;
 	this.showTime = 20;
 	
 	this.show();
@@ -50,7 +48,7 @@ FreezBonus.prototype.testRemove = function()
 
 FreezBonus.prototype.includeBonus = function()
 {
-	EnemyManager.freezMode = true;
+	global.EnemyManager.freezMode = true;
 	
 	var len = global.EnemyManager.enemies.length;
 	for (var i = 0; i < len; i++)

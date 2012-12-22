@@ -32,7 +32,7 @@ PlusToLifeBonus.prototype.init = function(x,y)
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.type = BonusTypes.SMALL_MED_KIT;
+	this.type = BonusTypes.PLUS_TO_LIFE;
 	this.showTime = 20;
 	
 	this.show();

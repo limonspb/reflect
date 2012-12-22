@@ -13,6 +13,7 @@ function BonusManager()
 	this.mediumMedKitBonusTime = 0;
 	this.plusToLifeBonusTime = 0;
 	this.freezBonusTime = 0;
+	this.doubleDamageBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -34,6 +35,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 			break;
 		case BonusTypes.FREEZ:
 			bonus = new FreezBonus();
+			break;
+		case BonusTypes.DOUBLE_DAMAGE:
+			bonus = new DoubleDamageBonus();
 			break;
 	}
 	if (bonus)
@@ -60,10 +64,11 @@ BonusManager.prototype.removeBonus = function(bonus)
 BonusManager.prototype.update = function(elapsedTime)
 {
 	
-	//this.smallMedkitUpdate(elapsedTime);
-	//this.mediumMedkitUpdate(elapsedTime);
-	//this.PlusToLifeUpdate(elapsedTime);
-	this.FreezUpdate(elapsedTime);
+	this.smallMedkitUpdate(elapsedTime);
+	this.mediumMedkitUpdate(elapsedTime);
+	this.plusToLifeUpdate(elapsedTime);
+	this.freezUpdate(elapsedTime);
+	this.doubleDamageUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
 	this.checkPickUp()
@@ -99,7 +104,7 @@ BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 	}
 }
 
-BonusManager.prototype.PlusToLifeUpdate = function(elapsedTime)
+BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 {
 	this.plusToLifeBonusTime += elapsedTime;
 	if (this.plusToLifeBonusTime >= 1000 + Math.random()*2000)
@@ -112,7 +117,7 @@ BonusManager.prototype.PlusToLifeUpdate = function(elapsedTime)
 	}
 }
 
-BonusManager.prototype.FreezUpdate = function(elapsedTime)
+BonusManager.prototype.freezUpdate = function(elapsedTime)
 {
 	this.freezBonusTime += elapsedTime;
 	if (this.freezBonusTime >= 1000 + Math.random()*5000)
@@ -125,6 +130,18 @@ BonusManager.prototype.FreezUpdate = function(elapsedTime)
 	}
 }
 
+BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
+{
+	this.doubleDamageBonusTime += elapsedTime;
+	if (this.doubleDamageBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.DOUBLE_DAMAGE, x, y);
+		this.doubleDamageBonusTime = 0;
+	}
+}
 
 BonusManager.prototype.checkPickUp = function()
 {

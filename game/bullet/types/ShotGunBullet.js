@@ -46,6 +46,8 @@ ShotGunBullet.prototype.move = function(elapsedTime)
 }
 
 ShotGunBullet.prototype.setMyBullet = function() {
+	this.damage *= 2;
+	
 	this.isMy = true;
 	
 	this.view.graphics.clear();
