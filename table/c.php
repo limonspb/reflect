@@ -2,8 +2,8 @@
 
 
   function dbconnect(){ //ÑÎÅÄÈÍßÅÌÑß Ñ ÁÄ
-	$user="aasdasdasdas";
-	$pass="sdfsdfsdsdfsdf";
+	$user="XXXXXXXXX";
+	$pass="XXXXXXXXX";
 	$connection=0;
 	$connection = mysql_connect('localhost', $user, $pass);
 	if (!mysql_select_db($user, $connection)){
@@ -26,6 +26,6 @@
   }
   
 	function dbdisconnect($c){ //ÐÀÇÚÅÄÈÍßÅÌÑß Ñ ÁÄ
-		mysql_close($c);		
+		mysql_close($c);
 	}
 ?>
