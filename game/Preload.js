@@ -102,5 +102,6 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/back/small_4.png","small_4");
    this.addImage("img/back/small_5.png","small_5");
    this.addImage("img/player2.png","player");
+   this.addImage("img/player_arrow.png","player_arrow");
 };
 

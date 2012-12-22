@@ -54,6 +54,8 @@ function HeroUnit()
 	
 	this.segments_arr;
 	this.segments_arr_counted = false;
+	
+	this.staticAngle = 0;
 }
 
 extend(HeroUnit,BaseUnit);
@@ -187,16 +189,77 @@ HeroUnit.prototype.initView = function ()
 	this.sheild = new createjs.Shape();
 	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
 	
+	this.arrow = new createjs.Bitmap(global.preloader.imgs.player_arrow);
+	this.arrow.rotation = 90;
+	this.arrow.x = 110;
+	this.arrow.regX = global.preloader.imgs.player_arrow.width/2;
+	this.arrow.regY = global.preloader.imgs.player_arrow.height/2;
 	
-	this.addChild(this.body);
 	
+	
+	this.addChild(this.body);	
+	this.addChild(this.arrow);
 	this.addChild(this.sheild);
 		
 	this.rotationSpeed = 200;
 }
 
-
-HeroUnit.prototype.keyControlling = function(){
+HeroUnit.prototype.staticKeyControlling = function(){
+	if (this.FORWARD || this.BACK || this.LEFT || this.RIGHT){
+		this.a_c = this.a_c_max_foward;
+		
+		
+		if (this.FORWARD && this.LEFT){
+			this.staticAngle = 225;
+		}else
+		if (this.FORWARD && this.RIGHT){
+			this.staticAngle = -45;
+		}else
+		if (this.FORWARD){
+			this.staticAngle = -90;
+		}else
+		if (this.BACK && this.LEFT){
+			this.staticAngle = 135;
+		}else
+		if (this.BACK && this.RIGHT){
+			this.staticAngle = 45;
+		}else
+		if (this.BACK){
+			this.staticAngle = 90;
+		}else
+		if (this.LEFT){
+			this.staticAngle = 180;
+		}else
+		if (this.RIGHT){
+			this.staticAngle = 0;
+		}
+		
+		var d = getAngleDiff_grad(this.rotation,this.staticAngle);
+		if (d>0)
+			this.ar_c = this.ar_c_max
+		else	
+			this.ar_c = -this.ar_c_max;
+		
+	}else{
+		if (this.v_c > 0){
+			this.a_c = -this.a_c_triction;
+		}else if (this.v_c < 0){
+			this.a_c = this.a_c_triction;			
+		}else{
+			this.a_c = 0;
+		}
+		
+		if (this.vr_c > 0){
+			this.ar_c = -this.ar_c_triction;
+		}else if (this.vr_c < 0){
+			this.ar_c = this.ar_c_triction;			
+		}else{
+			this.ar_c = 0;
+		}		
+				
+	}
+}
+HeroUnit.prototype.relativeKeyControlling = function(){
 	if (this.FORWARD){
 		this.a_c = this.a_c_max_foward;
 	}
@@ -231,7 +294,12 @@ HeroUnit.prototype.keyControlling = function(){
 HeroUnit.prototype.move = function(elapsedTime)
 {
 	var dt = elapsedTime/1000;
-	this.keyControlling();
+	if (global.staticControl){
+		this.staticKeyControlling();		
+	}else{
+		this.relativeKeyControlling();	
+	}
+	
 	
 	var tempvrc = this.vr_c;
 	this.vr_c += this.ar_c * dt;
@@ -244,7 +312,15 @@ HeroUnit.prototype.move = function(elapsedTime)
 		this.vr_c = -this.vr_c_max;		
 	}
 	
-	this.rotation+=this.vr_c * dt;
+	var newRotation = this.rotation+this.vr_c * dt;
+	
+	if ((getAngleDiff_grad(this.rotation, this.staticAngle) * getAngleDiff_grad(newRotation, this.staticAngle) <=0) && global.staticControl){
+		this.rotation = this.staticAngle;
+		this.vr_c = 0;
+	}else{
+		this.rotation=newRotation;	
+	}
+	
 	
 	
 	this.angle = this.rotation/180 * Math.PI;

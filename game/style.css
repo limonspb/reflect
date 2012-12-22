@@ -59,6 +59,7 @@ body{
 
 .button{
 	cursor: pointer;
+	width : 200px;
 }
 .button:hover{
 	background-color: #CCCCCC;

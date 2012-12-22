@@ -14,6 +14,7 @@ var global = {
 	EnemyManager: null,
 	BulletFactory: null,
 	BonusFactory: null,
-	BonusManager: null
+	BonusManager: null,
+	staticControl : false
 	
 };

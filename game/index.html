@@ -14,7 +14,7 @@
 		<!--
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 		-->
-
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -25,6 +25,7 @@
 		<script src="lib/jquery-1.8.3.min.js"></script>
 		<script src="lib/preloadjs-0.2.0.min.js"></script>
 		<script src="lib/tweenjs-0.3.0.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		<script src="extend.js"></script>
 		<script src="functions.js"></script>
 		<script src="MenuButton.js"></script>
@@ -105,7 +106,9 @@
 				</div>
 			</div>
 		</div>
-		
+<!--
+	===========================================================================================================
+-->		
 		<div id="mainMenu" class="scene">
 			<div>Main menu</div>
 			<div id="playButton" class="button ">
@@ -135,6 +138,9 @@
 				Back
 			</div>
 		</div>
+<!--
+	===========================================================================================================
+-->
 		<div id = "info" class="scene">
 			<div>
 				info and help of the game. <br> Bonuses, mobs etc.
@@ -143,14 +149,24 @@
 				Back
 			</div>
 		</div>
+<!--
+	===========================================================================================================
+-->
 		<div id="settings" class="scene">
 			<div>
 				Settings <br> Shiha-shiha =)
 			</div>
+		    <div id="controlling_type_radio">
+		        <input type="radio" id="radio_relative" name="radio" /><label for="radio_relative">Relative</label>
+		        <input type="radio" id="radio_static" name="radio" checked="checked" /><label for="radio_static">Static</label>		        
+    		</div>
 			<div id="backButton_settings" class="button">
 				Back
 			</div>
 		</div>
+<!--
+	===========================================================================================================
+-->
 		<div id="records" class="scene">
 			<div>
 				<table border = "1px">
@@ -176,5 +192,8 @@
 				Back
 			</div>
 		</div>
+<!--
+	===========================================================================================================
+-->
 	</body>
 </html>
