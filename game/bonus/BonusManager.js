@@ -9,7 +9,10 @@ function BonusManager()
 	this.bonusesCont = new createjs.Container();
 	
 	
-	this.bonusTime = 0;
+	this.smallMedKitBonusTime = 0;
+	this.mediumMedKitBonusTime = 0;
+	this.plusToLifeBonusTime = 0;
+	this.freezBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -25,6 +28,12 @@ BonusManager.prototype.addBonus = function(type, x, y)
 			break;
 		case BonusTypes.MEDIUM_MED_KIT:
 			bonus = new MediumMedKitBonus();
+			break;
+		case BonusTypes.PLUS_TO_LIFE:
+			bonus = new PlusToLifeBonus();
+			break;
+		case BonusTypes.FREEZ:
+			bonus = new FreezBonus();
 			break;
 	}
 	if (bonus)
@@ -51,7 +60,10 @@ BonusManager.prototype.removeBonus = function(bonus)
 BonusManager.prototype.update = function(elapsedTime)
 {
 	
-	this.smallMedkitUpdate(elapsedTime);
+	//this.smallMedkitUpdate(elapsedTime);
+	//this.mediumMedkitUpdate(elapsedTime);
+	//this.PlusToLifeUpdate(elapsedTime);
+	this.FreezUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
 	this.checkPickUp()
@@ -63,16 +75,56 @@ BonusManager.prototype.update = function(elapsedTime)
  */
 BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 {
-	this.bonusTime += elapsedTime;
-	if (this.bonusTime >= 1000)
+	this.smallMedKitBonusTime += elapsedTime;
+	if (this.smallMedKitBonusTime >= 1000 + Math.random()*2000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
 		
 		this.addBonus(BonusTypes.SMALL_MED_KIT, x, y);
-		this.bonusTime = 0;
+		this.smallMedKitBonusTime = 0;
 	}
 }
+
+BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
+{
+	this.mediumMedKitBonusTime += elapsedTime;
+	if (this.mediumMedKitBonusTime >= 1000 + Math.random()*2000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.MEDIUM_MED_KIT, x, y);
+		this.mediumMedKitBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.PlusToLifeUpdate = function(elapsedTime)
+{
+	this.plusToLifeBonusTime += elapsedTime;
+	if (this.plusToLifeBonusTime >= 1000 + Math.random()*2000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.PLUS_TO_LIFE, x, y);
+		this.plusToLifeBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.FreezUpdate = function(elapsedTime)
+{
+	this.freezBonusTime += elapsedTime;
+	if (this.freezBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.FREEZ, x, y);
+		this.freezBonusTime = 0;
+	}
+}
+
 
 BonusManager.prototype.checkPickUp = function()
 {
@@ -82,11 +134,12 @@ BonusManager.prototype.checkPickUp = function()
 	{
 		var bonus = this.bonuses[i];
 		
-		if (getDistanceToObject(bonus, global.hero) <= bonus.width)
+		if (bonus.isPickuped) { return; }
+		
+		if (getDistanceToObject(bonus, global.hero) <= bonus.size*0.75)
 		{
 			//console.log("HIT TEST BONUS " + i);
-			bonus.alpha = 0.2;
-			
+			//bonus.alpha = 0.2;
 			bonus.pickUp();
 			break;
 		}

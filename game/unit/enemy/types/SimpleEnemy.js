@@ -95,6 +95,7 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 	this.respawnCount += elapsedTime;
 	this.shoot();
 	
+	this.checkMyBullet();
 	this.checkHitBullet();
 }
 
@@ -110,5 +111,15 @@ SimpleEnemy.prototype.shoot = function ()
 			
 			this.respawnCount = 0;
 		}
+	}
+}
+
+SimpleEnemy.prototype.checkMyBullet = function ()
+{
+	if (!this.bullet) { return; }
+	
+	if (getDistanceToObject(this, this.bullet) > this.size*0.75)
+	{
+		this.bullet = null;
 	}
 }

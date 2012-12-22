@@ -14,20 +14,23 @@ extend(SmallMedKitBonus, BaseBonus);
 
 SmallMedKitBonus.prototype.init = function(x,y)
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.setStrokeStyle(3, 'round', 'round');
-	this.view.graphics.beginStroke(('#000000'));
-    this.view.graphics.beginFill("#FF0000").drawCircle(0,0,15);
-    this.view.graphics.endStroke();
-    this.view.graphics.endFill();
+    this.view = new createjs.Bitmap(global.preloader.imgs.bonus_20hp);
+    
+    this.width = global.preloader.imgs.bonus_20hp.width;
+	this.height = global.preloader.imgs.bonus_20hp.height;
+	
+	this.view.x = -this.width/2*this.scale;
+	this.view.y = -this.height/2*this.scale;
+	this.view.scaleX = this.view.scaleY = this.scale;
 	
 	this.addChild(this.view);
 	
 	this.x = x;
 	this.y = y;
 	
-	this.width = 30;
-	this.height = 30;
+	
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.type = BonusTypes.SMALL_MED_KIT;
 	this.showTime = 20;

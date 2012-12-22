@@ -18,7 +18,7 @@ ShotGunBullet.prototype.init = function(angle, x, y)
 ShotGunBullet.prototype.initView = function(x,y)
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("red").drawRect ( -10 , -5 , 20 , 10);
+	this.view.graphics.beginFill("red").drawRect( -5 , -3 , 10 , 6);
 	this.view.graphics.endFill();
 	
 	this.addChild(this.view);
@@ -49,6 +49,6 @@ ShotGunBullet.prototype.setMyBullet = function() {
 	this.isMy = true;
 	
 	this.view.graphics.clear();
-	this.view.graphics.beginFill("#2E2B57").drawRect ( -10 , -5 , 20 , 10);
+	this.view.graphics.beginFill("#2E2B57").drawRect( -5 , -3 , 10 , 6);
 	this.view.graphics.endFill();
 }

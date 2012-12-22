@@ -8,11 +8,10 @@ function EnemyManager()
 	this.enemies = [];
 	this.enemiesCont = new createjs.Container();
 	
-	
-	
+	this.freezMode = false;
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 5000;
+	this.timeToAddSimple = 1000;
 	
 	this.timerAddMediumEnemy = 0;
 	this.timerToAddMedium = 7000;
@@ -21,12 +20,12 @@ function EnemyManager()
 	this.timerToAddEscape = 9000;
 	
 	this.timerAddStrongEnemy = 0;
-	this.timerToAddStrong = 11000;
+	this.timerToAddStrong = 5000;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 100) { return; }
+	if (this.enemies.length >= 50) { return; }
 	
 	var enemy;
 	switch(type)

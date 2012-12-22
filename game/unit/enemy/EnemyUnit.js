@@ -106,8 +106,11 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 		this.pauseCount = Math.random() * 20000 + 3000;;
 		this.pauseTime = Math.random()*10000 + 3000;
 		pause = false;
+		EnemyManager.freezMode = false;
 	}
 	else { pause = false; }
+	
+	if (EnemyManager.freezMode) { pause = true; }
 	
 	return pause;
 }
