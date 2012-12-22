@@ -63,10 +63,37 @@ body{
 	background-color: #CCCCCC;
 }
 
+.gamePanel{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+	position : absolute;
+		
+	pointer-events:none;	
+}
+
 #lifePanel{
 	display : none;
-	position : absolute;
-	top : 0px;
+
+	top : 0px;	
 	left : 0px;
 	border : 1px solid;
+	background-color: #EEEEEE;
+	
+	width : 200px;
+	height : 25px;	
+}
+
+#bonusPanel{
+	display : none;
+	
+	width : 100px;
+	height : 500px;
+	top : 30px;
+	left : 0px;
+	background-color : #999999;
 }

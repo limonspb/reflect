@@ -71,6 +71,7 @@
 		<script src="view/BackGround.js"></script>
 		
 		<script src="scenes/gameScenePanels/LifePanel.js"></script>
+		<script src="scenes/gameScenePanels/BonusPanel.js"></script>
 		
 		<script src="scenes/BaseScene.js"></script>		
 		<script src="scenes/MenuScene.js"></script>
@@ -193,14 +194,29 @@
 		</div>
 <!--
 	===========================================================================================================
--->
-		  
-		<div id="lifePanel">
+-->		  
+		<div id="lifePanel" class="gamePanel">
 			<div id="innerLifePanel">
+				<span>жЫтуха:</span>
 				<span id="currentLife">54</span>
 				<span id="lifeSlash">/</span>
 				<span id="maxLife">100</span>
 			</div>
 		</div>
+<!--
+	===========================================================================================================
+-->
+		<div id="bonusPanel" class="gamePanel">
+			<div id="innerBonusPanel">
+				<div class="bonusDiv">
+					
+				</div>				
+				<div class="bonusDiv">
+				</div>				
+			</div>
+		</div>
+				  
+		
+		
 	</body>
 </html>
