@@ -30,6 +30,8 @@ SimpleEnemy.prototype.initView = function ()
 	
 	this.width = 40;
 	this.height = 40;
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -45,8 +47,8 @@ SimpleEnemy.prototype.initOptions = function ()
 	this.speed = Math.random()*30 + 40;
 	this.rotationSpeed = 200;
 	this.health = 10;
-	this.damage = 15;
-	this.bulletRespawn = 3000;
+	this.damage = 5;
+	this.bulletRespawn = 3000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 100;
 	this.maxRange = 1000;
@@ -92,6 +94,8 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 	
 	this.respawnCount += elapsedTime;
 	this.shoot();
+	
+	this.checkHitBullet();
 }
 
 SimpleEnemy.prototype.shoot = function ()
@@ -102,6 +106,7 @@ SimpleEnemy.prototype.shoot = function ()
 		{
 			//var angle = this.getAngleToObject(global.hero);
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+			this.bullet.damage = this.damage;
 			
 			this.respawnCount = 0;
 		}

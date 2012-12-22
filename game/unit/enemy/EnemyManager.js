@@ -11,12 +11,11 @@ function EnemyManager()
 	
 	
 	
-	
 	this.timerAddSimpleEnemy = 0;
 	this.timeToAddSimple = 5000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 1000;
+	this.timerToAddMedium = 7000;
 	
 	this.timerAddEscapeEnemy = 0;
 	this.timerToAddEscape = 9000;
@@ -62,23 +61,30 @@ EnemyManager.prototype.addEnemy = function(type)
 
 EnemyManager.prototype.removeEnemy = function(enemy)
 {
-	//TODO удаление enemy
+	var index = this.enemies.indexOf(enemy);
+	if (index != -1)
+	{
+		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }
+		
+		//TODO очистка всего содержимого врага
+		
+		this.enemies.splice(index,1);
+	}
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	//this.checkAddSimpleEnemy(elapsedTime);
+	this.checkAddSimpleEnemy(elapsedTime);
 	this.checkAddMediumEnemy(elapsedTime);
-	//this.checkAddEscapeEnemy(elapsedTime);
-	//this.checkAddStrongEnemy(elapsedTime);
+	this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddStrongEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
 {
-	var len = this.enemies.length;
-	for (var i = 0; i < len; i++)
+	for (var i = 0; i < this.enemies.length; i++)
 	{
 		this.enemies[i].move(elapsedTime);
 	}

@@ -38,6 +38,8 @@ MediumEnemy.prototype.initView = function ()
 	
 	this.width = 10;
 	this.height = 10;
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -55,7 +57,7 @@ MediumEnemy.prototype.initOptions = function ()
 	this.speed = Math.random()*30 + 80;
 	this.rotationSpeed = 200;
 	this.health = 30;
-	this.damage = 30;
+	this.damage = 10;
 	this.bulletRespawn = 3500 + Math.random()*1500;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 50;
@@ -118,6 +120,8 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	this.respawnCount += elapsedTime;
 	
 	this.shoot();
+	
+	this.checkHitBullet();
 }
 
 MediumEnemy.prototype.shoot = function ()
@@ -126,6 +130,7 @@ MediumEnemy.prototype.shoot = function ()
 	{
 		//var angle = this.getAngleToObject(global.hero);
 		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+		this.bullet.damage = this.damage;
 		
 		this.respawnCount = 0;
 		

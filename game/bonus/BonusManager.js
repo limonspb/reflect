@@ -90,6 +90,5 @@ BonusManager.prototype.checkPickUp = function()
 			bonus.pickUp();
 			break;
 		}
-		
 	}
 }

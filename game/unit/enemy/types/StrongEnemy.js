@@ -30,6 +30,8 @@ StrongEnemy.prototype.initView = function ()
 	
 	this.width = 20;
 	this.height = 20;
+	if (this.width >= this.height) { this.size = this.height; }
+	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
@@ -45,7 +47,7 @@ StrongEnemy.prototype.initOptions = function ()
 	this.rotationSpeed = 200;
 	this.health = 20;
 	this.damage = 10;
-	this.bulletRespawn = 4500;
+	this.bulletRespawn = 4000 + Math.random()*3000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 100;
 	this.maxRange = 700;
@@ -75,6 +77,8 @@ StrongEnemy.prototype.move = function (elapsedTime)
 	
 	this.respawnCount += elapsedTime;
 	this.shoot();
+	
+	this.checkHitBullet();
 }
 
 StrongEnemy.prototype.shoot = function ()
@@ -83,8 +87,8 @@ StrongEnemy.prototype.shoot = function ()
 	{
 		if (this.dist <= this.maxRange && this.dist >= this.minRange)
 		{
-			//var angle = this.getAngleToObject(global.hero);
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+			this.bullet.damage = this.damage;
 			
 			this.respawnCount = 0;
 		}

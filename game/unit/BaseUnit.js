@@ -6,12 +6,16 @@ function BaseUnit()
 {
 	BaseUnit.superclass.constructor.apply(this);
 	
+	this.MAX_HEALTH;
 	this.health;
 	this.speed;
 	this.rotationSpeed;
 	this.view;
 	this.width;
 	this.height;
+	this.size;
+	
+	this.bullet;
 }
 
 extend(BaseUnit, createjs.Container);
@@ -30,7 +34,70 @@ BaseUnit.prototype.getAngleToObject = function(object) {
 
 BaseUnit.prototype.checkHitBullet = function()
 {
+	var len = global.BulletFactory.bullets.length;
+	
+	for (var i = 0; i < len; i++)
+	{
+		var bull = global.BulletFactory.bullets[i];
+		
+		//if (bull == this.bullet) { continue; }
+		
+		if (getDistanceToObject(this, bull) <= this.size*0.75)
+		{
+			//console.log("HIT TEST BULLET " + i);
+			
+			if (this == global.hero)
+			{
+				//if (!bull.isMy)
+				//{
+					global.BulletFactory.removeBullet(i);
+					len--;
+					
+					this.health -= bull.damage;
+			
+					this.checkDestroy();
+				//}
+			} else {
+				if (bull.isMy)
+				{
+					global.BulletFactory.removeBullet(i);
+					len--;
+					
+					this.health -= bull.damage;
+			
+					this.checkDestroy();
+				}
+			}
+			
+		}
+		
+	}
 	
 }
 
+BaseUnit.prototype.checkDestroy = function()
+{
+	console.log("HEALTH " + this.health);
+	
+	if (this == global.hero)
+	{
+		this.alpha = this.health/this.MAX_HEALTH;
+	}
+	
+	if (this.health <= 0)
+	{
+		if (this == global.hero)
+		{
+			//TODO вывод окна об окончании игры
+		}
+		else
+		{
+			var index = global.EnemyManager.enemies.indexOf(this);
+			if (index != -1)
+			{
+				global.EnemyManager.removeEnemy(this);
+			}
+		}
+	}
+}
 

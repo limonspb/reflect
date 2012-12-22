@@ -22,8 +22,6 @@ function EnemyUnit()
 	this.minRange;
 	this.maxRange;
 	
-	this.bullet;
-	
 	this.pauseCount = Math.random() * 20000 + 3000;;
 	this.pauseTime = Math.random()*10000 + 3000;
 	
