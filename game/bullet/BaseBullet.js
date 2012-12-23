@@ -46,3 +46,7 @@ BaseBullet.prototype.getAngleToUnit = function(unit) {
 	
 	return (180 + this.angle);
 }
+
+BaseBullet.prototype.clearData = function() {
+	//TODO bulletClearData
+}

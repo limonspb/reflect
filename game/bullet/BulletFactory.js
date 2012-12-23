@@ -70,3 +70,21 @@ BulletFactory.prototype.removeBullet = function(index)
 	//TODO clear bullet
 	this.bullets.splice(index,1);
 }
+
+BulletFactory.prototype.clearAll = function(elapsedTime)
+{
+	this.doubleDamageTime = 0;
+	this.doubleDamage = false;
+	
+	for (var i = 0; i < this.bullets.length; i++)
+	{
+		if (!this.bullets[i]) { continue; }
+		
+		if (this.bulletsCont.contains(this.bullets[i])) { this.bulletsCont.removeChild(this.bullets[i]) }
+		this.bullets[i].clearData();
+		this.bullets[i] = null;
+	}
+	this.bullets.length = 0;
+	
+	if (this.bulletsCont.parent) { this.bulletsCont.parent.removeChild(this.bulletsCont); }
+}

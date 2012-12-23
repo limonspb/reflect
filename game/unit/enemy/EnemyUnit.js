@@ -124,13 +124,10 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 {
 	if (getDistanceToObject(this, global.hero) <= this.size*0.75)
 	{
-		
 		this.nearRespawnCount += elapsedTime;
 		if (this.nearRespawnCount >= this.nearRespawn)
 		{
-			global.hero.health -= this.nearDamage;
-
-			global.hero.checkDestroy();
+			this.setUnitDamage(global.hero, this.nearDamage);
 			
 			this.nearRespawnCount = 0;
 		}
@@ -151,6 +148,18 @@ EnemyUnit.prototype.checkHitTank = function(elapsedTime)
 	{
 		global.EnemyManager.removeEnemy(this);
 	}
+}
+
+EnemyUnit.prototype.setBigEnemy = function()
+{
+	this.scaleX = this.scaleY = 1.5;
+	this.size *= 1.5;
+}
+
+EnemyUnit.prototype.setNormalEnemy = function()
+{
+	this.scaleX = this.scaleY = 1;
+	this.size /= 1.5;
 }
 
 /**

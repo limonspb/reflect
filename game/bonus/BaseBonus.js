@@ -56,3 +56,8 @@ BaseBonus.prototype.pickUp = function()
 	//TODO метод действия бонуса
 	this.includeBonus();
 }
+
+BaseBonus.prototype.clearData = function()
+{
+	//TODO bonusClearData
+}

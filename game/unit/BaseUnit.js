@@ -73,23 +73,37 @@ BaseUnit.prototype.checkHitBullet = function()
 			global.BulletFactory.removeBullet(i);
 			len--;
 			
-			this.health -= bull.damage;
+			this.setUnitDamage(this, bull.damage);
 	
-			this.checkDestroy();
-			
 		}
 		
 	}
 	
 }
 
+BaseUnit.prototype.setUnitDamage = function(unit, damage)
+{
+	if (unit == global.hero)
+	{
+		if (unit.fullProtectMode) { return; }
+	}
+	unit.health -= damage;
+	
+	unit.checkDestroy();
+}
+
 BaseUnit.prototype.checkDestroy = function()
 {
-	//console.log("HEALTH " + this.health);
-	
 	if (this.health <= 0)
 	{
-		if (this != global.hero)
+		if (this == global.hero)
+		{
+			
+			//TODO вывод окна об окончании игры
+			
+			this.health = 0;
+		}
+		else
 		{
 			var index = global.EnemyManager.enemies.indexOf(this);
 			if (index != -1)
@@ -100,4 +114,7 @@ BaseUnit.prototype.checkDestroy = function()
 	}
 }
 
-
+BaseUnit.prototype.clearData = function()
+{
+	//TODO clearUnitData
+}

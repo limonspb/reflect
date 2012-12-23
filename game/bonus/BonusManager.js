@@ -17,11 +17,13 @@ function BonusManager()
 	this.speedUpBonusTime = 0;
 	this.regenerationBonusTime = 0;
 	this.teleportBonusTime = 0;
+	this.enemyScaleBonusTime = 0;
+	this.shieldScaleBonusTime = 0;
+	this.fullProtectBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
 {
-	
 	//if (this.bonuses.length >= 1) { return; }
 	
 	var bonus;
@@ -51,6 +53,15 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.TELEPORT:
 			bonus = new TeleportBonus();
 			break;
+		case BonusTypes.ENEMY_SCALE:
+			bonus = new EnemyScaleBonus();
+			break;
+		case BonusTypes.SHIELD_SCALE:
+			bonus = new ShieldScaleBonus();
+			break;
+		case BonusTypes.FULL_PROTECT:
+			bonus = new FullProtectionBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -75,7 +86,7 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	this.smallMedkitUpdate(elapsedTime);
+	/*this.smallMedkitUpdate(elapsedTime);
 	this.mediumMedkitUpdate(elapsedTime);
 	this.plusToLifeUpdate(elapsedTime);
 	this.freezUpdate(elapsedTime);
@@ -83,6 +94,10 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.speedUpUpdate(elapsedTime);
 	this.regenerationUpdate(elapsedTime);
 	this.teleportUpdate(elapsedTime);
+	this.enemyScaleUpdate(elapsedTime);
+	this.shieldScaleUpdate(elapsedTime);*/
+	this.fullProtectUpdate(elapsedTime);
+	
 	
 	this.checkPickUp()
 }
@@ -190,8 +205,47 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
 		
-		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.addBonus(BonusTypes.TELEPORT, x, y);
 		this.teleportBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
+{
+	this.enemyScaleBonusTime += elapsedTime;
+	if (this.enemyScaleBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.ENEMY_SCALE, x, y);
+		this.enemyScaleBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
+{
+	this.shieldScaleBonusTime += elapsedTime;
+	if (this.shieldScaleBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.SHIELD_SCALE, x, y);
+		this.shieldScaleBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
+{
+	this.fullProtectBonusTime += elapsedTime;
+	if (this.fullProtectBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.FULL_PROTECT, x, y);
+		this.fullProtectBonusTime = 0;
 	}
 }
 
@@ -207,10 +261,23 @@ BonusManager.prototype.checkPickUp = function()
 		
 		if (getDistanceToObject(bonus, global.hero) <= bonus.size*0.75)
 		{
-			//console.log("HIT TEST BONUS " + i);
-			//bonus.alpha = 0.2;
 			bonus.pickUp();
 			break;
 		}
 	}
+}
+
+BonusManager.prototype.clearAll = function(elapsedTime)
+{
+	for (var i = 0; i < this.bonuses.length; i++)
+	{
+		if (!this.bonuses[i]) { continue; }
+		
+		if (this.bonusesCont.contains(this.bonuses[i])) { this.bonusesCont.removeChild(this.bonuses[i]) }
+		this.bonuses[i].clearData();
+		this.bonuses[i] = null;
+	}
+	this.bonuses.length = 0;
+	
+	if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
 }
