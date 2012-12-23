@@ -21,11 +21,14 @@ function EnemyManager()
 	
 	this.timerAddStrongEnemy = 0;
 	this.timerToAddStrong = 5000;
+	
+	this.timerAddChaseEnemy = 0;
+	this.timerToAddChase = 1000;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 50) { return; }
+	if (this.enemies.length >= 1) { return; }
 	
 	var enemy;
 	switch(type)
@@ -47,6 +50,9 @@ EnemyManager.prototype.addEnemy = function(type)
 			break;
 		case EnemyTypes.TANK_ENEMY:
 			enemy = new TankEnemy();
+			break;
+		case EnemyTypes.CHASE_ENEMY:
+			enemy = new ChaseEnemy();
 			break;
 	}
 	if (enemy)
@@ -75,10 +81,11 @@ EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	this.checkAddSimpleEnemy(elapsedTime);
-	this.checkAddMediumEnemy(elapsedTime);
-	this.checkAddEscapeEnemy(elapsedTime);
-	this.checkAddStrongEnemy(elapsedTime);
+	//this.checkAddSimpleEnemy(elapsedTime);
+	//this.checkAddMediumEnemy(elapsedTime);
+	//this.checkAddEscapeEnemy(elapsedTime);
+	//this.checkAddStrongEnemy(elapsedTime);
+	this.checkAddChaseEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
@@ -138,5 +145,18 @@ EnemyManager.prototype.checkAddStrongEnemy = function(elapsedTime)
 			this.addEnemy(EnemyTypes.STRONG_ENEMY);
 		}
 		this.timerAddStrongEnemy = 0;
+	}
+}
+
+EnemyManager.prototype.checkAddChaseEnemy = function(elapsedTime)
+{
+	this.timerAddChaseEnemy += elapsedTime;
+	if (this.timerAddChaseEnemy >= this.timerToAddChase)
+	{
+		for (var i = 0; i < 1; i++)
+		{
+			this.addEnemy(EnemyTypes.CHASE_ENEMY);
+		}
+		this.timerAddChaseEnemy = 0;
 	}
 }

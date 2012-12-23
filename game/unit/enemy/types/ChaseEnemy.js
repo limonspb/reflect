@@ -3,22 +3,22 @@
  */
 
 
-function StrongEnemy()
+function ChaseEnemy()
 {
-	StrongEnemy.superclass.constructor.apply(this);
+	ChaseEnemy.superclass.constructor.apply(this);
 	
 }
 
-extend(StrongEnemy,EnemyUnit);
+extend(ChaseEnemy,EnemyUnit);
 
 
 /**
  * Инициализация отображения юнита
  */
-StrongEnemy.prototype.initView = function ()
+ChaseEnemy.prototype.initView = function ()
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("#FF6F00").drawRect ( -10 , -10 , 20 , 20 );
+	this.view.graphics.beginFill("#800000").drawRect ( -10 , -10 , 20 , 20 );
 	
 	this.gun = new createjs.Shape();
     this.gun.graphics.setStrokeStyle(1, 'round', 'round');
@@ -41,50 +41,52 @@ StrongEnemy.prototype.initView = function ()
 	this.addChild(this.center);
 }
 
-StrongEnemy.prototype.initOptions = function ()
+ChaseEnemy.prototype.initOptions = function ()
 {
-	this.speed = Math.random()*30 + 80;
-	this.rotationSpeed = 200;
+	this.speed = Math.random()*20 + 50;
+	this.rotationSpeed = 50;
 	this.health = 20;
-	this.damage = 10;
-	this.bulletRespawn = 4000 + Math.random()*3000;
-	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 100;
-	this.maxRange = 700;
-	
-	
-	this.velocity = new Vec2(-1,-2);
-	this.disared = new Vec2(0,0);
-	this.position = new Vec2(this.x, this.y);
-	this.steering = new Vec2(0, 0);
-	this.MAX_FORCE = 0.3;
-	this.MAX_VELOCITY = 4;
-	this.mass = 40 +  Math.random() * 20;
-	
-	this.truncate(this.velocity, this.MAX_VELOCITY);
+	this.nearDamage = 20;
+	this.minRange = 10;
+	this.maxRange = 20;
 }
 
-StrongEnemy.prototype.move = function (elapsedTime)
+ChaseEnemy.prototype.move = function (elapsedTime)
 {
 	this.dist = getDistanceToObject(this, global.hero);
 	
 	if (!this.pauseMove(elapsedTime))
 	{
-		this.update(global.hero)
+		//this.view.rotation = this.getAngleToObject(global.hero);
+		
+		this.view.rotation += this.getGunRotation(this.view, ShotType.CLEVER_SHOT)*elapsedTime/1000;
+		
+		this.angle = this.view.rotation/180 * Math.PI;
+		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
+		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
+		
+		if (getDistanceToObject(this, global.hero) <= this.minRange+5)
+		{
+			dx = 0;
+			dy = 0;
+		}
+		
+		this.x += dx;
+		this.y += dy;
 	}
 	
 	this.checkHitHero(elapsedTime);
 	
-	this.gun.rotation += this.getGunRotation(this.gun, ShotType.CLEVER_SHOT)*elapsedTime/1000;
+	//this.gun.rotation += this.getGunRotation(this.gun, ShotType.CLEVER_SHOT)*elapsedTime/1000;
 	
-	this.respawnCount += elapsedTime;
-	this.shoot();
+	//this.respawnCount += elapsedTime;
+	//this.shoot();
 	
-	this.checkMyBullet();
+	//this.checkMyBullet();
 	this.checkHitBullet();
 }
 
-StrongEnemy.prototype.shoot = function ()
+/*ChaseEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
@@ -98,7 +100,7 @@ StrongEnemy.prototype.shoot = function ()
 	}
 }
 
-StrongEnemy.prototype.checkMyBullet = function ()
+ChaseEnemy.prototype.checkMyBullet = function ()
 {
 	if (!this.bullet) { return; }
 	
@@ -107,3 +109,4 @@ StrongEnemy.prototype.checkMyBullet = function ()
 		this.bullet = null;
 	}
 }
+*/

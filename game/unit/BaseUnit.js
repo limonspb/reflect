@@ -98,6 +98,8 @@ BaseUnit.prototype.checkDestroy = function()
 		{
 			this.alpha = 0;
 			//TODO вывод окна об окончании игры
+			
+			this.health = 0;
 		}
 		else
 		{
@@ -109,4 +111,5 @@ BaseUnit.prototype.checkDestroy = function()
 		}
 	}
 }
+
 

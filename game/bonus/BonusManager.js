@@ -72,8 +72,8 @@ BonusManager.prototype.update = function(elapsedTime)
 	//this.mediumMedkitUpdate(elapsedTime);
 	//this.plusToLifeUpdate(elapsedTime);
 	//this.freezUpdate(elapsedTime);
-	this.doubleDamageUpdate(elapsedTime);
-	//this.speedUpUpdate(elapsedTime);
+	//this.doubleDamageUpdate(elapsedTime);
+	this.speedUpUpdate(elapsedTime);
 	//TODO определить отдельным методом. Появление первого типа бонусов
 	
 	this.checkPickUp()
