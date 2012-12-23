@@ -197,3 +197,12 @@ function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+function checkOutOfStage(object)
+{
+	if (object.x > global.levelWidth) { return false; }
+	else if (object.x < 0) { return false; }
+	if (object.y >= global.levelHeight) { return false; }
+	else if (object.y < 0) { return false; }
+		
+	return true;
+}

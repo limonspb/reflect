@@ -6,7 +6,11 @@
 function EnemyManager()
 {
 	this.enemies = [];
+	this.vacuums = [];
+	this.vacuumSize = 150;
 	this.enemiesCont = new createjs.Container();
+	
+	this.tank = null;
 	
 	this.freezMode = false;
 	
@@ -14,21 +18,27 @@ function EnemyManager()
 	this.timeToAddSimple = 1000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 7000;
+	this.timerToAddMedium = 1000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 9000;
+	this.timerToAddEscape = 1000;
 	
 	this.timerAddStrongEnemy = 0;
-	this.timerToAddStrong = 5000;
+	this.timerToAddStrong = 1000;
 	
 	this.timerAddChaseEnemy = 0;
 	this.timerToAddChase = 1000;
+	
+	this.timerAddTankEnemy = 0;
+	this.timerToAddTank = 1000;
+	
+	this.timerAddVacuumEnemy = 0;
+	this.timerToAddVacuum = 1000;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 1) { return; }
+	if (this.enemies.length >= 50) { return; }
 	
 	var enemy;
 	switch(type)
@@ -50,9 +60,14 @@ EnemyManager.prototype.addEnemy = function(type)
 			break;
 		case EnemyTypes.TANK_ENEMY:
 			enemy = new TankEnemy();
+			this.tank = enemy;
 			break;
 		case EnemyTypes.CHASE_ENEMY:
 			enemy = new ChaseEnemy();
+			break;
+		case EnemyTypes.VACUUM_ENEMY:
+			enemy = new VacuumEnemy();
+			if (this.vacuums.length < 3) { this.vacuums.push(enemy); } else { enemy = null; }
 			break;
 	}
 	if (enemy)
@@ -73,7 +88,17 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		
 		//TODO очистка всего содержимого врага
 		
+		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
+		{
+			var ind = this.vacuums.indexOf(enemy);
+			if (ind)
+			{
+				this.vacuums.splice(ind,1);
+			}
+		}
+		
 		this.enemies.splice(index,1);
+		enemy = null;
 	}
 }
 
@@ -85,7 +110,9 @@ EnemyManager.prototype.update = function(elapsedTime)
 	//this.checkAddMediumEnemy(elapsedTime);
 	//this.checkAddEscapeEnemy(elapsedTime);
 	//this.checkAddStrongEnemy(elapsedTime);
-	this.checkAddChaseEnemy(elapsedTime);
+	//this.checkAddChaseEnemy(elapsedTime);
+	//this.checkAddTankEnemy(elapsedTime);
+	this.checkAddVacuumEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
@@ -158,5 +185,37 @@ EnemyManager.prototype.checkAddChaseEnemy = function(elapsedTime)
 			this.addEnemy(EnemyTypes.CHASE_ENEMY);
 		}
 		this.timerAddChaseEnemy = 0;
+	}
+}
+
+EnemyManager.prototype.checkAddTankEnemy = function(elapsedTime)
+{
+	for (var j = 0; j < global.EnemyManager.enemies.length; j++)
+	{
+		var enemy = global.EnemyManager.enemies[j];
+		if (enemy.type == EnemyTypes.TANK_ENEMY) { return; }
+	}
+	
+	this.timerAddTankEnemy += elapsedTime;
+	if (this.timerAddTankEnemy >= this.timerToAddTank)
+	{
+		for (var i = 0; i < 1; i++)
+		{
+			this.addEnemy(EnemyTypes.TANK_ENEMY);
+		}
+		this.timerAddTankEnemy = 0;
+	}
+}
+
+EnemyManager.prototype.checkAddVacuumEnemy = function(elapsedTime)
+{
+	this.timerAddVacuumEnemy += elapsedTime;
+	if (this.timerAddVacuumEnemy >= this.timerToAddVacuum)
+	{
+		for (var i = 0; i < 1; i++)
+		{
+			this.addEnemy(EnemyTypes.VACUUM_ENEMY);
+		}
+		this.timerAddVacuumEnemy = 0;
 	}
 }

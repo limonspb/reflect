@@ -15,6 +15,8 @@ function EnemyUnit()
 {
 	EnemyUnit.superclass.constructor.apply(this);
 	
+	this.type;
+	
 	this.damage;
 	this.nearDamage = 5;
 	this.bulletType;
@@ -134,6 +136,20 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 		}
 	} else {
 		this.nearRespawnCount = this.nearRespawn;
+	}
+	
+	this.checkHitTank();
+}
+
+EnemyUnit.prototype.checkHitTank = function(elapsedTime)
+{
+	if (!global.EnemyManager.tank) { return; }
+	
+	if (this == global.EnemyManager.tank) { return; }
+	
+	if (getDistanceToObject(this, global.EnemyManager.tank) <= global.EnemyManager.tank.size*0.75)
+	{
+		global.EnemyManager.removeEnemy(this);
 	}
 }
 

@@ -54,6 +54,8 @@ EscapeEnemy.prototype.initView = function ()
  */
 EscapeEnemy.prototype.initOptions = function ()
 {
+	this.type = EnemyTypes.ESCAPE_ENEMY;
+	
 	this.speed = Math.random()*30 + 130;
 	this.rotationSpeed = 150;
 	this.health = 50;

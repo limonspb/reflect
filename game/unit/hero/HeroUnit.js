@@ -10,7 +10,7 @@
  *  
  */
 
-function HeroUnit()
+function HeroUnit()	
 {
 	HeroUnit.superclass.constructor.apply(this);
 	
@@ -318,14 +318,14 @@ HeroUnit.prototype.relativeKeyControlling = function(){
 }
 
 HeroUnit.prototype.setGravityV = function(){
-	var arr = [{x:300,y:300}];
+	var arr = global.EnemyManager.vacuums;
 	var d_min = 100000;
 	var i_min = -1;
 	var v_min = {x:0, y:0}
 	for (var i=0; i<arr.length; i++){
 		var v = vec_Get(this.x,this.y,arr[i].x, arr[i].y);
 		var d = vec_Length(v);
-		if ((d<d_min)&&(d<300)){
+		if ((d<d_min)&&(d<global.EnemyManager.vacuumSize)){
 			i_min = i;
 			d_min = d;
 			v_min.x = v.x;
@@ -334,7 +334,7 @@ HeroUnit.prototype.setGravityV = function(){
 	}
 	
 	if ((i_min != -1)&&(d_min>15)){
-		v_min = vec_Scale(v_min,200);
+		v_min = vec_Scale(v_min,150);
 		this.g_vx = v_min.x;		
 		this.g_vy = v_min.y;		
 	}else{

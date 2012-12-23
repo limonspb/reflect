@@ -3,57 +3,51 @@
  */
 
 
-function ChaseEnemy()
+function VacuumEnemy()
 {
-	ChaseEnemy.superclass.constructor.apply(this);
+	VacuumEnemy.superclass.constructor.apply(this);
 	
 }
 
-extend(ChaseEnemy,EnemyUnit);
+extend(VacuumEnemy,EnemyUnit);
 
 
 /**
  * Инициализация отображения юнита
  */
-ChaseEnemy.prototype.initView = function ()
+VacuumEnemy.prototype.initView = function ()
 {
 	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("#800000").drawRect ( -10 , -10 , 20 , 20 );
+	this.view.graphics.beginFill("#000000").drawRect ( -30 , -30 , 60 , 60 );
 	
-	this.gun = new createjs.Shape();
-    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
-    this.gun.graphics.beginStroke(('#000000'));
-    this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(10,0);
-    this.gun.graphics.endStroke();
-    this.gun.graphics.endFill();
-	
-	this.width = 20;
-	this.height = 20;
+	this.width = 60;
+	this.height = 60;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
 	this.center = new createjs.Shape();
 	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
 	
+	this.view.cache(-30 , -30 , 60 , 60);
 	this.addChild(this.view);
-	this.addChild(this.gun);
 	this.addChild(this.center);
 }
 
-ChaseEnemy.prototype.initOptions = function ()
+VacuumEnemy.prototype.initOptions = function ()
 {
-	this.type = EnemyTypes.CHASE_ENEMY
+	this.type = EnemyTypes.VACUUM_ENEMY;
 	
-	this.speed = Math.random()*20 + 200;
-	this.rotationSpeed = 250;
+	this.speed = Math.random()*20 + 20;
+	this.rotationSpeed = 50;
 	this.health = 20;
 	this.nearDamage = 20;
 	this.minRange = 10;
 	this.maxRange = 20;
+	
+	this.vacuum = 150;
 }
 
-ChaseEnemy.prototype.move = function (elapsedTime)
+VacuumEnemy.prototype.move = function (elapsedTime)
 {
 	this.dist = getDistanceToObject(this, global.hero);
 	
@@ -88,12 +82,13 @@ ChaseEnemy.prototype.move = function (elapsedTime)
 	this.checkHitBullet();
 }
 
-/*ChaseEnemy.prototype.shoot = function ()
+/*VacuumEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
 		if (this.dist <= this.maxRange && this.dist >= this.minRange)
 		{
+			//var angle = this.getAngleToObject(global.hero);
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
 			this.bullet.damage = this.damage;
 			
@@ -102,7 +97,7 @@ ChaseEnemy.prototype.move = function (elapsedTime)
 	}
 }
 
-ChaseEnemy.prototype.checkMyBullet = function ()
+VacuumEnemy.prototype.checkMyBullet = function ()
 {
 	if (!this.bullet) { return; }
 	
@@ -110,5 +105,4 @@ ChaseEnemy.prototype.checkMyBullet = function ()
 	{
 		this.bullet = null;
 	}
-}
-*/
+}*/
