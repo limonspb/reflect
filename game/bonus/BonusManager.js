@@ -18,6 +18,7 @@ function BonusManager()
 	this.regenerationBonusTime = 0;
 	this.teleportBonusTime = 0;
 	this.enemyScaleBonusTime = 0;
+	this.shieldScaleBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -54,6 +55,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.ENEMY_SCALE:
 			bonus = new EnemyScaleBonus();
 			break;
+		case BonusTypes.SHIELD_SCALE:
+			bonus = new ShieldScaleBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -85,8 +89,9 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.doubleDamageUpdate(elapsedTime);
 	this.speedUpUpdate(elapsedTime);
 	this.regenerationUpdate(elapsedTime);
-	this.teleportUpdate(elapsedTime);*/
-	this.enemyScaleUpdate(elapsedTime);
+	this.teleportUpdate(elapsedTime);
+	this.enemyScaleUpdate(elapsedTime);*/
+	this.shieldScaleUpdate(elapsedTime);
 	
 	this.checkPickUp()
 }
@@ -209,6 +214,19 @@ BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.ENEMY_SCALE, x, y);
 		this.enemyScaleBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
+{
+	this.shieldScaleBonusTime += elapsedTime;
+	if (this.shieldScaleBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.SHIELD_SCALE, x, y);
+		this.shieldScaleBonusTime = 0;
 	}
 }
 

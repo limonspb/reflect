@@ -256,6 +256,9 @@ HeroUnit.prototype.initOptions = function ()
 	
 	this.speedyMode = false;
 	this.speedTime;
+	
+	this.shieldScaleMode = false;
+	this.shieldScaleTime;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -467,6 +470,22 @@ HeroUnit.prototype.move = function(elapsedTime)
 			this.speedyMode = false;
 			this.max_v_c_forward = this.current_forward;
 			this.max_v_c_backward = this.current_backward;
+		}
+	}
+	
+	if (this.shieldScaleMode)
+	{
+		this.sheild.scaleX = this.sheild.scaleY = 1.5;
+		this.shieldWidth = 225;
+		this.shieldHeight = 15;
+		
+		this.shieldScaleTime -= elapsedTime;
+		if (this.shieldScaleTime <= 0)
+		{
+			this.shieldScaleMode = false;
+			this.sheild.scaleX = this.sheild.scaleY = 1;
+			this.shieldWidth = 150;
+			this.shieldHeight = 10;
 		}
 	}
 	
