@@ -15,6 +15,8 @@ function BonusManager()
 	this.freezBonusTime = 0;
 	this.doubleDamageBonusTime = 0;
 	this.speedUpBonusTime = 0;
+	this.regenerationBonusTime = 0;
+	this.teleportBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -43,6 +45,12 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.SPEED_UP:
 			bonus = new SpeedUpBonus();
 			break;
+		case BonusTypes.REGENERATION:
+			bonus = new RegenerationBonus();
+			break;
+		case BonusTypes.TELEPORT:
+			bonus = new TeleportBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -67,13 +75,14 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	
-	this.smallMedkitUpdate(elapsedTime);
-	this.mediumMedkitUpdate(elapsedTime);
-	this.plusToLifeUpdate(elapsedTime);
-	this.freezUpdate(elapsedTime);
-	this.doubleDamageUpdate(elapsedTime);
-	this.speedUpUpdate(elapsedTime);
+	//this.smallMedkitUpdate(elapsedTime);
+	//this.mediumMedkitUpdate(elapsedTime);
+	//this.plusToLifeUpdate(elapsedTime);
+	//this.freezUpdate(elapsedTime);
+	//this.doubleDamageUpdate(elapsedTime);
+	//this.speedUpUpdate(elapsedTime);
+	//this.regenerationUpdate(elapsedTime);
+	this.teleportUpdate(elapsedTime);
 	
 	this.checkPickUp()
 }
@@ -157,6 +166,32 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.SPEED_UP, x, y);
 		this.speedUpBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.regenerationUpdate = function(elapsedTime)
+{
+	this.regenerationBonusTime += elapsedTime;
+	if (this.regenerationBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.regenerationBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.teleportUpdate = function(elapsedTime)
+{
+	this.teleportBonusTime += elapsedTime;
+	if (this.teleportBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.teleportBonusTime = 0;
 	}
 }
 
