@@ -1,0 +1,58 @@
+#mainMenu, #credits, #info, #settings, #records {
+background: url(img/menu/back.png) no-repeat scroll 50% 50%  transparent;
+background-size: cover;
+padding: 0;
+min-width: 650px; 
+margin: 0;
+min-height: 550px;
+}
+
+.menu {
+	width: 300px;
+	margin: 0 auto;
+	min-height: 280px;
+	margin-top:16%;
+	position: relative;
+	vertical-align: middle;
+	}
+	
+.main {background: url(img/menu/points.png) left top no-repeat scroll transparent;}
+
+#playButton, #creditsButton, #infoButton, #settingsButton, #recordsButton, #backButton_info, #backButton_settings, #backButton_credits, #backButton_records  {
+	position:absolute;
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+	display: block;
+}
+
+
+
+#playButton {top: 8px; left: 90px; background: url(img/menu/playbutton.png) 50% 50% no-repeat scroll transparent; }
+#playButton:hover { background: url(img/menu/playbutton2.png) 50% 50% no-repeat scroll transparent;}
+
+#creditsButton { top: 50px; left: 166px; background: url(img/menu/creditsbutton.png) 50% 50% no-repeat scroll transparent;}
+#creditsButton:hover {background: url(img/menu/creditsbutton2.png) 50% 50% no-repeat scroll transparent;}
+	
+#infoButton { top: 50px; left: 16px; background: url(img/menu/infobutton.png) 50% 50% no-repeat scroll transparent; }
+#infoButton:hover {background: url(img/menu/infobutton2.png) 50% 50% no-repeat scroll transparent;}
+	
+#settingsButton {top: 98px; left: 90px; background: url(img/menu/settingsbutton.png) 50% 50% no-repeat scroll transparent;}
+#settingsButton:hover {background: url(img/menu/settingsbutton2.png) 50% 50% no-repeat scroll transparent;}
+	
+#recordsButton {top: 183px; left: 90px; background: url(img/menu/recordsbutton.png) 50% 50% no-repeat scroll transparent; }
+#recordsButton:hover {background: url(img/menu/recordsbutton2.png) 50% 50% no-repeat scroll transparent;}
+
+#backButton_info, #backButton_settings, #backButton_credits, #backButton_records {top: 8px; left: 60px; background: url(img/menu/backbutton.png) 50% 50% no-repeat scroll transparent; }
+#backButton_info:hover, #backButton_settings:hover, #backButton_credits:hover, #backButton_records:hover { background: url(img/menu/backbutton2.png) 50% 50% no-repeat scroll transparent;}
+
+.button {
+	cursor: pointer;
+	position: relative;
+	width : 200px;
+	height: 100px; 
+	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
+	margin: 30px auto 0;}
+	
+table.table0 { border-collapse: collapse; width: 100%; margin: 0 auto;}
+table.table0 td {color: #fff; font-weight: bold; padding: 3px; 5px; border: none; font-size: 16px;}
