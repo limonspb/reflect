@@ -57,6 +57,18 @@ function HeroUnit()
 	this.segments_arr_counted = false;
 	
 	this.staticAngle = 0;
+	
+	this.o_ax = 0;
+	this.o_ay = 0;
+	this.o_vx = 0;
+	this.o_vy = 0;
+	
+	this.o_a = 0;
+	this.o_v = 0;
+	this.o_angle = 0;
+	
+	this.g_vx = 0;
+	this.g_vy = 0;
 }
 
 extend(HeroUnit,BaseUnit);
@@ -305,6 +317,33 @@ HeroUnit.prototype.relativeKeyControlling = function(){
 	}	
 }
 
+HeroUnit.prototype.setGravityV = function(){
+	var arr = [{x:300,y:300}];
+	var d_min = 100000;
+	var i_min = -1;
+	var v_min = {x:0, y:0}
+	for (var i=0; i<arr.length; i++){
+		var v = vec_Get(this.x,this.y,arr[i].x, arr[i].y);
+		var d = vec_Length(v);
+		if ((d<d_min)&&(d<300)){
+			i_min = i;
+			d_min = d;
+			v_min.x = v.x;
+			v_min.y = v.y;
+		}
+	}
+	
+	if ((i_min != -1)&&(d_min>15)){
+		v_min = vec_Scale(v_min,200);
+		this.g_vx = v_min.x;		
+		this.g_vy = v_min.y;		
+	}else{
+		this.g_vx =0;
+		this.g_vy =0;		
+	}
+}
+
+
 HeroUnit.prototype.move = function(elapsedTime)
 {
 	var dt = elapsedTime/1000;
@@ -361,9 +400,9 @@ HeroUnit.prototype.move = function(elapsedTime)
 	this.old_x = this.x;
 	this.old_y = this.y;
 	
-	
-	this.x += vx_c*dt;
-	this.y += vy_c*dt;
+	this.setGravityV();
+	this.x += (vx_c+this.g_vx)*dt;
+	this.y += (vy_c+this.g_vy)*dt;
 	
 	if (this.x<this.bodySize){
 		this.vx_c = 0;
