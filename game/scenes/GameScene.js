@@ -24,20 +24,27 @@ function GameScene(){
 	this.container.addChildAt(this.backGround,0);
 	
 	this.lifePanel = new LifePanel();
-	this.lifePanel.setMaxLife(100);
-	this.lifePanel.setCurLife(100);
-	
 	this.bonusPanel = new BonusPanel();
+	this.pointsPanel = new PointsPanel();
+	this.infinityBonusPanel = new InfinityBonusPanel();
+	this.newGame();
 }
 
 extend(GameScene,BaseScene);
 
+GameScene.prototype.newGame = function(){
+	global.gameTime = 0;
+	global.points = 0;
+}
+
 GameScene.prototype.show = function(){
 	this.lifePanel.show();
 	this.bonusPanel.show();
+	this.pointsPanel.show();
+	this.infinityBonusPanel.show();
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
-
+	global.stage.onMouseUp = this.onMouseUp;
 	
 	global.stage.addChild(this.container);
 
@@ -47,8 +54,11 @@ GameScene.prototype.show = function(){
 GameScene.prototype.hide = function(){
 	this.lifePanel.hide();
 	this.bonusPanel.hide();
+	this.pointsPanel.hide();
+	this.infinityBonusPanel.hide();
 	$('body').unbind();
 	global.stage.removeChild(this.container);
+	global.stage.onMouseUp = null;
 
 	createjs.Ticker.removeListener(this);
 	global.camera.setLookAt(0,0);
@@ -95,9 +105,14 @@ GameScene.prototype.onBodyKeyUp = function(event){
 	}	
 }
 
+GameScene.prototype.onMouseUp = function(event){
+	global.hero.tryTeleport(event.stageX + global.camera.lookAtX, event.stageY + global.camera.lookAtY);
+}
 
 
-GameScene.prototype.tick = function(elapsedTime) {	
+
+GameScene.prototype.tick = function(elapsedTime) {
+	global.gameTime+=elapsedTime;
 
 	global.hero.move(elapsedTime);
 	
@@ -111,6 +126,11 @@ GameScene.prototype.tick = function(elapsedTime) {
 	
 	global.camera.setLookAt(global.hero.x,global.hero.y);
 	global.camera.applyTransform();
+	
+	this.lifePanel.update();
+	this.pointsPanel.update();
+	this.bonusPanel.update();
+	this.infinityBonusPanel.update();
 
 
 	global.stage.update(elapsedTime);

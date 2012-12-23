@@ -49,8 +49,7 @@
 		$dom->appendChild($reply);
 		$reply->setAttribute('place',htmlspecialchars($N));
 		$xml->formatOutput = true;
-		echo $dom->saveXML();
-		
+		echo $dom->saveXML();	
 	}
 	
 	dbdisconnect($c);

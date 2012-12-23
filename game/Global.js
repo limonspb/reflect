@@ -13,6 +13,7 @@ var global = {
 	EnemyManager: null,
 	BulletFactory: null,
 	BonusManager: null,
-	staticControl : false
-	
+	staticControl : false,
+	gameTime : 0,
+	points : 0
 };

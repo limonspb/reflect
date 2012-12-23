@@ -64,19 +64,15 @@
 		<script src="bonus/types/SpeedUpBonus.js"></script>
 		<script src="bonus/BonusTypes.js"></script>
 		<script src="bonus/BonusManager.js"></script>
-		
-			
-		</script>
-		
-			
-		</script>
-		
+				
 		<script src="model/Keyboard.js"></script>
 		
 		<script src="view/BackGround.js"></script>
 		
 		<script src="scenes/gameScenePanels/LifePanel.js"></script>
 		<script src="scenes/gameScenePanels/BonusPanel.js"></script>
+		<script src="scenes/gameScenePanels/PointsPanel.js"></script>
+		<script src="scenes/gameScenePanels/InfinityBonusPanel.js"></script>
 		
 		<script src="scenes/BaseScene.js"></script>		
 		<script src="scenes/MenuScene.js"></script>
@@ -212,16 +208,82 @@
 	===========================================================================================================
 -->
 		<div id="bonusPanel" class="gamePanel">
-			<div id="innerBonusPanel">
-				<div class="bonusDiv">
-					
-				</div>				
-				<div class="bonusDiv">
-				</div>				
-			</div>
+			<table>
+				<tr id="freezTr">
+					<td>
+						<img src="img/bonus/freeze.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="freezSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+				<tr id="enemyScaleTr">
+					<td>
+						<img src="img/bonus/enemi_scale.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="enemyScaleSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+				<tr id="protectionTr">
+					<td>
+						<img src="img/bonus/full_protectionl.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="protectionSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+				<tr id="shieldScaleTr">
+					<td>
+						<img src="img/bonus/shield_scale.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="shieldScaleSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+				<tr id="speedUpTR">
+					<td>
+						<img src="img/bonus/speedUp.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="speedUpSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+				<tr id="x2DamageTr">
+					<td>
+						<img src="img/bonus/x2damage.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="x2DamageSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
+			</table>
 		</div>
-				  
-		
-		
+<!--
+	===========================================================================================================
+-->
+		<div id="pointsPanel" class="gamePanel">
+			<span id="currentTime">0</span>
+			<span id="currentPoints">0</span>
+		</div>
+<!--
+	===========================================================================================================
+-->
+		<div id="infinityBonusPanel" class="gamePanel">
+			<div>
+				<img src="img/bonus/teleport.png"/>
+				<span>X </span><span id="teleportCount">X 0</span>			
+			</div>
+			<div>
+				<img src="img/bonus/regenerationl.png"/>				
+				<span>X </span><span id="regenerationCount">0</span>								
+			</div>
+		</div>	
 	</body>
 </html>

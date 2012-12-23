@@ -6,7 +6,7 @@
 function BonusManager()
 {
 	this.bonuses = [];
-	this.bonusesCont = new createjs.Container();
+	this.bonusesCont = new createjs.Container();	
 	
 	
 	this.smallMedKitBonusTime = 0;

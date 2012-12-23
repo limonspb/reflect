@@ -89,7 +89,7 @@ BaseUnit.prototype.checkDestroy = function()
 	
 	if (this == global.hero)
 	{
-		this.alpha = this.health/this.MAX_HEALTH;
+		this.alpha = this.health/this.MAX_HEALTH;		
 	}
 	
 	if (this.health <= 0)

@@ -49,6 +49,7 @@ FreezBonus.prototype.testRemove = function()
 FreezBonus.prototype.includeBonus = function()
 {
 	global.EnemyManager.freezMode = true;
+	global.EnemyManager.freezTime = this.freezTime;
 	
 	var len = global.EnemyManager.enemies.length;
 	for (var i = 0; i < len; i++)

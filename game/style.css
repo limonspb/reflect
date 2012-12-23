@@ -94,6 +94,30 @@ body{
 	width : 100px;
 	height : 500px;
 	top : 30px;
-	left : 0px;
-	background-color : #999999;
+	left : 0px;	
+}
+
+#pointsPanel{
+	display : none;
+	
+	width : 150;
+	height : 20;
+	top : 0px;
+	left : 100%;
+	margin-left : -150px;
+}
+
+#infinityBonusPanel{
+	display : none;
+	
+	width : 150px;
+	height : 400px;
+	top : 100%;
+	left : 100%;
+	margin-left: -150px;
+	margin-top: -400px;
+}
+
+.bonusPanelImg{
+	height : 40px;
 }
