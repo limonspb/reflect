@@ -21,7 +21,6 @@ function BonusManager()
 
 BonusManager.prototype.addBonus = function(type, x, y)
 {
-	
 	//if (this.bonuses.length >= 1) { return; }
 	
 	var bonus;
@@ -190,7 +189,7 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
 		
-		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.addBonus(BonusTypes.TELEPORT, x, y);
 		this.teleportBonusTime = 0;
 	}
 }
