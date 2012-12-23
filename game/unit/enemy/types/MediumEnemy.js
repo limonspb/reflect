@@ -54,6 +54,8 @@ MediumEnemy.prototype.initView = function ()
  */
 MediumEnemy.prototype.initOptions = function ()
 {
+	this.type = EnemyTypes.MEDIUM_ENEMY;
+	
 	this.speed = Math.random()*30 + 80;
 	this.rotationSpeed = 200;
 	this.health = 30;

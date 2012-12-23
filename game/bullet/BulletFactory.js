@@ -44,7 +44,7 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 	for (var i = 0; i < len; ++i)
 	{
 		this.bullets[i].move(elapsedTime);
-		if(!this.bullets[i].checkOutOfStage())
+		if(!checkOutOfStage(this.bullets[i]))
 		{
 			if (this.bulletsCont.contains(this.bullets[i]))
 			{

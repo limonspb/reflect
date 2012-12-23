@@ -43,6 +43,8 @@ StrongEnemy.prototype.initView = function ()
 
 StrongEnemy.prototype.initOptions = function ()
 {
+	this.type = EnemyTypes.STRONG_ENEMY;
+	
 	this.speed = Math.random()*30 + 80;
 	this.rotationSpeed = 200;
 	this.health = 20;

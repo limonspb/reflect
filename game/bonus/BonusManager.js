@@ -68,13 +68,12 @@ BonusManager.prototype.removeBonus = function(bonus)
 BonusManager.prototype.update = function(elapsedTime)
 {
 	
-	this.smallMedkitUpdate(elapsedTime);
-	this.mediumMedkitUpdate(elapsedTime);
-	this.plusToLifeUpdate(elapsedTime);
-	this.freezUpdate(elapsedTime);
-	this.doubleDamageUpdate(elapsedTime);
+	//this.smallMedkitUpdate(elapsedTime);
+	//this.mediumMedkitUpdate(elapsedTime);
+	//this.plusToLifeUpdate(elapsedTime);
+	//this.freezUpdate(elapsedTime);
+	//this.doubleDamageUpdate(elapsedTime);
 	this.speedUpUpdate(elapsedTime);
-	//TODO определить отдельным методом. Появление первого типа бонусов
 	
 	this.checkPickUp()
 }

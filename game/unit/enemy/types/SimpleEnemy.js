@@ -44,6 +44,8 @@ SimpleEnemy.prototype.initView = function ()
 
 SimpleEnemy.prototype.initOptions = function ()
 {
+	this.type = EnemyTypes.SIMPLE_ENEMY;
+	
 	this.speed = Math.random()*30 + 40;
 	this.rotationSpeed = 200;
 	this.health = 10;
