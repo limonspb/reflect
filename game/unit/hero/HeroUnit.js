@@ -69,9 +69,25 @@ function HeroUnit()
 	
 	this.g_vx = 0;
 	this.g_vy = 0;
+	
+	this.teleportCount = 2;
+	this.regenerationCount = 1;
+	//this.lastTeleportTime = global.gameTime;
 }
 
 extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.tryTeleport = function(x,y){
+	if (this.teleportCount>0){
+		this.teleport(x,y);	
+	}				
+}
+
+HeroUnit.prototype.teleport = function(x,y){
+	this.teleportCount --;
+	this.x = x;
+	this.y = y;	
+}
 
 HeroUnit.prototype.archiveShieldSegments = function(){
 	for (var i=0; i<4; i++){
