@@ -208,7 +208,7 @@ HeroUnit.prototype.initView = function ()
 
 HeroUnit.prototype.initOptions = function ()
 {
-	this.MAX_HEALTH = 100;
+	this.MAX_HEALTH = 10000;
 	this.health = this.MAX_HEALTH;
 	
 	this.current_forward = this.max_v_c_forward;

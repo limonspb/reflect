@@ -43,8 +43,8 @@ ChaseEnemy.prototype.initView = function ()
 
 ChaseEnemy.prototype.initOptions = function ()
 {
-	this.speed = Math.random()*20 + 50;
-	this.rotationSpeed = 50;
+	this.speed = Math.random()*20 + 350;
+	this.rotationSpeed = 250;
 	this.health = 20;
 	this.nearDamage = 20;
 	this.minRange = 10;
