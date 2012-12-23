@@ -5,7 +5,7 @@
 	$mode = $_REQUEST['mode'];
 		
 	if ($mode == 'showall'){
-		$request = "SELECT * FROM `refl_records` WHERE 1=1 ORDER BY -count LIMIT 0, 9";
+		$request = "SELECT * FROM `refl_records` WHERE 1=1 ORDER BY -count LIMIT 0, 10";
 		$res = mysql_query($request);
 		
 		$dom = new DOMDocument('1.0', 'utf-8');

@@ -72,10 +72,22 @@ function HeroUnit()
 	
 	this.teleportCount = 2;
 	this.regenerationCount = 1;
-	//this.lastTeleportTime = global.gameTime;
+	this.lastRegenerationTime = global.gameTime;
 }
 
 extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.regenerateHealth = function(){
+	if (global.gameTime-this.lastRegenerationTime > 10000){
+		if (this.health < this.MAX_HEALTH){
+			this.health+=this.regenerationCount;
+			this.lastRegenerationTime = global.gameTime;
+			if (this.health > this.MAX_HEALTH){
+				this.health = this.MAX_HEALTH;
+			}
+		}
+	}	
+}
 
 HeroUnit.prototype.tryTeleport = function(x,y){
 	if (this.teleportCount>0){
@@ -362,6 +374,7 @@ HeroUnit.prototype.setGravityV = function(){
 
 HeroUnit.prototype.move = function(elapsedTime)
 {
+	this.regenerateHealth();
 	var dt = elapsedTime/1000;
 	if (global.staticControl){
 		this.staticKeyControlling();		
