@@ -15,6 +15,7 @@ function BonusManager()
 	this.freezBonusTime = 0;
 	this.doubleDamageBonusTime = 0;
 	this.speedUpBonusTime = 0;
+	this.regenerationBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -42,6 +43,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 			break;
 		case BonusTypes.SPEED_UP:
 			bonus = new SpeedUpBonus();
+			break;
+		case BonusTypes.REGENERATION:
+			bonus = new RegenerationBonus();
 			break;
 	}
 	if (bonus)
@@ -73,7 +77,8 @@ BonusManager.prototype.update = function(elapsedTime)
 	//this.plusToLifeUpdate(elapsedTime);
 	//this.freezUpdate(elapsedTime);
 	//this.doubleDamageUpdate(elapsedTime);
-	this.speedUpUpdate(elapsedTime);
+	//this.speedUpUpdate(elapsedTime);
+	this.regenerationUpdate(elapsedTime);
 	
 	this.checkPickUp()
 }
@@ -147,7 +152,7 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 	}
 }
 
-BonusManager.prototype.speedUpUpdate = function(elapsedTime)
+BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
 	this.speedUpBonusTime += elapsedTime;
 	if (this.speedUpBonusTime >= 1000 + Math.random()*5000)
@@ -157,6 +162,19 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.SPEED_UP, x, y);
 		this.speedUpBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.speedUpUpdate = function(elapsedTime)
+{
+	this.regenerationBonusTime += elapsedTime;
+	if (this.regenerationBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.regenerationBonusTime = 0;
 	}
 }
 

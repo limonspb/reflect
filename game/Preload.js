@@ -109,5 +109,6 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bonus/freeze.png","freez");
    this.addImage("img/bonus/x2damage.png","x2damage");
    this.addImage("img/bonus/speedUp.png","speedUp");
+   this.addImage("img/bonus/regeneration.png","regeneration");
 };
 
