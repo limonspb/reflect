@@ -17,9 +17,9 @@ ShotGunBullet.prototype.init = function(angle, x, y)
 
 ShotGunBullet.prototype.initView = function(x,y)
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("red").drawRect( -5 , -3 , 10 , 6);
-	this.view.graphics.endFill();
+	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
+	this.view.x = -5;
+	this.view.y = -3;
 	
 	this.addChild(this.view);
 	
@@ -50,7 +50,7 @@ ShotGunBullet.prototype.setMyBullet = function() {
 	
 	this.isMy = true;
 	
-	this.view.graphics.clear();
+	/*this.view.graphics.clear();
 	this.view.graphics.beginFill("#2E2B57").drawRect( -5 , -3 , 10 , 6);
-	this.view.graphics.endFill();
+	this.view.graphics.endFill();*/
 }

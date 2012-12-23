@@ -112,4 +112,7 @@ BaseUnit.prototype.checkDestroy = function()
 	}
 }
 
-
+BaseUnit.prototype.clearData = function()
+{
+	//TODO clearUnitData
+}

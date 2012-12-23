@@ -161,9 +161,6 @@ EnemyUnit.prototype.setBigEnemy = function()
 
 EnemyUnit.prototype.setNormalEnemy = function()
 {
-	
-	console.log("SET NORMAL");
-	
 	this.scaleX = this.scaleY = 1;
 	this.size /= 1.5;
 }

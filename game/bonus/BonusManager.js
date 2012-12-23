@@ -231,3 +231,18 @@ BonusManager.prototype.checkPickUp = function()
 		}
 	}
 }
+
+BonusManager.prototype.clearAll = function(elapsedTime)
+{
+	for (var i = 0; i < this.bonuses.length; i++)
+	{
+		if (!this.bonuses[i]) { continue; }
+		
+		if (this.bonusesCont.contains(this.bonuses[i])) { this.bonusesCont.removeChild(this.bonuses[i]) }
+		this.bonuses[i].clearData();
+		this.bonuses[i] = null;
+	}
+	this.bonuses.length = 0;
+	
+	if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
+}

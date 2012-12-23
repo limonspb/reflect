@@ -125,7 +125,6 @@ EnemyManager.prototype.move = function(elapsedTime)
 		this.freezTime-=elapsedTime;
 	}
 	
-	
 	if (this.enemyScaleTime > 0)
 	{
 		this.enemyScaleTime-=elapsedTime;
@@ -142,7 +141,6 @@ EnemyManager.prototype.move = function(elapsedTime)
 		
 		this.enemyScaleMode = false;
 	}
-	
 	
 	
 	
@@ -247,4 +245,30 @@ EnemyManager.prototype.checkAddVacuumEnemy = function(elapsedTime)
 		}
 		this.timerAddVacuumEnemy = 0;
 	}
+}
+
+EnemyManager.prototype.clearAll = function()
+{
+	for (var i = 0; i < this.enemies.length; i++)
+	{
+		if(!this.enemies[i]) { continue; } 
+		
+		if (this.enemiesCont.contains(this.enemies[i])) { this.enemiesCont.removeChild(this.enemies[i]) }
+		this.enemies[i].clearData();
+		this.enemies[i] = null;
+	}
+	this.enemies.length = 0;
+	this.vacuums.length = 0;
+	
+	if (this.enemiesCont.parent) { this.enemiesCont.parent.removeChild(this.enemiesCont); }
+	
+	this.vacuumSize = 150;
+	
+	this.tank = null;
+	
+	this.freezMode = false;
+	this.freezTime = 0;
+	
+	this.enemyScaleMode = false;
+	this.enemyScaleTime = 0;
 }

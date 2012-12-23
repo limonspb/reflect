@@ -70,7 +70,7 @@ function HeroUnit()
 	this.g_vx = 0;
 	this.g_vy = 0;
 	
-	this.teleportCount = 2;
+	this.teleportCount = 0;
 	this.regenerationCount = 0;
 	this.lastRegenerationTime = global.gameTime;
 }
