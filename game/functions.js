@@ -72,7 +72,7 @@ function intersectSegments_obj(s1,s2){
 
 
 function rotateVec(vec, angle){
-	var r = {};
+	var r = {x:0,y:0};
 	r.x =   vec.x * Math.cos(angle) - vec.y * Math.sin(angle);
 	r.y =   vec.x * Math.sin(angle) + vec.y * Math.cos(angle);
 	return r;

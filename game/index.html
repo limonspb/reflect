@@ -153,12 +153,16 @@
 ===========================================================================================================
 --> 
 		<div id="settings" class="scene">
-			<div class="menu">
-				<div> Settings <br> shihin text :-) 			</div>
-			    <div id="controlling_type_radio">
-			        <input type="radio" id="radio_relative" name="radio" /><label for="radio_relative">Relative</label>
-			        <input type="radio" id="radio_static" name="radio" checked="checked" /><label for="radio_static">Static</label>		        
+			<div class="setcontrols">
+				<div>Settings</div>
+			    <div class="setcontrols">
+			    	<div class="control_select" id="radio_relative"><div class="relative"></div></div>
+			    	<div class="control" id="radio_static"><div class="static"></div></div>	
+			    	
+			    	<!--<div class="static_selected"></div>
+			    	<div class="relative"></div> 	-->        
 	    		</div>
+	    		<div style="clear: both;">&nbsp;</div>
 				<div class="button"><div id="backButton_settings"></div></div>
 			</div>
 		</div>
@@ -169,12 +173,12 @@
 			<div class="menu">
 				<table id="recordTable" class="table0">
 					<tr>
-						<td>ska ska ska</td>
+						<td class="names">ska ska ska</td>
 						<td>ska ska ska</td>
 					</tr> 
 				</table>
 			
-				<div class="button"><div id="backButton_records" ></div></div>
+			<div class="button"><div id="backButton_records" ></div></div>
 			</div>
 		</div>
 <!--
@@ -279,12 +283,15 @@
 	===========================================================================================================
 -->
 		<div id="writeNamePanel" class="">
-			<div>GAME OVER</div>
-			<div>Your score is <span id="scoreGO">...</span></div>
+			<div  id="gameover">GAME OVER</div>
+			<div id="goscore">Your score:<span id="scoreGO">...</span></div>
 			<div id="divWithPlace">Your place is <span id="placeGO">...</span></div>
-			<div>
-				Your name: <input type="text" maxlength="10" id="playerName"/><br>
-				<button id="sendRecordButton">Send</button> <button id="cancelRecordButton">Cancel</button>
+			<div id="goName">
+				Name: <input type="text" maxlength="10" id="playerName"/><br>
+			</div>
+			<div id="goButtons">
+				<span id="sendRecordButton">Send</span>
+				<span id="cancelRecordButton" class="goButton">Cancel</span>				
 			</div>
 		</div>	
 

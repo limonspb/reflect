@@ -45,9 +45,21 @@ function HeroUnit()
 	this.teleportCount = 0;
 	this.regenerationCount = 0;
 	this.lastRegenerationTime = global.gameTime;
+	
+	this.whiteShieldCount = 0;
 }
 
 extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.whiteShieldDecide = function(){
+	if (this.whiteShieldCount > 0){
+		this.underSheild.visible = true;
+		this.whiteShieldCount --;
+	}else{
+		this.underSheild.visible = false;		
+	}
+	
+}
 
 HeroUnit.prototype.zeroAll = function(){
 	this.o_ax = 0;
@@ -246,9 +258,13 @@ HeroUnit.prototype.initView = function ()
 	
 	//this.sheild = new createjs.Shape();
 	//this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
-	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);	
+	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);
+	this.underSheild = new createjs.Bitmap(global.preloader.imgs.underShield);
 	this.sheild.regX = -this.shieldWidth/2 + this.shieldHeight;
 	this.sheild.regY = this.shieldWidth/2;
+	this.underSheild.regX = this.sheild.regX;
+	this.underSheild.regY = this.sheild.regY;
+	this.underSheild.alpha = 0.5;
 	
 	this.arrow = new createjs.Bitmap(global.preloader.imgs.player_arrow);
 	this.arrow.rotation = 90;
@@ -260,7 +276,10 @@ HeroUnit.prototype.initView = function ()
 	
 	this.addChild(this.body);	
 	this.addChild(this.arrow);
+	
 	this.addChild(this.sheild);
+	this.addChild(this.underSheild);	
+	this.underSheild.visible = false;
 		
 	this.rotationSpeed = 200;
 }
@@ -399,6 +418,7 @@ HeroUnit.prototype.setGravityV = function(){
 
 HeroUnit.prototype.move = function(elapsedTime)
 {
+	this.whiteShieldDecide();
 	this.regenerateHealth();
 	var dt = elapsedTime/1000;
 	if (global.staticControl){
@@ -500,7 +520,7 @@ HeroUnit.prototype.move = function(elapsedTime)
 		this.sheild.scaleX = this.sheild.scaleY = 1.5;
 		this.shieldWidth = 140;
 		this.shieldHeight = 15;
-		this.shieldDist = 37.5;
+		this.shieldDist = 37.5;	 
 		
 		this.shieldScaleTime -= elapsedTime;
 		if (this.shieldScaleTime <= 0)
@@ -511,6 +531,7 @@ HeroUnit.prototype.move = function(elapsedTime)
 			this.shieldHeight = 10;
 			this.shieldDist = 25;
 		}
+		this.underSheild.scaleX = this.underSheild.scaleY = this.sheild.scaleX;
 	}
 	
 	
@@ -536,6 +557,7 @@ HeroUnit.prototype.rotationSheild = function (){
 	this.sh_old_angle = this.sheildAngle;
 	this.sheildAngle = Math.atan2(this.dy, this.dx)*180/Math.PI;	
 	this.sheild.rotation = 180 + this.sheildAngle - this.rotation;
+	this.underSheild.rotation = this.sheild.rotation;
 }
 
 HeroUnit.prototype.getRotationShieldArray = function(count){
@@ -639,6 +661,8 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		
 		b.futureX = pointtomove.x;
 		b.futureY = pointtomove.y;
+		
+		this.whiteShieldCount = 4;
 		
 		//если пуля попала в щит, она становится моей
 		//это для бонуса двойного урона

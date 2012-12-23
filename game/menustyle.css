@@ -1,5 +1,5 @@
-#mainMenu, #credits, #info, #settings, #records {
-background: url(img/menu/back.png) no-repeat scroll 50% 50%  transparent;
+#mainMenu, #credits, #info, #settings, #records, #preloader {
+background: url(img/menu/back.jpg) no-repeat fixed 50% 50%  transparent;
 background-size: cover;
 padding: 0;
 min-width: 650px; 
@@ -9,15 +9,12 @@ min-height: 550px;
 
 .menu {
 	width: 300px;
-	
 	min-height: 280px;
-	
 	position: absolute;
 	top : 50%;
 	margin-top:-140px;
 	left : 50%;
 	margin-left:-150px;
-	
 	}
 	
 .main {background: url(img/menu/points.png) left top no-repeat scroll transparent;}
@@ -30,8 +27,53 @@ min-height: 550px;
 	display: block;
 }
 
+.setcontrols {	width: 400px; 	margin: 12% auto 0; }
 
+.control {
+	cursor: pointer;
+	text-align: center;
+	width: 200px;
+	height: 200px;
+	float: left;
+	display: inline-block;
+	background: url(img/menu/bbuttongray.png) 50% 50% no-repeat scroll transparent;
+}
 
+.control_select{
+	cursor: pointer;
+	text-align: center;
+	width: 200px;
+	height: 200px;
+	float: left;
+	display: inline-block;
+	background: url(img/menu/bbutton.png) 50% 50% no-repeat scroll transparent;
+}
+
+.relative{
+	width: 200px;  height: 200px;
+	background: url(img/menu/relative.png) 50% 50% no-repeat scroll transparent;	
+}
+.relative:hover{
+	background: url(img/menu/relative2.png) 50% 50% no-repeat scroll transparent;
+}
+
+.static{
+	width: 200px;  height: 200px;
+	background: url(img/menu/static.png) 50% 50% no-repeat scroll transparent; 
+}
+.static:hover{
+	background: url(img/menu/static2.png) 50% 50% no-repeat scroll transparent;
+}
+
+			
+.button {
+	cursor: pointer;
+	position: relative;
+	width : 200px;
+	height: 100px; 
+	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
+	margin: 30px auto 0;}	
+	
 #playButton {top: 8px; left: 90px; background: url(img/menu/playbutton.png) 50% 50% no-repeat scroll transparent; }
 #playButton:hover { background: url(img/menu/playbutton2.png) 50% 50% no-repeat scroll transparent;}
 
@@ -47,16 +89,10 @@ min-height: 550px;
 #recordsButton {top: 183px; left: 90px; background: url(img/menu/recordsbutton.png) 50% 50% no-repeat scroll transparent; }
 #recordsButton:hover {background: url(img/menu/recordsbutton2.png) 50% 50% no-repeat scroll transparent;}
 
+
 #backButton_info, #backButton_settings, #backButton_credits, #backButton_records {top: 8px; left: 60px; background: url(img/menu/backbutton.png) 50% 50% no-repeat scroll transparent; }
 #backButton_info:hover, #backButton_settings:hover, #backButton_credits:hover, #backButton_records:hover { background: url(img/menu/backbutton2.png) 50% 50% no-repeat scroll transparent;}
-
-.button {
-	cursor: pointer;
-	position: relative;
-	width : 200px;
-	height: 100px; 
-	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
-	margin: 30px auto 0;}
 	
 table.table0 { border-collapse: collapse; width: 100%; margin: 0 auto;}
 table.table0 td {color: #fff; font-weight: bold; padding: 3px 5px; border: none; font-size: 16px;}
+table.table0 td.names {text-transform: uppercase;}

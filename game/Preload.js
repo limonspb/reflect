@@ -55,7 +55,7 @@ Preloader.prototype.go = function(){
 };
 
 Preloader.prototype.onProgress = function(event){	
-	$("#bar").width(event.target.progress*300);
+	$("#bar").width(event.target.progress*400);
 	if (event.target.owner.onProgress){
 		event.target.owner.onProgress(event.target.progress);
 	}else{		
@@ -119,5 +119,6 @@ Preloader.prototype.initConstants = function()
    
    
    this.addImage("img/shield.png","shield");
+   this.addImage("img/underShield.png","underShield");
 };
 
