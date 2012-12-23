@@ -15,6 +15,9 @@ function EnemyManager()
 	this.freezMode = false;
 	this.freezTime = 0;
 	
+	this.enemyScaleMode = false;
+	this.enemyScaleTime = 0;
+	
 	this.timerAddSimpleEnemy = 0;
 	this.timeToAddSimple = 3000;
 	
@@ -121,6 +124,28 @@ EnemyManager.prototype.move = function(elapsedTime)
 	if (this.freezTime > 0){
 		this.freezTime-=elapsedTime;
 	}
+	
+	
+	if (this.enemyScaleTime > 0)
+	{
+		this.enemyScaleTime-=elapsedTime;
+	} else {
+		this.enemyScaleTime = 0;
+		
+		if (this.enemyScaleMode)
+		{
+			for (var j = 0; j < this.enemies.length; j++)
+			{
+				this.enemies[j].setNormalEnemy();
+			}
+		}
+		
+		this.enemyScaleMode = false;
+	}
+	
+	
+	
+	
 	for (var i = 0; i < this.enemies.length; i++)
 	{
 		this.enemies[i].move(elapsedTime);

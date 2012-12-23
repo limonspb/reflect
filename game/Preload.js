@@ -111,5 +111,8 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bonus/speedUp.png","speedUp");
    this.addImage("img/bonus/regeneration.png","regeneration");
    this.addImage("img/bonus/teleport.png","teleport");
+   this.addImage("img/bonus/enemi_scale.png","enemy_scale");
+   this.addImage("img/bonus/full_protectionl.png","full_protect");
+   this.addImage("img/bonus/shield_scale.png","shield_scale");
 };
 

@@ -153,6 +153,21 @@ EnemyUnit.prototype.checkHitTank = function(elapsedTime)
 	}
 }
 
+EnemyUnit.prototype.setBigEnemy = function()
+{
+	this.scaleX = this.scaleY = 1.5;
+	this.size *= 1.5;
+}
+
+EnemyUnit.prototype.setNormalEnemy = function()
+{
+	
+	console.log("SET NORMAL");
+	
+	this.scaleX = this.scaleY = 1;
+	this.size /= 1.5;
+}
+
 /**
  * Получить направление поворота относительно элемента к герою
  * @param {Object} item

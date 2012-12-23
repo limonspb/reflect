@@ -61,5 +61,4 @@ FreezBonus.prototype.includeBonus = function()
 			enemy.pauseTime = this.freezTime;
 		}
 	}
-	
 }

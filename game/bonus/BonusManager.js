@@ -17,6 +17,7 @@ function BonusManager()
 	this.speedUpBonusTime = 0;
 	this.regenerationBonusTime = 0;
 	this.teleportBonusTime = 0;
+	this.enemyScaleBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -50,6 +51,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.TELEPORT:
 			bonus = new TeleportBonus();
 			break;
+		case BonusTypes.ENEMY_SCALE:
+			bonus = new EnemyScaleBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -74,14 +78,15 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	//this.smallMedkitUpdate(elapsedTime);
-	//this.mediumMedkitUpdate(elapsedTime);
-	//this.plusToLifeUpdate(elapsedTime);
-	//this.freezUpdate(elapsedTime);
-	//this.doubleDamageUpdate(elapsedTime);
-	//this.speedUpUpdate(elapsedTime);
-	//this.regenerationUpdate(elapsedTime);
-	this.teleportUpdate(elapsedTime);
+	/*this.smallMedkitUpdate(elapsedTime);
+	this.mediumMedkitUpdate(elapsedTime);
+	this.plusToLifeUpdate(elapsedTime);
+	this.freezUpdate(elapsedTime);
+	this.doubleDamageUpdate(elapsedTime);
+	this.speedUpUpdate(elapsedTime);
+	this.regenerationUpdate(elapsedTime);
+	this.teleportUpdate(elapsedTime);*/
+	this.enemyScaleUpdate(elapsedTime);
 	
 	this.checkPickUp()
 }
@@ -191,6 +196,19 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.TELEPORT, x, y);
 		this.teleportBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
+{
+	this.enemyScaleBonusTime += elapsedTime;
+	if (this.enemyScaleBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.ENEMY_SCALE, x, y);
+		this.enemyScaleBonusTime = 0;
 	}
 }
 
