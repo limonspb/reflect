@@ -55,14 +55,6 @@ body{
 	font-size: 30px;
 }
 
-.button{
-	cursor: pointer;
-	width : 200px;
-}
-.button:hover{
-	background-color: #CCCCCC;
-}
-
 .gamePanel{
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;

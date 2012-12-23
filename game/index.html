@@ -14,7 +14,8 @@
 		<!--
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 		-->
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" type='text/css' href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" type='text/css' href="menustyle.css" />
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -115,87 +116,61 @@
 	===========================================================================================================
 -->		
 		<div id="mainMenu" class="scene">
-			<div>Main menu</div>
-			<div id="playButton" class="button ">
-				Play
-			</div>
-			<div id="creditsButton" class="button ">
-				Credits
-			</div>
-			<div id="infoButton" class="button ">
-				Info
-			</div>
-			<div id="settingsButton" class="button ">
-				Settings
-			</div>		
-			<div id="recordsButton" class="button ">
-				Records
-			</div>		
+			 
+				<div class="menu main">
+					<div id="playButton" ></div>
+					<div id="creditsButton" ></div>
+					<div id="infoButton" ></div>
+					<div id="settingsButton" ></div>		
+					<div id="recordsButton" ></div>	
+				</div>
+			 
 		</div>
+<!--
+	===========================================================================================================
+-->		
 		<div id="credits" class="scene">
-			<div>
-				Credits
-			</div>
-			<div>
-				Blablabla
-			</div>
-			<div id="backButton_credits" class="button">
-				Back
+			<div class="menu">
+				<div>				Credits			</div>
+				<div>				Blablabla			</div>
+				<div class="button"><div id="backButton_credits"></div></div>
 			</div>
 		</div>
-<!--
-	===========================================================================================================
--->
+<!--  info Page
+===========================================================================================================
+--> 
 		<div id = "info" class="scene">
-			<div>
-				info and help of the game. <br> Bonuses, mobs etc.
-			</div>
-			<div id="backButton_info" class="button">
-				Back
+			<div class="menu">
+				<div>info and help of the game. <br> Bonuses, mobs etc.		</div>
+				 <div class="button"><div id="backButton_info"></div></div>
 			</div>
 		</div>
-<!--
-	===========================================================================================================
--->
+<!-- Settings Page
+===========================================================================================================
+--> 
 		<div id="settings" class="scene">
-			<div>
-				Settings <br> shihin text :-)
-			</div>
-		    <div id="controlling_type_radio">
-		        <input type="radio" id="radio_relative" name="radio" /><label for="radio_relative">Relative</label>
-		        <input type="radio" id="radio_static" name="radio" checked="checked" /><label for="radio_static">Static</label>		        
-    		</div>
-			<div id="backButton_settings" class="button">
-				Back
+			<div class="menu">
+				<div> Settings <br> shihin text :-) 			</div>
+			    <div id="controlling_type_radio">
+			        <input type="radio" id="radio_relative" name="radio" /><label for="radio_relative">Relative</label>
+			        <input type="radio" id="radio_static" name="radio" checked="checked" /><label for="radio_static">Static</label>		        
+	    		</div>
+				<div class="button"><div id="backButton_settings"></div></div>
 			</div>
 		</div>
 <!--
 	===========================================================================================================
 -->
 		<div id="records" class="scene">
-			<div>
-				<table border = "1px" id="recordTable">
+			<div class="menu">
+				<table id="recordTable" class="table0">
 					<tr>
-						<td>
-							Shiha loves tag table
-						</td>
-						<td>
-							Shiha loves tag table
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Shiha loves tag table
-						</td>
-						<td>
-							Shiha loves tag table
-						</td>
-					</tr>
+						<td>ska ska ska</td>
+						<td>ska ska ska</td>
+					</tr> 
 				</table>
 			</div>
-			<div id="backButton_records" class="button">
-				Back
-			</div>
+			<div class="button"><div id="backButton_records" ></div></div>
 		</div>
 <!--
 	===========================================================================================================
@@ -285,7 +260,7 @@
 				<span>X </span><span id="teleportCount">X 0</span>			
 			</div>
 			<div>
-				<img src="img/bonus/regenerationl.png"/>				
+				<img src="img/bonus/regeneration.png"/>				
 				<span>X </span><span id="regenerationCount">0</span>								
 			</div>
 		</div>	
