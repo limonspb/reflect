@@ -33,8 +33,8 @@ extend(GameScene,BaseScene);
 GameScene.prototype.newGame = function(){
 	global.gameTime = 0;
 	global.points = 0;
-	global.hero.health = 100;
-	global.hero.MAX_HEALTH = 100;
+	global.hero.health = 5000;
+	global.hero.MAX_HEALTH = 5000;
 	global.hero.teleportCount = 0;
 	global.hero.regenerationCount = 0;
 	global.hero.x = 1000;

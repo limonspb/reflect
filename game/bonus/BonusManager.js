@@ -86,7 +86,7 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	/*this.smallMedkitUpdate(elapsedTime);
+	this.smallMedkitUpdate(elapsedTime);
 	this.mediumMedkitUpdate(elapsedTime);
 	this.plusToLifeUpdate(elapsedTime);
 	this.freezUpdate(elapsedTime);
@@ -95,7 +95,7 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.regenerationUpdate(elapsedTime);
 	this.teleportUpdate(elapsedTime);
 	this.enemyScaleUpdate(elapsedTime);
-	this.shieldScaleUpdate(elapsedTime);*/
+	this.shieldScaleUpdate(elapsedTime);
 	this.fullProtectUpdate(elapsedTime);
 	
 	

@@ -39,4 +39,25 @@ BonusPanel.prototype.update = function(){
 	}else{
 		$('#x2DamageTr').fadeOut();		
 	}
+	
+	if(global.hero.shieldScaleTime > 0){
+		$('#shieldScaleTr').fadeIn();
+		$('#shieldScaleSec').text(Math.floor(global.hero.shieldScaleTime/1000).toString());		
+	}else{
+		$('#shieldScaleTr').fadeOut();		
+	}
+	
+	if(global.hero.fullProtectTime > 0){
+		$('#protectionTr').fadeIn();
+		$('#sprotectionSec').text(Math.floor(global.hero.fullProtectTime/1000).toString());		
+	}else{
+		$('#protectionTr').fadeOut();		
+	}
+	
+	if(global.EnemyManager.enemyScaleTime > 0){
+		$('#enemyScaleTr').fadeIn();
+		$('#enemyScaleSec').text(Math.floor(global.EnemyManager.enemyScaleTime/1000).toString());		
+	}else{
+		$('#enemyScaleTr').fadeOut();		
+	}	
 }

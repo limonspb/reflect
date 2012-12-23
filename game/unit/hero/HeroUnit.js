@@ -81,7 +81,7 @@ HeroUnit.prototype.zeroAll = function(){
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth = 150;
+	this.shieldWidth = 70;
 	this.shieldHeight = 10;
 	this.shieldDist = 25;
 	this.old_x = this.x;
@@ -244,8 +244,11 @@ HeroUnit.prototype.initView = function ()
 	this.body.rotation = 90;
 	
 	
-	this.sheild = new createjs.Shape();
-	this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
+	//this.sheild = new createjs.Shape();
+	//this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
+	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);	
+	this.sheild.regX = -this.shieldWidth/2 + this.shieldHeight;
+	this.sheild.regY = this.shieldWidth/2;
 	
 	this.arrow = new createjs.Bitmap(global.preloader.imgs.player_arrow);
 	this.arrow.rotation = 90;
@@ -271,13 +274,13 @@ HeroUnit.prototype.initOptions = function ()
 	this.current_backward = this.max_v_c_backward;
 	
 	this.speedyMode = false;
-	this.speedTime;
+	this.speedTime = 0;
 	
 	this.shieldScaleMode = false;
-	this.shieldScaleTime;
+	this.shieldScaleTime = 0;
 	
 	this.fullProtectMode = false;
-	this.fullProtectTime;
+	this.fullProtectTime = 0;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -495,16 +498,18 @@ HeroUnit.prototype.move = function(elapsedTime)
 	if (this.shieldScaleMode)
 	{
 		this.sheild.scaleX = this.sheild.scaleY = 1.5;
-		this.shieldWidth = 225;
+		this.shieldWidth = 140;
 		this.shieldHeight = 15;
+		this.shieldDist = 37.5;
 		
 		this.shieldScaleTime -= elapsedTime;
 		if (this.shieldScaleTime <= 0)
 		{
 			this.shieldScaleMode = false;
 			this.sheild.scaleX = this.sheild.scaleY = 1;
-			this.shieldWidth = 150;
+			this.shieldWidth = 70;
 			this.shieldHeight = 10;
+			this.shieldDist = 25;
 		}
 	}
 	

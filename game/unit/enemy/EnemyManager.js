@@ -95,7 +95,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
 		{
 			var ind = this.vacuums.indexOf(enemy);
-			if (ind)
+			if (ind!=-1)
 			{
 				this.vacuums.splice(ind,1);
 			}

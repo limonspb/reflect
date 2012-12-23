@@ -101,7 +101,7 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/back/small_3.png","small_3");
    this.addImage("img/back/small_4.png","small_4");
    this.addImage("img/back/small_5.png","small_5");
-   this.addImage("img/player2.png","player");
+   this.addImage("img/player3.png","player");
    this.addImage("img/player_arrow.png","player_arrow");
    this.addImage("img/bonus/20hp.png","bonus_20hp");
    this.addImage("img/bonus/50hp.png","bonus_50hp");
@@ -117,5 +117,7 @@ Preloader.prototype.initConstants = function()
    
    this.addImage("img/bullets/bullet.png","simple_bullet");
    
+   
+   this.addImage("img/shield.png","shield");
 };
 
