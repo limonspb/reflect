@@ -16,9 +16,12 @@ function EnemyUnit()
 	EnemyUnit.superclass.constructor.apply(this);
 	
 	this.damage;
+	this.nearDamage = 5;
 	this.bulletType;
 	this.bulletRespawn;
 	this.respawnCount = 0;
+	this.nearRespawn = 2000;
+	this.nearRespawnCount = this.nearRespawn;
 	this.minRange;
 	this.maxRange;
 	
@@ -103,7 +106,7 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 	}
 	else if (this.pauseTime <= 0)
 	{
-		this.pauseCount = Math.random() * 20000 + 3000;;
+		this.pauseCount = Math.random()*20000 + 3000;;
 		this.pauseTime = Math.random()*10000 + 3000;
 		pause = false;
 		EnemyManager.freezMode = false;
@@ -113,6 +116,25 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 	if (EnemyManager.freezMode) { pause = true; }
 	
 	return pause;
+}
+
+EnemyUnit.prototype.checkHitHero = function(elapsedTime)
+{
+	if (getDistanceToObject(this, global.hero) <= this.size*0.75)
+	{
+		
+		this.nearRespawnCount += elapsedTime;
+		if (this.nearRespawnCount >= this.nearRespawn)
+		{
+			global.hero.health -= this.nearDamage;
+
+			global.hero.checkDestroy();
+			
+			this.nearRespawnCount = 0;
+		}
+	} else {
+		this.nearRespawnCount = this.nearRespawn;
+	}
 }
 
 /**

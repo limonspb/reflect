@@ -90,6 +90,8 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 		this.y += dy;
 	}
 	
+	this.checkHitHero(elapsedTime);
+	
 	this.gun.rotation += this.getGunRotation(this.gun, ShotType.FORWARD_SHOT)*elapsedTime/1000;
 	
 	this.respawnCount += elapsedTime;

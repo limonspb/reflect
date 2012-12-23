@@ -114,6 +114,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	this.x += dx*dt; 
 	this.y += dy*dt;
 	
+	this.checkHitHero(elapsedTime);
 	
 	this.gun.rotation += this.getGunRotation(this.gun, ShotType.STUPID_SHOT)*elapsedTime/1000;
 	

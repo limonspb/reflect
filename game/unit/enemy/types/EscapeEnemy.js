@@ -99,7 +99,7 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		this.y += dy;
 	}
 	
-	
+	this.checkHitHero(elapsedTime);
 	
 	this.gun.rotation += this.getGunRotation(this.gun, ShotType.CLEVER_SHOT)*elapsedTime/1000;
 	

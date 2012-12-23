@@ -220,7 +220,7 @@ HeroUnit.prototype.initView = function ()
 
 HeroUnit.prototype.initOptions = function ()
 {
-	this.MAX_HEALTH = 10000;
+	this.MAX_HEALTH = 100;
 	this.health = this.MAX_HEALTH;
 	
 	this.current_forward = this.max_v_c_forward;
@@ -468,7 +468,7 @@ HeroUnit.prototype.getRotationShieldArray = function(count){
 
 
 HeroUnit.prototype.reflect = function(elapsedTime){
-	this.segments_arr_counted = false;	
+	this.segments_arr_counted = false;
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
 		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
