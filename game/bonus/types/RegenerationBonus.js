@@ -6,8 +6,6 @@ function RegenerationBonus()
 {
 	RegenerationBonus.superclass.constructor.apply(this);
 	
-	
-	this.plusToLife = 10;
 }
 
 extend(RegenerationBonus, BaseBonus);
