@@ -21,32 +21,45 @@ extend(EscapeEnemy,EnemyUnit);
  */
 EscapeEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.setStrokeStyle(1, 'round', 'round');
-	this.view.graphics.beginStroke(('#000000'));
-	this.view.graphics.beginFill("#FFD700").drawCircle ( 0 , 0 , 15 );
-	this.view.graphics.endStroke();
-    this.view.graphics.endFill();
-    
-    this.gun = new createjs.Shape();
-    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
-    this.gun.graphics.beginStroke(('#000000'));
-    this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(15,0);
-    this.gun.graphics.endStroke();
-    this.gun.graphics.endFill();
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 2]},
+		"images": [global.preloader.imgs.escape_anim],
+		"frames": {
+		"regX": global.preloader.imgs.escape_anim.height/2,
+		"regY": global.preloader.imgs.escape_anim.height/2,
+		"height": global.preloader.imgs.escape_anim.height,
+		"width": global.preloader.imgs.escape_anim.height
+		}
+	});	
 	
-	this.width = 15;
-	this.height = 15;
+	this.ss.getAnimation("run").frequency = 4;
+	
+	this.body = new createjs.BitmapAnimation(this.ss);
+	
+	var scale = 0.6;
+				
+	this.body.gotoAndPlay("run");
+	this.body.rotation = 90;
+	this.body.scaleX = this.body.scaleY = scale;
+	
+	this.gun = new createjs.Container();
+	this.gunView = new createjs.Bitmap(global.preloader.imgs.escape_gun);
+	this.gunView.regX = 41;
+	this.gunView.regY = 29;
+	this.gunView.rotation = 90;
+	this.gunView.scaleX = this.gunView.scaleY = scale;
+	this.gun.addChild(this.gunView);
+	
+	this.width = global.preloader.imgs.escape_anim.width;
+	this.height = global.preloader.imgs.escape_anim.height;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	this.view = new createjs.Container();
+	this.view.addChild(this.body);
 	
 	this.addChild(this.view);
 	this.addChild(this.gun);
-	this.addChild(this.center);
 }
 
 /**
@@ -64,8 +77,20 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
+}
+
+EscapeEnemy.prototype.clearData = function ()
+{
+	this.view.removeChild(this.body);
+	this.gun.removeChild(this.gunView);
+	this.removeChild(this.gun);
+	this.removeChild(this.view);
 	
-	this.wtf = 1;
+	this.ss = null;
+	this.body = null;
+	this.gunView = null;
+	this.gun = null;
+	this.view = null;
 }
 
 EscapeEnemy.prototype.move = function (elapsedTime)

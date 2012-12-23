@@ -18,19 +18,42 @@ extend(TankEnemy,EnemyUnit);
  */
 TankEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("#800000").drawRect ( -40 , -20 , 80 , 40 );
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 2]},
+		"images": [global.preloader.imgs.tank_anim],
+		"frames": {
+		"regX": global.preloader.imgs.tank_anim.height/2,
+		"regY": global.preloader.imgs.tank_anim.height/2,
+		"height": global.preloader.imgs.tank_anim.height,
+		"width": global.preloader.imgs.tank_anim.height
+		}
+	});	
 	
-	this.width = 80;
-	this.height = 40;
+	this.ss.getAnimation("run").frequency = 4;
+	
+	this.body = new createjs.BitmapAnimation(this.ss);
+	
+	var scale = 1;
+	
+	this.body.gotoAndPlay("run");
+	this.body.rotation = 90;
+	this.body.scaleX = this.body.scaleY = scale;
+	
+	this.shadow = new createjs.Bitmap(global.preloader.imgs.tank_shadow);
+	this.shadow.regX = global.preloader.imgs.tank_shadow.width/2;
+	this.shadow.regY = global.preloader.imgs.tank_shadow.height/2;
+	this.shadow.rotation = 90;
+	
+	this.width = global.preloader.imgs.tank_anim.width/2;
+	this.height = global.preloader.imgs.tank_anim.height/2;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	this.view = new createjs.Container();
+	this.view.addChild(this.shadow);
+	this.view.addChild(this.body);
 	
 	this.addChild(this.view);
-	this.addChild(this.center);
 }
 
 TankEnemy.prototype.initOptions = function ()
@@ -43,6 +66,18 @@ TankEnemy.prototype.initOptions = function ()
 	this.nearDamage = 9999999999;
 	this.minRange = 10;
 	this.maxRange = 20;
+}
+
+TankEnemy.prototype.clearData = function ()
+{
+	this.view.removeChild(this.body);
+	this.view.removeChild(this.shadow);
+	this.removeChild(this.view);
+	
+	this.ss = null;
+	this.body = null;
+	this.shadow = null;
+	this.view = null;
 }
 
 TankEnemy.prototype.move = function (elapsedTime)

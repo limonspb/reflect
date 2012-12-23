@@ -17,28 +17,39 @@ extend(ChaseEnemy,EnemyUnit);
  */
 ChaseEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("#800000").drawRect ( -10 , -10 , 20 , 20 );
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 1]},
+		"images": [global.preloader.imgs.chase_anim],
+		"frames": {
+		"regX": global.preloader.imgs.chase_anim.height/2,
+		"regY": global.preloader.imgs.chase_anim.height/2,
+		"height": global.preloader.imgs.chase_anim.height,
+		"width": global.preloader.imgs.chase_anim.height
+		}
+	});	
 	
-	this.gun = new createjs.Shape();
-    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
-    this.gun.graphics.beginStroke(('#000000'));
-    this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(10,0);
-    this.gun.graphics.endStroke();
-    this.gun.graphics.endFill();
+	this.ss.getAnimation("run").frequency = 2;
 	
-	this.width = 20;
-	this.height = 20;
+	this.body = new createjs.BitmapAnimation(this.ss);
+				
+	this.body.gotoAndPlay("run");
+	this.body.rotation = 90;
+	
+	this.shadow = new createjs.Bitmap(global.preloader.imgs.chase_shadow);
+	this.shadow.regX = global.preloader.imgs.chase_shadow.width/2;
+	this.shadow.regY = global.preloader.imgs.chase_shadow.height/2;
+	this.shadow.rotation = 90;
+	
+	this.view = new createjs.Container();
+	this.view.addChild(this.shadow);
+	this.view.addChild(this.body);
+	
+	this.width = global.preloader.imgs.chase_anim.width;
+	this.height = global.preloader.imgs.chase_anim.height;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
-	
 	this.addChild(this.view);
-	this.addChild(this.gun);
-	this.addChild(this.center);
 }
 
 ChaseEnemy.prototype.initOptions = function ()
@@ -51,6 +62,18 @@ ChaseEnemy.prototype.initOptions = function ()
 	this.nearDamage = 20;
 	this.minRange = 10;
 	this.maxRange = 20;
+}
+
+ChaseEnemy.prototype.clearData = function ()
+{
+	this.view.removeChild(this.shadow);
+	this.view.removeChild(this.body);
+	this.removeChild(this.view);
+	
+	this.shadow = null;
+	this.ss = null;
+	this.body = null;
+	this.view = null;
 }
 
 ChaseEnemy.prototype.move = function (elapsedTime)

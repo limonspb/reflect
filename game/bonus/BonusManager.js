@@ -89,14 +89,14 @@ BonusManager.prototype.update = function(elapsedTime)
 	/*this.smallMedkitUpdate(elapsedTime);
 	this.mediumMedkitUpdate(elapsedTime);
 	this.plusToLifeUpdate(elapsedTime);
-	this.freezUpdate(elapsedTime);
+	this.freezUpdate(elapsedTime);*/
 	this.doubleDamageUpdate(elapsedTime);
-	this.speedUpUpdate(elapsedTime);
+	/*this.speedUpUpdate(elapsedTime);
 	this.regenerationUpdate(elapsedTime);
 	this.teleportUpdate(elapsedTime);
 	this.enemyScaleUpdate(elapsedTime);
-	this.shieldScaleUpdate(elapsedTime);*/
-	this.fullProtectUpdate(elapsedTime);
+	this.shieldScaleUpdate(elapsedTime);
+	this.fullProtectUpdate(elapsedTime);*/
 	
 	
 	this.checkPickUp()

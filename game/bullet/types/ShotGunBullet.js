@@ -21,6 +21,25 @@ ShotGunBullet.prototype.initView = function(x,y)
 	this.view.x = -5;
 	this.view.y = -3;
 	
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 1]},
+		"images": [global.preloader.imgs.x2damage_bullet],
+		"frames": {
+		"regX": global.preloader.imgs.x2damage_bullet.height/2,
+		"regY": global.preloader.imgs.x2damage_bullet.height/2,
+		"height": global.preloader.imgs.x2damage_bullet.height,
+		"width": global.preloader.imgs.x2damage_bullet.height
+		}
+	});	
+	
+	this.ss.getAnimation("run").frequency = 10;
+	
+	this.x2bullet = new createjs.BitmapAnimation(this.ss);
+	
+	//this.x2bullet.gotoAndPlay("run");
+	this.x2bullet.x = this.view.x;
+	this.x2bullet.y = this.view.y;
+	
 	this.addChild(this.view);
 	
 	this.x = this.futureX = x;
@@ -49,6 +68,12 @@ ShotGunBullet.prototype.setMyBullet = function() {
 	this.damage *= 2;
 	
 	this.isMy = true;
+	
+	this.x2bullet.scaleX = this.x2bullet.scaleY = 2;
+	
+	this.removeChild(this.view);
+	this.addChild(this.x2bullet);
+	this.x2bullet.gotoAndPlay("run");
 	
 	/*this.view.graphics.clear();
 	this.view.graphics.beginFill("#2E2B57").drawRect( -5 , -3 , 10 , 6);

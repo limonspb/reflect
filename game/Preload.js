@@ -116,6 +116,22 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bonus/shield_scale.png","shield_scale");
    
    this.addImage("img/bullets/bullet.png","simple_bullet");
+   this.addImage("img/bullets/flame_bullet_animation.png","x2damage_bullet");
    
+   this.addImage("img/enemies/chase/animation.png","chase_anim");
+   this.addImage("img/enemies/chase/shadow.png","chase_shadow");
+   
+   this.addImage("img/enemies/escape/body_animation.png","escape_anim");
+   this.addImage("img/enemies/escape/gun.png","escape_gun");
+   
+   this.addImage("img/enemies/tank/animation.png","tank_anim");
+   this.addImage("img/enemies/tank/shadow.png","tank_shadow");
+   
+   this.addImage("img/enemies/medium/wheels_animation.png","medium_anim");
+   this.addImage("img/enemies/medium/body.png","medium_gun");
+   this.addImage("img/enemies/medium/shadow.png","medium_shadow");
+   
+   this.addImage("img/enemies/strong/Body_animation.png","strong_anim");
+   this.addImage("img/enemies/strong/gun.png","strong_gun");
 };
 
