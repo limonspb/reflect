@@ -15,5 +15,6 @@ var global = {
 	BonusManager: null,
 	staticControl : false,
 	gameTime : 0,
-	points : 0
+	points : 0,
+	place : 0
 };

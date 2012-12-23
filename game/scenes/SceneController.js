@@ -6,6 +6,7 @@ function SceneController(){
 	this.infoScene = new InfoScene();
 	this.settingsScene = new SettingsScene();
 	this.recordsScene = new RecordsScene();
+	this.gameOverScene = new GameOverScene();
 	this.event = 0;
 }
 
@@ -16,6 +17,7 @@ SceneController.eventTypes.NEW_GAME = 3;
 SceneController.eventTypes.INFO = 4;
 SceneController.eventTypes.SETTINGS = 5;
 SceneController.eventTypes.RECORDS = 6;
+SceneController.eventTypes.GAME_OVER = 7;
 
 SceneController.prototype.switchScene = function(s_event){
 	if (this.currentScene){
@@ -41,6 +43,9 @@ SceneController.prototype.switchScene = function(s_event){
 			break 
 		case SceneController.eventTypes.RECORDS:
 			scene = this.recordsScene
+			break 
+		case SceneController.eventTypes.GAME_OVER:
+			scene = this.gameOverScene
 			break 
 	}
 	this.currentScene = scene;

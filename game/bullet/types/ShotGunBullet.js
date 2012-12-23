@@ -69,7 +69,6 @@ ShotGunBullet.prototype.setMyBullet = function() {
 	
 	this.isMy = true;
 	
-	this.x2bullet.scaleX = this.x2bullet.scaleY = 2;
 	
 	this.removeChild(this.view);
 	this.addChild(this.x2bullet);

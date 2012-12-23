@@ -95,7 +95,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
 		{
 			var ind = this.vacuums.indexOf(enemy);
-			if (ind != -1)
+			if (ind!=-1)
 			{
 				this.vacuums.splice(ind,1);
 			}
@@ -110,13 +110,13 @@ EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	//this.checkAddSimpleEnemy(elapsedTime);
-	//this.checkAddMediumEnemy(elapsedTime);
-	//this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddSimpleEnemy(elapsedTime);
+	this.checkAddMediumEnemy(elapsedTime);
+	this.checkAddEscapeEnemy(elapsedTime);
 	this.checkAddStrongEnemy(elapsedTime);
-	//this.checkAddChaseEnemy(elapsedTime);
-	//this.checkAddTankEnemy(elapsedTime);
-	//this.checkAddVacuumEnemy(elapsedTime);
+	this.checkAddChaseEnemy(elapsedTime);
+	this.checkAddTankEnemy(elapsedTime);
+	this.checkAddVacuumEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)

@@ -18,7 +18,7 @@ LifePanel.prototype.setMaxLife = function(value){
 }
 
 LifePanel.prototype.setCurLife = function(value){
-	$('#currentLife').text(value.toString());
+	$('#currentLife').text(Math.ceil(value.toString()));
 }
 
 LifePanel.prototype.updateValues = function(){
@@ -27,8 +27,8 @@ LifePanel.prototype.updateValues = function(){
 }
 
 LifePanel.prototype.updateView = function(){
-	$('#currentLife').text(this.curLife.toString());	
-	$('#maxLife').text(this.maxLife.toString());
+	$('#currentLife').text(Math.ceil(this.curLife.toString()));	
+	$('#maxLife').text(Math.ceil(this.maxLife.toString()));
 }
 
 

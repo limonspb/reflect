@@ -113,3 +113,11 @@ body{
 .bonusPanelImg{
 	height : 40px;
 }
+
+#writeNamePanel{
+	display : none;
+	background-color:#555555;
+	position : absolute;
+	top : 100px;
+	left : 200px;
+}

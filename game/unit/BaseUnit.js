@@ -43,7 +43,7 @@ BaseUnit.prototype.checkHitBullet = function()
 		if (bull == this.bullet) { continue; }
 		if (bull == this.bullet2) { continue; }
 		
-		if (getDistanceToObject(this, bull) <= this.size*0.75)
+		if (getDistanceToObject(this, bull) <= this.size*0.6)
 		{
 			//console.log("HIT TEST BULLET " + i);
 			
@@ -95,8 +95,6 @@ BaseUnit.prototype.setUnitDamage = function(unit, damage)
 
 BaseUnit.prototype.checkDestroy = function()
 {
-	//console.log("HEALTH " + this.health);
-	
 	if (this.health <= 0)
 	{
 		if (this == global.hero)

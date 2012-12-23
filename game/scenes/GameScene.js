@@ -10,8 +10,6 @@ function GameScene(){
 	this.keys = [];
 	
 	global.hero = new HeroUnit();
-	global.hero.x = 1000;
-	global.hero.y = 1000;
 	this.container.addChild(global.hero);
 	
 	//global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
@@ -35,6 +33,13 @@ extend(GameScene,BaseScene);
 GameScene.prototype.newGame = function(){
 	global.gameTime = 0;
 	global.points = 0;
+	global.hero.health = 5000;
+	global.hero.MAX_HEALTH = 5000;
+	global.hero.teleportCount = 0;
+	global.hero.regenerationCount = 0;
+	global.hero.x = 1000;
+	global.hero.y = 1000;
+	global.hero.zeroAll();	
 }
 
 GameScene.prototype.show = function(){
@@ -134,4 +139,8 @@ GameScene.prototype.tick = function(elapsedTime) {
 
 
 	global.stage.update(elapsedTime);
+	
+	if (global.hero.health <=0){
+		global.sceneController.switchScene(SceneController.eventTypes.GAME_OVER);
+	}
 }

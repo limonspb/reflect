@@ -50,5 +50,5 @@ MediumMedKitBonus.prototype.includeBonus = function()
 {
 	global.hero.health += this.updateHealth;
 	
-	if (global.hero.health > global.hero.MAX_HEALTH) { global.hero.health = global.hero.MAX_HEALTH; }
+	if (global.hero.health > global.hero.MAX_HEALTH) { global.hero.health = global.hero.MAX_HEALTH; }	
 }
