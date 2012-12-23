@@ -69,9 +69,37 @@ function HeroUnit()
 	
 	this.g_vx = 0;
 	this.g_vy = 0;
+	
+	this.teleportCount = 2;
+	this.regenerationCount = 0;
+	this.lastRegenerationTime = global.gameTime;
 }
 
 extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.regenerateHealth = function(){
+	if (global.gameTime-this.lastRegenerationTime > 10000){
+		if (this.health < this.MAX_HEALTH){
+			this.health+=this.regenerationCount;
+			this.lastRegenerationTime = global.gameTime;
+			if (this.health > this.MAX_HEALTH){
+				this.health = this.MAX_HEALTH;
+			}
+		}
+	}	
+}
+
+HeroUnit.prototype.tryTeleport = function(x,y){
+	if (this.teleportCount>0){
+		this.teleport(x,y);	
+	}				
+}
+
+HeroUnit.prototype.teleport = function(x,y){
+	this.teleportCount --;
+	this.x = x;
+	this.y = y;	
+}
 
 HeroUnit.prototype.archiveShieldSegments = function(){
 	for (var i=0; i<4; i++){
@@ -346,6 +374,7 @@ HeroUnit.prototype.setGravityV = function(){
 
 HeroUnit.prototype.move = function(elapsedTime)
 {
+	this.regenerateHealth();
 	var dt = elapsedTime/1000;
 	if (global.staticControl){
 		this.staticKeyControlling();		

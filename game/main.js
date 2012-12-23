@@ -13,7 +13,8 @@ function init() {
 	global.canvas.height =  Math.min( $(window).height()-8, 1500 );
 	global.canvas.width = Math.min( $(window).width()-8, 1500 );
 	global.stage = new createjs.Stage(global.canvas);
-	global.stage.enableMouseOver()
+	global.stage.enableMouseOver();	
+	global.stage.mouseMoveOutside = true;
 	global.gameWidth = global.canvas.width;
 	global.gameHeight = global.canvas.height;
 	

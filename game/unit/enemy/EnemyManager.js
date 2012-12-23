@@ -13,6 +13,7 @@ function EnemyManager()
 	this.tank = null;
 	
 	this.freezMode = false;
+	this.freezTime = 0;
 	
 	this.timerAddSimpleEnemy = 0;
 	this.timeToAddSimple = 3000;
@@ -117,6 +118,9 @@ EnemyManager.prototype.update = function(elapsedTime)
 
 EnemyManager.prototype.move = function(elapsedTime)
 {
+	if (this.freezTime > 0){
+		this.freezTime-=elapsedTime;
+	}
 	for (var i = 0; i < this.enemies.length; i++)
 	{
 		this.enemies[i].move(elapsedTime);

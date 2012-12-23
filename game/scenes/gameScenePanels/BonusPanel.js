@@ -1,7 +1,10 @@
 BonusPanel = function(){
-	this.changeBonus(1,1);
-	this.addBonus(2,1);
-	this.delBonus(3);
+	$('#speedUpTR').fadeOut();
+	$('#freezTr').fadeOut();
+	$('#enemyScaleTr').fadeOut();
+	$('#protectionTr').fadeOut();
+	$('#shieldScaleTr').fadeOut();
+	$('#x2DamageTr').fadeOut();
 	
 }
 
@@ -13,14 +16,27 @@ BonusPanel.prototype.hide = function(){
 	$('#bonusPanel').fadeOut();
 }
 
-BonusPanel.prototype.changeBonus = function(n,bonus){ //MAX
-	$('#bonusPanel').append('change: '+n.toString()+'<br>');
-}
-
-BonusPanel.prototype.addBonus = function(n,bonus){//MAX
-	$('#bonusPanel').append('add: '+n.toString()+'<br>');	
-}
-
-BonusPanel.prototype.delBonus = function(n){//MAX
-	$('#bonusPanel').append('del: '+n.toString()+'<br>');	
+BonusPanel.prototype.update = function(){
+//	this.speedyMode = false;
+//	this.speedTime;
+	if (global.hero.speedyMode){
+		$('#speedUpTR').fadeIn();
+		$('#speedUpSec').text(Math.floor(global.hero.speedTime/1000).toString());
+	}else{
+		$('#speedUpTR').fadeOut();		
+	}
+	
+	if (global.EnemyManager.freezTime >0){
+		$('#freezTr').fadeIn();
+		$('#freezSec').text(Math.floor(global.EnemyManager.freezTime/1000).toString());		
+	}else{
+		$('#freezTr').fadeOut();		
+	}
+	
+	if (global.BulletFactory.doubleDamageTime >0){
+		$('#x2DamageTr').fadeIn();
+		$('#x2DamageSec').text(Math.floor(global.BulletFactory.doubleDamageTime/1000).toString());		
+	}else{
+		$('#x2DamageTr').fadeOut();		
+	}
 }

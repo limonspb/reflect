@@ -6,7 +6,7 @@
 function BonusManager()
 {
 	this.bonuses = [];
-	this.bonusesCont = new createjs.Container();
+	this.bonusesCont = new createjs.Container();	
 	
 	
 	this.smallMedKitBonusTime = 0;
@@ -16,6 +16,7 @@ function BonusManager()
 	this.doubleDamageBonusTime = 0;
 	this.speedUpBonusTime = 0;
 	this.regenerationBonusTime = 0;
+	this.teleportBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -47,6 +48,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.REGENERATION:
 			bonus = new RegenerationBonus();
 			break;
+		case BonusTypes.TELEPORT:
+			bonus = new TeleportBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -71,14 +75,14 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	
 	//this.smallMedkitUpdate(elapsedTime);
 	//this.mediumMedkitUpdate(elapsedTime);
 	//this.plusToLifeUpdate(elapsedTime);
 	//this.freezUpdate(elapsedTime);
 	//this.doubleDamageUpdate(elapsedTime);
 	//this.speedUpUpdate(elapsedTime);
-	this.regenerationUpdate(elapsedTime);
+	//this.regenerationUpdate(elapsedTime);
+	this.teleportUpdate(elapsedTime);
 	
 	this.checkPickUp()
 }
@@ -152,7 +156,7 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 	}
 }
 
-BonusManager.prototype.regenerationUpdate = function(elapsedTime)
+BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 {
 	this.speedUpBonusTime += elapsedTime;
 	if (this.speedUpBonusTime >= 1000 + Math.random()*5000)
@@ -165,7 +169,7 @@ BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 	}
 }
 
-BonusManager.prototype.speedUpUpdate = function(elapsedTime)
+BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
 	this.regenerationBonusTime += elapsedTime;
 	if (this.regenerationBonusTime >= 1000 + Math.random()*5000)
@@ -175,6 +179,19 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.REGENERATION, x, y);
 		this.regenerationBonusTime = 0;
+	}
+}
+
+BonusManager.prototype.teleportUpdate = function(elapsedTime)
+{
+	this.teleportBonusTime += elapsedTime;
+	if (this.teleportBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.REGENERATION, x, y);
+		this.teleportBonusTime = 0;
 	}
 }
 

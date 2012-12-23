@@ -45,5 +45,5 @@ RegenerationBonus.prototype.testRemove = function()
 
 RegenerationBonus.prototype.includeBonus = function()
 {
-	global.hero.regenerationCount +=1;
+	global.hero.regenerationCount += 1;
 }
