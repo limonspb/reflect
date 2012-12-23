@@ -18,7 +18,7 @@ LifePanel.prototype.setMaxLife = function(value){
 }
 
 LifePanel.prototype.setCurLife = function(value){
-	$('#currentLife').text(value.toString());
+	$('#currentLife').text(Math.ceil(value.toString()));
 }
 
 LifePanel.prototype.updateValues = function(){

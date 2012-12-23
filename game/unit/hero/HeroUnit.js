@@ -15,12 +15,57 @@ function HeroUnit()
 	HeroUnit.superclass.constructor.apply(this);
 	
 	this.angle;		
+	this.bodySize;
 	
-	this.LEFT = false;
+	this.zeroAll();
+	
+	this.sh_segments = [{},{},{},{}];	
+	
+	this.initView();
+	this.initOptions();
+		
+	this.sh_old_segments = [{},{},{},{}];
+	
+	this.segments_arr;
+	this.segments_arr_counted = false;
+	
+	
+	this.o_ax = 0;
+	this.o_ay = 0;
+	this.o_vx = 0;
+	this.o_vy = 0;
+	
+	this.o_a = 0;
+	this.o_v = 0;
+	this.o_angle = 0;
+	
+	this.g_vx = 0;
+	this.g_vy = 0;	
+	
+	this.teleportCount = 2;
+	this.regenerationCount = 0;
+	this.lastRegenerationTime = global.gameTime;
+}
+
+extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.zeroAll = function(){
+	this.o_ax = 0;
+	this.o_ay = 0;
+	this.o_vx = 0;
+	this.o_vy = 0;
+	
+	this.o_a = 0;
+	this.o_v = 0;
+	this.o_angle = 0;
+	
+	this.g_vx = 0;
+	this.g_vy = 0;
+	
+			this.LEFT = false;
 	this.RIGHT = false;
 	this.FORWARD = false;
 	this.BACK = false;
-	this.bodySize;
 	
 	this.a_c = 0;
 	this.a_c_max_foward = 1000;
@@ -39,43 +84,14 @@ function HeroUnit()
 	this.shieldWidth = 150;
 	this.shieldHeight = 10;
 	this.shieldDist = 25;
-	this.sh_segments = [{},{},{},{}];
-	
 	this.old_x = this.x;
 	this.old_y = this.y;
 	
-	this.old_x = 300;
-	this.old_y = 300;
-	
-	this.initView();
-	this.initOptions();
-		
-	this.sh_old_segments = [{},{},{},{}];
 	this.sh_old_angle = 90;
-	
-	this.segments_arr;
-	this.segments_arr_counted = false;
-	
-	this.staticAngle = 0;
-	
-	this.o_ax = 0;
-	this.o_ay = 0;
-	this.o_vx = 0;
-	this.o_vy = 0;
-	
-	this.o_a = 0;
-	this.o_v = 0;
-	this.o_angle = 0;
-	
-	this.g_vx = 0;
-	this.g_vy = 0;
-	
-	this.teleportCount = 2;
-	this.regenerationCount = 0;
-	this.lastRegenerationTime = global.gameTime;
-}
 
-extend(HeroUnit,BaseUnit);
+	this.staticAngle = 0;
+
+}
 
 HeroUnit.prototype.regenerateHealth = function(){
 	if (global.gameTime-this.lastRegenerationTime > 10000){
@@ -248,7 +264,7 @@ HeroUnit.prototype.initView = function ()
 
 HeroUnit.prototype.initOptions = function ()
 {
-	this.MAX_HEALTH = 10000;
+	this.MAX_HEALTH = 10;
 	this.health = this.MAX_HEALTH;
 	
 	this.current_forward = this.max_v_c_forward;

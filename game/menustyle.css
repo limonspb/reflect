@@ -9,11 +9,15 @@ min-height: 550px;
 
 .menu {
 	width: 300px;
-	margin: 0 auto;
+	
 	min-height: 280px;
-	margin-top:16%;
-	position: relative;
-	vertical-align: middle;
+	
+	position: absolute;
+	top : 50%;
+	margin-top:-140px;
+	left : 50%;
+	margin-left:-150px;
+	
 	}
 	
 .main {background: url(img/menu/points.png) left top no-repeat scroll transparent;}

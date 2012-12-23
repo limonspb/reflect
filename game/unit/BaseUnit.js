@@ -87,21 +87,9 @@ BaseUnit.prototype.checkDestroy = function()
 {
 	//console.log("HEALTH " + this.health);
 	
-	if (this == global.hero)
-	{
-		this.alpha = this.health/this.MAX_HEALTH;		
-	}
-	
 	if (this.health <= 0)
 	{
-		if (this == global.hero)
-		{
-			this.alpha = 0;
-			//TODO вывод окна об окончании игры
-			
-			this.health = 0;
-		}
-		else
+		if (this != global.hero)
 		{
 			var index = global.EnemyManager.enemies.indexOf(this);
 			if (index != -1)
