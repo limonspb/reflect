@@ -259,6 +259,9 @@ HeroUnit.prototype.initOptions = function ()
 	
 	this.shieldScaleMode = false;
 	this.shieldScaleTime;
+	
+	this.fullProtectMode = false;
+	this.fullProtectTime;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -486,6 +489,17 @@ HeroUnit.prototype.move = function(elapsedTime)
 			this.sheild.scaleX = this.sheild.scaleY = 1;
 			this.shieldWidth = 150;
 			this.shieldHeight = 10;
+		}
+	}
+	
+	
+	if (this.fullProtectMode)
+	{
+		
+		this.fullProtectTime -= elapsedTime;
+		if (this.fullProtectTime <= 0)
+		{
+			this.fullProtectMode = false;
 		}
 	}
 	

@@ -124,13 +124,10 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 {
 	if (getDistanceToObject(this, global.hero) <= this.size*0.75)
 	{
-		
 		this.nearRespawnCount += elapsedTime;
 		if (this.nearRespawnCount >= this.nearRespawn)
 		{
-			global.hero.health -= this.nearDamage;
-
-			global.hero.checkDestroy();
+			this.setUnitDamage(global.hero, this.nearDamage);
 			
 			this.nearRespawnCount = 0;
 		}

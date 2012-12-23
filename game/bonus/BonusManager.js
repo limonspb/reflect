@@ -19,6 +19,7 @@ function BonusManager()
 	this.teleportBonusTime = 0;
 	this.enemyScaleBonusTime = 0;
 	this.shieldScaleBonusTime = 0;
+	this.fullProtectBonusTime = 0;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -58,6 +59,9 @@ BonusManager.prototype.addBonus = function(type, x, y)
 		case BonusTypes.SHIELD_SCALE:
 			bonus = new ShieldScaleBonus();
 			break;
+		case BonusTypes.FULL_PROTECT:
+			bonus = new FullProtectionBonus();
+			break;
 	}
 	if (bonus)
 	{
@@ -90,8 +94,10 @@ BonusManager.prototype.update = function(elapsedTime)
 	this.speedUpUpdate(elapsedTime);
 	this.regenerationUpdate(elapsedTime);
 	this.teleportUpdate(elapsedTime);
-	this.enemyScaleUpdate(elapsedTime);*/
-	this.shieldScaleUpdate(elapsedTime);
+	this.enemyScaleUpdate(elapsedTime);
+	this.shieldScaleUpdate(elapsedTime);*/
+	this.fullProtectUpdate(elapsedTime);
+	
 	
 	this.checkPickUp()
 }
@@ -230,6 +236,19 @@ BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 	}
 }
 
+BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
+{
+	this.fullProtectBonusTime += elapsedTime;
+	if (this.fullProtectBonusTime >= 1000 + Math.random()*5000)
+	{
+		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
+		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
+		
+		this.addBonus(BonusTypes.FULL_PROTECT, x, y);
+		this.fullProtectBonusTime = 0;
+	}
+}
+
 BonusManager.prototype.checkPickUp = function()
 {
 	var len = this.bonuses.length;
@@ -242,8 +261,6 @@ BonusManager.prototype.checkPickUp = function()
 		
 		if (getDistanceToObject(bonus, global.hero) <= bonus.size*0.75)
 		{
-			//console.log("HIT TEST BONUS " + i);
-			//bonus.alpha = 0.2;
 			bonus.pickUp();
 			break;
 		}

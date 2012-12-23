@@ -73,30 +73,34 @@ BaseUnit.prototype.checkHitBullet = function()
 			global.BulletFactory.removeBullet(i);
 			len--;
 			
-			this.health -= bull.damage;
+			this.setUnitDamage(this, bull.damage);
 	
-			this.checkDestroy();
-			
 		}
 		
 	}
 	
 }
 
+BaseUnit.prototype.setUnitDamage = function(unit, damage)
+{
+	if (unit == global.hero)
+	{
+		if (unit.fullProtectMode) { return; }
+	}
+	unit.health -= damage;
+	
+	unit.checkDestroy();
+}
+
 BaseUnit.prototype.checkDestroy = function()
 {
 	//console.log("HEALTH " + this.health);
-	
-	if (this == global.hero)
-	{
-		this.alpha = this.health/this.MAX_HEALTH;		
-	}
 	
 	if (this.health <= 0)
 	{
 		if (this == global.hero)
 		{
-			this.alpha = 0;
+			
 			//TODO вывод окна об окончании игры
 			
 			this.health = 0;
