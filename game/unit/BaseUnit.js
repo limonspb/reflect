@@ -18,6 +18,7 @@ function BaseUnit()
 	this.bullet;
 	
 	this.stopUnit = false;
+	this.points = 0;
 }
 
 extend(BaseUnit, createjs.Container);

@@ -42,7 +42,7 @@ function EnemyManager()
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 200) { return; }
+	if (this.enemies.length >= 1) { return; }
 	
 	var enemy;
 	switch(type)
@@ -96,7 +96,7 @@ EnemyManager.prototype.blow = function(unit)
 		}
 	});	
 	
-	ssBlow.getAnimation("run").frequency = 4;
+	ssBlow.getAnimation("run").frequency = 1;
 	
 	var blow = new createjs.BitmapAnimation(ssBlow);
 	
@@ -105,7 +105,7 @@ EnemyManager.prototype.blow = function(unit)
 		anim.stop();
 		global.EnemyManager.enemiesCont.removeChild(anim);
 		anim = null;
-		//global.EnemyManager.removeEnemy(unit);
+		global.EnemyManager.removeEnemy(unit);
 	}
 	
 	//var scale = 0.6;
@@ -119,7 +119,7 @@ EnemyManager.prototype.blow = function(unit)
 	
 	unit.stopUnit = true;
 	
-	global.EnemyManager.removeEnemy(unit);
+	//global.EnemyManager.removeEnemy(unit);
 }
 
 EnemyManager.prototype.removeEnemy = function(enemy)
@@ -129,7 +129,9 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 	{
 		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }
 		
-		enemy.clearData();
+		//enemy.clearData();
+		
+		global.points += enemy.points;
 		
 		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
 		{
@@ -154,7 +156,7 @@ EnemyManager.prototype.update = function(elapsedTime)
 	this.checkAddEscapeEnemy(elapsedTime);
 	this.checkAddStrongEnemy(elapsedTime);
 	this.checkAddChaseEnemy(elapsedTime);
-	//this.checkAddTankEnemy(elapsedTime);
+	this.checkAddTankEnemy(elapsedTime);
 	this.checkAddVacuumEnemy(elapsedTime);
 }
 
@@ -303,6 +305,8 @@ EnemyManager.prototype.clearAll = function()
 	this.vacuums.length = 0;
 	
 	//if (this.enemiesCont.parent) { this.enemiesCont.parent.removeChild(this.enemiesCont); }
+	var num = this.enemiesCont.getNumChildren();
+	while(num--) { this.enemiesCont.removeChildAt(num); }
 	
 	this.vacuumSize = 150;
 	

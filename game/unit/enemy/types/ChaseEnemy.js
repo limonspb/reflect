@@ -62,9 +62,11 @@ ChaseEnemy.prototype.initOptions = function ()
 	this.nearDamage = 20;
 	this.minRange = 10;
 	this.maxRange = 20;
+	
+	this.points = 20;
 }
 
-ChaseEnemy.prototype.clearData = function ()
+/*ChaseEnemy.prototype.clearData = function ()
 {
 	this.view.removeChild(this.shadow);
 	this.view.removeChild(this.body);
@@ -74,7 +76,7 @@ ChaseEnemy.prototype.clearData = function ()
 	this.ss = null;
 	this.body = null;
 	this.view = null;
-}
+}*/
 
 ChaseEnemy.prototype.move = function (elapsedTime)
 {

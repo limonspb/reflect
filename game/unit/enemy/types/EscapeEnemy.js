@@ -77,9 +77,11 @@ EscapeEnemy.prototype.initOptions = function ()
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
+	
+	this.points = 18;
 }
 
-EscapeEnemy.prototype.clearData = function ()
+/*EscapeEnemy.prototype.clearData = function ()
 {
 	this.view.removeChild(this.body);
 	this.gun.removeChild(this.gunView);
@@ -91,7 +93,7 @@ EscapeEnemy.prototype.clearData = function ()
 	this.gunView = null;
 	this.gun = null;
 	this.view = null;
-}
+}*/
 
 EscapeEnemy.prototype.move = function (elapsedTime)
 {
