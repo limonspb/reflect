@@ -63,7 +63,7 @@ VacuumEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.VACUUM_ENEMY;
 	
-	this.speed = Math.random()*20 + 20;
+	this.speed = Math.random()*20 + 30;
 	this.rotationSpeed = 50;
 	this.health = 20;
 	this.nearDamage = 20;

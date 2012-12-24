@@ -86,16 +86,16 @@ BonusManager.prototype.removeBonus = function(bonus)
 
 BonusManager.prototype.update = function(elapsedTime)
 {
-	//this.smallMedkitUpdate(elapsedTime);
-	//this.mediumMedkitUpdate(elapsedTime);
-	//this.plusToLifeUpdate(elapsedTime);
-	//this.freezUpdate(elapsedTime);
-	//this.doubleDamageUpdate(elapsedTime);
-	//this.speedUpUpdate(elapsedTime);
-	//this.regenerationUpdate(elapsedTime);
-	//this.teleportUpdate(elapsedTime);
-	//this.enemyScaleUpdate(elapsedTime);
-	//this.shieldScaleUpdate(elapsedTime);
+	this.smallMedkitUpdate(elapsedTime);
+	this.mediumMedkitUpdate(elapsedTime);
+	this.plusToLifeUpdate(elapsedTime);
+	this.freezUpdate(elapsedTime);
+	this.doubleDamageUpdate(elapsedTime);
+	this.speedUpUpdate(elapsedTime);
+	this.regenerationUpdate(elapsedTime);
+	this.teleportUpdate(elapsedTime);
+	this.enemyScaleUpdate(elapsedTime);
+	this.shieldScaleUpdate(elapsedTime);
 	this.fullProtectUpdate(elapsedTime);
 	
 	
@@ -109,7 +109,7 @@ BonusManager.prototype.update = function(elapsedTime)
 BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 {
 	this.smallMedKitBonusTime += elapsedTime;
-	if (this.smallMedKitBonusTime >= 1000 + Math.random()*2000)
+	if (this.smallMedKitBonusTime >= 4000 + Math.random()*10000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -122,7 +122,7 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 {
 	this.mediumMedKitBonusTime += elapsedTime;
-	if (this.mediumMedKitBonusTime >= 1000 + Math.random()*2000)
+	if (this.mediumMedKitBonusTime >= 5000 + Math.random()*15000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -135,7 +135,7 @@ BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 {
 	this.plusToLifeBonusTime += elapsedTime;
-	if (this.plusToLifeBonusTime >= 1000 + Math.random()*2000)
+	if (this.plusToLifeBonusTime >= 13000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -148,7 +148,7 @@ BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 BonusManager.prototype.freezUpdate = function(elapsedTime)
 {
 	this.freezBonusTime += elapsedTime;
-	if (this.freezBonusTime >= 1000 + Math.random()*5000)
+	if (this.freezBonusTime >= 7000 + Math.random()*15000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -161,7 +161,7 @@ BonusManager.prototype.freezUpdate = function(elapsedTime)
 BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 {
 	this.doubleDamageBonusTime += elapsedTime;
-	if (this.doubleDamageBonusTime >= 1000 + Math.random()*5000)
+	if (this.doubleDamageBonusTime >= 6000 + Math.random()*20000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -174,7 +174,7 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 {
 	this.speedUpBonusTime += elapsedTime;
-	if (this.speedUpBonusTime >= 1000 + Math.random()*5000)
+	if (this.speedUpBonusTime >= 5000 + Math.random()*10000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -187,7 +187,7 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
 	this.regenerationBonusTime += elapsedTime;
-	if (this.regenerationBonusTime >= 1000 + Math.random()*5000)
+	if (this.regenerationBonusTime >= 10000 + Math.random()*3000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -200,7 +200,7 @@ BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 BonusManager.prototype.teleportUpdate = function(elapsedTime)
 {
 	this.teleportBonusTime += elapsedTime;
-	if (this.teleportBonusTime >= 1000 + Math.random()*5000)
+	if (this.teleportBonusTime >= 4000 + Math.random()*20000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -213,7 +213,7 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 {
 	this.enemyScaleBonusTime += elapsedTime;
-	if (this.enemyScaleBonusTime >= 1000 + Math.random()*5000)
+	if (this.enemyScaleBonusTime >= 10000 + Math.random()*30000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -226,7 +226,7 @@ BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 {
 	this.shieldScaleBonusTime += elapsedTime;
-	if (this.shieldScaleBonusTime >= 1000 + Math.random()*5000)
+	if (this.shieldScaleBonusTime >= 8000 + Math.random()*10000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -239,7 +239,7 @@ BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 {
 	this.fullProtectBonusTime += elapsedTime;
-	if (this.fullProtectBonusTime >= 1000 + Math.random()*5000)
+	if (this.fullProtectBonusTime >= 3000 + Math.random()*25000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
