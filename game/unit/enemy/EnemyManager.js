@@ -19,25 +19,25 @@ function EnemyManager()
 	this.enemyScaleTime = 0;
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 1000;
+	this.timeToAddSimple = 5000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 1000;
+	this.timerToAddMedium = 8000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 1000;
+	this.timerToAddEscape = 11000;
 	
 	this.timerAddStrongEnemy = 0;
-	this.timerToAddStrong = 1000;
+	this.timerToAddStrong = 14000;
 	
 	this.timerAddChaseEnemy = 0;
-	this.timerToAddChase = 1000;
+	this.timerToAddChase = 18000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 1000;
+	this.timerToAddTank = 15000;
 	
 	this.timerAddVacuumEnemy = 0;
-	this.timerToAddVacuum = 1000;
+	this.timerToAddVacuum = 20000;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
@@ -105,7 +105,7 @@ EnemyManager.prototype.blow = function(unit)
 		anim.stop();
 		global.EnemyManager.enemiesCont.removeChild(anim);
 		anim = null;
-		global.EnemyManager.removeEnemy(unit);
+		//global.EnemyManager.removeEnemy(unit);
 	}
 	
 	//var scale = 0.6;
@@ -119,7 +119,7 @@ EnemyManager.prototype.blow = function(unit)
 	
 	unit.stopUnit = true;
 	
-	//global.EnemyManager.removeEnemy(unit);
+	global.EnemyManager.removeEnemy(unit);
 }
 
 EnemyManager.prototype.removeEnemy = function(enemy)
@@ -183,8 +183,6 @@ EnemyManager.prototype.move = function(elapsedTime)
 		this.enemyScaleMode = false;
 	}
 	
-	
-	
 	for (var i = 0; i < this.enemies.length; i++)
 	{
 		if (this.enemies[i] != null)
@@ -212,7 +210,7 @@ EnemyManager.prototype.checkAddMediumEnemy = function(elapsedTime)
 	this.timerAddMediumEnemy += elapsedTime;
 	if (this.timerAddMediumEnemy >= this.timerToAddMedium)
 	{
-		for (var i = 0; i < 2; i++)
+		for (var i = 0; i < 1; i++)
 		{
 			this.addEnemy(EnemyTypes.MEDIUM_ENEMY);
 		}
@@ -225,7 +223,7 @@ EnemyManager.prototype.checkAddEscapeEnemy = function(elapsedTime)
 	this.timerAddEscapeEnemy += elapsedTime;
 	if (this.timerAddEscapeEnemy >= this.timerToAddEscape)
 	{
-		for (var i = 0; i < 1; i++)
+		for (var i = 0; i < 2; i++)
 		{
 			this.addEnemy(EnemyTypes.ESCAPE_ENEMY);
 		}
@@ -238,7 +236,7 @@ EnemyManager.prototype.checkAddStrongEnemy = function(elapsedTime)
 	this.timerAddStrongEnemy += elapsedTime;
 	if (this.timerAddStrongEnemy >= this.timerToAddStrong)
 	{
-		for (var i = 0; i < 1; i++)
+		for (var i = 0; i < 2; i++)
 		{
 			this.addEnemy(EnemyTypes.STRONG_ENEMY);
 		}
@@ -251,7 +249,7 @@ EnemyManager.prototype.checkAddChaseEnemy = function(elapsedTime)
 	this.timerAddChaseEnemy += elapsedTime;
 	if (this.timerAddChaseEnemy >= this.timerToAddChase)
 	{
-		for (var i = 0; i < 1; i++)
+		for (var i = 0; i < 2; i++)
 		{
 			this.addEnemy(EnemyTypes.CHASE_ENEMY);
 		}

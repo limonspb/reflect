@@ -69,8 +69,8 @@ MediumEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.MEDIUM_ENEMY;
 	
-	this.speed = Math.random()*30 + 80;
-	this.rotationSpeed = 100;
+	this.speed = Math.random()*30 + 40;
+	this.rotationSpeed = 120;
 	this.health = 30;
 	this.damage = 10;
 	this.bulletRespawn = 3500 + Math.random()*1500;
@@ -178,7 +178,7 @@ MediumEnemy.prototype.shoot = function ()
 		this.respawnCount = 0;
 		
 		this.bulletAngle = this.gun.rotation;
-		this.backTime = 200;//200
+		this.backTime = 200;
 	}
 }
 

@@ -58,7 +58,6 @@ HeroUnit.prototype.whiteShieldDecide = function(){
 	}else{
 		this.underSheild.visible = false;		
 	}
-	
 }
 
 HeroUnit.prototype.zeroAll = function(){
@@ -74,7 +73,7 @@ HeroUnit.prototype.zeroAll = function(){
 	this.g_vx = 0;
 	this.g_vy = 0;
 	
-			this.LEFT = false;
+	this.LEFT = false;
 	this.RIGHT = false;
 	this.FORWARD = false;
 	this.BACK = false;
@@ -84,8 +83,8 @@ HeroUnit.prototype.zeroAll = function(){
 	this.a_c_max_backward = -1000;
 	this.a_c_triction = 500;
 	this.v_c = 0;
-	this.max_v_c_forward = 300; 
-	this.max_v_c_backward = -100;
+	this.max_v_c_forward = 180; 
+	this.max_v_c_backward = -50;
 	
 	this.ar_c = 0; 
 	this.ar_c_max = 5000; 
@@ -102,7 +101,15 @@ HeroUnit.prototype.zeroAll = function(){
 	this.sh_old_angle = 90;
 
 	this.staticAngle = 0;
-
+	
+	this.speedyMode = false;
+	this.speedTime = 0;
+	
+	this.shieldScaleMode = false;
+	this.shieldScaleTime = 0;
+	
+	this.fullProtectMode = false;
+	this.fullProtectTime = 0;
 }
 
 HeroUnit.prototype.regenerateHealth = function(){
@@ -425,7 +432,7 @@ HeroUnit.prototype.setGravityV = function(){
 	}
 	
 	if ((i_min != -1)&&(d_min>15)){
-		v_min = vec_Scale(v_min,150);
+		v_min = vec_Scale(v_min,100);
 		this.g_vx = v_min.x;		
 		this.g_vy = v_min.y;		
 	}else{

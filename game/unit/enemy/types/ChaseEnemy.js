@@ -56,8 +56,8 @@ ChaseEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.CHASE_ENEMY
 	
-	this.speed = Math.random()*20 + 200;
-	this.rotationSpeed = 250;
+	this.speed = Math.random()*30 + 140;
+	this.rotationSpeed = 120;
 	this.health = 20;
 	this.nearDamage = 20;
 	this.minRange = 10;

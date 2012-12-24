@@ -69,8 +69,8 @@ EscapeEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.ESCAPE_ENEMY;
 	
-	this.speed = Math.random()*30 + 130;
-	this.rotationSpeed = 150;
+	this.speed = Math.random()*30 + 50;
+	this.rotationSpeed = 70;
 	this.health = 50;
 	this.damage = 12;
 	this.bulletRespawn = 2500 + Math.random()*1000;

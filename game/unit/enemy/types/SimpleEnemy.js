@@ -62,25 +62,14 @@ SimpleEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.SIMPLE_ENEMY;
 	
-	this.speed = Math.random()*30 + 40;
-	this.rotationSpeed = 200;
+	this.speed = Math.random()*30 + 50;
+	this.rotationSpeed = 40;
 	this.health = 10;
 	this.damage = 5;
 	this.bulletRespawn = 3000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 100;
 	this.maxRange = 1000;
-	
-	
-	this.velocity = new Vec2(-1,-2);
-	this.disared = new Vec2(0,0);
-	this.position = new Vec2(this.x, this.y);
-	this.steering = new Vec2(0, 0);
-	this.MAX_FORCE = 0.3;
-	this.MAX_VELOCITY = 4;
-	this.mass = 20 +  Math.random() * 20;
-	
-	this.truncate(this.velocity, this.MAX_VELOCITY);
 	
 	this.points = 10;
 }

@@ -60,8 +60,8 @@ TankEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.TANK_ENEMY;
 	
-	this.speed = Math.random()*20 + 300;
-	this.rotationSpeed = 250;
+	this.speed = Math.random()*20 + 230;
+	this.rotationSpeed = 200;
 	this.health = 99999;
 	this.nearDamage = 9999999999;
 	this.minRange = 10;
