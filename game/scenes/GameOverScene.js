@@ -8,7 +8,8 @@ function GameOverScene(){
 
 GameOverScene.prototype.show = function(){
 	$('#writeNamePanel').fadeIn();
-	$('#sendRecordButton').fadeIn();
+	$('#sendRecordButton').fadeIn();	
+	$('#divWithPlace').fadeIn();
 	$('#scoreGO').text(global.points);	
 	global.sceneController.recordsScene.show();
 }

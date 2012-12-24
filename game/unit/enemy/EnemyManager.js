@@ -42,7 +42,7 @@ function EnemyManager()
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 1) { return; }
+	if (this.enemies.length >= 100) { return; }
 	
 	var enemy;
 	switch(type)
