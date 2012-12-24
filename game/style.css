@@ -156,7 +156,7 @@ body{
 #goButtons{
 	position:absolute;
 	top : 100%;
-	margin-top : -40px;
+	margin-top : -70px;
 	margin-left : 50px;
 	
 }
@@ -165,4 +165,29 @@ body{
 	color : black;
 	font-size : 20px;
 	
+}
+
+.goButton{
+	width : 150px;
+	height : 70px;
+}
+
+#sendRecordButton{
+	float : right;
+	background: url('img/menu/okoff.png') no-repeat scroll top left transparent;
+	width : 150px;
+	height : 70px;
+}
+#sendRecordButton:hover{
+	background: url('img/menu/okon.png') no-repeat scroll top left transparent;
+}
+
+#cancelRecordButton{
+	float : right;
+	background: url('img/menu/cancelon.png') no-repeat scroll top left transparent;
+	width : 150px;
+	height : 70px;
+}
+#cancelRecordButton:hover{
+	background: url('img/menu/canceloff.png') no-repeat scroll top left transparent;
 }

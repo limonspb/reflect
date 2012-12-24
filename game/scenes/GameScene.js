@@ -33,13 +33,17 @@ extend(GameScene,BaseScene);
 GameScene.prototype.newGame = function(){
 	global.gameTime = 0;
 	global.points = 0;
-	global.hero.health = 10;
-	global.hero.MAX_HEALTH = 10;
+	global.hero.health = 100;
+	global.hero.MAX_HEALTH = 100;
 	global.hero.teleportCount = 0;
 	global.hero.regenerationCount = 0;
 	global.hero.x = 1000;
 	global.hero.y = 1000;
-	global.hero.zeroAll();	
+	global.hero.zeroAll();
+	
+	//global.BonusManager.clearAll();
+	//global.BulletFactory.clearAll();
+	//global.EnemyManager.clearAll();	
 }
 
 GameScene.prototype.show = function(){
