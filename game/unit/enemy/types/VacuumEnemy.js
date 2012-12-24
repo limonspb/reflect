@@ -17,20 +17,46 @@ extend(VacuumEnemy,EnemyUnit);
  */
 VacuumEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("#000000").drawRect ( -30 , -30 , 60 , 60 );
+	this.body = new createjs.Bitmap(global.preloader.imgs.vacuum_anim);
+	this.body.regX = global.preloader.imgs.vacuum_anim.width/2;
+	this.body.regY = global.preloader.imgs.vacuum_anim.height/2;
+	this.body.rotation = 90;
 	
-	this.width = 60;
-	this.height = 60;
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 3]},
+		"images": [global.preloader.imgs.vacuum_gun],
+		"frames": {
+		"regX": global.preloader.imgs.vacuum_gun.height/2,
+		"regY": global.preloader.imgs.vacuum_gun.height/2,
+		"height": global.preloader.imgs.vacuum_gun.height,
+		"width": global.preloader.imgs.vacuum_gun.height
+		}
+	});	
+	
+	this.ss.getAnimation("run").frequency = 4;
+	
+	this.gunView = new createjs.BitmapAnimation(this.ss);
+	
+	var scale = 1;
+				
+	this.gunView.gotoAndPlay("run");
+	this.gunView.rotation = 90;
+	this.gunView.scaleX = this.body.scaleY = scale;
+	
+	this.gun = new createjs.Container();
+	this.gun.addChild(this.gunView);
+	
+	this.width = global.preloader.imgs.vacuum_anim.width;
+	this.height = global.preloader.imgs.vacuum_anim.height;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
 	
-	this.view.cache(-30 , -30 , 60 , 60);
+	this.view = new createjs.Container();
+	this.view.addChild(this.body);
+	
 	this.addChild(this.view);
-	this.addChild(this.center);
+	this.addChild(this.gun);
 }
 
 VacuumEnemy.prototype.initOptions = function ()
@@ -47,8 +73,26 @@ VacuumEnemy.prototype.initOptions = function ()
 	this.vacuum = 150;
 }
 
+/*VacuumEnemy.prototype.clearData = function ()
+{
+	this.body.stop();
+	
+	this.view.removeChild(this.body);
+	this.gun.removeChild(this.gunView);
+	this.removeChild(this.gun);
+	this.removeChild(this.view);
+	
+	this.ss = null;
+	this.body = null;
+	this.gunView = null;
+	this.gun = null;
+	this.view = null;
+}*/
+
 VacuumEnemy.prototype.move = function (elapsedTime)
 {
+	if (this.stopUnit == true) { return; }
+	
 	this.dist = getDistanceToObject(this, global.hero);
 	
 	if (!this.pauseMove(elapsedTime))
@@ -70,6 +114,8 @@ VacuumEnemy.prototype.move = function (elapsedTime)
 		this.x += dx;
 		this.y += dy;
 	}
+	
+	this.gun.rotation = this.getAngleToObject(global.hero);
 	
 	this.checkHitHero(elapsedTime);
 	

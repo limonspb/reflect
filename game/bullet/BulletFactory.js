@@ -50,6 +50,7 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 			{
 				this.removeBullet(i);
 				len--;
+				i--;
 			}			
 		}
 	}
@@ -86,5 +87,5 @@ BulletFactory.prototype.clearAll = function(elapsedTime)
 	}
 	this.bullets.length = 0;
 	
-	if (this.bulletsCont.parent) { this.bulletsCont.parent.removeChild(this.bulletsCont); }
+	//if (this.bulletsCont.parent) { this.bulletsCont.parent.removeChild(this.bulletsCont); }
 }

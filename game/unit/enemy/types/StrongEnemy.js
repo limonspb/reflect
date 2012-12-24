@@ -99,6 +99,8 @@ StrongEnemy.prototype.clearData = function ()
 
 StrongEnemy.prototype.move = function (elapsedTime)
 {
+	if (this.stopUnit == true) { return; }
+	
 	this.dist = getDistanceToObject(this, global.hero);
 	
 	if (!this.pauseMove(elapsedTime))

@@ -82,8 +82,9 @@ TankEnemy.prototype.clearData = function ()
 
 TankEnemy.prototype.move = function (elapsedTime)
 {
-	this.dist = getDistanceToObject(this, global.hero);
+	if (this.stopUnit == true) { return; }
 	
+	this.dist = getDistanceToObject(this, global.hero);
 	
 	if (this.dist >= this.size + 200)
 	{
