@@ -105,7 +105,7 @@ EnemyManager.prototype.blow = function(unit)
 		anim.stop();
 		global.EnemyManager.enemiesCont.removeChild(anim);
 		anim = null;
-		global.EnemyManager.removeEnemy(unit);
+		//global.EnemyManager.removeEnemy(unit);
 	}
 	
 	//var scale = 0.6;
@@ -119,7 +119,7 @@ EnemyManager.prototype.blow = function(unit)
 	
 	unit.stopUnit = true;
 	
-	//global.EnemyManager.removeEnemy(unit);
+	global.EnemyManager.removeEnemy(unit);
 }
 
 EnemyManager.prototype.removeEnemy = function(enemy)

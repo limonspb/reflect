@@ -75,6 +75,7 @@ BaseUnit.prototype.checkHitBullet = function()
 			
 			global.BulletFactory.removeBullet(i);
 			len--;
+			i--;
 			
 			this.setUnitDamage(this, bull.damage);
 	

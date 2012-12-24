@@ -157,7 +157,7 @@ body{
 	position:absolute;
 	top : 100%;
 	margin-top : -70px;
-	margin-left : 50px;
+	margin-left : 35px;
 	
 }
 
@@ -175,7 +175,7 @@ body{
 #sendRecordButton{
 	float : right;
 	background: url('img/menu/okoff.png') no-repeat scroll top left transparent;
-	width : 150px;
+	width : 170px;
 	height : 70px;
 }
 #sendRecordButton:hover{
@@ -184,10 +184,19 @@ body{
 
 #cancelRecordButton{
 	float : right;
-	background: url('img/menu/cancelon.png') no-repeat scroll top left transparent;
-	width : 150px;
+	background: url('img/menu/canceloff.png') no-repeat scroll top left transparent;
+	width : 170px;
 	height : 70px;
 }
 #cancelRecordButton:hover{
-	background: url('img/menu/canceloff.png') no-repeat scroll top left transparent;
+	background: url('img/menu/cancelon.png') no-repeat scroll top left transparent;
+}
+
+#playerName{
+	background: url(img/menu/input.png) no-repeat scroll top left transparent;
+	border : 0px;
+	width : 200px;
+	height : 30px;
+	padding-left : 10px;
+	outline: none;
 }

@@ -75,7 +75,7 @@ MediumEnemy.prototype.initOptions = function ()
 	this.damage = 10;
 	this.bulletRespawn = 3500 + Math.random()*1500;
 	this.bulletType = BulletTypes.SHOT_GUN;
-	this.minRange = 50;
+	this.minRange = 150;
 	this.maxRange = 500;
 }
 
