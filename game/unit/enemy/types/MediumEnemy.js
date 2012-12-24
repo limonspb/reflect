@@ -21,32 +21,45 @@ extend(MediumEnemy,EnemyUnit);
  */
 MediumEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.setStrokeStyle(1, 'round', 'round');
-	this.view.graphics.beginStroke(('#000000'));
-	this.view.graphics.beginFill("green").drawCircle ( 0 , 0 , 10 );
-	this.view.graphics.endStroke();
-    this.view.graphics.endFill();
-    
-    this.gun = new createjs.Shape();
-    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
-    this.gun.graphics.beginStroke(('#000000'));
-    this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(15,0);
-    this.gun.graphics.endStroke();
-    this.gun.graphics.endFill();
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 2]},
+		"images": [global.preloader.imgs.medium_anim],
+		"frames": {
+		"regX": global.preloader.imgs.medium_anim.height/2,
+		"regY": global.preloader.imgs.medium_anim.height/2,
+		"height": global.preloader.imgs.medium_anim.height,
+		"width": global.preloader.imgs.medium_anim.height
+		}
+	});	
 	
-	this.width = 10;
-	this.height = 10;
+	this.ss.getAnimation("run").frequency = 4;
+	
+	this.body = new createjs.BitmapAnimation(this.ss);
+	
+	var scale = 1;
+				
+	this.body.gotoAndPlay("run");
+	this.body.rotation = 90;
+	this.body.scaleX = this.body.scaleY = scale;
+	
+	this.gun = new createjs.Container();
+	this.gunView = new createjs.Bitmap(global.preloader.imgs.medium_gun);
+	this.gunView.regX = global.preloader.imgs.medium_gun.width/2;
+	this.gunView.regY = global.preloader.imgs.medium_gun.height/2;
+	this.gunView.rotation = 90;
+	this.gunView.scaleX = this.gunView.scaleY = scale;
+	this.gun.addChild(this.gunView);
+	
+	this.width = global.preloader.imgs.medium_anim.width;
+	this.height = global.preloader.imgs.medium_anim.height;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	this.view = new createjs.Container();
+	this.view.addChild(this.body);
 	
 	this.addChild(this.view);
 	this.addChild(this.gun);
-	this.addChild(this.center);
 }
 
 /**
@@ -57,13 +70,41 @@ MediumEnemy.prototype.initOptions = function ()
 	this.type = EnemyTypes.MEDIUM_ENEMY;
 	
 	this.speed = Math.random()*30 + 80;
-	this.rotationSpeed = 200;
+	this.rotationSpeed = 100;
 	this.health = 30;
 	this.damage = 10;
 	this.bulletRespawn = 3500 + Math.random()*1500;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 50;
 	this.maxRange = 500;
+}
+
+MediumEnemy.prototype.clearData = function ()
+{
+	this.view.removeChild(this.body);
+	this.gun.removeChild(this.gunView);
+	this.removeChild(this.gun);
+	this.removeChild(this.view);
+	
+	this.ss = null;
+	this.body = null;
+	this.gunView = null;
+	this.gun = null;
+	this.view = null;
+}
+
+MediumEnemy.prototype.clearData = function ()
+{
+	this.view.removeChild(this.body);
+	this.gun.removeChild(this.gunView);
+	this.removeChild(this.gun);
+	this.removeChild(this.view);
+	
+	this.ss = null;
+	this.body = null;
+	this.gunView = null;
+	this.gun = null;
+	this.view = null;
 }
 
 MediumEnemy.prototype.move = function (elapsedTime)
@@ -118,7 +159,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	
 	this.checkHitHero(elapsedTime);
 	
-	this.gun.rotation += this.getGunRotation(this.gun, ShotType.STUPID_SHOT)*elapsedTime/1000;
+	this.gun.rotation += this.getGunRotation(this.gun, ShotType.FORWARD_SHOT)*elapsedTime/1000;
 	
 	this.respawnCount += elapsedTime;
 	
@@ -133,8 +174,14 @@ MediumEnemy.prototype.shoot = function ()
 	if (this.respawnCount >= this.bulletRespawn)
 	{
 		//var angle = this.getAngleToObject(global.hero);
-		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
+		
+		var vec1 = rotateVec( {x:-3,y:25}, this.gun.rotation);
+		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x + vec1.x, this.y + vec1.y);
 		this.bullet.damage = this.damage;
+		
+		var vec2 = rotateVec( {x:-3,y:-25}, this.gun.rotation);
+		this.bullet2 = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x + vec2.x, this.y + vec2.y);
+		this.bullet2.damage = this.damage;
 		
 		this.respawnCount = 0;
 		

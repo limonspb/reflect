@@ -41,8 +41,9 @@ BaseUnit.prototype.checkHitBullet = function()
 		var bull = global.BulletFactory.bullets[i];
 		
 		if (bull == this.bullet) { continue; }
+		if (bull == this.bullet2) { continue; }
 		
-		if (getDistanceToObject(this, bull) <= this.size*0.75)
+		if (getDistanceToObject(this, bull) <= this.size*0.6)
 		{
 			//console.log("HIT TEST BULLET " + i);
 			

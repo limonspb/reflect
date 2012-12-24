@@ -247,6 +247,7 @@ HeroUnit.prototype.initView = function ()
 	
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
+	this.size *= 0.6;
 				
 	this.ss.getAnimation("run").frequency = 0;
 				

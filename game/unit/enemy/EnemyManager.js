@@ -19,25 +19,25 @@ function EnemyManager()
 	this.enemyScaleTime = 0;
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 3000;
+	this.timeToAddSimple = 1000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 5000;
+	this.timerToAddMedium = 1000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 7000;
+	this.timerToAddEscape = 1000;
 	
 	this.timerAddStrongEnemy = 0;
-	this.timerToAddStrong = 9000;
+	this.timerToAddStrong = 1000;
 	
 	this.timerAddChaseEnemy = 0;
-	this.timerToAddChase = 11000;
+	this.timerToAddChase = 1000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 30000;
+	this.timerToAddTank = 1000;
 	
 	this.timerAddVacuumEnemy = 0;
-	this.timerToAddVacuum = 15000;
+	this.timerToAddVacuum = 1000;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
