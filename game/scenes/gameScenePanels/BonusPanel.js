@@ -49,7 +49,7 @@ BonusPanel.prototype.update = function(){
 	
 	if(global.hero.fullProtectTime > 0){
 		$('#protectionTr').fadeIn();
-		$('#sprotectionSec').text(Math.floor(global.hero.fullProtectTime/1000).toString());		
+		$('#protectionSec').text(Math.floor(global.hero.fullProtectTime/1000).toString());			
 	}else{
 		$('#protectionTr').fadeOut();		
 	}

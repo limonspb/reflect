@@ -96,7 +96,7 @@ EnemyManager.prototype.blow = function(unit)
 		}
 	});	
 	
-	ssBlow.getAnimation("run").frequency = 4;
+	ssBlow.getAnimation("run").frequency = 2;
 	
 	var blow = new createjs.BitmapAnimation(ssBlow);
 	

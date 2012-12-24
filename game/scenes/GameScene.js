@@ -41,9 +41,9 @@ GameScene.prototype.newGame = function(){
 	global.hero.y = 1000;
 	global.hero.zeroAll();
 	
-	//global.BonusManager.clearAll();
-	//global.BulletFactory.clearAll();
-	//global.EnemyManager.clearAll();	
+	global.BonusManager.clearAll();
+	global.BulletFactory.clearAll();
+	global.EnemyManager.clearAll();	
 }
 
 GameScene.prototype.show = function(){

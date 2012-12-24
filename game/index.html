@@ -135,8 +135,8 @@
 -->		
 		<div id="credits" class="scene">
 			<div class="menu">
-				<div>				Credits			</div>
-				<div>				Blablabla			</div>
+				<div>				Under construction			</div>
+				<div>				www.hahaton.ru			</div>
 				<div class="button"><div id="backButton_credits"></div></div>
 			</div>
 		</div>
@@ -145,7 +145,7 @@
 --> 
 		<div id = "info" class="scene">
 			<div class="menu">
-				<div>info and help of the game. <br> Bonuses, mobs etc.		</div>
+				<div>Under construction</div>
 				 <div class="button"><div id="backButton_info"></div></div>
 			</div>
 		</div>
@@ -186,7 +186,7 @@
 -->		  
 		<div id="lifePanel" class="gamePanel">
 			<div id="innerLifePanel">
-				<span>жЫтуха:</span>
+				<img src="img/panels/key.png" id="lifePicture"/>
 				<span id="currentLife">54</span>
 				<span id="lifeSlash">/</span>
 				<span id="maxLife">100</span>
@@ -257,21 +257,31 @@
 	===========================================================================================================
 -->
 		<div id="pointsPanel" class="gamePanel">
-			<span id="currentTime">0</span>
+			<span id="currentTime">0</span>/
 			<span id="currentPoints">0</span>
 		</div>
 <!--
 	===========================================================================================================
 -->
 		<div id="infinityBonusPanel" class="gamePanel">
-			<div>
-				<img src="img/bonus/teleport.png"/>
-				<span>X </span><span id="teleportCount">X 0</span>			
-			</div>
-			<div>
-				<img src="img/bonus/regeneration.png"/>				
-				<span>X </span><span id="regenerationCount">0</span>								
-			</div>
+			<table>
+				<tr>
+					<td>
+						<img src="img/bonus/teleport.png" class="infBonusImage" height="45px"/>
+					</td>
+					<td>
+						<span>X </span><span id="teleportCount">X 0</span>
+					</td>
+				</tr>			
+				<tr>
+					<td>
+						<img src="img/bonus/regeneration.png" style="margin-left:5px"  class="infBonusImage" height="45px"/>				
+					</td>
+					<td>
+						<span>X </span><span id="regenerationCount">0</span>								
+					</td>
+				</tr>			
+			</table>
 		</div>	
 
 

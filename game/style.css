@@ -11,7 +11,7 @@ body{
 }
 
 #reflectCanvas{
-	border:1px solid;
+	
 }
 
 #preloader{
@@ -74,23 +74,22 @@ body{
 	display : none;
 	top : 0px;	
 	left : 0px;
-	border : 1px solid;
-	background-color: #EEEEEE;
 	width : 200px;
-	height : 25px;	
+	height : 25px;
+	font-size: 23px;
 }
 
 #bonusPanel{
 	display : none;
 	width : 100px;
 	height : 500px;
-	top : 30px;
+	top : 50px;
 	left : 0px;	
 }
 
 #pointsPanel{
 	display : none;
-	
+	font-size : 23px;
 	width : 150;
 	height : 20;
 	top : 0px;
@@ -100,13 +99,16 @@ body{
 
 #infinityBonusPanel{
 	display : none;
+	position : absolute;
+	font-size : 23px;
 	
-	width : 150px;
-	height : 400px;
-	top : 100%;
+	width : 120px;
+	
+	top : 50px;
 	left : 100%;
-	margin-left: -150px;
-	margin-top: -400px;
+	margin-left: -120px;
+	
+	
 }
 
 .bonusPanelImg{
@@ -129,13 +131,15 @@ body{
 	
 	
 	background: url(img/menu/menu_2.png) no-repeat scroll top left transparent;
+	display:none;
 }
 
 #gameover{
 	font-size: 30px;
 	text-align: center;
 	margin-top : 15px;
-	color : #CC9000;	
+	color : #CC9000;
+		
 }
 
 #goscore{
@@ -162,7 +166,7 @@ body{
 }
 
 #playerName{
-	color : black;
+	color : white;
 	font-size : 20px;
 	
 }
@@ -198,5 +202,13 @@ body{
 	width : 200px;
 	height : 30px;
 	padding-left : 10px;
-	outline: none;
+	outline: none;	
+}
+
+#lifePicture{
+	width : 70px;
+}
+
+#infBonusImage{
+	
 }
