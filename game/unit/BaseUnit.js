@@ -16,6 +16,8 @@ function BaseUnit()
 	this.size;
 	
 	this.bullet;
+	
+	this.stopUnit = false;
 }
 
 extend(BaseUnit, createjs.Container);
@@ -43,7 +45,7 @@ BaseUnit.prototype.checkHitBullet = function()
 		if (bull == this.bullet) { continue; }
 		if (bull == this.bullet2) { continue; }
 		
-		if (getDistanceToObject(this, bull) <= this.size*0.6)
+		if (getDistanceToObject(this, bull) <= this.size*0.7)
 		{
 			//console.log("HIT TEST BULLET " + i);
 			
@@ -109,7 +111,7 @@ BaseUnit.prototype.checkDestroy = function()
 			var index = global.EnemyManager.enemies.indexOf(this);
 			if (index != -1)
 			{
-				global.EnemyManager.removeEnemy(this);
+				global.EnemyManager.blow(this);
 			}
 		}
 	}

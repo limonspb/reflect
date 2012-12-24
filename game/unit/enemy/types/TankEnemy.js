@@ -118,6 +118,7 @@ TankEnemy.prototype.move = function (elapsedTime)
 		if (!checkOutOfStage(this))
 		{
 			global.EnemyManager.removeEnemy(this);
+			//global.EnemyManager.blow(this);
 		}
 	}
 }

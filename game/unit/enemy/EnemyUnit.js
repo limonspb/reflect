@@ -146,7 +146,7 @@ EnemyUnit.prototype.checkHitTank = function(elapsedTime)
 	
 	if (getDistanceToObject(this, global.EnemyManager.tank) <= global.EnemyManager.tank.size*0.75)
 	{
-		global.EnemyManager.removeEnemy(this);
+		global.EnemyManager.blow(this);
 	}
 }
 

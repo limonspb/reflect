@@ -42,7 +42,7 @@ function EnemyManager()
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 150) { return; }
+	if (this.enemies.length >= 1) { return; }
 	
 	var enemy;
 	switch(type)
@@ -83,6 +83,45 @@ EnemyManager.prototype.addEnemy = function(type)
 	}
 }
 
+EnemyManager.prototype.blow = function(unit)
+{
+	unit.ssBlow = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 15]},
+		"images": [global.preloader.imgs.blow_anim],
+		"frames": {
+		"regX": global.preloader.imgs.blow_anim.height/2,
+		"regY": global.preloader.imgs.blow_anim.height/2,
+		"height": global.preloader.imgs.blow_anim.height,
+		"width": global.preloader.imgs.blow_anim.height
+		}
+	});	
+	
+	unit.ssBlow.getAnimation("run").frequency = 2;
+	
+	unit.blow = new createjs.BitmapAnimation(unit.ssBlow);
+	
+	unit.blow.onAnimationEnd = function(anim, frame)
+	{
+		anim.stop();
+		global.EnemyManager.enemiesCont.removeChild(anim);
+		anim = null;
+		global.EnemyManager.removeEnemy(unit);
+	}
+	
+	//var scale = 0.6;
+	unit.blow.x = unit.x;
+	unit.blow.y = unit.y;
+	global.EnemyManager.enemiesCont.addChild(unit.blow);
+				
+	unit.blow.gotoAndPlay("run");
+	unit.blow.rotation = Math.random()*360;
+	unit.blow.scaleX = unit.blow.scaleY = 0.7;
+	
+	unit.stopUnit = true;
+	
+	//global.EnemyManager.removeEnemy(unit);
+}
+
 EnemyManager.prototype.removeEnemy = function(enemy)
 {
 	var index = this.enemies.indexOf(enemy);
@@ -90,7 +129,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 	{
 		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }
 		
-		//TODO очистка всего содержимого врага
+		enemy.clearData();
 		
 		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
 		{
@@ -110,13 +149,13 @@ EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	this.checkAddSimpleEnemy(elapsedTime);
+	//this.checkAddSimpleEnemy(elapsedTime);
 	this.checkAddMediumEnemy(elapsedTime);
-	this.checkAddEscapeEnemy(elapsedTime);
-	this.checkAddStrongEnemy(elapsedTime);
-	this.checkAddChaseEnemy(elapsedTime);
-	this.checkAddTankEnemy(elapsedTime);
-	this.checkAddVacuumEnemy(elapsedTime);
+	//this.checkAddEscapeEnemy(elapsedTime);
+	//this.checkAddStrongEnemy(elapsedTime);
+	//this.checkAddChaseEnemy(elapsedTime);
+	//this.checkAddTankEnemy(elapsedTime);
+	//this.checkAddVacuumEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
