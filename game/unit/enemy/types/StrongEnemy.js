@@ -40,8 +40,8 @@ StrongEnemy.prototype.initView = function ()
 	
 	this.gun = new createjs.Container();
 	this.gunView = new createjs.Bitmap(global.preloader.imgs.strong_gun);
-	this.gunView.regX = 49;
-	this.gunView.regY = 54;
+	this.gunView.regX = 52;
+	this.gunView.regY = 60;
 	this.gunView.rotation = 90;
 	this.gunView.scaleX = this.gunView.scaleY = scale;
 	this.gun.addChild(this.gunView);

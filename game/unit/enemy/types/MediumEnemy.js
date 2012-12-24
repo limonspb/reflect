@@ -81,20 +81,8 @@ MediumEnemy.prototype.initOptions = function ()
 
 MediumEnemy.prototype.clearData = function ()
 {
-	this.view.removeChild(this.body);
-	this.gun.removeChild(this.gunView);
-	this.removeChild(this.gun);
-	this.removeChild(this.view);
+	this.body.stop();
 	
-	this.ss = null;
-	this.body = null;
-	this.gunView = null;
-	this.gun = null;
-	this.view = null;
-}
-
-MediumEnemy.prototype.clearData = function ()
-{
 	this.view.removeChild(this.body);
 	this.gun.removeChild(this.gunView);
 	this.removeChild(this.gun);
@@ -109,6 +97,8 @@ MediumEnemy.prototype.clearData = function ()
 
 MediumEnemy.prototype.move = function (elapsedTime)
 {
+	if (this.stopUnit == true) { return; }
+	
 	var dx = 0;
 	var dy = 0;
 	
@@ -186,7 +176,7 @@ MediumEnemy.prototype.shoot = function ()
 		this.respawnCount = 0;
 		
 		this.bulletAngle = this.gun.rotation;
-		this.backTime = 200;
+		this.backTime = 0;//200
 	}
 }
 

@@ -118,6 +118,8 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bullets/bullet.png","simple_bullet");
    this.addImage("img/bullets/flame_bullet_animation.png","x2damage_bullet");
    
+   this.addImage("img/effects/blow_animation.png","blow_anim");
+   
    this.addImage("img/enemies/chase/animation.png","chase_anim");
    this.addImage("img/enemies/chase/shadow.png","chase_shadow");
    
