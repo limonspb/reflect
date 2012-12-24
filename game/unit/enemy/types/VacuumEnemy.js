@@ -71,6 +71,8 @@ VacuumEnemy.prototype.initOptions = function ()
 	this.maxRange = 20;
 	
 	this.vacuum = 150;
+	
+	this.points = 25;
 }
 
 /*VacuumEnemy.prototype.clearData = function ()

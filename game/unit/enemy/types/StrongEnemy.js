@@ -81,9 +81,11 @@ StrongEnemy.prototype.initOptions = function ()
 	this.mass = 40 +  Math.random() * 20;
 	
 	this.truncate(this.velocity, this.MAX_VELOCITY);
+	
+	this.points = 22;
 }
 
-StrongEnemy.prototype.clearData = function ()
+/*StrongEnemy.prototype.clearData = function ()
 {
 	this.view.removeChild(this.body);
 	this.gun.removeChild(this.gunView);
@@ -95,7 +97,7 @@ StrongEnemy.prototype.clearData = function ()
 	this.gunView = null;
 	this.gun = null;
 	this.view = null;
-}
+}*/
 
 StrongEnemy.prototype.move = function (elapsedTime)
 {

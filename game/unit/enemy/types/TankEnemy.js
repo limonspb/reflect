@@ -68,7 +68,7 @@ TankEnemy.prototype.initOptions = function ()
 	this.maxRange = 20;
 }
 
-TankEnemy.prototype.clearData = function ()
+/*TankEnemy.prototype.clearData = function ()
 {
 	this.view.removeChild(this.body);
 	this.view.removeChild(this.shadow);
@@ -78,7 +78,7 @@ TankEnemy.prototype.clearData = function ()
 	this.body = null;
 	this.shadow = null;
 	this.view = null;
-}
+}*/
 
 TankEnemy.prototype.move = function (elapsedTime)
 {
@@ -119,7 +119,6 @@ TankEnemy.prototype.move = function (elapsedTime)
 		if (!checkOutOfStage(this))
 		{
 			global.EnemyManager.removeEnemy(this);
-			//global.EnemyManager.blow(this);
 		}
 	}
 }

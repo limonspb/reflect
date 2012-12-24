@@ -77,9 +77,11 @@ MediumEnemy.prototype.initOptions = function ()
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 500;
+	
+	this.points = 13;
 }
 
-MediumEnemy.prototype.clearData = function ()
+/*MediumEnemy.prototype.clearData = function ()
 {
 	this.body.stop();
 	
@@ -93,7 +95,7 @@ MediumEnemy.prototype.clearData = function ()
 	this.gunView = null;
 	this.gun = null;
 	this.view = null;
-}
+}*/
 
 MediumEnemy.prototype.move = function (elapsedTime)
 {

@@ -81,6 +81,8 @@ SimpleEnemy.prototype.initOptions = function ()
 	this.mass = 20 +  Math.random() * 20;
 	
 	this.truncate(this.velocity, this.MAX_VELOCITY);
+	
+	this.points = 10;
 }
 
 SimpleEnemy.prototype.move = function (elapsedTime)

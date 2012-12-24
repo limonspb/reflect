@@ -123,10 +123,24 @@ HeroUnit.prototype.tryTeleport = function(x,y){
 	}				
 }
 
-HeroUnit.prototype.teleport = function(x,y){
+HeroUnit.prototype.teleport = function(x,y) {
 	this.teleportCount --;
-	this.x = x;
-	this.y = y;	
+	
+	this.teleportX = x;
+	this.teleportY = y;
+	
+	var tween = createjs.Tween.get(this, {loop:false});	
+	tween.to( { alpha: 0 } ,200).wait(1).call(this.completeTeleport);
+}
+
+HeroUnit.prototype.completeTeleport = function()
+{
+	createjs.Tween.removeTweens(this);
+	
+	var tween = createjs.Tween.get(this, {loop:false});	
+	tween.to( { alpha: 1 } ,200)
+	this.x = this.teleportX;
+	this.y = this.teleportY;
 }
 
 HeroUnit.prototype.archiveShieldSegments = function(){
@@ -301,6 +315,10 @@ HeroUnit.prototype.initOptions = function ()
 	
 	this.fullProtectMode = false;
 	this.fullProtectTime = 0;
+	
+	this.protectIcon = new createjs.Bitmap(global.preloader.imgs.full_protect_icon);
+	this.protectIcon.regX = global.preloader.imgs.full_protect_icon.width/2;
+	this.protectIcon.regY = global.preloader.imgs.full_protect_icon.height/2;
 }
 
 HeroUnit.prototype.staticKeyControlling = function(){
@@ -538,10 +556,11 @@ HeroUnit.prototype.move = function(elapsedTime)
 	
 	if (this.fullProtectMode)
 	{
-		
+		this.addChild(this.protectIcon);
 		this.fullProtectTime -= elapsedTime;
 		if (this.fullProtectTime <= 0)
 		{
+			this.removeChild(this.protectIcon);
 			this.fullProtectMode = false;
 		}
 	}
