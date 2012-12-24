@@ -176,7 +176,7 @@ MediumEnemy.prototype.shoot = function ()
 		this.respawnCount = 0;
 		
 		this.bulletAngle = this.gun.rotation;
-		this.backTime = 0;//200
+		this.backTime = 200;//200
 	}
 }
 

@@ -136,6 +136,12 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/enemies/strong/Body_animation.png","strong_anim");
    this.addImage("img/enemies/strong/gun.png","strong_gun");
    
+   this.addImage("img/enemies/vacuum/body.png","vacuum_anim");
+   this.addImage("img/enemies/vacuum/GUN_animation.png","vacuum_gun");
+   
+   this.addImage("img/enemies/simple/Body.png","simple_anim");
+   this.addImage("img/enemies/simple/Gun.png","simple_gun");
+   
    this.addImage("img/shield.png","shield");
 };
 

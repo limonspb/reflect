@@ -17,29 +17,45 @@ extend(SimpleEnemy,EnemyUnit);
  */
 SimpleEnemy.prototype.initView = function ()
 {
-	this.view = new createjs.Shape();
-	this.view.graphics.beginFill("blue").drawRect ( -25 , -20 , 40 , 40 );
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 0]},
+		"images": [global.preloader.imgs.simple_anim],
+		"frames": {
+		"regX": global.preloader.imgs.simple_anim.height/2,
+		"regY": global.preloader.imgs.simple_anim.height/2,
+		"height": global.preloader.imgs.simple_anim.height,
+		"width": global.preloader.imgs.simple_anim.height
+		}
+	});	
 	
-	this.gun = new createjs.Shape();
-    this.gun.graphics.setStrokeStyle(1, 'round', 'round');
-    this.gun.graphics.beginStroke(('#000000'));
-    this.gun.graphics.moveTo(0,0);
-    this.gun.graphics.lineTo(20,0);
-    this.gun.graphics.endStroke();
-    this.gun.graphics.endFill();
+	this.ss.getAnimation("run").frequency = 4;
 	
-	this.width = 40;
-	this.height = 40;
+	this.body = new createjs.BitmapAnimation(this.ss);
+	
+	var scale = 0.6;
+				
+	this.body.gotoAndPlay("run");
+	this.body.rotation = 90;
+	this.body.scaleX = this.body.scaleY = scale;
+	
+	this.gun = new createjs.Container();
+	this.gunView = new createjs.Bitmap(global.preloader.imgs.simple_gun);
+	this.gunView.regX = global.preloader.imgs.simple_gun.width/2;
+	this.gunView.regY = global.preloader.imgs.simple_gun.height/2;
+	this.gunView.rotation = 90;
+	this.gunView.scaleX = this.gunView.scaleY = scale;
+	this.gun.addChild(this.gunView);
+	
+	this.width = global.preloader.imgs.simple_anim.width;
+	this.height = global.preloader.imgs.simple_anim.height;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.center = new createjs.Shape();
-	this.center.graphics.beginFill("red").drawCircle ( 0 , 0 , 1 );
+	this.view = new createjs.Container();
+	this.view.addChild(this.body);
 	
-	this.view.cache(-20,-20,40,40);
 	this.addChild(this.view);
 	this.addChild(this.gun);
-	this.addChild(this.center);
 }
 
 SimpleEnemy.prototype.initOptions = function ()
@@ -69,6 +85,8 @@ SimpleEnemy.prototype.initOptions = function ()
 
 SimpleEnemy.prototype.move = function (elapsedTime)
 {
+	if (this.stopUnit == true) { return; }
+	
 	this.dist = getDistanceToObject(this, global.hero);
 	
 	var dx = 0;

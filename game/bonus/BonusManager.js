@@ -279,5 +279,5 @@ BonusManager.prototype.clearAll = function(elapsedTime)
 	}
 	this.bonuses.length = 0;
 	
-	if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
+	//if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
 }

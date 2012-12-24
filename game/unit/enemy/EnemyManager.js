@@ -42,7 +42,7 @@ function EnemyManager()
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 1) { return; }
+	if (this.enemies.length >= 200) { return; }
 	
 	var enemy;
 	switch(type)
@@ -85,7 +85,7 @@ EnemyManager.prototype.addEnemy = function(type)
 
 EnemyManager.prototype.blow = function(unit)
 {
-	unit.ssBlow = new createjs.SpriteSheet({ "animations": {
+	var ssBlow = new createjs.SpriteSheet({ "animations": {
 		"run": [0, 15]},
 		"images": [global.preloader.imgs.blow_anim],
 		"frames": {
@@ -96,30 +96,30 @@ EnemyManager.prototype.blow = function(unit)
 		}
 	});	
 	
-	unit.ssBlow.getAnimation("run").frequency = 2;
+	ssBlow.getAnimation("run").frequency = 4;
 	
-	unit.blow = new createjs.BitmapAnimation(unit.ssBlow);
+	var blow = new createjs.BitmapAnimation(ssBlow);
 	
-	unit.blow.onAnimationEnd = function(anim, frame)
+	blow.onAnimationEnd = function(anim, frame)
 	{
 		anim.stop();
 		global.EnemyManager.enemiesCont.removeChild(anim);
 		anim = null;
-		global.EnemyManager.removeEnemy(unit);
+		//global.EnemyManager.removeEnemy(unit);
 	}
 	
 	//var scale = 0.6;
-	unit.blow.x = unit.x;
-	unit.blow.y = unit.y;
-	global.EnemyManager.enemiesCont.addChild(unit.blow);
+	blow.x = unit.x;
+	blow.y = unit.y;
+	global.EnemyManager.enemiesCont.addChild(blow);
 				
-	unit.blow.gotoAndPlay("run");
-	unit.blow.rotation = Math.random()*360;
-	unit.blow.scaleX = unit.blow.scaleY = 0.7;
+	blow.gotoAndPlay("run");
+	blow.rotation = Math.random()*360;
+	blow.scaleX = blow.scaleY = 0.7;
 	
 	unit.stopUnit = true;
 	
-	//global.EnemyManager.removeEnemy(unit);
+	global.EnemyManager.removeEnemy(unit);
 }
 
 EnemyManager.prototype.removeEnemy = function(enemy)
@@ -149,13 +149,13 @@ EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	//this.checkAddSimpleEnemy(elapsedTime);
+	this.checkAddSimpleEnemy(elapsedTime);
 	this.checkAddMediumEnemy(elapsedTime);
-	//this.checkAddEscapeEnemy(elapsedTime);
-	//this.checkAddStrongEnemy(elapsedTime);
-	//this.checkAddChaseEnemy(elapsedTime);
+	this.checkAddEscapeEnemy(elapsedTime);
+	this.checkAddStrongEnemy(elapsedTime);
+	this.checkAddChaseEnemy(elapsedTime);
 	//this.checkAddTankEnemy(elapsedTime);
-	//this.checkAddVacuumEnemy(elapsedTime);
+	this.checkAddVacuumEnemy(elapsedTime);
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
@@ -185,7 +185,10 @@ EnemyManager.prototype.move = function(elapsedTime)
 	
 	for (var i = 0; i < this.enemies.length; i++)
 	{
-		this.enemies[i].move(elapsedTime);
+		if (this.enemies[i] != null)
+		{
+			this.enemies[i].move(elapsedTime);
+		}
 	}
 }
 
@@ -299,7 +302,7 @@ EnemyManager.prototype.clearAll = function()
 	this.enemies.length = 0;
 	this.vacuums.length = 0;
 	
-	if (this.enemiesCont.parent) { this.enemiesCont.parent.removeChild(this.enemiesCont); }
+	//if (this.enemiesCont.parent) { this.enemiesCont.parent.removeChild(this.enemiesCont); }
 	
 	this.vacuumSize = 150;
 	

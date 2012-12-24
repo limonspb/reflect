@@ -95,6 +95,8 @@ EscapeEnemy.prototype.clearData = function ()
 
 EscapeEnemy.prototype.move = function (elapsedTime)
 {
+	if (this.stopUnit == true) { return; }
+	
 	this.dist = getDistanceToObject(this, global.hero);
 	
 	var dx = 0;
