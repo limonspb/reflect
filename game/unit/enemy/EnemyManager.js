@@ -19,7 +19,7 @@ function EnemyManager()
 	this.enemyScaleTime = 0;
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 5000;
+	this.timeToAddSimple = 700;
 	
 	this.timerAddMediumEnemy = 0;
 	this.timerToAddMedium = 8000;
@@ -38,11 +38,19 @@ function EnemyManager()
 	
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 20000;
+	
+	
+	this.totalEnemyKills = 0;
+	
+	this.isWaveInit = false;
 }
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	if (this.enemies.length >= 100) { return; }
+	//if (this.enemies.length >= 30) { return; }
+	
+	console.log("TYPE " + type);
+	console.log(this.enemies.length);
 	
 	var enemy;
 	switch(type)
@@ -82,6 +90,28 @@ EnemyManager.prototype.addEnemy = function(type)
 		this.enemies.push(enemy);
 	}
 }
+
+EnemyManager.prototype.initWave = function(types,nums,times)
+{
+	this.isWaveInit = true;
+	
+	var len = types.length;
+	for (var i = 0; i < len; i++)
+	{
+		for (var j = 0; j < nums[i]; j++)
+		{
+			var tween = createjs.Tween.get(this, {loop:false});
+			var obj = { };
+			tween.to( { },times[i]).call(this.addEnemy, [types[i]]);
+		}
+	}
+	/*
+	function wtf(type)
+	{
+		console.log(type);
+	}*/
+}
+
 
 EnemyManager.prototype.blow = function(unit)
 {
@@ -142,22 +172,32 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 			}
 		}
 		
+		this.totalEnemyKills++;
+		
 		this.enemies.splice(index,1);
 		enemy = null;
 	}
+	
+	console.log("ENEMIES " + this.enemies.length);
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	this.checkAddSimpleEnemy(elapsedTime);
+	if (!this.isWaveInit)
+	{
+		this.initWave([EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY], [10,5], [500,1000]);
+	}
+	
+	/*this.checkAddSimpleEnemy(elapsedTime);
 	this.checkAddMediumEnemy(elapsedTime);
 	this.checkAddEscapeEnemy(elapsedTime);
 	this.checkAddStrongEnemy(elapsedTime);
 	this.checkAddChaseEnemy(elapsedTime);
 	this.checkAddTankEnemy(elapsedTime);
-	this.checkAddVacuumEnemy(elapsedTime);
+	this.checkAddVacuumEnemy(elapsedTime);*/
+	
 }
 
 EnemyManager.prototype.move = function(elapsedTime)
