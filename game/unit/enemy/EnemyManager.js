@@ -6,7 +6,7 @@
 function EnemyManager()
 {
 	this.enemies = [];
-	this.vacuums = [];
+	
 	this.vacuumSize = 150;
 	this.enemiesCont = new createjs.Container();
 	
@@ -19,67 +19,265 @@ function EnemyManager()
 	this.enemyScaleTime = 0;
 	
 	this.timerAddSimpleEnemy = 0;
-	this.timeToAddSimple = 700;
+	this.timeToAddSimple = 3000;
 	
 	this.timerAddMediumEnemy = 0;
-	this.timerToAddMedium = 8000;
+	this.timerToAddMedium = 5000;
 	
 	this.timerAddEscapeEnemy = 0;
-	this.timerToAddEscape = 11000;
+	this.timerToAddEscape = 5000;
 	
 	this.timerAddStrongEnemy = 0;
-	this.timerToAddStrong = 14000;
+	this.timerToAddStrong = 10000;
 	
 	this.timerAddChaseEnemy = 0;
-	this.timerToAddChase = 18000;
+	this.timerToAddChase = 7000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 15000;
+	this.timerToAddTank = 40000;
 	
 	this.timerAddVacuumEnemy = 0;
-	this.timerToAddVacuum = 20000;
+	this.timerToAddVacuum = 15000;
 	
 	
 	this.totalEnemyKills = 0;
 	
 	this.isWaveInit = false;
+	
+	this.WAVES = [];
+	
+	this.skillKoeff = 1;
+	
+	this.MAX_LEN = 100;
+	
+	this.WAVE_LEN = 0;
+	
+	this.max_simple = 0;
+	this.simples = [];
+	this.max_medium = 0;
+	this.mediums = [];
+	this.max_escape = 0;
+	this.escapes = [];
+	this.max_chase = 0;
+	this.chases = [];
+	this.max_stong = 0;
+	this.strongs = [];
+	this.max_vacuum = 0;
+	this.vacuums = [];
+	this.max_tank = 1;
+	this.tanks = [];
+	
+	this.arrayTypes = [];
+	this.arrayTypes.push(this.simples, this.mediums, this.escapes, this.chases, this.strongs, this.vacuums, this.tanks);
+	
+	
+	this.WAVES.push({ time: 5000, wave: this.wave1, init: false });
+	this.WAVES.push({ time: 50000, wave: this.wave2, init: false });
+	this.WAVES.push({ time: 120000, wave: this.wave3, init: false });
+	this.WAVES.push({ time: 180000, wave: this.wave4, init: false });
+	this.WAVES.push({ time: 260000, wave: this.wave5, init: false });
+	this.WAVES.push({ time: 360000, wave: this.wave6, init: false });
+	this.WAVES.push({ time: 460000, wave: this.wave7, init: false });
+	this.WAVES.push({ time: 560000, wave: this.wave8, init: false });
+	this.WAVES.push({ time: 660000, wave: this.wave9, init: false });
+	
+}
+
+EnemyManager.prototype.wave1 = function()
+{
+	console.log("CALL WAVE 1");
+	global.EnemyManager.WAVE_LEN = 20;
+	
+	global.EnemyManager.max_simple = 20;
+	global.EnemyManager.max_medium = 0;
+	global.EnemyManager.max_escape = 0;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [20], [global.EnemyManager.timeToAddSimple]);
+}
+
+EnemyManager.prototype.wave2 = function()
+{
+	console.log("CALL WAVE 2");
+	global.EnemyManager.WAVE_LEN = 24;
+	
+	global.EnemyManager.max_simple = 18;
+	global.EnemyManager.max_medium = 5;
+	global.EnemyManager.max_escape = 0;
+	global.EnemyManager.max_chase = 1;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.CHASE_ENEMY],
+		[18, 5, 1],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddChase]);
+}
+
+EnemyManager.prototype.wave3 = function()
+{
+	console.log("CALL WAVE 3");
+	global.EnemyManager.WAVE_LEN = 33;
+	
+	global.EnemyManager.max_simple = 15;
+	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_escape = 8;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY],
+		[15, 10, 8],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape]);
+}
+
+EnemyManager.prototype.wave4 = function()
+{
+	console.log("CALL WAVE 4");
+	global.EnemyManager.WAVE_LEN = 42;
+	
+	global.EnemyManager.max_simple = 15;
+	global.EnemyManager.max_medium = 15;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 2;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY],
+		[15, 15, 10, 2],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase]);
+}
+
+EnemyManager.prototype.wave5 = function()
+{
+	console.log("CALL WAVE 5");
+	global.EnemyManager.WAVE_LEN = 46;
+	
+	global.EnemyManager.max_simple = 10;
+	global.EnemyManager.max_medium = 16;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 6;
+	global.EnemyManager.max_strong = 3;
+	global.EnemyManager.max_vacuum = 1;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[10, 16, 10, 6, 3, 1],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave6 = function()
+{
+	console.log("CALL WAVE 6");
+	global.EnemyManager.WAVE_LEN = 50;
+	
+	global.EnemyManager.max_simple = 10;
+	global.EnemyManager.max_medium = 12;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 10;
+	global.EnemyManager.max_strong = 6;
+	global.EnemyManager.max_vacuum = 2;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[10, 12, 10, 10, 6, 2],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave7 = function()
+{
+	console.log("CALL WAVE 7");
+	global.EnemyManager.WAVE_LEN = 51;
+	
+	global.EnemyManager.max_simple = 10;
+	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_escape = 16;
+	global.EnemyManager.max_chase = 5;
+	global.EnemyManager.max_strong = 10;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY],
+		[10, 10, 16, 5, 10, 0],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong]);
+}
+
+EnemyManager.prototype.wave8 = function()
+{
+	console.log("CALL WAVE 8");
+	global.EnemyManager.WAVE_LEN = 56;
+	
+	global.EnemyManager.max_simple = 6;
+	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_escape = 20;
+	global.EnemyManager.max_chase = 5;
+	global.EnemyManager.max_strong = 12;
+	global.EnemyManager.max_vacuum = 3;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[6, 10, 20, 5, 12, 3],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave9 = function()
+{
+	console.log("CALL WAVE 9");
+	global.EnemyManager.WAVE_LEN = 59;
+	
+	global.EnemyManager.max_simple = 20;
+	global.EnemyManager.max_medium = 14;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 5;
+	global.EnemyManager.max_strong = 6;
+	global.EnemyManager.max_vacuum = 4;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[20, 14, 10, 5, 6, 4],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
 EnemyManager.prototype.addEnemy = function(type)
 {
-	//if (this.enemies.length >= 30) { return; }
-	
-	console.log("TYPE " + type);
-	console.log(this.enemies.length);
+	if (this.enemies.length >= this.MAX_LEN) { return; }
 	
 	var enemy;
 	switch(type)
 	{
 		case EnemyTypes.SIMPLE_ENEMY:
 			enemy = new SimpleEnemy();
+			if (this.simples.length < this.max_simple) { this.simples.push(enemy); } else { enemy = null; }
 			break;
 		case EnemyTypes.MEDIUM_ENEMY:
 			enemy = new MediumEnemy();
+			if (this.mediums.length < this.max_medium) { this.mediums.push(enemy); } else { enemy = null; }
 			break;
 		case EnemyTypes.ESCAPE_ENEMY:
 			enemy = new EscapeEnemy();
-			break;
-		case EnemyTypes.STRONG_ENEMY:
-			enemy = new StrongEnemy();
-			break;
-		case EnemyTypes.SMART_ENEMY:
-			enemy = new SmartEnemy();
-			break;
-		case EnemyTypes.TANK_ENEMY:
-			enemy = new TankEnemy();
-			this.tank = enemy;
+			if (this.escapes.length < this.max_escape) { this.escapes.push(enemy); } else { enemy = null; }
 			break;
 		case EnemyTypes.CHASE_ENEMY:
 			enemy = new ChaseEnemy();
+			if (this.chases.length < this.max_chase) { this.chases.push(enemy); } else { enemy = null; }
 			break;
+		case EnemyTypes.STRONG_ENEMY:
+			enemy = new StrongEnemy();
+			if (this.strongs.length < this.max_strong) { this.strongs.push(enemy); } else { enemy = null; }
+			break;
+		
 		case EnemyTypes.VACUUM_ENEMY:
 			enemy = new VacuumEnemy();
-			if (this.vacuums.length < 3) { this.vacuums.push(enemy); } else { enemy = null; }
+			if (this.vacuums.length < this.max_vacuum) { this.vacuums.push(enemy); } else { enemy = null; }
+			break;
+		case EnemyTypes.TANK_ENEMY:
+			enemy = new TankEnemy();
+			if (this.tanks.length < this.max_tank) { this.tanks.push(enemy); } else { enemy = null; }
+			this.tank = enemy;
 			break;
 	}
 	if (enemy)
@@ -91,9 +289,12 @@ EnemyManager.prototype.addEnemy = function(type)
 	}
 }
 
+
+
+
 EnemyManager.prototype.initWave = function(types,nums,times)
 {
-	this.isWaveInit = true;
+	//this.isWaveInit = true;
 	
 	var len = types.length;
 	for (var i = 0; i < len; i++)
@@ -105,6 +306,12 @@ EnemyManager.prototype.initWave = function(types,nums,times)
 			tween.to( { },times[i]).call(this.addEnemy, [types[i]]);
 		}
 	}
+	
+	//TODO инициализация волны
+	//Задаем параметры, массив типов, массив количества каждого типа, массив промежутки появления для каждого типа
+	//После отработки инициализации, продолжение слежки за волной, постоянной пополнение определенным количеством мобов
+	//Задание коэффициента усиления монстров
+	
 	/*
 	function wtf(type)
 	{
@@ -163,14 +370,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		
 		global.points += enemy.points;
 		
-		if (enemy.type == EnemyTypes.VACUUM_ENEMY)
-		{
-			var ind = this.vacuums.indexOf(enemy);
-			if (ind!=-1)
-			{
-				this.vacuums.splice(ind,1);
-			}
-		}
+		this.removeTypeEnemy(enemy, this.arrayTypes[enemy.type]);
 		
 		this.totalEnemyKills++;
 		
@@ -178,25 +378,34 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		enemy = null;
 	}
 	
-	console.log("ENEMIES " + this.enemies.length);
+	//console.log("ENEMIES " + this.enemies.length);
+}
+
+EnemyManager.prototype.removeTypeEnemy = function(enemy, arrType)
+{
+	var ind = arrType.indexOf(enemy);
+	if (ind!=-1) { arrType.splice(ind,1); }
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
 {
 	this.move(elapsedTime);
 	
-	if (!this.isWaveInit)
+	for (var i = 0; i < this.WAVES.length; i++)
 	{
-		this.initWave([EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY], [10,5], [500,1000]);
+		var obj = this.WAVES[i];
+		if (obj.init == true) { continue; }
+		obj.time -= elapsedTime;
+		if (obj.time <= 0) { obj.wave.call(); obj.init = true; }
 	}
 	
-	/*this.checkAddSimpleEnemy(elapsedTime);
+	this.checkAddSimpleEnemy(elapsedTime);
 	this.checkAddMediumEnemy(elapsedTime);
 	this.checkAddEscapeEnemy(elapsedTime);
 	this.checkAddStrongEnemy(elapsedTime);
 	this.checkAddChaseEnemy(elapsedTime);
 	this.checkAddTankEnemy(elapsedTime);
-	this.checkAddVacuumEnemy(elapsedTime);*/
+	this.checkAddVacuumEnemy(elapsedTime);
 	
 }
 

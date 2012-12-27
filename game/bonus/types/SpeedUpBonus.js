@@ -6,7 +6,7 @@ function SpeedUpBonus()
 {
 	SpeedUpBonus.superclass.constructor.apply(this);
 	
-	this.speedTime = 3000;
+	this.speedTime = 15000;
 }
 
 extend(SpeedUpBonus, BaseBonus);
