@@ -86,7 +86,7 @@ TankEnemy.prototype.move = function (elapsedTime)
 	
 	this.dist = getDistanceToObject(this, global.hero);
 	
-	if (this.dist >= this.size + 200)
+	if (this.dist >= (this.size + global.hero.size + 130))
 	{
 		if (!this.tankMode) 
 		{

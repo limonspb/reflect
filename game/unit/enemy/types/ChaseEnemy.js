@@ -54,16 +54,17 @@ ChaseEnemy.prototype.initView = function ()
 
 ChaseEnemy.prototype.initOptions = function ()
 {
-	this.type = EnemyTypes.CHASE_ENEMY
+	this.type = EnemyTypes.CHASE_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
 	this.speed = Math.random()*30 + 140;
 	this.rotationSpeed = 120;
-	this.health = 20;
-	this.nearDamage = 20;
+	this.health = 20*skill;
+	this.nearDamage = 20*skill;
 	this.minRange = 10;
 	this.maxRange = 20;
 	
-	this.points = 20;
+	this.points = 20*skill;
 }
 
 /*ChaseEnemy.prototype.clearData = function ()

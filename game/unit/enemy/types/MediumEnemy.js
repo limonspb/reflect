@@ -68,17 +68,18 @@ MediumEnemy.prototype.initView = function ()
 MediumEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.MEDIUM_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*30 + 40;
+	this.speed = Math.random()*30*skill + 40;
 	this.rotationSpeed = 100;
-	this.health = 30;
+	this.health = 30*skill;
 	this.damage = 10;
 	this.bulletRespawn = 3000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 500;
 	
-	this.points = 13;
+	this.points = 14*skill;
 }
 
 /*MediumEnemy.prototype.clearData = function ()

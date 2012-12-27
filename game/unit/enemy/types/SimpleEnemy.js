@@ -61,17 +61,18 @@ SimpleEnemy.prototype.initView = function ()
 SimpleEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.SIMPLE_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*30 + 50;
-	this.rotationSpeed = 40;
-	this.health = 10;
+	this.speed = Math.random()*30*skill + 50;
+	this.rotationSpeed = 40*skill;
+	this.health = 10*skill;
 	this.damage = 5;
 	this.bulletRespawn = 2000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 100;
 	this.maxRange = 600;
 	
-	this.points = 10;
+	this.points = 10*skill;
 }
 
 SimpleEnemy.prototype.move = function (elapsedTime)

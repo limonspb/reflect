@@ -68,17 +68,18 @@ EscapeEnemy.prototype.initView = function ()
 EscapeEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.ESCAPE_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*30 + 50;
-	this.rotationSpeed = 70;
-	this.health = 50;
+	this.speed = Math.random()*30*skill + 50;
+	this.rotationSpeed = 70*skill;
+	this.health = 50*skill;
 	this.damage = 12;
-	this.bulletRespawn = 2500 + Math.random()*1000;
+	this.bulletRespawn = (2500 + Math.random()*1000)/skill;
 	this.bulletType = BulletTypes.SHOT_GUN;
 	this.minRange = 150;
 	this.maxRange = 700;
 	
-	this.points = 18;
+	this.points = 18*skill;
 }
 
 /*EscapeEnemy.prototype.clearData = function ()
