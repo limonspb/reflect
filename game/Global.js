@@ -16,5 +16,7 @@ var global = {
 	staticControl : false,
 	gameTime : 0,
 	points : 0,
-	place : 0
+	place : 0,
+	music : null,
+	volumePanel : null
 };

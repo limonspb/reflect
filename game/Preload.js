@@ -1,77 +1,86 @@
 Preloader = function(){
-	this.sources = [];
-	this.manifest;
-	this.names = [];
+	this.manifest = [];
 	
-	this.imgs = {};
+	this.imgs = {};	
 
 	this.initConstants();
+
+	//createjs.FlashPlugin.BASE_PATH = "lib/srcsound/soundjs/";
+	if (!createjs.SoundJS.checkPlugin(true)){
+		alert('sound problems');
+	}	
 	
 	this.pr = new createjs.PreloadJS();
+	this.pr.installPlugin(createjs.SoundJS);
+	createjs.SoundJS.setMasterVolume(0.5);
 	this.pr.owner = this;
 	this.pr.onFileLoad = this.onFileLoad; 
 	this.pr.onProgress = this.onProgress;
 	this.onComplete = null;
-	this.pr.onComplete = function(event){
-		if(event.target.owner.onComplete){
-			event.target.owner.onComplete();
-			$("#preloader").fadeOut();
-		}
-	};
+	
 	
 	this.onProgress = null;
 	
 	//this.pr.onFileProgress = handleFileProgress;
-	//this.pr.onError = handleFileError;
-	this.pr.setMaxConnections(1);	
-};
-
-
-Preloader.prototype.getSourceIndex = function(str){
-	for (var i=0; i<this.sources.length; i++){
-		if (str==this.sources[i]) return i;
+	this.pr.onError = function(){
+		alert("preloader error");
+	}
+	//this.pr.setMaxConnections(1);
+	
+	
+	this.pr.onComplete = function(event){
+		if(event.target.owner.onComplete){
+			event.target.owner.onComplete();
+			$("#preloader").fadeOut();					
+		}
 	};
-	return -1;
+	
+				
 };
 
 
 Preloader.prototype.onFileLoad = 	function(event){
-		var n = event.target.owner.getSourceIndex(event.id);
-		if (n>=0){
-			event.target.owner.imgs[event.target.owner.names[n]] = event.result;
-		}		
+		//console.log(event);
+		if (event.type == "image"){
+			event.target.owner.imgs[event.id] = event.result;	
+		}else{
+			//alert("sound loaded");
+		}
+		
+		
 };
 
 
 
 Preloader.prototype.go = function(){	
-	//this.pr.loadManifest(this.sources,true);
-	this.manifest = this.sources.slice(0);
-	
-	while (this.manifest.length > 0) {
-	    var item = this.manifest.shift();
-	    this.pr.loadFile(item);
-    }	
+	this.pr.loadManifest(this.manifest,true);
 };
 
-Preloader.prototype.onProgress = function(event){	
-	$("#bar").width(event.target.progress*400);
-	if (event.target.owner.onProgress){
-		event.target.owner.onProgress(event.target.progress);
-	}else{		
-	}	
+Preloader.prototype.onProgress = function(event){
+	var progress = 0;
+	progress = event.target.progress;
+	$("#bar").width(progress*400);
 };
 
-//global.preloader = new Preloader();
 
 
-Preloader.prototype.addImage = function(src, name){
-	this.sources.push(src);
-	this.names.push(name);
+
+Preloader.prototype.addImage = function(src, name){	
+	this.manifest.push({src:src, id:name, data:1});
+}
+
+Preloader.prototype.addSound = function(src,name,times){	
+	this.manifest.push({src:src,id:name, data:times});
+	//alert(this.manifest[this.manifest.length-1].src);
 }
 
 Preloader.prototype.initConstants = function()
 {
+   this.addSound("sound/phh.ogg|sound/phh.mp3","phh",2);
+   this.addSound("sound/music/mus1.mp3|sound/music/mus1.ogg","mus1",2);
+   this.addSound("sound/music/mus2.mp3|sound/music/mus2.ogg","mus2",2);
+
+	
    this.addImage("img/image0.jpg","name0");
    this.addImage("img/image1.jpg","name1");
    this.addImage("img/image2.jpg","name2");
@@ -145,5 +154,8 @@ Preloader.prototype.initConstants = function()
    
    this.addImage("img/shield.png","shield");
    this.addImage("img/underShield.png","underShield");
+   
+   
+   
 };
 

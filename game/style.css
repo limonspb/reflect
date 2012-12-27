@@ -70,6 +70,17 @@ body{
 	pointer-events:none;	
 }
 
+.activeGamePanel{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+	position : absolute;	
+}
+
 #lifePanel{
 	display : none;
 	top : 0px;	
@@ -94,7 +105,7 @@ body{
 	height : 20;
 	top : 0px;
 	left : 100%;
-	margin-left : -150px;
+	margin-left : -250px;
 }
 
 #infinityBonusPanel{
@@ -210,5 +221,60 @@ body{
 }
 
 #infBonusImage{
+	
+}
+
+#volumePanel{
+	cursor : pointer;
+	left : 100%;
+	width : 60px;
+	height : 30px;
+	top : 0px;
+	margin-left:-60px;	
+	overflow:hidden;
+}
+#volumePanel:hover{
+	height : 130px;
+	
+}
+
+#sound_div{
+	float : left;
+	width : 30px;
+	height : 30px;	
+	background-size: 30px 30px;					
+}
+
+#music_div{
+	float : left;
+	width : 30px;
+	height : 30px;	
+	background-size: 30px 30px;
+}
+
+.volume_img{
+	width : 30px;
+	height : 30px;
+	position : absolute;
+	top : 0px;
+	left : 0px;
+}
+#music_div{
+	position : absolute;
+	top : 0px;
+	left : 30px;
+}
+#volume_slider_div{
+	position : absolute;
+	width : 40px;
+	height : 100px;
+	padding-top:7px;	
+	top : 30px;
+	left : 20px;
+	
+}
+
+#volume_slider{
+	height : 80px;
 	
 }

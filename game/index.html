@@ -14,7 +14,7 @@
 		<!--
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 		-->
-		<link rel="stylesheet" type='text/css' href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" type='text/css' href="jquery-ui.css" />
 		<link rel="stylesheet" type='text/css' href="menustyle.css" />
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico" />
@@ -25,11 +25,22 @@
 		<script src="lib/easeljs-0.5.0.min.js"></script>
 		<script src="lib/jquery-1.8.3.min.js"></script>
 		<script src="lib/preloadjs-0.2.0.min.js"></script>
+<!--		<script src="lib/soundjs-0.3.0.min.js"></script>
+		<script src="lib/soundjs.flashplugin-0.3.0.min.js"></script> -->
+		
+		<script type="text/javascript" src="lib/srcsound/soundjs/SoundJS.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/HTMLAudioPlugin.js"></script>
+		<script type="text/javascript" src="lib/srcsound/swfobject.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/FlashPlugin.js"></script>
+		
+		
 		<script src="lib/tweenjs-0.3.0.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		<script src="extend.js"></script>
 		<script src="functions.js"></script>
 		<script src="MenuButton.js"></script>
+		<script src="Music.js"></script>
+		
 		
 		<script src="Global.js"></script>
 		
@@ -77,6 +88,7 @@
 		
 		<script src="view/BackGround.js"></script>
 		
+		<script src="scenes/gameScenePanels/VolumePanel.js"></script>
 		<script src="scenes/gameScenePanels/LifePanel.js"></script>
 		<script src="scenes/gameScenePanels/BonusPanel.js"></script>
 		<script src="scenes/gameScenePanels/PointsPanel.js"></script>
@@ -304,7 +316,39 @@
 				<div id="sendRecordButton" class="goButton"></div>
 			</div>
 		</div>	
-
+<!--
+	===========================================================================================================
+-->
+	<div id="volumePanel" class="activeGamePanel">
+		<div id = "sound_div">
+			<img class="volume_img" src="img/menu/sound.png"/>
+			<img id="mute_sound_img" class="volume_img" src="img/menu/mute.png"/>
+		</div>
+		<div id = "music_div">
+			<img class="volume_img" src="img/menu/music.png"/>
+			<img id="mute_music_img" class="volume_img" src="img/menu/mute.png"/>
+		</div>
+		<div id="volume_slider_div">
+			<div id="volume_slider">
+			</div>
+		</div>
+			<script>
+			    $(function() {
+			        $( "#volume_slider" ).slider({
+			            orientation: "vertical",
+			            range: "min",
+			            min: 0,
+			            max: 100,
+			            value: 50,
+			            slide: function( event, ui ) {
+			                global.volumePanel.setVolume( ui.value );
+			            }
+			        });
+			        $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
+			    });
+    		</script>
+	</div>
+		
 
 	</body>
 </html>

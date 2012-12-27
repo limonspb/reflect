@@ -20,6 +20,7 @@ function init() {
 	
 	global.keyboard = new Keyboard();
 	global.preloader = new Preloader();
+	global.music = new Music();
 	
 	global.preloader.onComplete = handleImageLoad;
 	global.preloader.go();
@@ -33,19 +34,20 @@ function bodyKeyUp(event){
 	keys[event.keyCode] = false;
 }
 
+var preload;
+
 function handleImageLoad(event){
+	global.music.play();
 	global.sceneController = new SceneController();
 	global.sceneController.currentScene = global.sceneController.menuScene;
 	global.sceneController.menuScene.show();
-	//global.sceneController.creditsScene.show();
+	global.volumePanel = new VolumePanel();
 	
-	//test = new CutSprite(global.preloader.imgs.spider,200,200,9);
-	//test.x = 200;
-	//test.y = 200;	
-	//global.stage.addChild(test);	
+	
 	
 	createjs.Ticker.addListener(window);	
 	createjs.Ticker.setFPS(30);	
+		
 }
 
 

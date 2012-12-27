@@ -24,9 +24,15 @@ MenuScene.prototype.onInfoClick = function(){
 }
 
 MenuScene.prototype.onNewGameClick = function(){
-	global.sceneController.switchScene(SceneController.eventTypes.NEW_GAME);
+	global.sceneController.switchScene(SceneController.eventTypes.NEW_GAME);	
 }
 MenuScene.prototype.onSettingsClick = function(){
+	
+	//var i = createjs.SoundJS.play("phh", createjs.SoundJS.INTERRUPT_NONE, 0, 0, false, 1);
+	i.onComplete = function(i){
+		i.stop();
+	}
+	
 	global.sceneController.switchScene(SceneController.eventTypes.SETTINGS);
 }
 MenuScene.prototype.onRecordsClick = function(){

@@ -1,8 +1,42 @@
 <!DOCTYPE html>
 <html>
-	<body>
-		<iframe src="http://127.0.0.1:8020/reflect/index.html" width="400" height="200">
+	<head>
+		<script src="lib/easeljs-0.5.0.min.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="lib/preloadjs-0.2.0.min.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/WebAudioPlugin.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/SoundJS.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/HTMLAudioPlugin.js"></script>
+		
+		
+		<script type="text/javascript" src="lib/srcsound/swfobject.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/FlashPlugin.js"></script>
+
+		<script>			
+			var manifest = [
+				{src:"music/mus2.ogg|music/mus2.mp3", id:1,data:6}
+			];
+			//createjs.SoundJS.registerPlugins([WebAudioPlugin, createjs.HTMLAudioPlugin]);
+			alert("CheckPlugin: "+createjs.SoundJS.checkPlugin(true));
 			
-		</iframe>
+			preload = new createjs.PreloadJS();
+			preload.installPlugin(createjs.SoundJS);
+			preload.loadManifest(manifest, true);
+			
+			function play(){
+				var i = createjs.SoundJS.play(1);
+				$('body').append(i.toString());
+				console.log(i);
+			}
+		</script>
+
+	</head>
+	<body>
+		<div  id ="playdiv1" onClick="play();" style="cursor:pointer">
+			Press here 1
+		</div>
+		<div  id ="playdiv2" onClick="play();" style="cursor:pointer">
+			Press here 2
+		</div>
 	</body>
 </html>
