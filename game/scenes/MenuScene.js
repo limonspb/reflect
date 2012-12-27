@@ -28,7 +28,7 @@ MenuScene.prototype.onNewGameClick = function(){
 }
 MenuScene.prototype.onSettingsClick = function(){
 	
-	//var i = createjs.SoundJS.play("phh", createjs.SoundJS.INTERRUPT_NONE, 0, 0, false, 1);
+	var i = createjs.SoundJS.play("phh", createjs.SoundJS.INTERRUPT_NONE, 0, 0, false, 1);
 	
 	global.sceneController.switchScene(SceneController.eventTypes.SETTINGS);
 }
