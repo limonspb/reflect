@@ -7,7 +7,7 @@ function PlusToLifeBonus()
 	PlusToLifeBonus.superclass.constructor.apply(this);
 	
 	
-	this.plusToLife = 10;
+	this.plusToLife = 20;
 }
 
 extend(PlusToLifeBonus, BaseBonus);

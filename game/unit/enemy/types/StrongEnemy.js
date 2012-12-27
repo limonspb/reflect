@@ -61,10 +61,11 @@ StrongEnemy.prototype.initView = function ()
 StrongEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.STRONG_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*30 + 90;
+	this.speed = Math.random()*30*skill + 90;
 	this.rotationSpeed = 200;
-	this.health = 20;
+	this.health = 20*skill;
 	this.damage = 10;
 	this.bulletRespawn = 4000 + Math.random()*3000;
 	this.bulletType = BulletTypes.SHOT_GUN;
@@ -82,7 +83,7 @@ StrongEnemy.prototype.initOptions = function ()
 	
 	this.truncate(this.velocity, this.MAX_VELOCITY);
 	
-	this.points = 22;
+	this.points = 22*skill;
 }
 
 /*StrongEnemy.prototype.clearData = function ()

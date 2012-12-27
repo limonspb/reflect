@@ -103,13 +103,16 @@ BonusManager.prototype.update = function(elapsedTime)
 }
 
 /**
- * Выпадение бонусов с типов SMALL_MED_KIT
- * @param {Number} elapsedTime
+ * Выпадение бонусов с типом SMALL_MED_KIT.
+ * Выпадает каждые 15-45сек, если количество жизней меньше 80% от максимального.
  */
 BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 {
+	if (global.hero.health/global.hero.MAX_HEALTH > 0.8) { return; }
+	
 	this.smallMedKitBonusTime += elapsedTime;
-	if (this.smallMedKitBonusTime >= 4000 + Math.random()*10000)
+	
+	if (this.smallMedKitBonusTime >= 8000 + Math.random()*30000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -119,10 +122,17 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом MEDIUM_MED_KIT.
+ * Выпадает каждые 5-40сек, если количество жизней меньше 50% от максимального.
+ */
 BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 {
+	if (global.hero.health/global.hero.MAX_HEALTH > 0.5) { return; }
+	
 	this.mediumMedKitBonusTime += elapsedTime;
-	if (this.mediumMedKitBonusTime >= 5000 + Math.random()*15000)
+	
+	if (this.mediumMedKitBonusTime >= 5000 + Math.random()*20000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -132,10 +142,14 @@ BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом PLUS_TO_LIFE.
+ * Выпадает каждые 20-60сек, повышает максимальный запас жизней на 10.
+ */
 BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 {
 	this.plusToLifeBonusTime += elapsedTime;
-	if (this.plusToLifeBonusTime >= 13000)
+	if (this.plusToLifeBonusTime >= 20000 + Math.random()*40000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -145,10 +159,14 @@ BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом FREEZ.
+ * Выпадает каждые 20-80сек, на время останавливает всех вражеских юнитов.
+ */
 BonusManager.prototype.freezUpdate = function(elapsedTime)
 {
 	this.freezBonusTime += elapsedTime;
-	if (this.freezBonusTime >= 7000 + Math.random()*15000)
+	if (this.freezBonusTime >= 20000 + Math.random()*60000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -158,10 +176,14 @@ BonusManager.prototype.freezUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом DOUBLE_DAMAGE.
+ * Выпадает каждые 10-110сек, при отражении щитом удваивает урон снарядов на определенное время.
+ */
 BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 {
 	this.doubleDamageBonusTime += elapsedTime;
-	if (this.doubleDamageBonusTime >= 6000 + Math.random()*20000)
+	if (this.doubleDamageBonusTime >= 10000 + Math.random()*100000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -171,10 +193,14 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом SPEED_UP.
+ * Выпадает каждые 15-45сек, ускоряет в два раза движение персонажа.
+ */
 BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 {
 	this.speedUpBonusTime += elapsedTime;
-	if (this.speedUpBonusTime >= 5000 + Math.random()*10000)
+	if (this.speedUpBonusTime >= 15000 + Math.random()*30000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -184,10 +210,16 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом REGENERATION.
+ * Выпадает раз в 1-5сек после каждого 10го убитого врага, добавляет регенерацию жизней на 1.
+ */
 BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%10 != 0) { return; } 
+	
 	this.regenerationBonusTime += elapsedTime;
-	if (this.regenerationBonusTime >= 10000 + Math.random()*3000)
+	if (this.regenerationBonusTime >= 5000 + Math.random()*5000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -197,10 +229,16 @@ BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом TELEPORT.
+ * Выпадает раз в 1-20сек после каждого 15го убитого врага, добавляет возможность телепортироваться 1 раз за каждый такой бонус.
+ */
 BonusManager.prototype.teleportUpdate = function(elapsedTime)
 {
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%15 != 0) { return; } 
+	
 	this.teleportBonusTime += elapsedTime;
-	if (this.teleportBonusTime >= 4000 + Math.random()*20000)
+	if (this.teleportBonusTime >= 10000 + Math.random()*10000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -210,10 +248,14 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом ENEMY_SCALE.
+ * Выпадает раз в 30-90сек, увеличивает размер всех монстров в 1.5 раза на время.
+ */
 BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 {
 	this.enemyScaleBonusTime += elapsedTime;
-	if (this.enemyScaleBonusTime >= 10000 + Math.random()*30000)
+	if (this.enemyScaleBonusTime >= 30000 + Math.random()*60000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -223,10 +265,14 @@ BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом SHIELD_SCALE.
+ * Выпадает раз в 15-45сек, увеличивает размер щита главного игрока в 1.5 раза на время.
+ */
 BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 {
 	this.shieldScaleBonusTime += elapsedTime;
-	if (this.shieldScaleBonusTime >= 8000 + Math.random()*10000)
+	if (this.shieldScaleBonusTime >= 15000 + Math.random()*45000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;
@@ -236,10 +282,16 @@ BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 	}
 }
 
+/**
+ * Выпадение бонусов с типом FULL_PROTECT.
+ * Выпадает раз в 15-75сек после каждого 10го убитого монстра, на время делает игрока неуязвимым к любым уронам.
+ */
 BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 {
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%10 != 0) { return; }
+	
 	this.fullProtectBonusTime += elapsedTime;
-	if (this.fullProtectBonusTime >= 3000 + Math.random()*25000)
+	if (this.fullProtectBonusTime >= 8000 + Math.random()*15000)
 	{
 		var x = global.camera.lookAtX + Math.random() * global.gameWidth;
 		var y = global.camera.lookAtY + Math.random() * global.gameHeight;

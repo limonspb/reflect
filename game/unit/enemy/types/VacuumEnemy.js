@@ -62,17 +62,18 @@ VacuumEnemy.prototype.initView = function ()
 VacuumEnemy.prototype.initOptions = function ()
 {
 	this.type = EnemyTypes.VACUUM_ENEMY;
+	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*20 + 30;
+	this.speed = Math.random()*20*skill + 30;
 	this.rotationSpeed = 50;
-	this.health = 20;
-	this.nearDamage = 20;
+	this.health = 20*skill;
+	this.nearDamage = 20*skill;
 	this.minRange = 10;
 	this.maxRange = 20;
 	
 	this.vacuum = 150;
 	
-	this.points = 25;
+	this.points = 25*skill;
 }
 
 /*VacuumEnemy.prototype.clearData = function ()
