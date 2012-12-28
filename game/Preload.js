@@ -78,11 +78,7 @@ Preloader.prototype.initConstants = function()
 {
    this.addSound("sound/phh.ogg|sound/phh.mp3","phh",2);
 	
-   this.addImage("img/image0.jpg","name0");
-   this.addImage("img/image1.jpg","name1");
-   this.addImage("img/image2.jpg","name2");
-   this.addImage("img/spider.png","spider");
-   this.addImage("img/back.jpg","back");
+   
    this.addImage("img/back/pattern.png","pattern");
    for (var i=1; i <= 15; i++){
 	   this.addImage("img/back/cloud_"+ i.toString() + ".png","cloud_"+i.toString());   	
