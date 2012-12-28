@@ -5,6 +5,9 @@ VolumePanel = function(){
 	$('#music_div').click(this.musicDivClick);
 	this.getSavedValues();
 	this.setControls();
+	global.music.setVolume(0.5);
+	global.music.setPlay(this.music);
+	
 }
 
 VolumePanel.prototype.setControls = function(){
@@ -54,5 +57,6 @@ VolumePanel.prototype.musicDivClick = function(){
 
 VolumePanel.prototype.setVolume = function(v){
 	createjs.SoundJS.setMasterVolume(v/100);
+	global.music.setVolume(v/100);
 }
 

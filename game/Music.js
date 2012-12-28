@@ -1,32 +1,45 @@
 Music = function(){
-	this.mus;
+	this.M = [];
+	this.M[0] = document.getElementById('menu_audio');
+	this.M[1] = document.getElementById('game_audio');
+	this.current = 0;
+	this.mute = true;
 }
 
-Music.prototype.play = function(){
-	this.mus = createjs.SoundJS.play("mus1", createjs.SoundJS.INTERRUPT_NONE);
-	this.nowPlaying = 0;
-	
-	this.mus.onComplete = this.songComplete;
-
-}
-
-Music.prototype.songComplete = function(i){
-	var id = "";
-	if (global.music.nowPlaying == 0){
-		id = "mus2";
-		global.music.nowPlaying = 1;
-	}else{
-		id = "mus1";
-		global.music.nowPlaying = 0;
+Music.prototype.play = function(n){
+	this.current = n;
+	for (var i=0; i<2; i++){
+		this.M[i].pause();
+		this.M[i].currentTime = 0;		
 	}
-	global.music.mus = createjs.SoundJS.play(id, createjs.SoundJS.INTERRUPT_NONE);	
-	global.music.mus.onComplete = global.music.songComplete;
+	if (!this.mute){
+		this.M[n].play();	
+	}
+	
+	
 }
 
-Music.prototype.setPlay = function(toplay){	
-	if (toplay){
-		this.mus.play();
+
+Music.prototype.stopAll = function(){
+	for (var i=0; i<2; i++){
+		this.M[i].pause();
+		this.M[i].currentTime=0;		
+	}
+}
+
+Music.prototype.setPlay = function(bool){
+	if (bool != this.mute) return;
+	this.mute = !bool;
+	if (bool){
+		this.play(this.current);
 	}else{
-		this.mus.stop();	
+		this.stopAll();
+	}
+}
+
+Music.prototype.setVolume = function(v){
+	for (var i=0; i<2; i++){
+		this.M[i].volume = v;
+				
 	}	
 }

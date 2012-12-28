@@ -77,9 +77,6 @@ Preloader.prototype.addSound = function(src,name,times){
 Preloader.prototype.initConstants = function()
 {
    this.addSound("sound/phh.ogg|sound/phh.mp3","phh",2);
-   this.addSound("sound/music/mus1.mp3|sound/music/mus1.ogg","mus1",2);
-   this.addSound("sound/music/mus2.mp3|sound/music/mus2.ogg","mus2",2);
-
 	
    this.addImage("img/image0.jpg","name0");
    this.addImage("img/image1.jpg","name1");

@@ -58,6 +58,7 @@ GameScene.prototype.show = function(){
 	global.stage.addChild(this.container);
 
 	createjs.Ticker.addListener(this);	
+	global.music.play(1);
 }
 
 GameScene.prototype.hide = function(){
@@ -72,7 +73,7 @@ GameScene.prototype.hide = function(){
 	createjs.Ticker.removeListener(this);
 	global.camera.setLookAt(0,0);
 	global.camera.applyTransform();
-
+	global.music.play(0);
 }
 
 GameScene.prototype.onBodyKeyDown = function(event){

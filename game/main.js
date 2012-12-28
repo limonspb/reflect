@@ -10,8 +10,10 @@ var map = new Array();
 
 function init() {
 	global.canvas = document.getElementById("reflectCanvas");
-	global.canvas.height =  Math.min( $(window).height()-8, 1500 );
-	global.canvas.width = Math.min( $(window).width()-8, 1500 );
+	global.canvas.height =  Math.min( $(window).height(), 1500 );
+	global.canvas.width = Math.min( $(window).width(), 1500 );
+	//global.canvas.height =  Math.min( document.body.clientHeigh, 1500 );
+	//global.canvas.width = Math.min( document.body.clientWidth, 1500 );
 	global.stage = new createjs.Stage(global.canvas);
 	global.stage.enableMouseOver();	
 	global.stage.mouseMoveOutside = true;
@@ -21,6 +23,9 @@ function init() {
 	global.keyboard = new Keyboard();
 	global.preloader = new Preloader();
 	global.music = new Music();
+	global.volumePanel = new VolumePanel();
+	
+	
 	
 	global.preloader.onComplete = handleImageLoad;
 	global.preloader.go();
@@ -37,11 +42,11 @@ function bodyKeyUp(event){
 var preload;
 
 function handleImageLoad(event){
-	global.music.play();
+	
 	global.sceneController = new SceneController();
 	global.sceneController.currentScene = global.sceneController.menuScene;
 	global.sceneController.menuScene.show();
-	global.volumePanel = new VolumePanel();
+	
 	
 	
 	
