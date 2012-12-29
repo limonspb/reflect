@@ -691,7 +691,7 @@ EnemyManager.prototype.clearAll = function()
 		this.enemies[i] = null;
 	}
 	this.enemies.length = 0;
-	this.vacuums.length = 0;
+	
 	
 	//if (this.enemiesCont.parent) { this.enemiesCont.parent.removeChild(this.enemiesCont); }
 	var num = this.enemiesCont.getNumChildren();
@@ -706,4 +706,35 @@ EnemyManager.prototype.clearAll = function()
 	
 	this.enemyScaleMode = false;
 	this.enemyScaleTime = 0;
+	
+	
+	
+	this.totalEnemyKills = 0;
+	
+	this.isWaveInit = false;
+	
+	this.WAVES.length = 0;
+	
+	this.skillKoeff = 1;
+	
+	this.MAX_LEN = 100;
+	
+	this.WAVE_LEN = 0;
+	
+	this.max_simple = 0;
+	this.simples.length = 0;
+	this.max_medium = 0;
+	this.mediums.length = 0;
+	this.max_escape = 0;
+	this.escapes.length = 0;
+	this.max_chase = 0;
+	this.chases.length = 0;
+	this.max_stong = 0;
+	this.strongs.length = 0;
+	this.max_vacuum = 0;
+	this.vacuums.length = 0;
+	this.max_tank = 1;
+	this.tanks.length = 0;
+	
+	this.arrayTypes.length = 0;
 }
