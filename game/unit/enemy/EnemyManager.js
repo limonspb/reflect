@@ -459,6 +459,7 @@ EnemyManager.prototype.blow = function(unit)
 	unit.stopUnit = true;
 	
 	global.EnemyManager.removeEnemy(unit);
+	playExp();
 }
 
 EnemyManager.prototype.removeEnemy = function(enemy)

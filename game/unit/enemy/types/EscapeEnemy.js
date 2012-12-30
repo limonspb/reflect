@@ -150,6 +150,7 @@ EscapeEnemy.prototype.shoot = function ()
 		if (this.dist <= this.maxRange && this.dist >= this.minRange)
 		{
 			//var angle = this.getAngleToObject(global.hero);
+			this.fireSound();
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
 			this.bullet.damage = this.damage;
 			

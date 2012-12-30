@@ -168,6 +168,9 @@ MediumEnemy.prototype.shoot = function ()
 	{
 		//var angle = this.getAngleToObject(global.hero);
 		
+		this.fireSound();
+		this.fireSound();
+		
 		var vec1 = rotateVec( {x:-3,y:25}, this.gun.rotation);
 		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x + vec1.x, this.y + vec1.y);
 		this.bullet.damage = this.damage;

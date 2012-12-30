@@ -13,6 +13,7 @@ Preloader = function(){
 	this.pr = new createjs.PreloadJS();
 	this.pr.installPlugin(createjs.SoundJS);
 	createjs.SoundJS.setMasterVolume(0.5);
+	console.log("Channels "+createjs.SoundJS.getCapabilities().channels.toString());
 	this.pr.owner = this;
 	this.pr.onFileLoad = this.onFileLoad; 
 	this.pr.onProgress = this.onProgress;
@@ -70,13 +71,35 @@ Preloader.prototype.addImage = function(src, name){
 }
 
 Preloader.prototype.addSound = function(src,name,times){	
-	this.manifest.push({src:src,id:name, data:times});
+	this.manifest.push({src:src+'.mp3|'+src+'.ogg',id:name, data:times});
 	//alert(this.manifest[this.manifest.length-1].src);
 }
 
 Preloader.prototype.initConstants = function()
 {
-   this.addSound("sound/phh.ogg|sound/phh.mp3","phh",2);
+   this.addSound("sound/phh","phh",2);
+   this.addSound("sound/menu/MenuButtonBack","menu_back",2);
+   this.addSound("sound/menu/MenuButtonForward","menu_forward",2);
+   this.addSound("sound/menu/hover","hover",6);
+   
+   this.addSound("sound/game/ricochet/r1","ricochet1",10);
+   this.addSound("sound/game/ricochet/r2","ricochet2",10);
+   this.addSound("sound/game/ricochet/r3","ricochet3",10);
+   
+   for (var i=1; i<8; i++){
+	   this.addSound("sound/game/fire/"+i.toString(),"fire"+i.toString(),5);
+	   console.log(i);   	
+   }
+   for (var i=1; i<8; i++){
+	   this.addSound("sound/game/exp/"+i.toString(),"exp"+i.toString(),10);
+	   console.log(i);	
+   }
+   
+   this.addSound("sound/game/damage/1","damage",12);
+	
+	
+	
+	
 	
    
    this.addImage("img/back/pattern.png","pattern");
@@ -86,6 +109,8 @@ Preloader.prototype.initConstants = function()
    for (var i=1; i <= 14; i++){
 	   this.addImage("img/back/line_"+ i.toString() + ".png","line_"+i.toString());   	
    }
+   
+   
    this.addImage("img/back/big_1.png","big_1");
    this.addImage("img/back/big_2.png","big_2");
    this.addImage("img/back/big_3.png","big_3");

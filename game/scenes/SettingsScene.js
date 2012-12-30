@@ -16,6 +16,10 @@ function SettingsScene(){
 	$("#radio_static").click('change',this.radio_controlling_change);
 	
 	$("#backButton_settings").bind('click',this.onBackCkick);
+	$('#backButton_settings').mouseover(function(){playSound("hover")});
+	$('#radio_relative').mouseover(function(){playSound("hover")});
+	$('#radio_static').mouseover(function(){playSound("hover")});
+	
 }
 extend(SettingsScene,BaseScene);
 
@@ -29,6 +33,7 @@ SettingsScene.prototype.hide = function(){
 }
 
 SettingsScene.prototype.onBackCkick = function(){
+	playSound("menu_back");	
 	global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 }
 

@@ -7,6 +7,7 @@ VolumePanel = function(){
 	this.setControls();
 	global.music.setVolume(0.5);
 	global.music.setPlay(this.music);
+	createjs.SoundJS.setMute(!this.sound);
 	
 }
 
@@ -47,6 +48,7 @@ VolumePanel.prototype.soundDivClick = function(){
 	global.volumePanel.sound = !global.volumePanel.sound;
 	global.volumePanel.setControls();
 	global.volumePanel.saveValues();
+	createjs.SoundJS.setMute(!global.volumePanel.sound);
 }
 VolumePanel.prototype.musicDivClick = function(){
 	global.volumePanel.music = !global.volumePanel.music;

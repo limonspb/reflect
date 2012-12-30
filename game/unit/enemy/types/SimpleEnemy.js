@@ -5,8 +5,7 @@
 
 function SimpleEnemy()
 {
-	SimpleEnemy.superclass.constructor.apply(this);
-	
+	SimpleEnemy.superclass.constructor.apply(this);	
 }
 
 extend(SimpleEnemy,EnemyUnit);
@@ -113,13 +112,14 @@ SimpleEnemy.prototype.move = function (elapsedTime)
 	this.checkHitBullet();
 }
 
-SimpleEnemy.prototype.shoot = function ()
-{
+SimpleEnemy.prototype.shoot = function (){
+	
 	if (this.respawnCount >= this.bulletRespawn)
 	{
 		if (this.dist <= this.maxRange/* && this.dist >= this.minRange*/)
 		{
 			//var angle = this.getAngleToObject(global.hero);
+			this.fireSound();
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
 			this.bullet.damage = this.damage;
 			

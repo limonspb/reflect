@@ -88,6 +88,7 @@ BaseUnit.prototype.checkHitBullet = function()
 
 BaseUnit.prototype.setUnitDamage = function(unit, damage)
 {
+	playDamage();
 	if (unit == global.hero)
 	{
 		if (unit.fullProtectMode) { return; }
