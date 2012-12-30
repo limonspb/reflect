@@ -501,8 +501,11 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 
 EnemyManager.prototype.removeTypeEnemy = function(enemy, arrType)
 {
-	var ind = arrType.indexOf(enemy);
-	if (ind!=-1) { arrType.splice(ind,1); }
+	if (arrType){ //FUCK FAT MAX!!!
+		var ind = arrType.indexOf(enemy);
+		if (ind!=-1) { arrType.splice(ind,1); }	
+	}	
+	
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
@@ -713,7 +716,7 @@ EnemyManager.prototype.clearAll = function()
 	
 	this.isWaveInit = false;
 	
-	this.WAVES.length = 0;
+	//this.WAVES.length = 0; //FUCK FAT MAX!!!
 	
 	this.skillKoeff = 1;
 	
