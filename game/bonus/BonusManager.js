@@ -331,5 +331,17 @@ BonusManager.prototype.clearAll = function(elapsedTime)
 	}
 	this.bonuses.length = 0;
 	
+	this.smallMedKitBonusTime = 0;
+	this.mediumMedKitBonusTime = 0;
+	this.plusToLifeBonusTime = 0;
+	this.freezBonusTime = 0;
+	this.doubleDamageBonusTime = 0;
+	this.speedUpBonusTime = 0;
+	this.regenerationBonusTime = 0;
+	this.teleportBonusTime = 0;
+	this.enemyScaleBonusTime = 0;
+	this.shieldScaleBonusTime = 0;
+	this.fullProtectBonusTime = 0;
+	
 	//if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
 }

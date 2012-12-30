@@ -718,4 +718,19 @@ EnemyManager.prototype.clearAll = function()
 	this.vacuums.length = 0;
 	this.max_tank = 1;
 	this.tanks.length = 0;
+	
+	this.timerAddSimpleEnemy = 0;
+	this.timeToAddSimple = 2000;
+	this.timerAddMediumEnemy = 0;
+	this.timerToAddMedium = 3000;
+	this.timerAddEscapeEnemy = 0;
+	this.timerToAddEscape = 4000;
+	this.timerAddStrongEnemy = 0;
+	this.timerToAddStrong = 7000;
+	this.timerAddChaseEnemy = 0;
+	this.timerToAddChase = 6000;
+	this.timerAddTankEnemy = 0;
+	this.timerToAddTank = 40000;
+	this.timerAddVacuumEnemy = 0;
+	this.timerToAddVacuum = 10000;
 }
