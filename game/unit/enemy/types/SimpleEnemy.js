@@ -46,8 +46,8 @@ SimpleEnemy.prototype.initView = function ()
 	this.gunView.scaleX = this.gunView.scaleY = scale;
 	this.gun.addChild(this.gunView);
 	
-	this.width = global.preloader.imgs.simple_anim.width;
-	this.height = global.preloader.imgs.simple_anim.height;
+	this.width = global.preloader.imgs.simple_anim.width*scale;
+	this.height = global.preloader.imgs.simple_anim.height*scale;
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
@@ -117,7 +117,7 @@ SimpleEnemy.prototype.shoot = function ()
 {
 	if (this.respawnCount >= this.bulletRespawn)
 	{
-		if (this.dist <= this.maxRange && this.dist >= this.minRange)
+		if (this.dist <= this.maxRange/* && this.dist >= this.minRange*/)
 		{
 			//var angle = this.getAngleToObject(global.hero);
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
@@ -128,12 +128,3 @@ SimpleEnemy.prototype.shoot = function ()
 	}
 }
 
-SimpleEnemy.prototype.checkMyBullet = function ()
-{
-	if (!this.bullet) { return; }
-	
-	if (getDistanceToObject(this, this.bullet) > this.size*0.75)
-	{
-		this.bullet = null;
-	}
-}

@@ -153,7 +153,7 @@ EnemyUnit.prototype.checkHitTank = function(elapsedTime)
 EnemyUnit.prototype.setBigEnemy = function()
 {
 	this.scaleX = this.scaleY = 1.5;
-	this.size *= 1.5;
+	if (this.scaleX != 1.5) { this.size *= 1.5; }
 }
 
 EnemyUnit.prototype.setNormalEnemy = function()
@@ -212,6 +212,17 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
     //console.log("ANGLE " + angle + " ROT " + rot);
     
 	return (rot);
+}
+
+/** Проверка принадлежности пули игроку */
+EnemyUnit.prototype.checkMyBullet = function ()
+{
+	if (!this.bullet) { return; }
+	
+	if (getDistanceToObject(this, this.bullet) > this.size*0.7)
+	{
+		this.bullet = null;
+	}
 }
 
 

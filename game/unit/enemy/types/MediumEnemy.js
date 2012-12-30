@@ -182,13 +182,3 @@ MediumEnemy.prototype.shoot = function ()
 		this.backTime = 200;
 	}
 }
-
-MediumEnemy.prototype.checkMyBullet = function ()
-{
-	if (!this.bullet) { return; }
-	
-	if (getDistanceToObject(this, this.bullet) > this.size*0.75)
-	{
-		this.bullet = null;
-	}
-}
