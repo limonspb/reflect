@@ -690,7 +690,7 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		b.futureY = pointtomove.y;
 		
 		this.whiteShieldCount = 4;
-		
+		playRicochet();
 		//если пуля попала в щит, она становится моей
 		//это для бонуса двойного урона
 		if (global.BulletFactory.doubleDamage) { b.setMyBullet(); }

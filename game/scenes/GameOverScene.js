@@ -2,6 +2,10 @@ function GameOverScene(){
 	$('#cancelRecordButton').click(this.cancelClick);
 	
 	$('#sendRecordButton').click(this.sendRecordClick);
+	
+	$('#cancelRecordButton').mouseover(function(){playSound("hover")});
+	$('#sendRecordButton').mouseover(function(){playSound("hover")});
+	
 	$('#divWithPlace').css('display','none');
 	
 }
@@ -21,10 +25,11 @@ GameOverScene.prototype.hide = function(){
 }
 
 GameOverScene.prototype.cancelClick = function(){
+	playSound("menu_back");
 	$('#writeNamePanel').fadeOut();
 }
 GameOverScene.prototype.sendRecordClick = function(){
-	
+	playSound("menu_forward");	
 	$('#sendRecordButton').fadeOut();
 	global.sceneController.gameOverScene.sendRecord($('#playerName').val(),global.points,'sdaoOIJASDLknasd0O0OOO000OO00Llll111ll1l1l1l111l1l0o0o0oOooolaJASNDinasid');	
 }

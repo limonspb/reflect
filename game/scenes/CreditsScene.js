@@ -1,5 +1,6 @@
 function CreditsScene(){
 	$("#backButton_credits").bind('click',this.onBackCkick);
+	$('#backButton_credits').mouseover(function(){playSound("hover")});
 }
 extend(CreditsScene,BaseScene);
 
@@ -13,5 +14,6 @@ CreditsScene.prototype.hide = function(){
 }
 
 CreditsScene.prototype.onBackCkick = function(){
+	playSound("menu_back");
 	global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 }

@@ -91,7 +91,8 @@ EnemyUnit.prototype.initPosition = function() {
 
 EnemyUnit.prototype.move = function(elapsedTime) { }
 
-EnemyUnit.prototype.shoot = function() { }
+EnemyUnit.prototype.shoot = function() {
+}
 
 /** Расчет случайной остановки на случайное время юнита*/
 EnemyUnit.prototype.pauseMove = function(elapsedTime)
@@ -257,3 +258,7 @@ EnemyUnit.prototype.update = function(target) {
 	this.y = this.position.y;
 }
 
+
+EnemyUnit.prototype.fireSound = function(){
+	playFire();
+}

@@ -54,7 +54,7 @@ this.createjs = this.createjs||{};
 	 * @default 30
 	 * @static
 	 */
-	s.MAX_INSTANCES = 30;
+	s.MAX_INSTANCES = 300;
 
 	/**
 	 * The capabilities of the plugin.

@@ -128,6 +128,7 @@ StrongEnemy.prototype.shoot = function ()
 	{
 		if (this.dist <= this.maxRange && this.dist >= this.minRange)
 		{
+			this.fireSound();
 			this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x, this.y);
 			this.bullet.damage = this.damage;
 			
