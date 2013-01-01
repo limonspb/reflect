@@ -18,5 +18,6 @@ var global = {
 	points : 0,
 	place : 0,
 	music : null,
-	volumePanel : null
+	volumePanel : null,
+	soundManager : null
 };

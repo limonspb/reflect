@@ -80,7 +80,8 @@ Preloader.prototype.initConstants = function()
    this.addSound("sound/phh","phh",2);
    this.addSound("sound/menu/MenuButtonBack","menu_back",2);
    this.addSound("sound/menu/MenuButtonForward","menu_forward",2);
-   this.addSound("sound/menu/hover","hover",6);
+   this.addSound("sound/menu/hover","hover",10);
+   //this.addSound("sound/game/exp/1","hover",10);
    
    this.addSound("sound/game/ricochet/r1","ricochet1",10);
    this.addSound("sound/game/ricochet/r2","ricochet2",10);
@@ -88,11 +89,11 @@ Preloader.prototype.initConstants = function()
    
    for (var i=1; i<8; i++){
 	   this.addSound("sound/game/fire/"+i.toString(),"fire"+i.toString(),5);
-	   console.log(i);   	
+	    	
    }
    for (var i=1; i<8; i++){
 	   this.addSound("sound/game/exp/"+i.toString(),"exp"+i.toString(),10);
-	   console.log(i);	
+	   	
    }
    
    this.addSound("sound/game/damage/1","damage",12);

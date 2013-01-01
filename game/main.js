@@ -23,6 +23,7 @@ function init() {
 	global.keyboard = new Keyboard();
 	global.preloader = new Preloader();
 	global.music = new Music();
+	global.soundManager = new SoundManager();
 	global.volumePanel = new VolumePanel();
 	
 	
