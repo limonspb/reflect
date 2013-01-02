@@ -144,8 +144,8 @@ this.createjs = this.createjs||{};
 
 		createTag: function(src) {
 			var tag = document.createElement("audio");
-			tag.preload = false;
-			tag.src = src;
+			tag.preload = false;			
+			tag.src = src;			
 			//tag.type = "audio/ogg"; //LM: Need to set properly
 			return tag;
 		},

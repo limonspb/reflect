@@ -284,3 +284,61 @@ body{
 	height : 80px;
 	
 }
+
+.center_content{
+	position : absolute;
+	top : 18%;
+	left : 50%;
+	width : 600px;
+	height : 64%;
+	margin-left : -300px;
+	
+}
+
+#info_center_content{
+	overflow: auto;	
+}
+
+table.info_bonus_table{
+	font-size: 18px;	
+}
+
+table.info_bonus_table tr{
+	height : 60px;
+	margin : 10px;
+}
+
+table.info_bonus_table tr td:nth-child(1){
+	text-align: center;
+	width : 70px;
+}
+
+table.info_bonus_table tr td:nth-child(2){
+	color : #d6bf2b;
+	
+}
+
+
+table.info_bonus_table tr td:nth-child(1) img{
+	height : 50px;
+}
+
+h2{
+	font-size : 26px;
+	margin : 20px;
+}
+
+#credits_center_content{
+	overflow: auto;
+}
+
+#credits_game_name{
+	font-size : 56px;
+	margin : 20px;
+	text-align: center;
+		
+}
+
+#credits_content{
+	font-size : 24px;
+}

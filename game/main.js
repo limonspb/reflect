@@ -28,8 +28,10 @@ function init() {
 	
 	
 	
+	
 	global.preloader.onComplete = handleImageLoad;
 	global.preloader.go();
+	console.log("Channels "+createjs.SoundJS.getCapabilities().channels.toString()+'/'+global.soundManager.MAX_NUM_SOUNDS);
 }
 
 function bodyKeyDown(event){

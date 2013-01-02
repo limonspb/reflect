@@ -20,10 +20,12 @@
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel='stylesheet' type='text/css' href='style.css'>
+		
 
 		
 		<script src="lib/easeljs-0.5.0.min.js"></script>
 		<script src="lib/jquery-1.8.3.min.js"></script>
+		
 		<script src="lib/preloadjs-0.2.0.min.js"></script>
 <!--		<script src="lib/soundjs-0.3.0.min.js"></script>
 		<script src="lib/soundjs.flashplugin-0.3.0.min.js"></script> -->
@@ -37,6 +39,7 @@
 		
 		<script src="lib/tweenjs-0.3.0.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+		<script src="jq_ui.js"></script>
 		<script src="extend.js"></script>
 		<script src="functions.js"></script>
 		<script src="MenuButton.js"></script>
@@ -146,20 +149,17 @@
 	===========================================================================================================
 -->		
 		<div id="credits" class="scene">
-			<div class="menu">
-				<div>				Under construction			</div>
-				<div>				www.hahaton.ru			</div>
-				<div class="button"><div id="backButton_credits"></div></div>
+			<div class="center_content" id="credits_center_content">
 			</div>
+			<div class="backButton_frame"><div id="backButton_credits" class="backButton_text"></div></div>
 		</div>
 <!--  info Page
 ===========================================================================================================
 --> 
 		<div id = "info" class="scene">
-			<div class="menu">
-				<div>Under construction</div>
-				 <div class="button"><div id="backButton_info"></div></div>
+			<div class="center_content" id="info_center_content">				 
 			</div>
+		<div class="backButton_frame"><div id="backButton_info" class="backButton_text"></div></div>
 		</div>
 <!-- Settings Page
 ===========================================================================================================
@@ -175,8 +175,9 @@
 			    	<div class="relative"></div> 	-->        
 	    		</div>
 	    		<div style="clear: both;">&nbsp;</div>
-				<div class="button"><div id="backButton_settings"></div></div>
 			</div>
+			<div class="backButton_frame"><div id="backButton_settings" class="backButton_text"></div></div>
+			
 		</div>
 <!--
 	===========================================================================================================
@@ -193,8 +194,8 @@
 					</tr> 
 				</table>
 			
-			<div class="button"><div id="backButton_records" ></div></div>
 			</div>
+			<div class="backButton_frame"><div id="backButton_records" class="backButton_text"></div></div>
 		</div>
 <!--
 	===========================================================================================================
@@ -335,31 +336,16 @@
 			<div id="volume_slider">
 			</div>
 		</div>
-			<script>
-			    $(function() {
-			        $( "#volume_slider" ).slider({
-			            orientation: "vertical",
-			            range: "min",
-			            min: 0,
-			            max: 100,
-			            value: 50,
-			            slide: function( event, ui ) {
-			                global.volumePanel.setVolume( ui.value );
-			            }
-			        });
-			        $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
-			    });
-    		</script>
 	</div>
 		
 
 
 
-		<audio id="menu_audio" loop preload="auto"> 
+		<audio id="menu_audio" loop> 
 		  	<source src="sound/music/mus1.mp3"  type="audio/mp3">
 		  	<source src="sound/music/mus1.ogg" type="audio/ogg"> 
 		</audio>
-		<audio id="game_audio" loop preload="auto"> 
+		<audio id="game_audio" loop> 
 		  	<source src="sound/music/mus2.mp3"  type="audio/mp3"> 
 		  	<source src="sound/music/mus2.ogg" type="audio/ogg"> 
 		</audio>

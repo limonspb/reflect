@@ -10,7 +10,9 @@ Music.prototype.play = function(n){
 	this.current = n;
 	for (var i=0; i<2; i++){
 		this.M[i].pause();
-		this.M[i].currentTime = 0;		
+		if (this.M[i].currentTime!=0){
+			this.M[i].currentTime = 0;			
+		}
 	}
 	if (!this.mute){
 		this.M[n].play();	

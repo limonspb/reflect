@@ -24,7 +24,7 @@ min-height: 310px;
 	
 .main {background: url(img/menu/points.png) left top no-repeat scroll transparent;}
 
-#playButton, #creditsButton, #infoButton, #settingsButton, #recordsButton, #backButton_info, #backButton_settings, #backButton_credits, #backButton_records  {
+#playButton, #creditsButton, #infoButton, #settingsButton, #recordsButton  {
 	position:absolute;
 	width: 80px;
 	height: 80px;
@@ -73,11 +73,22 @@ min-height: 310px;
 			
 .button {
 	cursor: pointer;
-	position: relative;
 	width : 200px;
 	height: 100px; 
 	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
-	margin: 30px auto 0;}	
+	margin: 30px auto 0;
+}
+	
+.backButton_frame{
+	cursor: pointer;
+	width : 120px;
+	height: 100px; 
+	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
+	position : absolute;
+	left : 0px;
+	top : 100%;
+	margin-top:-100px;
+}	
 	
 #playButton {top: 8px; left: 90px; background: url(img/menu/playbutton.png) 50% 50% no-repeat scroll transparent; }
 #playButton:hover { background: url(img/menu/playbutton2.png) 50% 50% no-repeat scroll transparent;}
@@ -95,8 +106,14 @@ min-height: 310px;
 #recordsButton:hover {background: url(img/menu/recordsbutton2.png) 50% 50% no-repeat scroll transparent;}
 
 
-#backButton_info, #backButton_settings, #backButton_credits, #backButton_records {top: 8px; left: 60px; background: url(img/menu/backbutton.png) 50% 50% no-repeat scroll transparent; }
-#backButton_info:hover, #backButton_settings:hover, #backButton_credits:hover, #backButton_records:hover { background: url(img/menu/backbutton2.png) 50% 50% no-repeat scroll transparent;}
+.backButton_text{
+	width : 120px;
+	height : 100px;		
+	background:	url(img/menu/backbutton.png) 50% 50% no-repeat scroll transparent;
+}
+.backButton_text:hover {
+	background: url(img/menu/backbutton2.png) 50% 50% no-repeat scroll transparent;
+}
 	
 table.table0 { border-collapse: collapse; width: 100%; margin: 0 auto;}
 table.table0 td {color: #fff; font-weight: bold; padding: 3px 5px; border: none; font-size: 16px;}

@@ -12,8 +12,7 @@ Preloader = function(){
 	
 	this.pr = new createjs.PreloadJS();
 	this.pr.installPlugin(createjs.SoundJS);
-	createjs.SoundJS.setMasterVolume(0.5);
-	console.log("Channels "+createjs.SoundJS.getCapabilities().channels.toString());
+	createjs.SoundJS.setMasterVolume(0.5);	
 	this.pr.owner = this;
 	this.pr.onFileLoad = this.onFileLoad; 
 	this.pr.onProgress = this.onProgress;
