@@ -1,0 +1,1 @@
+Текст "Loadnig..." : Verdana 21px #dadada
