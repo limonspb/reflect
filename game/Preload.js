@@ -9,29 +9,42 @@ Preloader = function(){
 	if (!createjs.SoundJS.checkPlugin(true)){
 		alert('sound problems');
 	}	
+	createjs.SoundJS.setMasterVolume(0.5);
 	
-	this.pr = new createjs.PreloadJS();
-	this.pr.installPlugin(createjs.SoundJS);
-	createjs.SoundJS.setMasterVolume(0.5);	
+	this.pr = new createjs.PreloadJS();	
+	this.pr.installPlugin(createjs.SoundJS);		
 	this.pr.owner = this;
 	this.pr.onFileLoad = this.onFileLoad; 
 	this.pr.onProgress = this.onProgress;
 	this.onComplete = null;
-	
+
+	this.pr_error = new createjs.PreloadJS();	
+	this.pr_error.installPlugin(createjs.SoundJS);		
+	this.pr_error.owner = this;	
 	
 	this.onProgress = null;
+	this.errored = [];
 	
 	//this.pr.onFileProgress = handleFileProgress;
-	this.pr.onError = function(){
-		alert("preloader error");
+	this.pr.onError = function(e){
+		global.preloader.errored.push(e);
+		console.log(e);
 	}
 	//this.pr.setMaxConnections(1);
 	
 	
 	this.pr.onComplete = function(event){
+		if (event.target.owner.errored.length !=0){
+			event.target.owner.pr_error.loadManifest(event.target.owner.errored,true);			
+		}else{
+			event.target.owner.pr_error.onComplete(event);
+		}
+	}
+	
+	this.pr_error.onComplete = function(event){
 		if(event.target.owner.onComplete){
-			event.target.owner.onComplete();
-			$("#preloader").fadeOut();					
+			$("#preloader").fadeOut();
+			event.target.owner.onComplete();					
 		}
 	};
 	
@@ -40,7 +53,7 @@ Preloader = function(){
 
 
 Preloader.prototype.onFileLoad = 	function(event){
-		//console.log(event);
+		
 		if (event.type == "image"){
 			event.target.owner.imgs[event.id] = event.result;	
 		}else{
@@ -53,7 +66,7 @@ Preloader.prototype.onFileLoad = 	function(event){
 
 
 Preloader.prototype.go = function(){	
-	this.pr.loadManifest(this.manifest,true);
+	this.pr.loadManifest(this.manifest,true);	
 };
 
 Preloader.prototype.onProgress = function(event){
@@ -109,7 +122,6 @@ Preloader.prototype.initConstants = function()
    for (var i=1; i <= 14; i++){
 	   this.addImage("img/back/line_"+ i.toString() + ".png","line_"+i.toString());   	
    }
-   
    
    this.addImage("img/back/big_1.png","big_1");
    this.addImage("img/back/big_2.png","big_2");
