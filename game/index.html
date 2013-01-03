@@ -151,7 +151,7 @@
 		<div id="credits" class="scene">
 			<div class="center_content" id="credits_center_content">
 			</div>
-			<div class="backButton_frame"><div id="backButton_credits" class="backButton_text"></div></div>
+			<div id="backButton_credits" class="backButton"></div>
 		</div>
 <!--  info Page
 ===========================================================================================================
@@ -159,43 +159,45 @@
 		<div id = "info" class="scene">
 			<div class="center_content" id="info_center_content">				 
 			</div>
-		<div class="backButton_frame"><div id="backButton_info" class="backButton_text"></div></div>
+		<div id="backButton_info" class="backButton"></div>
 		</div>
 <!-- Settings Page
 ===========================================================================================================
 --> 
 		<div id="settings" class="scene">
-			<div class="setcontrols">
-				<div>Settings</div>
-			    <div class="setcontrols">
-			    	<div class="control_select" id="radio_relative"><div class="relative"></div></div>
-			    	<div class="control" id="radio_static"><div class="static"></div></div>	
-			    	
-			    	<!--<div class="static_selected"></div>
-			    	<div class="relative"></div> 	-->        
-	    		</div>
-	    		<div style="clear: both;">&nbsp;</div>
+			<div class="center_content" id="settings_center_content">
+				<div class="item_header">
+					<img src="img/menu/Settings/settings.png"/>
+				</div>
+				<div style="height:20px;">
+				</div>
+				<div class="some_part">
+					Controlling style:
+				</div>
+				<div class="control_selection">
+			    	<div class="control_select" id="radio_relative"><div class="relative"></div></div>	
+			    	<div class="control" id="radio_static"><div class="static"></div></div>
+			    </div>
 			</div>
-			<div class="backButton_frame"><div id="backButton_settings" class="backButton_text"></div></div>
-			
+			<div id="backButton_settings" class="backButton"></div>
 		</div>
 <!--
 	===========================================================================================================
 -->
 		<div id="records" class="scene">
-			<div id="records_in">
-				<div id="top10">
-					TOP 10
+			<div class="center_content" id="records_center_content">
+				<div class="item_header">
+					<img src="img/menu/top10/top10.png"/>
 				</div>
-				<table id="recordTable" class="table0">
+				<table id="recordTable" class="menu_table menu_table_top10">
 					<tr>
 						<td class="names">ska ska ska</td>
 						<td>ska ska ska</td>
 					</tr> 
 				</table>
-			
 			</div>
-			<div class="backButton_frame"><div id="backButton_records" class="backButton_text"></div></div>
+			
+			<div id="backButton_records" class="backButton"></div>
 		</div>
 <!--
 	===========================================================================================================
@@ -325,12 +327,12 @@
 -->
 	<div id="volumePanel" class="activeGamePanel">
 		<div id = "sound_div">
-			<img class="volume_img" src="img/menu/sound.png"/>
-			<img id="mute_sound_img" class="volume_img" src="img/menu/mute.png"/>
+			<img class="volume_img" src="img/menu/audio_icons/sounds_on.png"/>
+			<img id="mute_sound_img" class="volume_img" src="img/menu/audio_icons/sounds_off.png"/>
 		</div>
 		<div id = "music_div">
-			<img class="volume_img" src="img/menu/music.png"/>
-			<img id="mute_music_img" class="volume_img" src="img/menu/mute.png"/>
+			<img class="volume_img" src="img/menu/audio_icons/music_on.png"/>
+			<img id="mute_music_img" class="volume_img" src="img/menu/audio_icons/music_off.png"/>
 		</div>
 		<div id="volume_slider_div">
 			<div id="volume_slider">

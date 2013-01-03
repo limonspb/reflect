@@ -1,14 +1,15 @@
 *{
 	margin : 0px;
 	padding : 0px;
-	font-family : Helvetica, Arial;
-	color : #FFFFFF;
+	font-family : Verdana, Arial;
 }
 
 body{
 	margin : 0px;
 	padding : 0px;
 	overflow: hidden;	
+	font-size : 18px;
+	color : #DADADA;
 }
 
 #reflectCanvas{
@@ -230,7 +231,7 @@ body{
 	
 }
 
-#volumePanel{
+#volumePanel{	
 	cursor : pointer;
 	left : 100%;
 	width : 60px;
@@ -259,8 +260,7 @@ body{
 }
 
 .volume_img{
-	width : 30px;
-	height : 30px;
+	margin-top : 3px;
 	position : absolute;
 	top : 0px;
 	left : 0px;
@@ -289,38 +289,53 @@ body{
 	position : absolute;
 	top : 18%;
 	left : 50%;
-	width : 600px;
+	width : 500px;
 	height : 64%;
-	margin-left : -300px;
-	
+	margin-left : -220px;	
 }
 
 #info_center_content{
-	overflow: auto;	
+	overflow: auto;
 }
 
-table.info_bonus_table{
-	font-size: 18px;	
+table.menu_table{
+	font-size: 14px;
+	color : #DADADA;
+	padding-right : 10px;
+	width : 474px;
 }
 
-table.info_bonus_table tr{
+table.menu_table tr{
 	height : 60px;
-	margin : 10px;
+	margin : 10px;	
 }
 
-table.info_bonus_table tr td:nth-child(1){
+table.menu_table tr td{
+	padding-left : 10px;
+	padding-right : 10px;
+}
+
+table.menu_table tr td:nth-child(1){
 	text-align: center;
-	width : 70px;
+	width : 80px;
 }
 
-table.info_bonus_table tr td:nth-child(2){
-	color : #d6bf2b;
+table.menu_table tr td:nth-child(2){
+		
+}
+
+table.menu_table tr:nth-child(2n+1){
+	background-color: rgba(0,0,0,0.4)
 	
 }
 
+table.menu_table tr:nth-child(2n){
+	background-color: rgba(0,0,0,0.2)
+}
 
-table.info_bonus_table tr td:nth-child(1) img{
-	height : 50px;
+
+table.menu_table tr td:nth-child(1) img{
+	height : 43px;
 }
 
 h2{
@@ -339,6 +354,55 @@ h2{
 		
 }
 
+.item_header{
+	width : 100%;
+	height : 63px;
+	padding-left : auto;
+	margin-top : 20px;
+	text-align: center;
+}
+
 #credits_content{
-	font-size : 24px;
+	font-size : 15px;
+	line-height : 23px;
+}
+
+.some_part{
+	width : 100%;
+	font-size : 21px;
+	text-align : center;
+	color : #CD9C29;
+	margin-top : 0px;
+}
+
+.inner_content_with_scroll{
+	overflow: auto;
+	height : 100%;
+	padding-bottom : 19%;
+}
+
+.some_part a{
+	color : #CD9C29;
+}
+
+#records_center_content{
+	overflow: auto;
+}
+
+table.menu_table_top10{
+	width : 350px;
+	margin-left : 70px;
+}
+
+table.menu_table_top10 tr{
+	height : 24px;
+}
+
+table.menu_table_top10 tr td:nth-child(1){
+	width : 60%;
+}
+
+table.menu_table_top10 tr td:nth-child(2){
+	width : 40%;
+	text-align: center;
 }

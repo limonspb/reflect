@@ -1,13 +1,13 @@
 #mainMenu, #credits, #info, #settings, #records, #preloader {
-background: url(img/menu/back.jpg) no-repeat fixed 50% 50%  transparent;
-background-size: cover;
-padding: 0;
-min-width: 450px; 
-margin: 0;
-min-height: 310px;
+	background: url(img/menu/back.jpg) no-repeat fixed 50% 50%  transparent;
+	background-size: cover;
+	padding: 0;
+	min-width: 450px; 
+	margin: 0;
+	min-height: 310px;
 }
 
-#preloader, #settings, #info, #credits{
+#preloader, #settings, #info, #credits, #records{
 	background: url(img/menu/lead.jpg) no-repeat fixed 50% 50%  transparent;	
 	background-size: cover;
 }
@@ -37,37 +37,42 @@ min-height: 310px;
 .control {
 	cursor: pointer;
 	text-align: center;
-	width: 200px;
-	height: 200px;
-	float: left;
-	display: inline-block;
-	background: url(img/menu/bbuttongray.png) 50% 50% no-repeat scroll transparent;
+	width: 146px;
+	height: 131px;	
+	background-image: url('img/menu/Settings/sota_gray.png');
+	display : inline-block;
 }
 
 .control_select{
 	cursor: pointer;
 	text-align: center;
-	width: 200px;
-	height: 200px;
-	float: left;
-	display: inline-block;
-	background: url(img/menu/bbutton.png) 50% 50% no-repeat scroll transparent;
+	width: 146px;
+	height: 131px;	
+	background-image: url('img/menu/Settings/sota_yellow.png');
+	display : inline-block;	
 }
 
+
 .relative{
-	width: 200px;  height: 200px;
-	background: url(img/menu/relative.png) 50% 50% no-repeat scroll transparent;	
+	width: 146px;
+	height: 131px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-image: url('img/menu/Settings/relative.png');
 }
 .relative:hover{
-	background: url(img/menu/relative2.png) 50% 50% no-repeat scroll transparent;
+	background-image: url('img/menu/Settings/relative2.png');
 }
 
 .static{
-	width: 200px;  height: 200px;
-	background: url(img/menu/static.png) 50% 50% no-repeat scroll transparent; 
+	width: 146px;
+	height: 131px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-image: url('img/menu/Settings/static.png');
 }
 .static:hover{
-	background: url(img/menu/static2.png) 50% 50% no-repeat scroll transparent;
+	background-image: url('img/menu/Settings/static2.png');
 }
 
 			
@@ -79,15 +84,14 @@ min-height: 310px;
 	margin: 30px auto 0;
 }
 	
-.backButton_frame{
+.backButton{
 	cursor: pointer;
-	width : 120px;
-	height: 100px; 
-	background: url(img/menu/button.png) 50% 50% no-repeat scroll transparent; 
+	width : 126px;
+	height: 63px; 
 	position : absolute;
-	left : 0px;
-	top : 100%;
-	margin-top:-100px;
+	left : 20px;
+	top : 18%;
+	margin-top : 20px;
 }	
 	
 #playButton {top: 8px; left: 90px; background: url(img/menu/playbutton.png) 50% 50% no-repeat scroll transparent; }
@@ -104,32 +108,18 @@ min-height: 310px;
 	
 #recordsButton {top: 183px; left: 90px; background: url(img/menu/recordsbutton.png) 50% 50% no-repeat scroll transparent; }
 #recordsButton:hover {background: url(img/menu/recordsbutton2.png) 50% 50% no-repeat scroll transparent;}
-
-
-.backButton_text{
-	width : 120px;
-	height : 100px;		
-	background:	url(img/menu/backbutton.png) 50% 50% no-repeat scroll transparent;
-}
-.backButton_text:hover {
-	background: url(img/menu/backbutton2.png) 50% 50% no-repeat scroll transparent;
-}
 	
 table.table0 { border-collapse: collapse; width: 100%; margin: 0 auto;}
 table.table0 td {color: #fff; font-weight: bold; padding: 3px 5px; border: none; font-size: 16px;}
 table.table0 td.names {text-transform: uppercase;}
 
-#records_in{
-	position : absolute;
-	top : 50%;
-	left : 50%;
-	width : 350px;
-	height : 450px;
-	margin-left : -175px;
-	margin-top : -225px;
-	
-}
 #top10{
 	margin-bottom : 10px;
 	margin-left : 50px;
+}
+
+.control_selection{
+	width : 100%;
+	text-align : center;
+	margin-top : 20px;
 }
