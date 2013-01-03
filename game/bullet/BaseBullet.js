@@ -17,6 +17,7 @@ function BaseBullet()
 	this.damage;
 	
 	this.isMy = false;
+	this.fireMode = false;
 }
 
 extend(BaseBullet, createjs.Container);

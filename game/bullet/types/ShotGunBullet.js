@@ -17,12 +17,15 @@ ShotGunBullet.prototype.init = function(angle, x, y)
 
 ShotGunBullet.prototype.initView = function(x,y)
 {
+	var scale = 1.2;
+	
 	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
-	this.view.x = -5;
-	this.view.y = -3;
+	this.view.scaleX = this.view.scaleY = scale;
+	this.view.x = -6;
+	this.view.y = -4;
 	
 	this.ss = new createjs.SpriteSheet({ "animations": {
-		"run": [0, 1]},
+		"run": [0, 1, 2]},
 		"images": [global.preloader.imgs.x2damage_bullet],
 		"frames": {
 		"regX": global.preloader.imgs.x2damage_bullet.height/2,
@@ -49,7 +52,7 @@ ShotGunBullet.prototype.initView = function(x,y)
 ShotGunBullet.prototype.initOptions = function(angle)
 {
 	this.rotation = this.futureRotation = angle;
-	this.speed = 500;
+	this.speed = 400;
 	this.type = BulletTypes.SHOT_GUN;
 }
 
@@ -64,17 +67,15 @@ ShotGunBullet.prototype.move = function(elapsedTime)
 	this.futureY += this.speed*Math.sin(this.angle)*elapsedTime/1000;
 }
 
-ShotGunBullet.prototype.setMyBullet = function() {
-	this.damage *= 2;
-	
-	this.isMy = true;
-	
+ShotGunBullet.prototype.setFireBullet = function() {
+	this.fireMode = true;
+	this.speed = 500;
 	
 	this.removeChild(this.view);
 	this.addChild(this.x2bullet);
 	this.x2bullet.gotoAndPlay("run");
-	
-	/*this.view.graphics.clear();
-	this.view.graphics.beginFill("#2E2B57").drawRect( -5 , -3 , 10 , 6);
-	this.view.graphics.endFill();*/
+}
+
+ShotGunBullet.prototype.setMyBullet = function() {
+	this.isMy = true;
 }

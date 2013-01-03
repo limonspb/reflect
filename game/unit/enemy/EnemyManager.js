@@ -70,7 +70,7 @@ function EnemyManager()
 	
 	
 	this.WAVES.push({ time: 0, wave: this.wave1, timeToInit: 5000, init: false });
-	this.WAVES.push({ time: 0, wave: this.wave2, timeToInit: 45000, init: false });//50
+	this.WAVES.push({ time: 0, wave: this.wave2, timeToInit: 30000, init: false });//50
 	this.WAVES.push({ time: 0, wave: this.wave3, timeToInit: 45000, init: false });//50
 	this.WAVES.push({ time: 0, wave: this.wave4, timeToInit: 50000, init: false });//60
 	this.WAVES.push({ time: 0, wave: this.wave5, timeToInit: 50000, init: false });//80
@@ -90,16 +90,16 @@ function EnemyManager()
 EnemyManager.prototype.wave1 = function()
 {
 	console.log("CALL WAVE 1");
-	global.EnemyManager.WAVE_LEN = 30;
+	global.EnemyManager.WAVE_LEN = 15;
 	
-	global.EnemyManager.max_simple = 30;
+	global.EnemyManager.max_simple = 15;
 	global.EnemyManager.max_medium = 0;
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
-	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [30], [global.EnemyManager.timeToAddSimple]);
+	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [15], [global.EnemyManager.timeToAddSimple]);
 }
 
 EnemyManager.prototype.wave2 = function()
@@ -703,7 +703,6 @@ EnemyManager.prototype.clearAll = function()
 		obj.time = 0;
 		obj.init = false;
 	}
-	
 	
 	this.max_simple = 0;
 	this.simples.length = 0;

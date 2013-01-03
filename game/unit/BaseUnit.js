@@ -51,35 +51,39 @@ BaseUnit.prototype.checkHitBullet = function()
 			//console.log("HIT TEST BULLET " + i);
 			
 			//Without friendly fire
-			/*if (this == global.hero)
+			if (this == global.hero)
 			{
-				//if (!bull.isMy)
-				//{
-					global.BulletFactory.removeBullet(i);
-					len--;
-					
-					this.health -= bull.damage;
-			
-					this.checkDestroy();
-				//}
-			} else {
-				if (bull.isMy)
+				if (!bull.isMy)
 				{
 					global.BulletFactory.removeBullet(i);
 					len--;
+					i--;
 					
-					this.health -= bull.damage;
-			
-					this.checkDestroy();
+					this.setUnitDamage(this, bull.damage);
 				}
-			}*/
+			} else if (!bull.fireMode) {
+				var dam;
+				if (!bull.isMy)
+				{
+					dam = bull.damage/4;
+				} else {
+					dam = bull.damage;
+				}
+				global.BulletFactory.removeBullet(i);
+				len--;
+				i--;
+				
+				this.setUnitDamage(this, dam);
+			} else if (bull.fireMode) {
+				this.setUnitDamage(this, this.health);	
+			}
 			
-			global.BulletFactory.removeBullet(i);
+			//FriendlyFireMode
+			/*global.BulletFactory.removeBullet(i);
 			len--;
 			i--;
 			
-			this.setUnitDamage(this, bull.damage);
-	
+			this.setUnitDamage(this, bull.damage);*/
 		}
 		
 	}
