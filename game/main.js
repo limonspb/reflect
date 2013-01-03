@@ -9,6 +9,7 @@ var circle, filter, test;
 var map = new Array();
 
 function init() {
+	$("#version_div").append("v 0.9.1.0");
 	global.canvas = document.getElementById("reflectCanvas");
 	global.canvas.height =  Math.min( $(window).height(), 1500 );
 	global.canvas.width = Math.min( $(window).width(), 1500 );
