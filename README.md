@@ -1,1 +1,1 @@
-First hahaton HTML5 game called reflect
+First hahaton HTML5 game called Reflect
