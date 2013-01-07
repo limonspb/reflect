@@ -19,6 +19,7 @@ Preloader = function(){
 	this.onComplete = null;
 
 	this.pr_error = new createjs.PreloadJS();	
+	this.pr_error.onFileLoad = this.onFileLoad; 
 	this.pr_error.installPlugin(createjs.SoundJS);		
 	this.pr_error.owner = this;	
 	
@@ -92,23 +93,23 @@ Preloader.prototype.initConstants = function()
    this.addSound("sound/phh","phh",2);
    this.addSound("sound/menu/MenuButtonBack","menu_back",2);
    this.addSound("sound/menu/MenuButtonForward","menu_forward",2);
-   this.addSound("sound/menu/hover","hover",10);
+   this.addSound("sound/menu/hover","hover",2);
    //this.addSound("sound/game/exp/1","hover",10);
    
-   this.addSound("sound/game/ricochet/r1","ricochet1",10);
-   this.addSound("sound/game/ricochet/r2","ricochet2",10);
-   this.addSound("sound/game/ricochet/r3","ricochet3",10);
+   this.addSound("sound/game/ricochet/r1","ricochet1",3);
+   this.addSound("sound/game/ricochet/r2","ricochet2",3);
+   this.addSound("sound/game/ricochet/r3","ricochet3",3);
    
    for (var i=1; i<8; i++){
 	   this.addSound("sound/game/fire/"+i.toString(),"fire"+i.toString(),5);
 	    	
    }
    for (var i=1; i<8; i++){
-	   this.addSound("sound/game/exp/"+i.toString(),"exp"+i.toString(),10);
+	   this.addSound("sound/game/exp/"+i.toString(),"exp"+i.toString(),2);
 	   	
    }
    
-   this.addSound("sound/game/damage/1","damage",12);
+   this.addSound("sound/game/damage/1","damage",3);
 	
 	
 	
@@ -157,7 +158,7 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bullets/bullet.png","simple_bullet");
    this.addImage("img/bullets/flame_bullet_animation.png","x2damage_bullet");
    
-   this.addImage("img/effects/blow_animation.png","blow_anim");
+   this.addImage("img/effects/1.png","blow_anim");
    this.addImage("img/effects/protection.png","full_protect_icon");
    
    this.addImage("img/enemies/chase/animation.png","chase_anim");

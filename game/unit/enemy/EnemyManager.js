@@ -92,14 +92,14 @@ EnemyManager.prototype.wave1 = function()
 	console.log("CALL WAVE 1");
 	global.EnemyManager.WAVE_LEN = 15;
 	
-	global.EnemyManager.max_simple = 15;
-	global.EnemyManager.max_medium = 0;
+	global.EnemyManager.max_simple = 30;
+	global.EnemyManager.max_medium = 30;
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
-	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [15], [global.EnemyManager.timeToAddSimple]);
+	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY,EnemyTypes.MEDIUM_ENEMY], [30,30], [global.EnemyManager.timeToAddSimple,global.EnemyManager.timerToAddMedium]);
 }
 
 EnemyManager.prototype.wave2 = function()

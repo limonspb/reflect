@@ -1,6 +1,3 @@
-/**
- * @author ProBigi
- */
 
 function Keyboard()
 {

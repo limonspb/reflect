@@ -404,3 +404,12 @@ table.menu_table_top10 tr td:nth-child(2){
 	width : 40%;
 	text-align: center;
 }
+
+#fps_div{
+	width : 100px;
+	height : 9px;
+	top : 100%;
+	left : 0px;
+	margin-top:-9px;
+	font-size : 8px; 
+}

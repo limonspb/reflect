@@ -13,26 +13,16 @@ LifePanel.prototype.hide = function(){
 	$('#lifePanel').fadeOut();
 }
 
-LifePanel.prototype.setMaxLife = function(value){
-	$('#maxLife').text(value.toString());
-}
-
-LifePanel.prototype.setCurLife = function(value){
-	$('#currentLife').text(Math.ceil(value.toString()));
-}
-
-LifePanel.prototype.updateValues = function(){
-	this.curLife = global.hero.health;
-	this.maxLife = global.hero.MAX_HEALTH;
-}
-
-LifePanel.prototype.updateView = function(){
-	$('#currentLife').text(Math.ceil(this.curLife.toString()));	
-	$('#maxLife').text(Math.ceil(this.maxLife.toString()));
-}
-
-
 LifePanel.prototype.update = function(){
-	this.updateValues();	
-	this.updateView();	
+	if (this.curLife != global.hero.health){
+		this.curLife = global.hero.health;
+		$('#currentLife').text(Math.ceil(this.curLife.toString()));		
+	}
+	
+	if (this.maxLife != global.hero.MAX_HEALTH){
+		this.maxLife = global.hero.MAX_HEALTH;
+		$('#maxLife').text(Math.ceil(this.maxLife.toString()));		
+	}
 }
+
+

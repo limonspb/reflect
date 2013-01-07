@@ -43,17 +43,16 @@ SoundManager.prototype.onSoundFinish = function(){
 
 SoundManager.prototype.playMainSound = function(v,level){
 	if (this.getSoundCount() < this.MAX_NUM_SOUNDS){
-		this.main_sounds.push(this.createSound(v,level,true));
-		console.log("no stop");
+		this.main_sounds.push(this.createSound(v,level,true));		
 	}else
 	if (this.sounds.length > 0){
 		//this.sounds[0].stop();
-		console.log(this.sounds[0].stop());
+		this.stopSound(this.sounds[0]);		
 		this.sounds.shift();
 		this.main_sounds.push(this.createSound(v,level,true));
-	}else{
-		console.log("stop2");
-		this.main_sounds[0].stop();
+	}else{		
+		//this.main_sounds[0].stop();
+		this.stopSound(this.sounds[0]);
 		this.main_sounds.shift();
 		this.main_sounds.push(this.createSound(v,level,true));		
 	}
@@ -64,11 +63,22 @@ SoundManager.prototype.playSound = function(v,level){
 		this.sounds.push(this.createSound(v,level,false));
 	}else
 	if (this.main_sounds.length < this.MAX_NUM_SOUNDS){
-		this.sounds[0].stop();
+		this.stopSound(this.sounds[0]);
+		//this.sounds[0].stop();
 		this.sounds.shift();
 		this.sounds.push(this.createSound(v,level,false));		
 	}
 	
+}
+
+SoundManager.prototype.stopSound = function(s){
+	if (
+			(s != undefined)&&
+			(s.playState != createjs.SoundJS.PLAY_FINISHED) &&
+			(s.paused != true) &&
+			(s.tag != null)
+		)
+		s.stop();
 }
 
 function playSound(v, level, main){

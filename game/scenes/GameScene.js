@@ -1,5 +1,3 @@
-
-
 function GameScene(){
 	this.container = new createjs.Container();
 	
@@ -26,6 +24,8 @@ function GameScene(){
 	this.pointsPanel = new PointsPanel();
 	this.infinityBonusPanel = new InfinityBonusPanel();
 	this.newGame();
+	
+	this.fps_value = $("#fps_value");
 }
 
 extend(GameScene,BaseScene);
@@ -33,8 +33,8 @@ extend(GameScene,BaseScene);
 GameScene.prototype.newGame = function(){
 	global.gameTime = 0;
 	global.points = 0;
-	global.hero.health = 250;
-	global.hero.MAX_HEALTH = 250;
+	global.hero.health = 2500;
+	global.hero.MAX_HEALTH = 2500;
 	global.hero.teleportCount = 0;
 	global.hero.regenerationCount = 0;
 	global.hero.x = 1000;
@@ -53,8 +53,7 @@ GameScene.prototype.show = function(){
 	this.infinityBonusPanel.show();
 	$('body').keydown(this.onBodyKeyDown);
 	$('body').keyup(this.onBodyKeyUp);
-	global.stage.onMouseUp = this.onMouseUp;
-	
+	global.stage.onMouseUp = this.onMouseUp;	
 	global.stage.addChild(this.container);
 
 	createjs.Ticker.addListener(this);	
@@ -77,7 +76,7 @@ GameScene.prototype.hide = function(){
 }
 
 GameScene.prototype.onBodyKeyDown = function(event){
-	keys[event.keyCode] = true;
+	global.sceneController.gameScene.keys[event.keyCode] = true;
 
 
 	if (event.keyCode == global.keyboard.W || event.keyCode == global.keyboard.ARROW_UP){
@@ -95,7 +94,7 @@ GameScene.prototype.onBodyKeyDown = function(event){
 
 }
 GameScene.prototype.onBodyKeyUp = function(event){
-	keys[event.keyCode] = false;
+	global.sceneController.gameScene.keys[event.keyCode] = false;
 	if (event.keyCode == global.keyboard.ESC || event.keyCode == global.keyboard.P){
 		global.sceneController.switchScene(SceneController.eventTypes.MAIN_MENU);
 	}
@@ -122,6 +121,7 @@ GameScene.prototype.onMouseUp = function(event){
 
 
 GameScene.prototype.tick = function(elapsedTime) {
+	this.fps_value.text(createjs.Ticker.getMeasuredFPS());
 	global.gameTime+=elapsedTime;
 
 	global.hero.move(elapsedTime);
