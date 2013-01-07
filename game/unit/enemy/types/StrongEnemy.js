@@ -78,8 +78,8 @@ StrongEnemy.prototype.initOptions = function ()
 	this.position = new Vec2(this.x, this.y);
 	this.steering = new Vec2(0, 0);
 	this.MAX_FORCE = 0.3;
-	this.MAX_VELOCITY = 4;
-	this.mass = 40 +  Math.random() * 20;
+	this.MAX_VELOCITY = 3;
+	this.mass = 60 +  Math.random() * 20;
 	
 	this.truncate(this.velocity, this.MAX_VELOCITY);
 	

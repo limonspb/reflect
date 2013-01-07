@@ -129,8 +129,8 @@
 
 	</head>
 
-	<body onLoad="init();" onkeydown="bodyKeyDown(event)" onkeyup="bodyKeyUp(event)">
-		<canvas id="reflectCanvas" width="700px" height="500px" onclick="onCanvasClick()">
+	<body onLoad="init();">
+		<canvas id="reflectCanvas" width="700px" height="500px">
 			alternate content
 		</canvas>
 		
@@ -365,7 +365,7 @@
 <!--
 	===========================================================================================================
 -->
-	<div id="volumePanel" class="activeGamePanel">
+	<div id="volumePanel"  class="activeGamePanel">
 		<div id = "sound_div">
 			<img class="volume_img" src="img/menu/audio_icons/sounds_on.png"/>
 			<img id="mute_sound_img" class="volume_img" src="img/menu/audio_icons/sounds_off.png"/>
@@ -380,6 +380,12 @@
 		</div>
 	</div>
 		
+<!--
+	===========================================================================================================
+-->
+	<div id="fps_div" class="activeGamePanel">
+		<span>FPS:</span><span id="fps_value">60</span>
+	</div>
 
 
 
