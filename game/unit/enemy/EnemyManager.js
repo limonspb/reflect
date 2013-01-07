@@ -76,9 +76,9 @@ function EnemyManager()
 	this.WAVES.push({ time: 0, wave: this.wave5, timeToInit: 50000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave6, timeToInit: 60000, init: false });//90
 	this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 50000, init: false });//80
-	this.WAVES.push({ time: 0, wave: this.wave8, timeToInit: 70000, init: false });//80
-	this.WAVES.push({ time: 0, wave: this.wave9, timeToInit: 50000, init: false });//80
-	this.WAVES.push({ time: 0, wave: this.wave10, timeToInit: 50000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave8, timeToInit: 60000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave9, timeToInit: 80000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave10, timeToInit: 80000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave11, timeToInit: 70000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave12, timeToInit: 70000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave13, timeToInit: 70000, init: false });//80
@@ -202,36 +202,36 @@ EnemyManager.prototype.wave6 = function()
 EnemyManager.prototype.wave7 = function()
 {
 	console.log("CALL WAVE 7");
-	global.EnemyManager.WAVE_LEN = 28;
+	global.EnemyManager.WAVE_LEN = 21;
 	
 	global.EnemyManager.max_simple = 3;
 	global.EnemyManager.max_medium = 3;
 	global.EnemyManager.max_escape = 3;
-	global.EnemyManager.max_chase = 15;
+	global.EnemyManager.max_chase = 8;
 	global.EnemyManager.max_strong = 2;
 	global.EnemyManager.max_vacuum = 2;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
-		[3, 3, 3, 15, 2, 2],
+		[3, 3, 3, 8, 2, 2],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
 EnemyManager.prototype.wave8 = function()
 {
 	console.log("CALL WAVE 8");
-	global.EnemyManager.WAVE_LEN = 25;
+	global.EnemyManager.WAVE_LEN = 17;
 	
 	global.EnemyManager.max_simple = 0;
 	global.EnemyManager.max_medium = 0;
-	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_escape = 5;
 	global.EnemyManager.max_chase = 0;
-	global.EnemyManager.max_strong = 10;
+	global.EnemyManager.max_strong = 7;
 	global.EnemyManager.max_vacuum = 5;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.ESCAPE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
-		[10, 10, 5],
+		[5, 7, 5],
 		[global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
@@ -459,18 +459,18 @@ EnemyManager.prototype.wave20 = function()
 EnemyManager.prototype.wave21 = function()
 {
 	console.log("CALL WAVE 21");
-	global.EnemyManager.WAVE_LEN = 72;
+	global.EnemyManager.WAVE_LEN = 78;
 	
 	global.EnemyManager.max_simple = 20;
 	global.EnemyManager.max_medium = 14;
 	global.EnemyManager.max_escape = 16;
 	global.EnemyManager.max_chase = 4;
 	global.EnemyManager.max_strong = 14;
-	global.EnemyManager.max_vacuum = 4;
+	global.EnemyManager.max_vacuum = 10;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
-		[20, 14, 16, 4, 14, 4],
+		[20, 14, 16, 4, 14, 10],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
