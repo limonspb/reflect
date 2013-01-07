@@ -134,19 +134,22 @@ body{
 
 #writeNamePanel{
 	
-	background-color:#555555;
 	position : absolute;
 	top : 50%;
 	left : 50%;
 	
 	margin-left : -200px;
-	margin-top : -100px;
+	margin-top : -125px;
 		
 	width : 400px;
-	height : 200px;
-	
-	
-	background: url(img/menu/menu_2.png) no-repeat scroll top left transparent;
+	/*height : 250px;*/
+
+
+	background: url(img/menu/lead.jpg) no-repeat scroll center center transparent;
+    border: 5px solid #CC9000;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
 	display:none;
 }
 
@@ -174,11 +177,7 @@ body{
 }
 
 #goButtons{
-	position:absolute;
-	top : 100%;
-	margin-top : -70px;
-	margin-left : 35px;
-	
+    margin-left: 30px;
 }
 
 #playerName{
@@ -193,7 +192,7 @@ body{
 }
 
 #sendRecordButton{
-	float : right;
+	float : left;
 	background: url('img/menu/okoff.png') no-repeat scroll top left transparent;
 	width : 170px;
 	height : 70px;
@@ -203,7 +202,7 @@ body{
 }
 
 #cancelRecordButton{
-	float : right;
+	float : left;
 	background: url('img/menu/canceloff.png') no-repeat scroll top left transparent;
 	width : 170px;
 	height : 70px;

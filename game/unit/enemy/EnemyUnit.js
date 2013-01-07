@@ -139,7 +139,7 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 	this.checkHitTank();
 }
 
-EnemyUnit.prototype.checkHitTank = function(elapsedTime)
+EnemyUnit.prototype.checkHitTank = function()
 {
 	if (global.EnemyManager.tank == null) { return; }
 	

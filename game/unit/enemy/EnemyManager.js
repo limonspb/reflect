@@ -75,90 +75,206 @@ function EnemyManager()
 	this.WAVES.push({ time: 0, wave: this.wave4, timeToInit: 50000, init: false });//60
 	this.WAVES.push({ time: 0, wave: this.wave5, timeToInit: 50000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave6, timeToInit: 60000, init: false });//90
-	this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 80000, init: false });//80
-	this.WAVES.push({ time: 0, wave: this.wave8, timeToInit: 70000, init: false });//80
-	this.WAVES.push({ time: 0, wave: this.wave9, timeToInit: 70000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 50000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave8, timeToInit: 60000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave9, timeToInit: 80000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave10, timeToInit: 80000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave11, timeToInit: 70000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave12, timeToInit: 70000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave13, timeToInit: 70000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave14, timeToInit: 70000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave15, timeToInit: 70000, init: false });//80
 	
-	this.WAVES.push({ time: 0, wave: this.wave10, timeToInit: 90000, init: false });//120
-	this.WAVES.push({ time: 0, wave: this.wave11, timeToInit: 90000, init: false });//120
-	this.WAVES.push({ time: 0, wave: this.wave12, timeToInit: 100000, init: false });//130
-	this.WAVES.push({ time: 0, wave: this.wave13, timeToInit: 120000, init: false });//150
-	this.WAVES.push({ time: 0, wave: this.wave14, timeToInit: 140000, init: false });//190
-	this.WAVES.push({ time: 0, wave: this.wave15, timeToInit: 130000, init: false });//180
+	this.WAVES.push({ time: 0, wave: this.wave16, timeToInit: 90000, init: false });//120
+	this.WAVES.push({ time: 0, wave: this.wave17, timeToInit: 90000, init: false });//120
+	this.WAVES.push({ time: 0, wave: this.wave18, timeToInit: 100000, init: false });//130
+	this.WAVES.push({ time: 0, wave: this.wave19, timeToInit: 120000, init: false });//150
+	this.WAVES.push({ time: 0, wave: this.wave20, timeToInit: 140000, init: false });//190
+	this.WAVES.push({ time: 0, wave: this.wave21, timeToInit: 130000, init: false });//180
 }
 
 EnemyManager.prototype.wave1 = function()
 {
 	console.log("CALL WAVE 1");
-	global.EnemyManager.WAVE_LEN = 15;
+	global.EnemyManager.WAVE_LEN = 5;
 	
-	global.EnemyManager.max_simple = 30;
-	global.EnemyManager.max_medium = 30;
+	global.EnemyManager.max_simple = 5;
+	global.EnemyManager.max_medium = 0;
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
-	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY,EnemyTypes.MEDIUM_ENEMY], [30,30], [global.EnemyManager.timeToAddSimple,global.EnemyManager.timerToAddMedium]);
+	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
 
 EnemyManager.prototype.wave2 = function()
 {
 	console.log("CALL WAVE 2");
-	global.EnemyManager.WAVE_LEN = 30;
+	global.EnemyManager.WAVE_LEN = 15;
 	
-	global.EnemyManager.max_simple = 18;
-	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_simple = 15;
+	global.EnemyManager.max_medium = 0;
 	global.EnemyManager.max_escape = 0;
-	global.EnemyManager.max_chase = 2;
+	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
 	global.EnemyManager.initWave(
-		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.CHASE_ENEMY],
-		[18, 10, 2],
-		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddChase]);
+		[EnemyTypes.SIMPLE_ENEMY],
+		[18],
+		[global.EnemyManager.timeToAddSimple]);
 }
 
 EnemyManager.prototype.wave3 = function()
 {
 	console.log("CALL WAVE 3");
-	global.EnemyManager.WAVE_LEN = 40;
+	global.EnemyManager.WAVE_LEN = 20;
 	
 	global.EnemyManager.max_simple = 15;
-	global.EnemyManager.max_medium = 15;
-	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_medium = 5;
+	global.EnemyManager.max_escape = 0;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY],
+		[15, 5],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium]);
+}
+
+EnemyManager.prototype.wave4 = function()
+{
+	console.log("CALL WAVE 4");
+	global.EnemyManager.WAVE_LEN = 35;
+	
+	global.EnemyManager.max_simple = 20;
+	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_escape = 5;
 	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY],
-		[15, 15, 10],
+		[20, 10, 5],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape]);
 }
 
-EnemyManager.prototype.wave4 = function()
+
+EnemyManager.prototype.wave5 = function()
 {
-	console.log("CALL WAVE 4");
-	global.EnemyManager.WAVE_LEN = 49;
+	console.log("CALL WAVE 5");
+	global.EnemyManager.WAVE_LEN = 33;
 	
-	global.EnemyManager.max_simple = 15;
-	global.EnemyManager.max_medium = 15;
-	global.EnemyManager.max_escape = 15;
-	global.EnemyManager.max_chase = 4;
+	global.EnemyManager.max_simple = 10;
+	global.EnemyManager.max_medium = 12;
+	global.EnemyManager.max_escape = 8;
+	global.EnemyManager.max_chase = 3;
 	global.EnemyManager.max_strong = 0;
 	global.EnemyManager.max_vacuum = 0;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY],
-		[15, 15, 15, 4],
+		[10, 12, 8, 3],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase]);
 }
 
-EnemyManager.prototype.wave5 = function()
+EnemyManager.prototype.wave6 = function()
 {
-	console.log("CALL WAVE 5");
+	console.log("CALL WAVE 6");
+	global.EnemyManager.WAVE_LEN = 35;
+	
+	global.EnemyManager.max_simple = 10;
+	global.EnemyManager.max_medium = 10;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 5;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.STRONG_ENEMY],
+		[10, 10, 10, 5],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddStrong]);
+}
+
+EnemyManager.prototype.wave7 = function()
+{
+	console.log("CALL WAVE 7");
+	global.EnemyManager.WAVE_LEN = 21;
+	
+	global.EnemyManager.max_simple = 3;
+	global.EnemyManager.max_medium = 3;
+	global.EnemyManager.max_escape = 3;
+	global.EnemyManager.max_chase = 8;
+	global.EnemyManager.max_strong = 2;
+	global.EnemyManager.max_vacuum = 2;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[3, 3, 3, 8, 2, 2],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave8 = function()
+{
+	console.log("CALL WAVE 8");
+	global.EnemyManager.WAVE_LEN = 17;
+	
+	global.EnemyManager.max_simple = 0;
+	global.EnemyManager.max_medium = 0;
+	global.EnemyManager.max_escape = 5;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 7;
+	global.EnemyManager.max_vacuum = 5;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.ESCAPE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[5, 7, 5],
+		[global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave9 = function()
+{
+	console.log("CALL WAVE 9");
+	global.EnemyManager.WAVE_LEN = 25;
+	
+	global.EnemyManager.max_simple = 0;
+	global.EnemyManager.max_medium = 0;
+	global.EnemyManager.max_escape = 0;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 20;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.VACUUM_ENEMY],
+		[20],
+		[global.EnemyManager.timerToAddVecuum]);
+}
+
+EnemyManager.prototype.wave10 = function()
+{
+	console.log("CALL WAVE 10");
+	global.EnemyManager.WAVE_LEN = 50;
+	
+	global.EnemyManager.max_simple = 0;
+	global.EnemyManager.max_medium = 0;
+	global.EnemyManager.max_escape = 10;
+	global.EnemyManager.max_chase = 10;
+	global.EnemyManager.max_strong = 30;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY],
+		[10, 10, 30],
+		[global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong]);
+}
+
+////////////////////////////////////////////////////////////////
+EnemyManager.prototype.wave11 = function()
+{
+	console.log("CALL WAVE 11");
 	global.EnemyManager.WAVE_LEN = 58;
 	
 	global.EnemyManager.max_simple = 12;
@@ -174,9 +290,9 @@ EnemyManager.prototype.wave5 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave6 = function()
+EnemyManager.prototype.wave12 = function()
 {
-	console.log("CALL WAVE 6");
+	console.log("CALL WAVE 12");
 	global.EnemyManager.WAVE_LEN = 75;
 	
 	global.EnemyManager.max_simple = 15;
@@ -192,9 +308,9 @@ EnemyManager.prototype.wave6 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave7 = function()
+EnemyManager.prototype.wave13 = function()
 {
-	console.log("CALL WAVE 7");
+	console.log("CALL WAVE 13");
 	global.EnemyManager.WAVE_LEN = 62;
 	
 	global.EnemyManager.max_simple = 12;
@@ -210,9 +326,9 @@ EnemyManager.prototype.wave7 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong]);
 }
 
-EnemyManager.prototype.wave8 = function()
+EnemyManager.prototype.wave14 = function()
 {
-	console.log("CALL WAVE 8");
+	console.log("CALL WAVE 14");
 	global.EnemyManager.WAVE_LEN = 67;
 	
 	global.EnemyManager.max_simple = 10;
@@ -228,9 +344,9 @@ EnemyManager.prototype.wave8 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave9 = function()
+EnemyManager.prototype.wave15 = function()
 {
-	console.log("CALL WAVE 9");
+	console.log("CALL WAVE 15");
 	global.EnemyManager.WAVE_LEN = 72;
 	
 	global.EnemyManager.max_simple = 23;
@@ -248,11 +364,11 @@ EnemyManager.prototype.wave9 = function()
 
 /** -----зацикленные волны----- **/
 
-EnemyManager.prototype.wave10 = function()
+EnemyManager.prototype.wave16 = function()
 {
 	this.skillKoeff += 1;
 	
-	console.log("CALL WAVE 10");
+	console.log("CALL WAVE 16");
 	global.EnemyManager.WAVE_LEN = 63;
 	
 	global.EnemyManager.max_simple = 15;
@@ -268,9 +384,9 @@ EnemyManager.prototype.wave10 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave11 = function()
+EnemyManager.prototype.wave17 = function()
 {
-	console.log("CALL WAVE 11");
+	console.log("CALL WAVE 17");
 	global.EnemyManager.WAVE_LEN = 61;
 	
 	global.EnemyManager.max_simple = 15;
@@ -286,9 +402,9 @@ EnemyManager.prototype.wave11 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave12 = function()
+EnemyManager.prototype.wave18 = function()
 {
-	console.log("CALL WAVE 12");
+	console.log("CALL WAVE 18");
 	global.EnemyManager.WAVE_LEN = 63;
 	
 	global.EnemyManager.max_simple = 20;
@@ -304,9 +420,9 @@ EnemyManager.prototype.wave12 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave13 = function()
+EnemyManager.prototype.wave19 = function()
 {
-	console.log("CALL WAVE 13");
+	console.log("CALL WAVE 19");
 	global.EnemyManager.WAVE_LEN = 61;
 	
 	global.EnemyManager.max_simple = 15;
@@ -322,9 +438,9 @@ EnemyManager.prototype.wave13 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave14 = function()
+EnemyManager.prototype.wave20 = function()
 {
-	console.log("CALL WAVE 14");
+	console.log("CALL WAVE 20");
 	global.EnemyManager.WAVE_LEN = 66;
 	
 	global.EnemyManager.max_simple = 10;
@@ -340,21 +456,21 @@ EnemyManager.prototype.wave14 = function()
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
-EnemyManager.prototype.wave15 = function()
+EnemyManager.prototype.wave21 = function()
 {
-	console.log("CALL WAVE 15");
-	global.EnemyManager.WAVE_LEN = 72;
+	console.log("CALL WAVE 21");
+	global.EnemyManager.WAVE_LEN = 78;
 	
 	global.EnemyManager.max_simple = 20;
 	global.EnemyManager.max_medium = 14;
 	global.EnemyManager.max_escape = 16;
 	global.EnemyManager.max_chase = 4;
 	global.EnemyManager.max_strong = 14;
-	global.EnemyManager.max_vacuum = 4;
+	global.EnemyManager.max_vacuum = 10;
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY, EnemyTypes.CHASE_ENEMY, EnemyTypes.STRONG_ENEMY, EnemyTypes.VACUUM_ENEMY],
-		[20, 14, 16, 4, 14, 4],
+		[20, 14, 16, 4, 14, 10],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape, global.EnemyManager.timerToAddChase, global.EnemyManager.timerToAddStrong, global.EnemyManager.timerToAddVecuum]);
 }
 
@@ -512,12 +628,13 @@ EnemyManager.prototype.update = function(elapsedTime)
 			obj.time = 0;
 			if (i == this.WAVES.length - 1)
 			{
-				this.WAVES[9].init = false;
-				this.WAVES[10].init = false;
-				this.WAVES[11].init = false;
-				this.WAVES[12].init = false;
-				this.WAVES[13].init = false;
-				this.WAVES[14].init = false;
+				var lenW = this.WAVES.length;
+				this.WAVES[lenW-6].init = false;
+				this.WAVES[lenW-5].init = false;
+				this.WAVES[lenW-4].init = false;
+				this.WAVES[lenW-3].init = false;
+				this.WAVES[lenW-2].init = false;
+				this.WAVES[lenW-1].init = false;
 			}
 		}
 	}

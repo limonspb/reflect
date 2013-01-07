@@ -212,7 +212,7 @@ BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 
 /**
  * Выпадение бонусов с типом REGENERATION.
- * Выпадает раз в 1-5сек после каждого 10го убитого врага, добавляет регенерацию жизней на 1.
+ * Выпадает раз в 1-5сек после каждого 10го убитого врага, добавляет регенерацию жизней на 2.
  */
 BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
@@ -231,11 +231,11 @@ BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 
 /**
  * Выпадение бонусов с типом TELEPORT.
- * Выпадает раз в 1-20сек после каждого 15го убитого врага, добавляет возможность телепортироваться 1 раз за каждый такой бонус.
+ * Выпадает раз в 1-20сек после каждого 8го убитого врага, добавляет возможность телепортироваться 1 раз за каждый такой бонус.
  */
 BonusManager.prototype.teleportUpdate = function(elapsedTime)
 {
-	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%15 != 0) { return; } 
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%8 != 0) { return; } 
 	
 	this.teleportBonusTime += elapsedTime;
 	if (this.teleportBonusTime >= 10000 + Math.random()*10000)
@@ -288,7 +288,7 @@ BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
  */
 BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 {
-	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%10 != 0) { return; }
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%5 != 0) { return; }
 	
 	this.fullProtectBonusTime += elapsedTime;
 	if (this.fullProtectBonusTime >= 8000 + Math.random()*15000)
