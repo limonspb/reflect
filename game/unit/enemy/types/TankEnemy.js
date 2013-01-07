@@ -104,7 +104,7 @@ TankEnemy.prototype.move = function (elapsedTime)
 	this.x += dx;
 	this.y += dy;
 	
-	this.nearDamage = global.hero.health*0.9;
+	this.nearDamage = global.hero.health*0.5;
 	
 	this.checkHitHero(elapsedTime);
 	
