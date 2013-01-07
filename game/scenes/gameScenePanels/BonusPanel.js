@@ -31,10 +31,13 @@ BonusPanel = function(){
 	this.divsSec[4] = this.s_shieldScaleTr;
 	this.divsSec[5] = this.s_x2DamageTr;
 	
+	this.values = [];
+	
 	
 	for (var i=0; i<6; i++){
 		this.divs[i].showed = false;
 		this.divs[i].fadeOut();
+		this.values[i] = 0;
 	}	
 }
 
@@ -82,11 +85,14 @@ BonusPanel.prototype.update = function(){
 		temp = this.getBonusTime(i);			
 		if (temp!=0){			
 			if (this.divs[i].showed==false){
-				console.log("456",this.divs[i].showed);
 				this.divs[i].showed = true;
 				this.divs[i].fadeIn();				
 			}
-			this.divsSec[i].text(Math.floor(temp/1000).toString());
+			temp = Math.floor(temp/1000);
+			if (temp!=this.values[i]){
+				this.values[i] = temp;
+				this.divsSec[i].text(temp.toString());			
+			}
 		}else{			
 			if (this.divs[i].showed==true){
 				this.divs[i].showed = false;
