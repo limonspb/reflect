@@ -80,8 +80,7 @@ BonusPanel.prototype.update = function(){
 	var temp = 0;
 	for (var i=0; i<6; i++){
 		temp = this.getBonusTime(i);			
-		if (temp!=0){
-			console.log("123",this.divs[i].showed);
+		if (temp!=0){			
 			if (this.divs[i].showed==false){
 				console.log("456",this.divs[i].showed);
 				this.divs[i].showed = true;
