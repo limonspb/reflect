@@ -93,6 +93,26 @@ function EnemyManager()
 	this.WAVES.push({ time: 0, wave: this.wave21, timeToInit: 130000, init: false });//180
 }
 
+EnemyManager.prototype.waweTest = function()
+{
+	console.log("CALL WAVE TEST");
+	global.EnemyManager.WAVE_LEN = 100;
+	
+	global.EnemyManager.max_simple = 30;
+	global.EnemyManager.max_medium = 30;
+	global.EnemyManager.max_escape = 0;
+	global.EnemyManager.max_chase = 0;
+	global.EnemyManager.max_strong = 0;
+	global.EnemyManager.max_vacuum = 0;
+	
+	global.EnemyManager.initWave(
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY],
+		[30, 30],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium]);
+}
+
+
+
 EnemyManager.prototype.wave1 = function()
 {
 	console.log("CALL WAVE 1");
@@ -107,6 +127,8 @@ EnemyManager.prototype.wave1 = function()
 	
 	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
+
+//EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;
 
 EnemyManager.prototype.wave2 = function()
 {

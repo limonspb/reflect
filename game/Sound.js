@@ -72,6 +72,7 @@ SoundManager.prototype.playSound = function(v,level){
 }
 
 SoundManager.prototype.stopSound = function(s){
+	//return;
 	if (
 			(s != undefined)&&
 			(s.playState != createjs.SoundJS.PLAY_FINISHED) &&

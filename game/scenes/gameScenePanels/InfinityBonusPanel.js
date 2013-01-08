@@ -1,5 +1,7 @@
 InfinityBonusPanel = function(){
-	this.update();	
+	this.update();
+	this.teleportCount = 0;
+	this.regenerationCount = 0;
 }
 
 InfinityBonusPanel.prototype.show = function(){
@@ -11,6 +13,13 @@ InfinityBonusPanel.prototype.hide = function(){
 }
 
 InfinityBonusPanel.prototype.update = function(){
-	$('#teleportCount').text(global.hero.teleportCount.toString());
-	$('#regenerationCount').text(global.hero.regenerationCount.toString());
+	if (this.regenerationCount!=global.hero.regenerationCount){
+		this.regenerationCount = global.hero.regenerationCount;
+		$('#regenerationCount').text(global.hero.regenerationCount.toString());
+	}
+	
+	if(this.teleportCount!=global.hero.teleportCount){
+		this.teleportCount!=global.hero.teleportCount;
+		$('#teleportCount').text(global.hero.teleportCount.toString());
+	}
 }
