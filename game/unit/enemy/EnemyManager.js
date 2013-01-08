@@ -103,12 +103,12 @@ EnemyManager.prototype.waweTest = function()
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
 	global.EnemyManager.max_strong = 0;
-	global.EnemyManager.max_vacuum = 0;
+	global.EnemyManager.max_vacuum = 10;
 	
 	global.EnemyManager.initWave(
-		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY],
-		[30, 30],
-		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium]);
+		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.VACUUM_ENEMY],
+		[30, 30, 10],
+		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddVecuum]);
 }
 
 
@@ -128,7 +128,7 @@ EnemyManager.prototype.wave1 = function()
 	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
 
-//EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
+EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
 
 EnemyManager.prototype.wave2 = function()
 {
