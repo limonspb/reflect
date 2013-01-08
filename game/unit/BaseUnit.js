@@ -46,7 +46,7 @@ BaseUnit.prototype.checkHitBullet = function()
 		if (bull == this.bullet) { continue; }
 		if (bull == this.bullet2) { continue; }
 		
-		if (this.x - bull.x >= this.size || this.y - bull.y >= this.size) { continue; }
+		if (Math.abs(this.x - bull.x) >= this.size || Math.abs(this.y - bull.y) >= this.size) { continue; }
 		
 		if (getDistanceToObject(this, bull) <= this.size*0.7)
 		{

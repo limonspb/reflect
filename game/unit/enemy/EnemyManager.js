@@ -133,9 +133,9 @@ EnemyManager.prototype.wave1 = function()
 EnemyManager.prototype.wave2 = function()
 {
 	log("CALL WAVE 2");
-	global.EnemyManager.WAVE_LEN = 15;
+	global.EnemyManager.WAVE_LEN = 10;
 	
-	global.EnemyManager.max_simple = 15;
+	global.EnemyManager.max_simple = 10;
 	global.EnemyManager.max_medium = 0;
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
@@ -144,16 +144,16 @@ EnemyManager.prototype.wave2 = function()
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY],
-		[18],
+		[10],
 		[global.EnemyManager.timeToAddSimple]);
 }
 
 EnemyManager.prototype.wave3 = function()
 {
 	log("CALL WAVE 3");
-	global.EnemyManager.WAVE_LEN = 20;
+	global.EnemyManager.WAVE_LEN = 15;
 	
-	global.EnemyManager.max_simple = 15;
+	global.EnemyManager.max_simple = 10;
 	global.EnemyManager.max_medium = 5;
 	global.EnemyManager.max_escape = 0;
 	global.EnemyManager.max_chase = 0;
@@ -162,16 +162,16 @@ EnemyManager.prototype.wave3 = function()
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY],
-		[15, 5],
+		[10, 5],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium]);
 }
 
 EnemyManager.prototype.wave4 = function()
 {
 	log("CALL WAVE 4");
-	global.EnemyManager.WAVE_LEN = 35;
+	global.EnemyManager.WAVE_LEN = 25;
 	
-	global.EnemyManager.max_simple = 20;
+	global.EnemyManager.max_simple = 10;
 	global.EnemyManager.max_medium = 10;
 	global.EnemyManager.max_escape = 5;
 	global.EnemyManager.max_chase = 0;
@@ -180,7 +180,7 @@ EnemyManager.prototype.wave4 = function()
 	
 	global.EnemyManager.initWave(
 		[EnemyTypes.SIMPLE_ENEMY, EnemyTypes.MEDIUM_ENEMY, EnemyTypes.ESCAPE_ENEMY],
-		[20, 10, 5],
+		[10, 10, 5],
 		[global.EnemyManager.timeToAddSimple, global.EnemyManager.timerToAddMedium, global.EnemyManager.timerToAddEscape]);
 }
 
@@ -553,7 +553,6 @@ EnemyManager.prototype.initWave = function(types,nums,times)
 		for (var j = 0; j < nums[i]; j++)
 		{
 			var tween = createjs.Tween.get(this, {loop:false});
-			//var obj = { }; ???08
 			tween.to( { },times[i]).call(this.addEnemy, [types[i]]);
 		}
 	}
@@ -606,7 +605,8 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 	if (index != -1)
 	{
 		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }//???08 здесь два раза будет вычислен индекс в массиве
-		
+																					  // не будет! это же разные массивы, и это стандартная проверка на всякий случай
+																					  // она популярна во флеш
 		//enemy.clearData();
 		
 		global.points += enemy.points;

@@ -123,17 +123,21 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 
 EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 {	
-	if (getDistanceToObject(this, global.hero) <= (this.size + global.hero.size)*0.75)
+	if (Math.abs(this.x - global.hero.x) <= (this.size + global.hero.size)*0.75 ||
+		Math.abs(this.y - global.hero.y) <= (this.size + global.hero.size)*0.75)
 	{
-		this.nearRespawnCount += elapsedTime;
-		if (this.nearRespawnCount >= this.nearRespawn)
+		if (getDistanceToObject(this, global.hero) <= (this.size + global.hero.size)*0.75)
 		{
-			this.setUnitDamage(global.hero, this.nearDamage);
-			
-			this.nearRespawnCount = 0;
+			this.nearRespawnCount += elapsedTime;
+			if (this.nearRespawnCount >= this.nearRespawn)
+			{
+				this.setUnitDamage(global.hero, this.nearDamage);
+				
+				this.nearRespawnCount = 0;
+			}
+		} else {
+			this.nearRespawnCount = this.nearRespawn;
 		}
-	} else {
-		this.nearRespawnCount = this.nearRespawn;
 	}
 	
 	this.checkHitTank();
@@ -145,9 +149,13 @@ EnemyUnit.prototype.checkHitTank = function()
 	
 	if (this == global.EnemyManager.tank) { return; }
 	
-	if (getDistanceToObject(this, global.EnemyManager.tank) <= (global.EnemyManager.tank.size + this.size)*0.75)
+	if (Math.abs(this.x - global.EnemyManager.tank.x) <= (global.EnemyManager.tank.size + this.size)*0.75 ||
+		Math.abs(this.y - global.EnemyManager.tank.y) <= (global.EnemyManager.tank.size + this.size)*0.75)
 	{
-		global.EnemyManager.blow(this);
+		if (getDistanceToObject(this, global.EnemyManager.tank) <= (global.EnemyManager.tank.size + this.size)*0.75)
+		{
+			global.EnemyManager.blow(this);
+		}
 	}
 }
 

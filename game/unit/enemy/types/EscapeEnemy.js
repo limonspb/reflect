@@ -121,7 +121,6 @@ EscapeEnemy.prototype.move = function (elapsedTime)
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
 		if (this.dist <= this.minRange+5 && this.dist > this.minRange)
-		//???08 биля, два лишних раза вычисляется getDistanceToObject. Он уже вычислен вверху. Заменил
 		{
 			dx = 0;
 			dy = 0;
