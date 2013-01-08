@@ -1,22 +1,43 @@
-var fbApi = {
+/**
+ * @author anisimov
+ * @type {Object}
+ */
+global.Sharing.fbApi = {
 
+    /**
+     * контейнер кнопок
+     * на него тригерим события
+     */
     container: null,
 
+    /**
+     * готово ли апи FB
+     */
     fbApiLoaded: false,
 
+    /**
+     * авторизованный пользователь FB
+     */
     fbUser: null,
 
+    /**
+     * начинаем танцы
+     *
+     * @param container
+     */
     init: function(container) {
         this.container = container;
 
         this.initFbApi();
     },
 
+    /**
+     * асинхронный инит апи FB
+     */
     initFbApi: function() {
         var t = this;
 
         window.fbAsyncInit = function() {
-            log('initing fb')
             FB.init({
                 appId: '576632212352083',
                 status: true,
@@ -32,8 +53,6 @@ var fbApi = {
                 t.fbApiLoaded = false;
                 t.container.trigger('fbApi.logout');
             });
-
-//            t.checkFbLoginStatus();
         };
 
         (function(d){
@@ -45,29 +64,27 @@ var fbApi = {
         }(document));
     },
 
-    checkFbLoginStatus: function() {
-        var t = this;
-
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-//                var uid = response.authResponse.userID;
-//                var accessToken = response.authResponse.accessToken;
-                t.setFbUser();
-            } else {
-                t.fbApiLoaded = false;
-                t.container.trigger('fbApi.logout');
-            }
-        });
-    },
-
+    /**
+     * логаут из FB
+     */
     logout: function() {
         FB.logout();
     },
 
+    /**
+     * готово ли апи FB
+     *
+     * @return {Boolean}
+     */
     isLoaded: function() {
         return this.fbApiLoaded;
     },
 
+    /**
+     * получаем данные о пользователе FB
+     *
+     * @return $.Deferred
+     */
     getUserInfo: function() {
         var def = $.Deferred();
         FB.api('/me', function(response) {
@@ -84,6 +101,10 @@ var fbApi = {
         return def.promise();
     },
 
+    /**
+     * получаем пользователя FB
+     * тригерим, что апи готово к работе
+     */
     setFbUser: function() {
         var t = this;
         $.when(t.getUserInfo()).then(function(data) {
@@ -95,13 +116,13 @@ var fbApi = {
     },
 
     /**
+     * отправляем пост на стену FB
      *
      * @param {Object} message
      * @param {String} link
      * @param {String} picture
      */
     wallPost: function(message, link, picture) {
-        log('wallpost fb')
         FB.ui(
             {
                 method: 'feed',
