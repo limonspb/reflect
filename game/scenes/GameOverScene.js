@@ -55,5 +55,7 @@ GameOverScene.prototype.onMyPlaceCome = function(xml){
 	$('#divWithPlace').fadeIn();
 	$('#placeGO').text(global.place.toString());
 
-    Sharing.init();
+    if (global.Sharing) {
+        global.Sharing.init();
+    }
 }

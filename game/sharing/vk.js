@@ -1,14 +1,30 @@
-var vkApi = {
+/**
+ * @author anisimov
+ * @type {Object}
+ */
+global.Sharing.vkApi = {
 
+    /**
+     * контейнер кнопок
+     * на него тригерим события
+     */
     container: null,
 
+    /**
+     * готово ли апи ВК
+     */
     vkApiLoaded: false,
 
     /**
-     * авторизованный пользователь Вконтакте
+     * авторизованный пользователь ВК
      */
     vkUser: null,
 
+    /**
+     * начинаем танцы
+     *
+     * @param container
+     */
     init: function(container) {
         this.container = container;
 
@@ -16,26 +32,14 @@ var vkApi = {
         this.bindEvents();
     },
 
+    /**
+     * асинхронный инит апи ВК
+     */
     initVkApi: function() {
-        var t = this;
-
         window.vkAsyncInit = function() {
             VK.init({
                 apiId: 3308430
             });
-
-            VK.Observer.subscribe('auth.login', function(response) {
-                if (response.session) {
-                    t.setVkUser(response.session);
-                }
-            });
-
-            VK.Observer.subscribe('auth.logout', function() {
-                t.vkApiLoaded = false;
-                t.container.trigger('vkApi.logout');
-            });
-
-//            t.checkVkLoginStatus();
 
             VK.UI.button('login-vk');
         };
@@ -50,39 +54,52 @@ var vkApi = {
 
     },
 
-    checkVkLoginStatus: function() {
-        var t = this;
-
-        VK.Auth.getLoginStatus(function(response) {
-//            if (response.session) {
-//                t.setVkUser(response.session);
-//            } else {
-            if (!response.session) {
-                t.vkApiLoaded = false;
-                t.container.trigger('vkApi.logout');
-            }
-        });
-    },
-
+    /**
+     * готово ли апи ВК
+     *
+     * @return {Boolean}
+     */
     isLoaded: function() {
         return this.vkApiLoaded;
     },
 
+    /**
+     * биндим события
+     */
     bindEvents: function() {
+        var t = this;
+
         $('#login-vk').click(function() {
+            VK.Observer.subscribe('auth.login', function(response) {
+                if (response.session) {
+                    t.setVkUser(response.session);
+                }
+            });
+
             VK.Auth.login();
         });
     },
 
+    /**
+     * логаут из ВК
+     */
     logout: function() {
+        var t = this;
+
+        VK.Observer.subscribe('auth.logout', function() {
+            t.vkApiLoaded = false;
+            t.container.trigger('vkApi.logout');
+        });
+
         VK.Auth.logout();
     },
 
     /**
-     * обертка для вызова метода апи Вконтакте
+     * обертка для вызова метода апи ВК
      *
      * @param method
      * @param params
+     * @return $.Deferred
      */
     request: function(method, params) {
         var def = $.Deferred();
@@ -94,6 +111,12 @@ var vkApi = {
         return def.promise();
     },
 
+    /**
+     * получаем данные о пользователе ВК
+     *
+     * @param uid
+     * @return $.Deferred
+     */
     getUserInfo: function(uid) {
         var def = $.Deferred();
         $.when(this.request('users.get', {uids: uid, fields: 'sex, photo_50, can_post'})).then(function(data) {
@@ -110,6 +133,12 @@ var vkApi = {
         return def.promise();
     },
 
+    /**
+     * получаем пользователя ВК
+     * тригерим, что апи готово к работе
+     *
+     * @param session
+     */
     setVkUser: function(session) {
         var t = this;
         $.when(t.getUserInfo(session.mid)).then(function(data) {
@@ -120,6 +149,7 @@ var vkApi = {
     },
 
     /**
+     * отправляем пост на стену ВК
      *
      * @param {String} message
      * @param {String} link

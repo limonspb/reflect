@@ -1,30 +1,44 @@
-var Sharing = {
+/**
+ * Отправляем пост на стену ВК или FB после авторизации
+ *
+ * @author anisimov
+ * @type {Object}
+ */
+global.Sharing = {
 
+    /**
+     * подключенное апи
+     */
     api: null,
 
+    /**
+     * авторизованный пользователь
+     */
     webUser: null,
 
+    /**
+     * селектор контейнера кнопок
+     */
     selector: '.social-buttons',
 
-    params: null,
-
-    init: function(params) {
-        log('starting sharing')
+    /**
+     * инитим апи
+     */
+    init: function() {
         var t = this;
 
-        this.params = params;
         this.container = $(this.selector);
         this.container.show();
 
-        vkApi.init(this.container);
-        fbApi.init(this.container);
+        t.vkApi.init(this.container);
+        t.fbApi.init(this.container);
 
         t.container.on('vkApi.login', function() {
             log('vkapi.on');
 
-            t.webUser = vkApi.vkUser;
-            if (fbApi.isLoaded()) {
-                fbApi.logout();
+            t.webUser = t.vkApi.vkUser;
+            if (t.fbApi.isLoaded()) {
+                t.fbApi.logout();
             }
             t.bindEvents();
         });
@@ -32,9 +46,9 @@ var Sharing = {
         t.container.on('fbApi.login', function() {
             log('fbapi.on');
 
-            t.webUser = fbApi.fbUser;
-            if (vkApi.isLoaded()) {
-                vkApi.logout();
+            t.webUser = t.fbApi.fbUser;
+            if (t.vkApi.isLoaded()) {
+                t.vkApi.logout();
             }
             t.bindEvents();
         });
@@ -50,6 +64,9 @@ var Sharing = {
         });
     },
 
+    /**
+     * биндим события
+     */
     bindEvents: function() {
         var t = this;
 
@@ -57,16 +74,16 @@ var Sharing = {
 
         $('.share').unbind('click').click(function() {
             var message,
-                link = 'http://www.tonyspb.ru/limonhahaton/reflect/game/',
+                link = global.gameUrl,
                 picture;
 
-            if (vkApi.isLoaded()) {
+            if (t.vkApi.isLoaded()) {
                 message = 'I\'m number ' + global.place + ' at Hahaton! I\'ve scored ' + global.points + ' points! Try to beat me!';
                 picture = 'photo-46533758_294427131';
-                vkApi.wallPost(message, link, picture);
+                t.vkApi.wallPost(message, link, picture);
             }
 
-            if (fbApi.isLoaded()) {
+            if (t.fbApi.isLoaded()) {
                 message = {
                     name: 'Hahaton Game',
                     caption: 'Try to beat me!',
@@ -74,20 +91,23 @@ var Sharing = {
                 };
                 picture = 'http://cs421820.userapi.com/v421820242/1fc4/tR5XXtY2JEs.jpg';
 
-                fbApi.wallPost(message, link, picture);
+                t.fbApi.wallPost(message, link, picture);
             }
         });
 
         $('.logout').click(function() {
-            if (vkApi.isLoaded()) {
-                vkApi.logout();
+            if (t.vkApi.isLoaded()) {
+                t.vkApi.logout();
             }
-            if (fbApi.isLoaded()) {
-                fbApi.logout();
+            if (t.fbApi.isLoaded()) {
+                t.fbApi.logout();
             }
         });
     },
 
+    /**
+     * играем с кнопками
+     */
     showHideButtons: function() {
         var vkButton = this.container.find('.vk');
         var fbButton = this.container.find('.fb');
@@ -95,7 +115,7 @@ var Sharing = {
         var infoWrap = this.container.find('.share-info');
         var shareWrap = this.container.find('.share-wrap');
 
-        if (vkApi.isLoaded() || fbApi.isLoaded()) {
+        if (this.vkApi.isLoaded() || this.fbApi.isLoaded()) {
             vkButton.hide();
             fbButton.hide();
             shareTitle.hide();

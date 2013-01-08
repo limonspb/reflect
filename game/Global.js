@@ -19,5 +19,7 @@ var global = {
 	place : 0,
 	music : null,
 	volumePanel : null,
-	soundManager : null
+	soundManager : null,
+    gameUrl: 'http://hahaton.ru/reflect/',
+    Sharing: null
 };
