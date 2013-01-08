@@ -95,7 +95,10 @@ ChaseEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (getDistanceToObject(this, global.hero) <= this.minRange+5)
+		if (this.dist <= this.minRange+5)//???08 второй раз вызывалось getDistanceToObject(this, global.hero) вместо this.dist
+		//???08 и вообще, зачем на 86 строчке вычисляется dist? Только для 98 строчки?
+		//если да, то 86 можно убрать, а 98 заменить на проверку отдельно x1-x2 и отдельно y1-y2
+		
 		{
 			dx = 0;
 			dy = 0;

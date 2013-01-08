@@ -137,7 +137,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 		}
 	}
 	
-	if (getDistanceToObject(this, global.hero) <= this.minRange+5)
+	if (getDistanceToObject(this, global.hero) <= this.minRange+5)//???08 и опять getDistanceToObject второй раз
 	{
 		if (dt > 0)
 		{
