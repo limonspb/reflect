@@ -22,5 +22,6 @@ var global = {
 	soundManager : null,
     gameUrl: 'http://hahaton.ru/reflect/',
     Sharing: null,
-    useSoundBuffer : false
+    useSoundBuffer : false,
+    gameid : ""
 };

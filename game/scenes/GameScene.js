@@ -1,4 +1,5 @@
 function GameScene(){
+	this.inprogress = false;
 	this.container = new createjs.Container();
 	
 	global.EnemyManager = new EnemyManager();
@@ -23,7 +24,7 @@ function GameScene(){
 	this.bonusPanel = new BonusPanel();
 	this.pointsPanel = new PointsPanel();
 	this.infinityBonusPanel = new InfinityBonusPanel();
-	this.newGame();
+	//this.newGame();
 	
 	this.fps_value = $("#fps_value");
 }
@@ -31,6 +32,7 @@ function GameScene(){
 extend(GameScene,BaseScene);
 
 GameScene.prototype.newGame = function(){
+	global.gameid = "";
 	global.gameTime = 0;
 	global.points = 0;
 	global.hero.health = 250;
@@ -43,7 +45,18 @@ GameScene.prototype.newGame = function(){
 	
 	global.BonusManager.clearAll();
 	global.BulletFactory.clearAll();
-	global.EnemyManager.clearAll();	
+	global.EnemyManager.clearAll();
+	
+	var th = this;
+	jQuery.ajax({
+		type: "GET", // метод передачи данных, можно пропустить - по умолчанию и так get
+		url: "http://hahaton.ru/html5games/reflect/table/ng.php", // путь к файлу, который будем читать
+		dataType: "xml", // тип данных, с которыми работаем
+		success: th.onGameIDReceived,
+		data:   {
+					life : global.hero.health
+			}
+	});	
 }
 
 GameScene.prototype.show = function(){
@@ -58,6 +71,11 @@ GameScene.prototype.show = function(){
 
 	createjs.Ticker.addListener(this);	
 	global.music.play(1);
+	
+	if (this.inprogress == false){
+		this.inprogress = true;
+		this.newGame();
+	}
 }
 
 GameScene.prototype.hide = function(){
@@ -147,5 +165,11 @@ GameScene.prototype.tick = function(elapsedTime) {
 	
 	if (global.hero.health <=0){
 		global.sceneController.switchScene(SceneController.eventTypes.GAME_OVER);
+		global.sceneController.gameScene.inprogress = false;
 	}
+}
+
+GameScene.prototype.onGameIDReceived = function(xml){
+	global.gameid = jQuery(xml).find('reply').attr('gameid');
+	log(global.gameid);
 }

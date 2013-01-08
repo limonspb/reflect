@@ -20,9 +20,8 @@ GameOverScene.prototype.show = function(){
 }
 
 GameOverScene.prototype.hide = function(){
-	$('#writeNamePanel').fadeOut();
-	global.sceneController.gameScene.newGame();
-	global.sceneController.recordsScene.hide();	
+	$('#writeNamePanel').fadeOut();	
+	global.sceneController.recordsScene.hide();
 }
 
 GameOverScene.prototype.cancelClick = function(){
@@ -44,10 +43,11 @@ GameOverScene.prototype.sendRecord = function(name,count,mode){
 		data:   {
 					mode : mode,
 					name : name,
-					count : count
+					count : count,
+					gameid : global.gameid,
+					gameTime : global.gameTime
 			}
-	});
-	
+	});	
 }
 
 GameOverScene.prototype.onMyPlaceCome = function(xml){
@@ -55,7 +55,8 @@ GameOverScene.prototype.onMyPlaceCome = function(xml){
 	global.place = jQuery(xml).find('reply').attr('place');
 	$('#divWithPlace').fadeIn();
 	$('#placeGO').text(global.place.toString());
-
+	//log('ololo',jQuery(xml).find('reply').attr('nnnn'));
+	global.sceneController.recordsScene.show();
     if (global.Sharing) {
         global.Sharing.init();
     }

@@ -2,7 +2,7 @@ function RecordsScene(){
 	$("#backButton_records").bind('click',this.onBackCkick);
 	$('#backButton_records').mouseover(function(){playSound("hover")});
 	
-	this.place = -1;		
+	this.place = -1;
 }
 extend(RecordsScene,BaseScene);
 
