@@ -95,7 +95,7 @@ function EnemyManager()
 
 EnemyManager.prototype.waweTest = function()
 {
-	console.log("CALL WAVE TEST");
+	log("CALL WAVE TEST");
 	global.EnemyManager.WAVE_LEN = 100;
 	
 	global.EnemyManager.max_simple = 30;
@@ -115,7 +115,7 @@ EnemyManager.prototype.waweTest = function()
 
 EnemyManager.prototype.wave1 = function()
 {
-	console.log("CALL WAVE 1");
+	log("CALL WAVE 1");
 	global.EnemyManager.WAVE_LEN = 5;
 	
 	global.EnemyManager.max_simple = 5;
@@ -128,11 +128,11 @@ EnemyManager.prototype.wave1 = function()
 	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
 
-//EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;
+EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
 
 EnemyManager.prototype.wave2 = function()
 {
-	console.log("CALL WAVE 2");
+	log("CALL WAVE 2");
 	global.EnemyManager.WAVE_LEN = 15;
 	
 	global.EnemyManager.max_simple = 15;
@@ -150,7 +150,7 @@ EnemyManager.prototype.wave2 = function()
 
 EnemyManager.prototype.wave3 = function()
 {
-	console.log("CALL WAVE 3");
+	log("CALL WAVE 3");
 	global.EnemyManager.WAVE_LEN = 20;
 	
 	global.EnemyManager.max_simple = 15;
@@ -168,7 +168,7 @@ EnemyManager.prototype.wave3 = function()
 
 EnemyManager.prototype.wave4 = function()
 {
-	console.log("CALL WAVE 4");
+	log("CALL WAVE 4");
 	global.EnemyManager.WAVE_LEN = 35;
 	
 	global.EnemyManager.max_simple = 20;
@@ -187,7 +187,7 @@ EnemyManager.prototype.wave4 = function()
 
 EnemyManager.prototype.wave5 = function()
 {
-	console.log("CALL WAVE 5");
+	log("CALL WAVE 5");
 	global.EnemyManager.WAVE_LEN = 33;
 	
 	global.EnemyManager.max_simple = 10;
@@ -205,7 +205,7 @@ EnemyManager.prototype.wave5 = function()
 
 EnemyManager.prototype.wave6 = function()
 {
-	console.log("CALL WAVE 6");
+	log("CALL WAVE 6");
 	global.EnemyManager.WAVE_LEN = 35;
 	
 	global.EnemyManager.max_simple = 10;
@@ -223,7 +223,7 @@ EnemyManager.prototype.wave6 = function()
 
 EnemyManager.prototype.wave7 = function()
 {
-	console.log("CALL WAVE 7");
+	log("CALL WAVE 7");
 	global.EnemyManager.WAVE_LEN = 21;
 	
 	global.EnemyManager.max_simple = 3;
@@ -241,7 +241,7 @@ EnemyManager.prototype.wave7 = function()
 
 EnemyManager.prototype.wave8 = function()
 {
-	console.log("CALL WAVE 8");
+	log("CALL WAVE 8");
 	global.EnemyManager.WAVE_LEN = 17;
 	
 	global.EnemyManager.max_simple = 0;
@@ -259,7 +259,7 @@ EnemyManager.prototype.wave8 = function()
 
 EnemyManager.prototype.wave9 = function()
 {
-	console.log("CALL WAVE 9");
+	log("CALL WAVE 9");
 	global.EnemyManager.WAVE_LEN = 25;
 	
 	global.EnemyManager.max_simple = 0;
@@ -277,7 +277,7 @@ EnemyManager.prototype.wave9 = function()
 
 EnemyManager.prototype.wave10 = function()
 {
-	console.log("CALL WAVE 10");
+	log("CALL WAVE 10");
 	global.EnemyManager.WAVE_LEN = 50;
 	
 	global.EnemyManager.max_simple = 0;
@@ -296,7 +296,7 @@ EnemyManager.prototype.wave10 = function()
 ////////////////////////////////////////////////////////////////
 EnemyManager.prototype.wave11 = function()
 {
-	console.log("CALL WAVE 11");
+	log("CALL WAVE 11");
 	global.EnemyManager.WAVE_LEN = 58;
 	
 	global.EnemyManager.max_simple = 12;
@@ -314,7 +314,7 @@ EnemyManager.prototype.wave11 = function()
 
 EnemyManager.prototype.wave12 = function()
 {
-	console.log("CALL WAVE 12");
+	log("CALL WAVE 12");
 	global.EnemyManager.WAVE_LEN = 75;
 	
 	global.EnemyManager.max_simple = 15;
@@ -332,7 +332,7 @@ EnemyManager.prototype.wave12 = function()
 
 EnemyManager.prototype.wave13 = function()
 {
-	console.log("CALL WAVE 13");
+	log("CALL WAVE 13");
 	global.EnemyManager.WAVE_LEN = 62;
 	
 	global.EnemyManager.max_simple = 12;
@@ -350,7 +350,7 @@ EnemyManager.prototype.wave13 = function()
 
 EnemyManager.prototype.wave14 = function()
 {
-	console.log("CALL WAVE 14");
+	log("CALL WAVE 14");
 	global.EnemyManager.WAVE_LEN = 67;
 	
 	global.EnemyManager.max_simple = 10;
@@ -368,7 +368,7 @@ EnemyManager.prototype.wave14 = function()
 
 EnemyManager.prototype.wave15 = function()
 {
-	console.log("CALL WAVE 15");
+	log("CALL WAVE 15");
 	global.EnemyManager.WAVE_LEN = 72;
 	
 	global.EnemyManager.max_simple = 23;
@@ -390,7 +390,7 @@ EnemyManager.prototype.wave16 = function()
 {
 	this.skillKoeff += 1;
 	
-	console.log("CALL WAVE 16");
+	log("CALL WAVE 16");
 	global.EnemyManager.WAVE_LEN = 63;
 	
 	global.EnemyManager.max_simple = 15;
@@ -408,7 +408,7 @@ EnemyManager.prototype.wave16 = function()
 
 EnemyManager.prototype.wave17 = function()
 {
-	console.log("CALL WAVE 17");
+	log("CALL WAVE 17");
 	global.EnemyManager.WAVE_LEN = 61;
 	
 	global.EnemyManager.max_simple = 15;
@@ -426,7 +426,7 @@ EnemyManager.prototype.wave17 = function()
 
 EnemyManager.prototype.wave18 = function()
 {
-	console.log("CALL WAVE 18");
+	log("CALL WAVE 18");
 	global.EnemyManager.WAVE_LEN = 63;
 	
 	global.EnemyManager.max_simple = 20;
@@ -444,7 +444,7 @@ EnemyManager.prototype.wave18 = function()
 
 EnemyManager.prototype.wave19 = function()
 {
-	console.log("CALL WAVE 19");
+	log("CALL WAVE 19");
 	global.EnemyManager.WAVE_LEN = 61;
 	
 	global.EnemyManager.max_simple = 15;
@@ -462,7 +462,7 @@ EnemyManager.prototype.wave19 = function()
 
 EnemyManager.prototype.wave20 = function()
 {
-	console.log("CALL WAVE 20");
+	log("CALL WAVE 20");
 	global.EnemyManager.WAVE_LEN = 66;
 	
 	global.EnemyManager.max_simple = 10;
@@ -480,7 +480,7 @@ EnemyManager.prototype.wave20 = function()
 
 EnemyManager.prototype.wave21 = function()
 {
-	console.log("CALL WAVE 21");
+	log("CALL WAVE 21");
 	global.EnemyManager.WAVE_LEN = 78;
 	
 	global.EnemyManager.max_simple = 20;
@@ -553,7 +553,7 @@ EnemyManager.prototype.initWave = function(types,nums,times)
 		for (var j = 0; j < nums[i]; j++)
 		{
 			var tween = createjs.Tween.get(this, {loop:false});
-			var obj = { };
+			//var obj = { }; ???08
 			tween.to( { },times[i]).call(this.addEnemy, [types[i]]);
 		}
 	}
@@ -620,7 +620,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		enemy = null;
 	}
 	
-	//console.log("ENEMIES " + this.enemies.length);
+	//log("ENEMIES " + this.enemies.length);
 }
 
 EnemyManager.prototype.removeTypeEnemy = function(enemy, arrType)

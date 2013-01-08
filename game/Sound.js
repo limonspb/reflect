@@ -4,12 +4,20 @@ SoundManager = function(){
 	this.sounds = [];
 }
 
-SoundManager.prototype.play = function(v,level,main){	
-	if (main){
-		this.playMainSound(v,level);
+SoundManager.prototype.play = function(v,level,main){
+	if (global.useSoundBuffer){
+		if (main){
+			this.playMainSound(v,level);
+		}else{
+			this.playSound(v,level);
+		}		
 	}else{
-		this.playSound(v,level);	
+		this.playNormalSound(v,level);
 	}
+}
+
+SoundManager.prototype.playNormalSound = function(v,level){
+	createjs.SoundJS.play(v, createjs.SoundJS.INTERRUPT_EARLY, 0, 0, false, level);
 }
 
 SoundManager.prototype.getSoundCount = function(){

@@ -494,7 +494,11 @@ HeroUnit.prototype.move = function(elapsedTime)
 	
 	var vx_c = this.v_c * Math.cos(this.angle);
 	var vy_c = this.v_c * Math.sin(this.angle);
-	this.ss.getAnimation("run").frequency = Math.ceil(13 - this.v_c/this.max_v_c_forward * 10);
+	if (!this.speedyMode){
+		this.ss.getAnimation("run").frequency = Math.ceil(13 - this.v_c/this.max_v_c_forward * 10);		
+	}else{
+		this.ss.getAnimation("run").frequency = Math.ceil(11 - this.v_c/this.max_v_c_forward * 10);		
+	}
 	if (this.v_c == 0){
 		this.ss.getAnimation("run").frequency = 100000;
 	}

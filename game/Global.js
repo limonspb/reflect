@@ -21,5 +21,6 @@ var global = {
 	volumePanel : null,
 	soundManager : null,
     gameUrl: 'http://hahaton.ru/reflect/',
-    Sharing: null
+    Sharing: null,
+    useSoundBuffer : false
 };
