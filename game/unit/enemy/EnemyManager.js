@@ -128,7 +128,7 @@ EnemyManager.prototype.wave1 = function()
 	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
 
-EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
+//EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
 
 EnemyManager.prototype.wave2 = function()
 {
@@ -605,7 +605,7 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 	var index = this.enemies.indexOf(enemy);
 	if (index != -1)
 	{
-		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }
+		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }//???08 здесь два раза будет вычислен индекс в массиве
 		
 		//enemy.clearData();
 		

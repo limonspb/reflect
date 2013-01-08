@@ -19,9 +19,26 @@ function SettingsScene(){
 	$('#backButton_settings').mouseover(function(){playSound("hover")});
 	$('#radio_relative').mouseover(function(){playSound("hover")});
 	$('#radio_static').mouseover(function(){playSound("hover")});
+
+	if (localStorage.getItem('hahaton_reflect_use_limited_sound_buffer')=='true'){
+		global.useSoundBuffer = true;		
+	}else{
+		global.useSoundBuffer = false;		
+	}
+	
+	$("#useBufferCheckBox").attr("checked", global.useSoundBuffer);
+	$("#useBufferCheckBox").bind('change',this.useBufferCheckBox_click);
+	
+
 	
 }
 extend(SettingsScene,BaseScene);
+
+SettingsScene.prototype.useBufferCheckBox_click = function(e){
+	global.useSoundBuffer = !global.useSoundBuffer;
+	$("#useBufferCheckBox").prop("checked", global.useSoundBuffer);
+	localStorage.setItem('hahaton_reflect_use_limited_sound_buffer',global.useSoundBuffer);
+}
 
 SettingsScene.prototype.show = function(){	
 	$("#settings").fadeIn();

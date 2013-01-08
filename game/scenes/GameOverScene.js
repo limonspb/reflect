@@ -11,6 +11,7 @@ function GameOverScene(){
 }
 
 GameOverScene.prototype.show = function(){
+	$('#placeGO').text("...");
 	$('#writeNamePanel').fadeIn();
 	$('#sendRecordButton').fadeIn();	
 	$('#divWithPlace').fadeIn();

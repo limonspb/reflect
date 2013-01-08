@@ -29,7 +29,7 @@ Preloader = function(){
 	//this.pr.onFileProgress = handleFileProgress;
 	this.pr.onError = function(e){
 		global.preloader.errored.push(e);
-		console.log(e);
+		log(e);
 	}
 	//this.pr.setMaxConnections(1);
 	

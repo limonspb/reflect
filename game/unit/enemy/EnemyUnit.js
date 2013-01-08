@@ -70,11 +70,11 @@ EnemyUnit.prototype.initPosition = function() {
 		this.x = Math.random()*global.levelWidth;
 		this.y = global.levelHeight + this.height + 20;
 	}
-	else if (random > .5 && random < .75) {
+	else if (random >= .5 && random < .75) {
 		this.x = - this.width - 20;
 		this.y = Math.random() * global.levelHeight;
 	}
-	else if (random >= .75) {
+	else { //???08 убрал if (random >= .75) 
 		this.x = global.levelWidth + this.width + 20;
 		this.y = Math.random() * global.levelHeight;
 	}
@@ -122,7 +122,7 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 }
 
 EnemyUnit.prototype.checkHitHero = function(elapsedTime)
-{
+{	
 	if (getDistanceToObject(this, global.hero) <= (this.size + global.hero.size)*0.75)
 	{
 		this.nearRespawnCount += elapsedTime;
@@ -171,7 +171,7 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 {
 	if (item.rotation < -360 || item.rotation >  360) { item.rotation %= 360; }
 	
-	var angle;
+	var angle = 0.0;
 	switch(shotType)
 	{
 		case ShotType.FORWARD_SHOT:
@@ -196,7 +196,7 @@ EnemyUnit.prototype.getGunRotation = function(item, shotType)
 	
 	
 	var minAngle = 10;
-	var rot;
+	var rot = 0.0;
 	if (Math.abs(angle) <= minAngle)
     {
     	rot = 0;

@@ -47,6 +47,11 @@ function HeroUnit()
 	this.lastRegenerationTime = global.gameTime;
 	
 	this.whiteShieldCount = 0;
+	
+	this.shieldWidth = 0;
+	this.shieldHeight = 0;
+	this.shieldDist = 0;
+	
 }
 
 extend(HeroUnit,BaseUnit);
@@ -92,9 +97,6 @@ HeroUnit.prototype.zeroAll = function(){
 	this.vr_c = 0;
 	this.vr_c_max = 300;
 	
-	this.shieldWidth = 70;
-	this.shieldHeight = 10;
-	this.shieldDist = 25;
 	this.old_x = this.x;
 	this.old_y = this.y;
 	
@@ -110,10 +112,14 @@ HeroUnit.prototype.zeroAll = function(){
 	
 	this.fullProtectMode = false;
 	this.fullProtectTime = 0;
+	
+	this.shieldWidth = 70;
+	this.shieldHeight = 10;
+	this.shieldDist = 25;	
 }
 
 HeroUnit.prototype.regenerateHealth = function(){
-	if (global.gameTime-this.lastRegenerationTime > 10000){
+	if (global.gameTime-this.lastRegenerationTime > 5000){
 		if (this.health < this.MAX_HEALTH){
 			this.health+=this.regenerationCount;
 			this.lastRegenerationTime = global.gameTime;
@@ -165,8 +171,7 @@ HeroUnit.prototype.getSieldSegmentsArray_usingOldandNow = function(count){
 	var posArr = this.getPositionArray(count);
 	var angleArr = this.getRotationShieldArray(count);
 	var res = [];
-	for (var i=0; i<count; i++){
-		res[i] = {};
+	for (var i=0; i<count; i++){		
 		res[i] = this.countShieldSegments(angleArr[i], posArr[i].x, posArr[i].y);		
 	}
 	return res;
@@ -178,7 +183,7 @@ HeroUnit.prototype.getPositionArray = function(count){
 	var dx = (this.x - this.old_x)/(count-1);
 	var dy = (this.y - this.old_y)/(count-1);
 	for (var i=0; i<count; i++){
-		res[i] = {};
+		res[i] = {x:0.0, y:0.0};
 		res[i].x = this.old_x + dx*i;
 		res[i].y = this.old_y + dy*i;
 	}	
@@ -186,10 +191,10 @@ HeroUnit.prototype.getPositionArray = function(count){
 }
 
 HeroUnit.prototype.countShieldSegments = function(angle,px,py){
-	var sh_TopLeft = {};
-	var sh_TopRight = {};
-	var sh_BottomRight = {};
-	var sh_BottomLeft = {};
+	var sh_TopLeft = {x:0.0, y:0.0};
+	var sh_TopRight = {x:0.0, y:0.0};
+	var sh_BottomRight = {x:0.0, y:0.0};
+	var sh_BottomLeft = {x:0.0, y:0.0};
 
 	
 	sh_TopLeft.x = -this.shieldWidth/2;
@@ -220,7 +225,7 @@ HeroUnit.prototype.countShieldSegments = function(angle,px,py){
 	sh_BottomLeft.y += py;	
 	sh_BottomRight.y += py;
 	
-	sh_segments = [{},{},{},{}];
+	var sh_segments = [{},{},{},{}];
 	
 	sh_segments[0].x1 = sh_TopLeft.x;	
 	sh_segments[0].y1 = sh_TopLeft.y;
@@ -277,11 +282,8 @@ HeroUnit.prototype.initView = function ()
 	this.body.scaleY = 0.5;
 				
 	this.body.gotoAndPlay("run");	
-	this.body.rotation = 90;
+	this.body.rotation = 90;	
 	
-	
-	//this.sheild = new createjs.Shape();
-	//this.sheild.graphics.beginFill("green").drawRect ( this.shieldDist , -this.shieldWidth/2 , this.shieldHeight , this.shieldWidth );
 	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);
 	this.underSheild = new createjs.Bitmap(global.preloader.imgs.underShield);
 	this.sheild.regX = -this.shieldWidth/2 + this.shieldHeight;
@@ -294,9 +296,7 @@ HeroUnit.prototype.initView = function ()
 	this.arrow.rotation = 90;
 	this.arrow.x = 110;
 	this.arrow.regX = global.preloader.imgs.player_arrow.width/2;
-	this.arrow.regY = global.preloader.imgs.player_arrow.height/2;
-	
-	
+	this.arrow.regY = global.preloader.imgs.player_arrow.height/2;	
 	
 	this.addChild(this.body);	
 	this.addChild(this.arrow);
@@ -424,12 +424,14 @@ HeroUnit.prototype.setGravityV = function(){
 	var v_min = {x:0, y:0}
 	for (var i=0; i<arr.length; i++){
 		var v = vec_Get(this.x,this.y,arr[i].x, arr[i].y);
-		var d = vec_Length(v);
-		if ((d<d_min)&&(d<global.EnemyManager.vacuumSize)){
-			i_min = i;
-			d_min = d;
-			v_min.x = v.x;
-			v_min.y = v.y;
+		if ((d.x <= global.EnemyManager.vacuumSize)&&((d.y <= global.EnemyManager.vacuumSize))){			
+			var d = vec_Length(v);
+			if ((d<d_min)&&(d<global.EnemyManager.vacuumSize)){
+				i_min = i;
+				d_min = d;
+				v_min.x = v.x;
+				v_min.y = v.y;
+			}
 		}
 	}
 	
@@ -576,9 +578,8 @@ HeroUnit.prototype.move = function(elapsedTime)
 			this.removeChild(this.protectIcon);
 			this.fullProtectMode = false;
 		}
-	}
+	}	
 	
-	//console.log(this.getChanceFireAngle(0, 0, 1500));
 }	
 /**
  * Поворот щита относительно курсора

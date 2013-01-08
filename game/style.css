@@ -361,7 +361,7 @@ h2{
 
 #credits_content{
 	font-size : 15px;
-	line-height : 23px;
+	line-height : 22px;
 }
 
 .some_part{
@@ -411,4 +411,11 @@ table.menu_table_top10 tr td:nth-child(2){
 	left : 0px;
 	margin-top:-9px;
 	font-size : 8px; 
+}
+
+
+#useBufferCheckBoxText{
+	margin-top:20px;
+	font-size : 12px;
+	text-align:center;
 }

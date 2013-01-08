@@ -10,6 +10,20 @@ function sleep(millisecondi)
     }
 }
 
+/**
+ * логирование
+ * можно убрать все логи и эту функцию
+ */
+var log = function() {
+    if (typeof console !=="undefined" && console.log) {
+        var args = $.makeArray(arguments.callee.arguments);
+        $.each(args, function(k, v) {
+            console.log(v);
+        });
+    }
+};
+
+
 // функция генерирует целое случайное число от m до n
 function randomNumber (m,n)
 {
@@ -72,7 +86,7 @@ function intersectSegments_obj(s1,s2){
 
 
 function rotateVec(vec, angle){
-	var r = {x:0,y:0};
+	var r = {x:0.0,y:0.0};
 	r.x =   vec.x * Math.cos(angle) - vec.y * Math.sin(angle);
 	r.y =   vec.x * Math.sin(angle) + vec.y * Math.cos(angle);
 	return r;
@@ -80,7 +94,7 @@ function rotateVec(vec, angle){
 
 function vec_normal(vec){
 	var d = Math.sqrt(vec.x*vec.x + vec.y*vec.y);
-	var r = {x:0,y:0};
+	var r = {x:0.0,y:0.0};
 	if (d!=0){
 		r.x = vec.x/d;
 		r.y = vec.y/d;
@@ -108,9 +122,9 @@ function vec_Length(v){
 function vec_Scale(v,new_length){
 	var d = vec_Length(v);
 	if (d==0){
-		return {x:0, y:0};
+		return {x:0.0, y:0.0};
 	}else{
-		var res = {};
+		var res = {x:0.0,y:0.0};
 		res.x = v.x/d*new_length;
 		res.y = v.y/d*new_length;
 		return res;
@@ -144,12 +158,10 @@ function getAngleDiff_grad(angle1,angle2){
 	var ad1 = Math.abs(d1);
 	var ad2 = Math.abs(d2);	
 	
-	var res;
+	var res = d2;
 	
 	if (ad1 <= ad2)
-		res = d1
-	else
-		res = d2;
+		res = d1;
 		
 	return res;
 }

@@ -134,16 +134,3 @@ global.Sharing = {
     }
 
 };
-
-/**
- * логирование
- * можно убрать все логи и эту функцию
- */
-var log = function() {
-    if (typeof console !=="undefined" && console.log) {
-        var args = $.makeArray(arguments.callee.arguments);
-        $.each(args, function(k, v) {
-            console.log(v);
-        });
-    }
-};
