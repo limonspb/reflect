@@ -107,6 +107,8 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	
 	var dt = 1;
 	
+	this.dist = getDistanceToObject(this, global.hero);
+	
 	this.backTime -= elapsedTime;
 	if (this.backTime > 0)
 	{
@@ -128,7 +130,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 	dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 	
-	if (this.pauseMove(elapsedTime) || getDistanceToObject(this, global.hero) <= this.minRange+5)
+	if (this.pauseMove(elapsedTime) || this.dist <= this.minRange+5)
 	{
 		if (dt > 0)
 		{
@@ -137,7 +139,7 @@ MediumEnemy.prototype.move = function (elapsedTime)
 		}
 	}
 	
-	if (getDistanceToObject(this, global.hero) <= this.minRange+5)//???08 и опять getDistanceToObject второй раз
+	if (this.dist <= this.minRange+5)
 	{
 		if (dt > 0)
 		{
