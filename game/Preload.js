@@ -184,6 +184,7 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/enemies/simple/Gun.png","simple_gun");
    
    this.addImage("img/shield.png","shield");
+   //this.addImage("img/underShield.png","shield");
    this.addImage("img/underShield.png","underShield");  
 };
 

@@ -88,7 +88,7 @@ HeroUnit.prototype.zeroAll = function(){
 	this.a_c_max_backward = -1000;
 	this.a_c_triction = 500;
 	this.v_c = 0;
-	this.max_v_c_forward = 180; 
+	this.max_v_c_forward = 180;
 	this.max_v_c_backward = -50;
 	
 	this.ar_c = 0; 
@@ -113,7 +113,7 @@ HeroUnit.prototype.zeroAll = function(){
 	this.fullProtectMode = false;
 	this.fullProtectTime = 0;
 	
-	this.shieldWidth = 70;
+	this.shieldWidth = 100;
 	this.shieldHeight = 10;
 	this.shieldDist = 25;	
 }
@@ -286,8 +286,11 @@ HeroUnit.prototype.initView = function ()
 	
 	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);
 	this.underSheild = new createjs.Bitmap(global.preloader.imgs.underShield);
-	this.sheild.regX = -this.shieldWidth/2 + this.shieldHeight;
-	this.sheild.regY = this.shieldWidth/2;
+	this.sheild.regX = -this.shieldDist + 10;
+	this.sheild.regY = this.shieldWidth/2 + 10;
+	//this.sheild.regX = -this.shieldWidth/2 + this.shieldHeight + 10;
+	//this.sheild.regY = this.shieldWidth/2 + 10;
+	
 	this.underSheild.regX = this.sheild.regX;
 	this.underSheild.regY = this.sheild.regY;
 	this.underSheild.alpha = 0.5;
