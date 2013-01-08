@@ -120,8 +120,13 @@
 		
 		
 		<script src="main.js"></script>
-		
-			
+
+        <!--sharing-->
+        <script type="text/javascript" src="sharing/sharing.js"></script>
+        <script type="text/javascript" src="sharing/vk.js"></script>
+        <script type="text/javascript" src="sharing/fb.js"></script>
+        <link rel="stylesheet" type="text/css" href="sharing/style.css" />
+
 	</head>
 
 	<body onLoad="init();">
@@ -327,10 +332,33 @@
 			<div id="goName">
 				Name: <input type="text" maxlength="10" id="playerName"/><br>
 			</div>
-			<div id="goButtons">
-				<div id="cancelRecordButton" class="goButton"></div>				
-				<div id="sendRecordButton" class="goButton"></div>
-			</div>
+
+            <div class="social-buttons">
+                <div class="share-title">sign in to share you achievement with friends</div>
+                <div class="social-button vk">
+                    <div id="vk_api_transport"></div>
+                    <div id="login-vk"></div>
+                </div>
+                <div class="social-button fb">
+                    <div id="fb-root"></div>
+                    <div class="fb-login-button" data-show-faces="false" data-scope="publish_stream" data-width="200" data-max-rows="1"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="share-info">
+                    <span></span>
+                    <img />
+                    <a href="javascript:;" class="logout">sign out</a>
+                </div>
+                <div class="share-wrap">
+                    <a href="javascript:;" class="share">share your achievement with friends</a>
+                </div>
+            </div>
+
+            <div id="goButtons">
+                <div id="sendRecordButton" class="goButton"></div>
+                <div id="cancelRecordButton" class="goButton"></div>
+                <div class="clear"></div>
+            </div>
 		</div>	
 <!--
 	===========================================================================================================

@@ -1,0 +1,38 @@
+.clear {
+    clear: both;
+    float: none;
+}
+
+.social-buttons {
+    display: none;
+    margin: 10px 0 0px 40px;
+}
+
+.social-buttons .social-button {
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+.social-buttons .social-button.vk {
+    padding-top: 1px;
+}
+
+.social-buttons .share-info {
+    display: none;
+}
+
+.social-buttons .share-info img {
+    width: 24px;
+}
+
+.social-buttons .share-wrap {
+    display: none;
+    margin: 0 5px 0 0;
+}
+
+.social-buttons .share-title, .social-buttons .share-info span, .social-buttons .share-info a, .social-buttons .share-wrap a {
+    color: #fff;
+    line-height: 24px;
+    font-size: 14px;
+    vertical-align: top;
+}

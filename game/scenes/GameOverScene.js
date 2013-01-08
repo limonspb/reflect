@@ -31,7 +31,7 @@ GameOverScene.prototype.cancelClick = function(){
 GameOverScene.prototype.sendRecordClick = function(){
 	playSound("menu_forward");	
 	$('#sendRecordButton').fadeOut();
-	global.sceneController.gameOverScene.sendRecord($('#playerName').val(),global.points,'sdaoOIJASDLknasd0O0OOO000OO00Llll111ll1l1l1l111l1l0o0o0oOooolaJASNDinasid');	
+	global.sceneController.gameOverScene.sendRecord($('#playerName').val(),global.points,'sdaoOIJASDLknasd0O0OOO000OO00Llll111ll1l1l1l111l1l0o0o0oOooolaJASNDinasid');
 }
 
 GameOverScene.prototype.sendRecord = function(name,count,mode){
@@ -54,4 +54,8 @@ GameOverScene.prototype.onMyPlaceCome = function(xml){
 	global.place = jQuery(xml).find('reply').attr('place');
 	$('#divWithPlace').fadeIn();
 	$('#placeGO').text(global.place.toString());
+
+    if (global.Sharing) {
+        global.Sharing.init();
+    }
 }

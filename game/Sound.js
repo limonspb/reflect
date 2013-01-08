@@ -76,7 +76,8 @@ SoundManager.prototype.stopSound = function(s){
 			(s != undefined)&&
 			(s.playState != createjs.SoundJS.PLAY_FINISHED) &&
 			(s.paused != true) &&
-			(s.tag != null)
+			(s.tag != null)&&
+			(s.getPosition() != 0)
 		)
 		s.stop();
 }

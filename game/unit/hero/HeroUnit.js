@@ -253,7 +253,7 @@ HeroUnit.prototype.initView = function ()
 	
 	this.bodySize = global.preloader.imgs.player.height;
 	this.ss = new createjs.SpriteSheet({ "animations": {
-		"run": [0, 2]},
+		"run": { frames: [0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1] }},
 		"images": [global.preloader.imgs.player],
 		"frames": {
 		"regX": global.preloader.imgs.player.height/2,
@@ -273,6 +273,8 @@ HeroUnit.prototype.initView = function ()
 	this.ss.getAnimation("run").frequency = 0;
 				
 	this.body = new createjs.BitmapAnimation(this.ss);
+	this.body.scaleX = 0.5;
+	this.body.scaleY = 0.5;
 				
 	this.body.gotoAndPlay("run");	
 	this.body.rotation = 90;
@@ -492,7 +494,7 @@ HeroUnit.prototype.move = function(elapsedTime)
 	
 	var vx_c = this.v_c * Math.cos(this.angle);
 	var vy_c = this.v_c * Math.sin(this.angle);
-	this.ss.getAnimation("run").frequency = Math.ceil(11 - this.v_c/this.max_v_c_forward * 10);
+	this.ss.getAnimation("run").frequency = Math.ceil(13 - this.v_c/this.max_v_c_forward * 10);
 	if (this.v_c == 0){
 		this.ss.getAnimation("run").frequency = 100000;
 	}
