@@ -108,7 +108,7 @@ VacuumEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (getDistanceToObject(this, global.hero) <= this.minRange+5)
+		if (this.dist <= this.minRange+5)
 		{
 			dx = 0;
 			dy = 0;

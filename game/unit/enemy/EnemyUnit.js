@@ -1,7 +1,3 @@
-/**
- * @author ProBigi
- */
-
 var ShotType = {
 	
 	FORWARD_SHOT: 0,
@@ -74,7 +70,7 @@ EnemyUnit.prototype.initPosition = function() {
 		this.x = - this.width - 20;
 		this.y = Math.random() * global.levelHeight;
 	}
-	else { //???08 убрал if (random >= .75) 
+	else {
 		this.x = global.levelWidth + this.width + 20;
 		this.y = Math.random() * global.levelHeight;
 	}
@@ -123,8 +119,8 @@ EnemyUnit.prototype.pauseMove = function(elapsedTime)
 
 EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 {	
-	if (Math.abs(this.x - global.hero.x) <= (this.size + global.hero.size)*0.75 ||
-		Math.abs(this.y - global.hero.y) <= (this.size + global.hero.size)*0.75)
+	if (Math.abs(this.x - global.hero.x) <= (this.size + global.hero.size)*0.75 &&
+		Math.abs(this.y - global.hero.y) <= (this.size + global.hero.size)*0.75) //???090909 &&&&&&
 	{
 		if (getDistanceToObject(this, global.hero) <= (this.size + global.hero.size)*0.75)
 		{
@@ -149,8 +145,8 @@ EnemyUnit.prototype.checkHitTank = function()
 	
 	if (this == global.EnemyManager.tank) { return; }
 	
-	if (Math.abs(this.x - global.EnemyManager.tank.x) <= (global.EnemyManager.tank.size + this.size)*0.75 ||
-		Math.abs(this.y - global.EnemyManager.tank.y) <= (global.EnemyManager.tank.size + this.size)*0.75)
+	if (Math.abs(this.x - global.EnemyManager.tank.x) <= (global.EnemyManager.tank.size + this.size)*0.75 &&
+		Math.abs(this.y - global.EnemyManager.tank.y) <= (global.EnemyManager.tank.size + this.size)*0.75) //???090909 &&&&&
 	{
 		if (getDistanceToObject(this, global.EnemyManager.tank) <= (global.EnemyManager.tank.size + this.size)*0.75)
 		{
@@ -228,10 +224,10 @@ EnemyUnit.prototype.checkMyBullet = function ()
 {
 	if (!this.bullet) { return; }
 	
-	if (getDistanceToObject(this, this.bullet) > this.size*0.7)
-	{
+	if (getDistanceToObject(this, this.bullet) > this.size*0.7)	{
 		this.bullet = null;
 	}
+		
 }
 
 

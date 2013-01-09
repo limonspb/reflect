@@ -258,7 +258,7 @@ HeroUnit.prototype.initView = function ()
 	
 	this.bodySize = global.preloader.imgs.player.height;
 	this.ss = new createjs.SpriteSheet({ "animations": {
-		"run": { frames: [0,1,2,3,4,5,6,7,8,7,6,5,4,3,2,1] }},
+		"run": { frames: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] }},
 		"images": [global.preloader.imgs.player],
 		"frames": {
 		"regX": global.preloader.imgs.player.height/2,
@@ -278,8 +278,6 @@ HeroUnit.prototype.initView = function ()
 	this.ss.getAnimation("run").frequency = 0;
 				
 	this.body = new createjs.BitmapAnimation(this.ss);
-	this.body.scaleX = 0.5;
-	this.body.scaleY = 0.5;
 				
 	this.body.gotoAndPlay("run");	
 	this.body.rotation = 90;	
@@ -613,8 +611,8 @@ HeroUnit.prototype.reflect = function(elapsedTime){
 	this.segments_arr_counted = false;
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
-		if (Math.abs( bullet.x - this.x) < 2*this.shieldWidth){
-			if (Math.abs( bullet.y - this.y) < 2*this.shieldWidth){				
+		if (Math.abs( bullet.x - this.x) < 1.0*this.shieldWidth){
+			if (Math.abs( bullet.y - this.y) < 1.0*this.shieldWidth){				
 					this.hardReflect(bullet, elapsedTime);
 			}				
 		}			

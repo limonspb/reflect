@@ -607,6 +607,9 @@ EnemyManager.prototype.removeEnemy = function(enemy)
 		if (this.enemiesCont.contains(enemy)) { this.enemiesCont.removeChild(enemy); }//???08 здесь два раза будет вычислен индекс в массиве
 																					  // не будет! это же разные массивы, и это стандартная проверка на всякий случай
 																					  // она популярна во флеш
+																					  //где же это разные массивы? Он один - enemiesCont
+																					  //вот тут this.enemiesCont.contains(enemy) - вычислится номер элемента
+																					  //а вот тут this.enemiesCont.removeChild(enemy) - вычислится снова
 		//enemy.clearData();
 		
 		global.points += enemy.points;

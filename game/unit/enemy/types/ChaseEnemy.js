@@ -95,9 +95,9 @@ ChaseEnemy.prototype.move = function (elapsedTime)
 		dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
 		dy = this.speed*Math.sin(this.angle)*elapsedTime/1000;
 		
-		if (Math.abs(this.x - global.hero.x) <= this.minRange+5 || Math.abs(this.y - global.hero.y) <= this.minRange+5)
+		if (Math.abs(this.x - global.hero.x) <= this.minRange+5 && Math.abs(this.y - global.hero.y) <= this.minRange+5)//???090909 && а не ||
 		{
-			if (getDistanceToObject(this, global.hero) <= this.minRange+5)
+			if (this.dist <= this.minRange+5)
 			{
 				dx = 0;
 				dy = 0;

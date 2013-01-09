@@ -86,7 +86,7 @@ BonusPanel.prototype.update = function(){
 		if (temp!=0){			
 			if (this.divs[i].showed==false){
 				this.divs[i].showed = true;
-				this.divs[i].fadeIn();				
+				this.divs[i].fadeIn();								
 			}
 			temp = Math.floor(temp/1000);
 			if (temp!=this.values[i]){

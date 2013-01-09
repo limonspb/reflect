@@ -312,7 +312,7 @@ BonusManager.prototype.checkPickUp = function()
 		
 		if (bonus.isPickuped) { return; }
 		
-		if (Math.abs(bonus.x - global.hero.x) <= bonus.size*0.75 || Math.abs(bonus.y-global.hero.y)<=bonus.size*0.75)
+		if (Math.abs(bonus.x - global.hero.x) <= bonus.size*0.75 && Math.abs(bonus.y-global.hero.y)<=bonus.size*0.75)//???090909 не "или", а "и", блеать :-)
 		{
 			if (getDistanceToObject(bonus, global.hero) <= bonus.size*0.75)
 			{
