@@ -128,7 +128,7 @@ EnemyManager.prototype.wave1 = function()
 	global.EnemyManager.initWave([EnemyTypes.SIMPLE_ENEMY], [5], [global.EnemyManager.timeToAddSimple]);
 }
 
-EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
+//EnemyManager.prototype.wave1 = EnemyManager.prototype.waweTest;//For testing. Do not delete. Comment it
 
 EnemyManager.prototype.wave2 = function()
 {

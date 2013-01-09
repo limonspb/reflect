@@ -31,6 +31,7 @@
 		
 		<script src="lib/easeljs-0.5.0.min.js"></script>
 		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="browser.js"></script>
 		
 		<script src="lib/preloadjs-0.2.0.min.js"></script>
 <!--		<script src="lib/soundjs-0.3.0.min.js"></script>
@@ -148,7 +149,13 @@
 	===========================================================================================================
 -->		
 		<div id="mainMenu" class="scene">
-				<div style="position:absolute; left : 0px; top:0px; font-size:10px; color:#DADADA;" id="version_div">
+				<div style="position:absolute; left : 100%; top:100%; margin-left: -90px; margin-top:-12px; font-size:10px; color:#DADADA;" id="version_div">
+				</div>
+				<div id="attention_chrome" style="display : none;" class="attention">
+					<span class="yellow">ATTENTION!</span> This game is optimized for <a href="https://www.google.com/chrome/">Google Chrome</a> browser
+				</div>
+				<div id="attention_version" style="display : none;" class="attention">
+					<span class="yellow">ATTENTION!</span> You are using an old version of your browser
 				</div>
 			 
 				<div class="menu main">

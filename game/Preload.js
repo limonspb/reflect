@@ -101,7 +101,7 @@ Preloader.prototype.initConstants = function()
    this.addSound("sound/game/ricochet/r3","ricochet3",2);
    
    for (var i=1; i<8; i++){
-	   this.addSound("sound/game/fire/"+i.toString(),"fire"+i.toString(),1);
+	   this.addSound("sound/game/fire/"+i.toString(),"fire"+i.toString(),2);
 	    	
    }
    for (var i=1; i<8; i++){

@@ -2,7 +2,7 @@
 // "main function"
 //
 function init() {
-	$("#version_div").append("v 0.9.1.3");
+	$("#version_div").append("v 0.9.9.1");
 	global.canvas = document.getElementById("reflectCanvas");
 	
 	global.canvas.height =  Math.min( $(window).height(), 1500 );

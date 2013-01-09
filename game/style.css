@@ -460,3 +460,18 @@ table.menu_table_top10 tr td:nth-child(2){
 #innerLifePanel{
 
 }
+
+.attention{
+	position:absolute;
+	left : 5px;
+	top : 2px;
+	font-size : 18px;	
+}
+
+.attention a{
+	color : #DADADA;
+}
+
+.yellow{
+	color : #CD9C29;
+}
