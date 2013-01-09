@@ -225,10 +225,18 @@
 -->		  
 		<div id="lifePanel" class="gamePanel">
 			<div id="innerLifePanel">
-				<img src="img/panels/key.png" id="lifePicture"/>
-				<span id="currentLife">54</span>
-				<span id="lifeSlash">/</span>
-				<span id="maxLife">100</span>
+				<table>
+					<tr>
+						<td style="vertical-align:middle;">
+							<img src="img/panels/key.png" id="lifePicture"/>
+						</td>
+						<td style="vertical-align:middle; padding-bottom : 10px;">				
+							<span id="currentLife">54</span>
+							<span id="lifeSlash">/</span>
+							<span id="maxLife">100</span>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 <!--
@@ -296,7 +304,7 @@
 	===========================================================================================================
 -->
 		<div id="pointsPanel" class="gamePanel">
-			<span id="currentTime">0</span>/
+			<span id="currentTime">0</span> /
 			<span id="currentPoints">0</span>
 		</div>
 <!--
@@ -309,7 +317,7 @@
 						<img src="img/bonus/teleport.png" class="infBonusImage" height="45px"/>
 					</td>
 					<td>
-						<span>X </span><span id="teleportCount">X 0</span>
+						<span>x </span><span id="teleportCount">0</span>
 					</td>
 				</tr>			
 				<tr>
@@ -317,7 +325,7 @@
 						<img src="img/bonus/regeneration.png" style="margin-left:5px"  class="infBonusImage" height="45px"/>				
 					</td>
 					<td>
-						<span>X </span><span id="regenerationCount">0</span>								
+						<span>x </span><span id="regenerationCount">0</span>								
 					</td>
 				</tr>			
 			</table>

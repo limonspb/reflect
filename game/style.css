@@ -90,17 +90,39 @@ body{
 	display : none;
 	top : 0px;	
 	left : 0px;
-	width : 200px;
+	padding-left : 5px;
+	width : 100%;
 	height : 25px;
-	font-size: 23px;
+	font-size: 23px;	
+	
+	background-color: rgba(0,0,0,0.2);
+		
+	
+	padding-right : 10px;
+	padding-bottom : 12px;	
 }
 
 #bonusPanel{
 	display : none;
-	width : 100px;
+	width : 150px;
 	height : 500px;
-	top : 50px;
+	top : 70px;
 	left : 0px;	
+}
+
+#bonusPanel table{
+	background-color: rgba(0,0,0,0.2);
+	
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-moz-border-radius-topright: 10px;
+	-moz-border-radius-bottomright: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	
+	padding-top : 10px;
+	padding-right : 10px;
+	padding-bottom : 10px;	
 }
 
 #pointsPanel{
@@ -108,7 +130,7 @@ body{
 	font-size : 23px;
 	width : 150;
 	height : 20;
-	top : 0px;
+	top : 3px;
 	left : 100%;
 	margin-left : -250px;
 }
@@ -116,15 +138,26 @@ body{
 #infinityBonusPanel{
 	display : none;
 	position : absolute;
-	font-size : 23px;
+	font-size : 18px;
 	
-	width : 120px;
+	width : 100px;	 
 	
 	top : 50px;
 	left : 100%;
-	margin-left: -120px;
+	margin-left: -100px;	
 	
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;	
 	
+	padding-top : 15px;
+	padding-bottom : 8px;
+	padding-left : 10px;
+	
+	background-color: rgba(0,0,0,0.2);
 }
 
 .bonusPanelImg{
@@ -221,11 +254,11 @@ body{
 }
 
 #lifePicture{
-	width : 70px;
+	
 }
 
-#infBonusImage{
-	
+.infBonusImage{
+	height : 35px;
 }
 
 #volumePanel{	
@@ -233,7 +266,7 @@ body{
 	left : 100%;
 	width : 60px;
 	height : 30px;
-	top : 0px;
+	top : 4px;
 	margin-left:-60px;	
 	overflow:hidden;
 }
@@ -418,4 +451,12 @@ table.menu_table_top10 tr td:nth-child(2){
 	margin-top:20px;
 	font-size : 12px;
 	text-align:center;
+}
+
+#currentLife, #lifeSlash, #maxLife{
+	
+}
+
+#innerLifePanel{
+
 }
