@@ -31,13 +31,12 @@ function GameScene(){
 
 extend(GameScene,BaseScene);
 
-GameScene.prototype.newGame = function(){
+GameScene.prototype.newGame = function(){	
 	global.gameid = "";
 	global.gameTime = 0;
 	global.points = 0;
 	global.hero.health = 250;
-	global.hero.MAX_HEALTH = 250;
-	global.hero.teleportCount = 0;
+	global.hero.MAX_HEALTH = 250;	
 	global.hero.regenerationCount = 0;
 	global.hero.x = 1000;
 	global.hero.y = 1000;
@@ -60,6 +59,10 @@ GameScene.prototype.newGame = function(){
 }
 
 GameScene.prototype.show = function(){
+	if (this.inprogress == false){
+		this.inprogress = true;
+		this.newGame();
+	}
 	this.lifePanel.show();
 	this.bonusPanel.show();
 	this.pointsPanel.show();
@@ -72,10 +75,6 @@ GameScene.prototype.show = function(){
 	createjs.Ticker.addListener(this);	
 	global.music.play(1);
 	
-	if (this.inprogress == false){
-		this.inprogress = true;
-		this.newGame();
-	}
 }
 
 GameScene.prototype.hide = function(){

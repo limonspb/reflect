@@ -1,7 +1,7 @@
 InfinityBonusPanel = function(){
 	this.update();
-	this.teleportCount = 0;
-	this.regenerationCount = 0;
+	this.teleportCount = 1000000;
+	this.regenerationCount = 10000000;
 }
 
 InfinityBonusPanel.prototype.show = function(){

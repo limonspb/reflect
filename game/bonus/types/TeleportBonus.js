@@ -1,7 +1,3 @@
-/**
- * @author ProBigi
- */
-
 function TeleportBonus()
 {
 	TeleportBonus.superclass.constructor.apply(this);

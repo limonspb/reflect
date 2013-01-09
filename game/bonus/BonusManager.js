@@ -1,8 +1,3 @@
-/**
- * Менеджер управления Бонусами
- * @author ProBigi
- */
-
 function BonusManager()
 {
 	this.bonuses = [];

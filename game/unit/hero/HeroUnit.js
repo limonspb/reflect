@@ -115,13 +115,17 @@ HeroUnit.prototype.zeroAll = function(){
 	
 	this.shieldWidth = 100;
 	this.shieldHeight = 10;
-	this.shieldDist = 25;	
+	this.shieldDist = 25;
+	
+	this.teleportCount = 0;
+	this.regenerationCount = 0;
+		
 }
 
 HeroUnit.prototype.regenerateHealth = function(){
 	if (global.gameTime-this.lastRegenerationTime > 5000){
 		if (this.health < this.MAX_HEALTH){
-			this.health+=this.regenerationCount;
+			this.health+=this.regenerationCount;			
 			this.lastRegenerationTime = global.gameTime;
 			if (this.health > this.MAX_HEALTH){
 				this.health = this.MAX_HEALTH;
