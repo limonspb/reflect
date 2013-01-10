@@ -97,7 +97,8 @@ BaseUnit.prototype.setUnitDamage = function(unit, damage)
 	playDamage();
 	if (unit == global.hero)
 	{
-		if (unit.fullProtectMode) { return; }
+		if (!unit.fullProtectMode) { global.hero.makeDamage(damage); }
+		return;
 	}
 	unit.health -= damage;
 	
@@ -108,20 +109,10 @@ BaseUnit.prototype.checkDestroy = function()
 {
 	if (this.health <= 0)
 	{
-		if (this == global.hero)
+		var index = global.EnemyManager.enemies.indexOf(this);
+		if (index != -1)
 		{
-			
-			//TODO вывод окна об окончании игры
-			
-			this.health = 0;
-		}
-		else
-		{
-			var index = global.EnemyManager.enemies.indexOf(this);
-			if (index != -1)
-			{
-				global.EnemyManager.blow(this);
-			}
+			global.EnemyManager.blow(this);
 		}
 	}
 }
