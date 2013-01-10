@@ -1,13 +1,11 @@
-/**
- * @author ProBigi
- */
-
 
 function TankEnemy()
 {
 	TankEnemy.superclass.constructor.apply(this);
 	
 	this.tankMode = false;
+	this.lastTail_time = -10000;
+	this.iamtank = true;
 }
 
 extend(TankEnemy,EnemyUnit);
@@ -27,7 +25,21 @@ TankEnemy.prototype.initView = function ()
 		"height": global.preloader.imgs.tank_anim.height,
 		"width": global.preloader.imgs.tank_anim.height
 		}
-	});	
+	});
+	
+	this.ss_fire = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 15]},
+		"images": [global.preloader.imgs.blow_anim],
+		"frames": {
+		"regX": global.preloader.imgs.blow_anim.height/2,
+		"regY": global.preloader.imgs.blow_anim.height/2,
+		"height": global.preloader.imgs.blow_anim.height,
+		"width": global.preloader.imgs.blow_anim.height
+		}
+	});
+	
+	this.ss_fire.getAnimation("run").frequency = 4;
+	
 	
 	this.ss.getAnimation("run").frequency = 4;
 	
@@ -84,6 +96,31 @@ TankEnemy.prototype.initOptions = function ()
 
 TankEnemy.prototype.move = function (elapsedTime)
 {
+	if (global.gameTime - this.lastTail_time > 100){
+		this.lastTail_time = global.gameTime;
+		
+		var expl = new createjs.BitmapAnimation(this.ss_fire);
+		
+		expl.onAnimationEnd = function(anim, frame)
+		{
+			anim.stop();
+			global.EnemyManager.enemiesCont.removeChild(anim);
+			anim = null;
+			//global.EnemyManager.removeEnemy(unit);
+		}
+		
+		//var scale = 0.6;
+		expl.x = this.x;
+		expl.y = this.y;
+		global.EnemyManager.enemiesCont.addChildAt(expl,0);
+					
+		expl.gotoAndPlay("run");
+		expl.rotation = Math.random()*360;
+		expl.scaleX = expl.scaleY = 0.7;
+	}
+	
+	
+	
 	if (this.stopUnit == true) { return; }
 	
 	this.dist = getDistanceToObject(this, global.hero);

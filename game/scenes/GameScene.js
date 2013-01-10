@@ -14,7 +14,7 @@ function GameScene(){
 	//global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 0, 20,250);
 	this.container.addChild(global.BulletFactory.bulletsCont);
 	
-	this.container.addChild(global.EnemyManager.enemiesCont);
+	this.container.addChildAt(global.EnemyManager.enemiesCont,2);
 	this.container.addChild(global.BonusManager.bonusesCont);
 	
 	this.backGround = new BackGround();
@@ -35,8 +35,8 @@ GameScene.prototype.newGame = function(){
 	global.gameid = "";
 	global.gameTime = 0;
 	global.points = 0;
-	global.hero.health = 2500;
-	global.hero.MAX_HEALTH = 2500;	
+	global.hero.health = 250;
+	global.hero.MAX_HEALTH = 250;	
 	global.hero.regenerationCount = 0;
 	global.hero.x = 1000;
 	global.hero.y = 1000;

@@ -100,4 +100,6 @@ BonusPanel.prototype.update = function(){
 			}
 		}
 	}
+	
+	$('#bonusPanel').css("margin-top",(-$("#bonusPanel").height()).toString() + "px");
 }

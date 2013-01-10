@@ -52,9 +52,53 @@ function HeroUnit()
 	this.shieldHeight = 0;
 	this.shieldDist = 0;
 	
+	this.start_fire_time = -100000;
+	this.last_exp_time = -100000;
+	
+	
+	this.ss_fire = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 15]},
+		"images": [global.preloader.imgs.blow_anim],
+		"frames": {
+		"regX": global.preloader.imgs.blow_anim.height/2,
+		"regY": global.preloader.imgs.blow_anim.height/2,
+		"height": global.preloader.imgs.blow_anim.height,
+		"width": global.preloader.imgs.blow_anim.height
+		}
+	});
+	
+	this.ss_fire.getAnimation("run").frequency = 1;	
 }
 
 extend(HeroUnit,BaseUnit);
+
+HeroUnit.prototype.drawFire = function(){
+	if (global.gameTime - this.start_fire_time < 2000)
+		if (Math.abs(global.gameTime - this.last_exp_time) > 300)
+		{
+			this.lastTail_time = global.gameTime;
+			
+			var expl = new createjs.BitmapAnimation(this.ss_fire);
+			
+			expl.onAnimationEnd = function(anim, frame)
+			{
+				anim.stop();
+				global.EnemyManager.enemiesCont.removeChild(anim);
+				anim = null;
+				//global.EnemyManager.removeEnemy(unit);
+			}
+			
+			//var scale = 0.6;
+			expl.x = this.x;
+			expl.y = this.y;
+			global.EnemyManager.enemiesCont.addChildAt(expl,0);
+						
+			expl.gotoAndPlay("run");
+			expl.rotation = Math.random()*360;
+			expl.scaleX = expl.scaleY = 0.5;
+		}
+	
+}
 
 HeroUnit.prototype.whiteShieldDecide = function(){
 	if (this.whiteShieldCount > 0){
@@ -343,7 +387,7 @@ HeroUnit.prototype.makeDamage = function(v){
 }
 
 HeroUnit.prototype.check_glow_green_vis = function(){
-	if (global.gameTime - this.glowGreen_start < 500){
+	if (global.gameTime - this.glowGreen_start < 1000){
 		this.player_glow_green.visible = true;	
 	}else{
 		this.player_glow_green.visible = false;		
@@ -351,7 +395,7 @@ HeroUnit.prototype.check_glow_green_vis = function(){
 }
 
 HeroUnit.prototype.check_glow_red_vis = function(){
-	if (global.gameTime - this.glowRed_start < 500){
+	if (global.gameTime - this.glowRed_start < 1000){
 		this.player_glow_red.visible = true;	
 	}else{
 		this.player_glow_red.visible = false;		
@@ -496,9 +540,14 @@ HeroUnit.prototype.setGravityV = function(){
 	}
 }
 
+HeroUnit.prototype.startFire = function(){
+	this.start_fire_time = global.gameTime;	
+}
+
 
 HeroUnit.prototype.move = function(elapsedTime)
 {	
+	this.drawFire();	
 	this.check_glow_green_vis();
 	this.check_glow_red_vis();
 	this.whiteShieldDecide();

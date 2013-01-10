@@ -1,7 +1,7 @@
 //
 // "main function"
 //
-function init() {
+function init() {	
 	$("#version_div").append("v 0.9.9.1");
 	global.canvas = document.getElementById("reflectCanvas");
 	

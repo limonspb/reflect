@@ -1,7 +1,3 @@
-/**
- * @author ProBigi
- */
-
 function BaseUnit()
 {
 	BaseUnit.superclass.constructor.apply(this);

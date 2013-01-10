@@ -128,6 +128,9 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 			if (this.nearRespawnCount >= this.nearRespawn)
 			{
 				this.setUnitDamage(global.hero, this.nearDamage);
+				if (!!this.iamtank){
+					global.hero.startFire();
+				}
 				
 				this.nearRespawnCount = 0;
 			}

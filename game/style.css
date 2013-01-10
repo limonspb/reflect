@@ -105,9 +105,9 @@ body{
 #bonusPanel{
 	display : none;
 	width : 150px;
-	height : 500px;
-	top : 70px;
-	left : 0px;	
+	
+	top : 100%;
+	left : 0px;
 }
 
 #bonusPanel table{
@@ -142,9 +142,11 @@ body{
 	
 	width : 100px;	 
 	
-	top : 50px;
+	top : 100%;
 	left : 100%;
-	margin-left: -100px;	
+	margin-left: -100px;
+	
+	margin-top : -105px;	
 	
 	-webkit-border-top-left-radius: 10px;
 	-webkit-border-bottom-left-radius: 10px;

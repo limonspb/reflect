@@ -1,8 +1,3 @@
-/**
- * @author ProBigi
- */
-
-
 function BulletFactory()
 {
 	this.bullets = [];
@@ -10,6 +5,20 @@ function BulletFactory()
 	
 	this.doubleDamageTime = 0;
 	this.doubleDamage = false;
+	
+	this.ss = new createjs.SpriteSheet({ "animations": {
+		"run": [0, 15]},
+		"images": [global.preloader.imgs.blow_anim],
+		"frames": {
+		"regX": global.preloader.imgs.blow_anim.height/2,
+		"regY": global.preloader.imgs.blow_anim.height/2,
+		"height": global.preloader.imgs.blow_anim.height,
+		"width": global.preloader.imgs.blow_anim.height
+		}
+	});
+	
+	this.ss.getAnimation("run").frequency = 1;
+	
 }
 
 
@@ -49,7 +58,7 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 		this.bullets[i].move(elapsedTime);
 		if(!checkOutOfStage(this.bullets[i]))
 		{
-			if (this.bulletsCont.contains(this.bullets[i]))
+			if (this.bulletsCont.contains(this.bullets[i]),true)
 			{
 				this.removeBullet(i);
 				len--;
@@ -68,11 +77,37 @@ BulletFactory.prototype.moveBullets = function(elapsedTime)
 	}
 }
 
-BulletFactory.prototype.removeBullet = function(index)
+BulletFactory.prototype.removeBullet = function(index, noExplosion)
 {
+	if(!!!noExplosion){
+		this.makeExplosion(this.bullets[index].x, this.bullets[index].y);
+	}
 	this.bulletsCont.removeChild(this.bullets[index]);
 	//TODO clear bullet
 	this.bullets.splice(index,1);
+}
+
+BulletFactory.prototype.makeExplosion = function(x,y){	
+	var expl = new createjs.BitmapAnimation(this.ss);
+	
+	expl.onAnimationEnd = function(anim, frame)
+	{
+		anim.stop();
+		global.stage.removeChild(anim);
+		anim = null;
+		//global.EnemyManager.removeEnemy(unit);
+	}
+	
+	//var scale = 0.6;
+	expl.x = x;
+	expl.y = y;
+	global.stage.addChild(expl);
+				
+	expl.gotoAndPlay("run");
+	expl.rotation = Math.random()*360;
+	expl.scaleX = expl.scaleY = 0.3;
+
+
 }
 
 BulletFactory.prototype.clearAll = function(elapsedTime)

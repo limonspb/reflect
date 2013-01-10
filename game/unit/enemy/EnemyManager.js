@@ -1,8 +1,3 @@
-/**
- * Менеджер управления Врагами
- * @author ProBigi
- */
-
 function EnemyManager()
 {
 	this.enemies = [];
@@ -34,7 +29,7 @@ function EnemyManager()
 	this.timerToAddChase = 6000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 40000;
+	this.timerToAddTank = 4000;
 	
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
@@ -537,7 +532,7 @@ EnemyManager.prototype.addEnemy = function(type)
 	{
 		enemy.init();
 		
-		this.enemiesCont.addChild(enemy);
+		this.enemiesCont.addChildAt(enemy);
 		this.enemies.push(enemy);
 	}
 }
@@ -591,7 +586,7 @@ EnemyManager.prototype.blow = function(unit)
 				
 	blow.gotoAndPlay("run");
 	blow.rotation = Math.random()*360;
-	blow.scaleX = blow.scaleY = 0.7;
+	blow.scaleX = blow.scaleY = 1;
 	
 	unit.stopUnit = true;
 	
@@ -872,7 +867,7 @@ EnemyManager.prototype.clearAll = function()
 	this.timerAddChaseEnemy = 0;
 	this.timerToAddChase = 6000;
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 40000;
+	this.timerToAddTank = 4000;
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
 }
