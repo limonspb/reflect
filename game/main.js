@@ -30,6 +30,6 @@ function handleImageLoad(event){
 	global.sceneController.menuScene.show();	
 	
 	createjs.Ticker.setFPS(60);
-	createjs.Ticker.useRAF = true;
+	//createjs.Ticker.useRAF = true;
 		
 }

@@ -557,16 +557,16 @@ HeroUnit.prototype.move = function(elapsedTime)
 	if (this.shieldScaleMode)
 	{
 		this.sheild.scaleX = this.sheild.scaleY = 1.5;
-		this.shieldWidth = 140;
+		this.shieldWidth = 150;
 		this.shieldHeight = 15;
-		this.shieldDist = 37.5;	 
+		this.shieldDist = 37.5;
 		
 		this.shieldScaleTime -= elapsedTime;
 		if (this.shieldScaleTime <= 0)
 		{
 			this.shieldScaleMode = false;
 			this.sheild.scaleX = this.sheild.scaleY = 1;
-			this.shieldWidth = 70;
+			this.shieldWidth = 100;
 			this.shieldHeight = 10;
 			this.shieldDist = 25;
 		}
@@ -615,8 +615,8 @@ HeroUnit.prototype.reflect = function(elapsedTime){
 	this.segments_arr_counted = false;
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
-		if (Math.abs( bullet.x - this.x) < 1.0*this.shieldWidth){
-			if (Math.abs( bullet.y - this.y) < 1.0*this.shieldWidth){				
+		if (Math.abs( bullet.x - this.x) < 1*this.shieldWidth){
+			if (Math.abs( bullet.y - this.y) < 1*this.shieldWidth){				
 					this.hardReflect(bullet, elapsedTime);
 			}				
 		}			
@@ -629,7 +629,7 @@ HeroUnit.prototype.reflect = function(elapsedTime){
 HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 	if (!this.segments_arr_counted){
 		this.segments_arr_counted = true;
-		segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);		
+		segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);	
 	}
 	var s = {};
 	s.x1 = b.x;

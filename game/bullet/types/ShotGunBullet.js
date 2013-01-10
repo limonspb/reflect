@@ -20,7 +20,8 @@ ShotGunBullet.prototype.initView = function(x,y)
 	var scale = 1.2;
 	
 	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
-	this.view.scaleX = this.view.scaleY = scale;
+	this.view.scaleX = scale; 
+	this.view.scaleY = scale;
 	this.view.x = -6;
 	this.view.y = -4;
 	
