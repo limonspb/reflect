@@ -4,17 +4,17 @@ function BonusManager()
 	this.bonusesCont = new createjs.Container();	
 	
 	
-	this.smallMedKitBonusTime = 0;
-	this.mediumMedKitBonusTime = 0;
-	this.plusToLifeBonusTime = 0;
-	this.freezBonusTime = 0;
-	this.doubleDamageBonusTime = 0;
-	this.speedUpBonusTime = 0;
-	this.regenerationBonusTime = 0;
-	this.teleportBonusTime = 0;
-	this.enemyScaleBonusTime = 0;
-	this.shieldScaleBonusTime = 0;
-	this.fullProtectBonusTime = 0;
+	this.smallMedKitBonusTime = 8000 + Math.random()*30000;
+	this.mediumMedKitBonusTime = 5000 + Math.random()*20000;
+	this.plusToLifeBonusTime = 20000 + Math.random()*40000;
+	this.freezBonusTime = 20000 + Math.random()*60000;
+	this.doubleDamageBonusTime = 10000 + Math.random()*100000;
+	this.speedUpBonusTime = 15000 + Math.random()*30000;
+	this.regenerationBonusTime = 5000 + Math.random()*5000;
+	this.teleportBonusTime = 10000 + Math.random()*10000;
+	this.enemyScaleBonusTime = 30000 + Math.random()*60000;
+	this.shieldScaleBonusTime = 15000 + Math.random()*45000;
+	this.fullProtectBonusTime = 8000 + Math.random()*15000;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -105,15 +105,15 @@ BonusManager.prototype.smallMedkitUpdate = function(elapsedTime)
 {
 	if (global.hero.health/global.hero.MAX_HEALTH > 0.8) { return; }
 	
-	this.smallMedKitBonusTime += elapsedTime;
+	this.smallMedKitBonusTime -= elapsedTime;
 	
-	if (this.smallMedKitBonusTime >= 8000 + Math.random()*30000)
+	if (this.smallMedKitBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.SMALL_MED_KIT, x, y);
-		this.smallMedKitBonusTime = 0;
+		this.smallMedKitBonusTime = 8000 + Math.random()*30000;
 	}
 }
 
@@ -125,15 +125,15 @@ BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
 {
 	if (global.hero.health/global.hero.MAX_HEALTH > 0.5) { return; }
 	
-	this.mediumMedKitBonusTime += elapsedTime;
+	this.mediumMedKitBonusTime -= elapsedTime;
 	
-	if (this.mediumMedKitBonusTime >= 5000 + Math.random()*20000)
+	if (this.mediumMedKitBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.MEDIUM_MED_KIT, x, y);
-		this.mediumMedKitBonusTime = 0;
+		this.mediumMedKitBonusTime = 5000 + Math.random()*20000;
 	}
 }
 
@@ -143,14 +143,14 @@ BonusManager.prototype.mediumMedkitUpdate = function(elapsedTime)
  */
 BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
 {
-	this.plusToLifeBonusTime += elapsedTime;
-	if (this.plusToLifeBonusTime >= 20000 + Math.random()*40000)
+	this.plusToLifeBonusTime -= elapsedTime;
+	if (this.plusToLifeBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.PLUS_TO_LIFE, x, y);
-		this.plusToLifeBonusTime = 0;
+		this.plusToLifeBonusTime = 20000 + Math.random()*40000;
 	}
 }
 
@@ -160,14 +160,14 @@ BonusManager.prototype.plusToLifeUpdate = function(elapsedTime)
  */
 BonusManager.prototype.freezUpdate = function(elapsedTime)
 {
-	this.freezBonusTime += elapsedTime;
-	if (this.freezBonusTime >= 20000 + Math.random()*60000)
+	this.freezBonusTime -= elapsedTime;
+	if (this.freezBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.FREEZ, x, y);
-		this.freezBonusTime = 0;
+		this.freezBonusTime = 20000 + Math.random()*60000;
 	}
 }
 
@@ -177,15 +177,15 @@ BonusManager.prototype.freezUpdate = function(elapsedTime)
  */
 BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
 {
-	this.doubleDamageBonusTime += elapsedTime;
-	if (this.doubleDamageBonusTime >= 10000 + Math.random()*100000)
+	this.doubleDamageBonusTime -= elapsedTime;
+	if (this.doubleDamageBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		
 		this.addBonus(BonusTypes.DOUBLE_DAMAGE, x, y);
-		this.doubleDamageBonusTime = 0;
+		this.doubleDamageBonusTime = 10000 + Math.random()*100000;
 	}
 }
 
@@ -195,14 +195,14 @@ BonusManager.prototype.doubleDamageUpdate = function(elapsedTime)
  */
 BonusManager.prototype.speedUpUpdate = function(elapsedTime)
 {
-	this.speedUpBonusTime += elapsedTime;
-	if (this.speedUpBonusTime >= 15000 + Math.random()*30000)
+	this.speedUpBonusTime -= elapsedTime;
+	if (this.speedUpBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.SPEED_UP, x, y);
-		this.speedUpBonusTime = 0;
+		this.speedUpBonusTime = 15000 + Math.random()*30000;
 	}
 }
 
@@ -214,14 +214,14 @@ BonusManager.prototype.regenerationUpdate = function(elapsedTime)
 {
 	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%10 != 0) { return; } 
 	
-	this.regenerationBonusTime += elapsedTime;
-	if (this.regenerationBonusTime >= 5000 + Math.random()*5000)
+	this.regenerationBonusTime -= elapsedTime;
+	if (this.regenerationBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.REGENERATION, x, y);
-		this.regenerationBonusTime = 0;
+		this.regenerationBonusTime = 5000 + Math.random()*5000;
 	}
 }
 
@@ -233,14 +233,14 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
 {
 	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%8 != 0) { return; } 
 	
-	this.teleportBonusTime += elapsedTime;
-	if (this.teleportBonusTime >= 10000 + Math.random()*10000)
+	this.teleportBonusTime -= elapsedTime;
+	if (this.teleportBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.TELEPORT, x, y);
-		this.teleportBonusTime = 0;
+		this.teleportBonusTime = 10000 + Math.random()*10000;
 	}
 }
 
@@ -250,14 +250,14 @@ BonusManager.prototype.teleportUpdate = function(elapsedTime)
  */
 BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
 {
-	this.enemyScaleBonusTime += elapsedTime;
-	if (this.enemyScaleBonusTime >= 30000 + Math.random()*60000)
+	this.enemyScaleBonusTime -= elapsedTime;
+	if (this.enemyScaleBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.ENEMY_SCALE, x, y);
-		this.enemyScaleBonusTime = 0;
+		this.enemyScaleBonusTime = 30000 + Math.random()*60000;
 	}
 }
 
@@ -267,14 +267,14 @@ BonusManager.prototype.enemyScaleUpdate = function(elapsedTime)
  */
 BonusManager.prototype.shieldScaleUpdate = function(elapsedTime)
 {
-	this.shieldScaleBonusTime += elapsedTime;
-	if (this.shieldScaleBonusTime >= 15000 + Math.random()*45000)
+	this.shieldScaleBonusTime -= elapsedTime;
+	if (this.shieldScaleBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.SHIELD_SCALE, x, y);
-		this.shieldScaleBonusTime = 0;
+		this.shieldScaleBonusTime = 15000 + Math.random()*45000;
 	}
 }
 
@@ -286,14 +286,14 @@ BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 {
 	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%5 != 0) { return; }
 	
-	this.fullProtectBonusTime += elapsedTime;
-	if (this.fullProtectBonusTime >= 8000 + Math.random()*15000)
+	this.fullProtectBonusTime -= elapsedTime;
+	if (this.fullProtectBonusTime <= 0)
 	{
 		var x = global.camera.lookAtX + global.hero.bodySize + Math.random() * (global.gameWidth - 2*global.hero.bodySize);
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.FULL_PROTECT, x, y);
-		this.fullProtectBonusTime = 0;
+		this.fullProtectBonusTime = 8000 + Math.random()*15000;
 	}
 }
 

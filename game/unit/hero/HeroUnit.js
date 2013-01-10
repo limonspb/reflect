@@ -343,7 +343,7 @@ HeroUnit.prototype.makeDamage = function(v){
 }
 
 HeroUnit.prototype.check_glow_green_vis = function(){
-	if (global.gameTime - this.glowGreen_start < 500){
+	if (global.gameTime - this.glowGreen_start < 800){
 		this.player_glow_green.visible = true;	
 	}else{
 		this.player_glow_green.visible = false;		
