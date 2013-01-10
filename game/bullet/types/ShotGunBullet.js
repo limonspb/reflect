@@ -21,8 +21,8 @@ ShotGunBullet.prototype.initView = function(x,y)
 	
 	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
 	this.view.scaleX = this.view.scaleY = scale;
-	this.view.x = -6;
-	this.view.y = -4;
+	this.view.x = global.preloader.imgs.simple_bullet.width/2*scale;
+	this.view.y = global.preloader.imgs.simple_bullet.height/2*scale;
 	
 	this.ss = new createjs.SpriteSheet({ "animations": {
 		"run": [0, 1, 2]},
