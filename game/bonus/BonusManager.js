@@ -312,6 +312,7 @@ BonusManager.prototype.checkPickUp = function()
 			if (getDistanceToObject(bonus, global.hero) <= bonus.size*0.75)
 			{
 				bonus.pickUp();
+				global.hero.takeBonusAnimation();
 				break;
 			}
 		}

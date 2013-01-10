@@ -119,7 +119,9 @@ HeroUnit.prototype.zeroAll = function(){
 	
 	this.teleportCount = 0;
 	this.regenerationCount = 0;
-		
+	
+	this.glowGreen_start = -1000;		
+	this.glowRed_start = -1000;		
 }
 
 HeroUnit.prototype.regenerateHealth = function(){
@@ -274,6 +276,11 @@ HeroUnit.prototype.initView = function ()
 			
 	this.width = global.preloader.imgs.player.width;
 	this.height = global.preloader.imgs.player.height;
+
+	this.player_glow_green = new createjs.Bitmap(global.preloader.imgs.player_glow_green);
+	this.player_glow_green.visible = false;
+	this.player_glow_red = new createjs.Bitmap(global.preloader.imgs.player_glow_red);
+	this.player_glow_red.visible = false;
 	
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
@@ -284,7 +291,13 @@ HeroUnit.prototype.initView = function ()
 	this.body = new createjs.BitmapAnimation(this.ss);
 				
 	this.body.gotoAndPlay("run");	
-	this.body.rotation = 90;	
+	this.body.rotation = 90;
+	this.player_glow_green.regX = global.preloader.imgs.player.height/2;
+	this.player_glow_green.regY = global.preloader.imgs.player.height/2;
+	this.player_glow_green.rotation = this.body.rotation; 	
+	this.player_glow_red.regX = this.player_glow_green.regX;
+	this.player_glow_red.regY = this.player_glow_green.regY;
+	this.player_glow_red.rotation = this.player_glow_green.rotation;	
 	
 	this.sheild = new createjs.Bitmap(global.preloader.imgs.shield);
 	this.underSheild = new createjs.Bitmap(global.preloader.imgs.underShield);
@@ -303,8 +316,11 @@ HeroUnit.prototype.initView = function ()
 	this.arrow.regX = global.preloader.imgs.player_arrow.width/2;
 	this.arrow.regY = global.preloader.imgs.player_arrow.height/2;	
 	
+	this.addChild(this.player_glow_green);
+	this.addChild(this.player_glow_red);
 	this.addChild(this.body);	
 	this.addChild(this.arrow);
+	
 	
 	this.addChild(this.sheild);
 	this.addChild(this.underSheild);	
@@ -312,6 +328,36 @@ HeroUnit.prototype.initView = function ()
 		
 	this.rotationSpeed = 200;
 }
+
+HeroUnit.prototype.takeBonusAnimation = function(){
+	this.glowGreen_start = global.gameTime;
+}
+
+HeroUnit.prototype.damageAnimation = function(){
+	this.glowRed_start = global.gameTime;
+}
+
+HeroUnit.prototype.makeDamage = function(v){
+	this.health -= v;
+	this.damageAnimation();
+}
+
+HeroUnit.prototype.check_glow_green_vis = function(){
+	if (global.gameTime - this.glowGreen_start < 200){
+		this.player_glow_green.visible = true;	
+	}else{
+		this.player_glow_green.visible = false;		
+	}		
+}
+
+HeroUnit.prototype.check_glow_red_vis = function(){
+	if (global.gameTime - this.glowRed_start < 200){
+		this.player_glow_red.visible = true;	
+	}else{
+		this.player_glow_red.visible = false;		
+	}		
+}
+
 
 HeroUnit.prototype.initOptions = function ()
 {
@@ -452,7 +498,9 @@ HeroUnit.prototype.setGravityV = function(){
 
 
 HeroUnit.prototype.move = function(elapsedTime)
-{
+{	
+	this.check_glow_green_vis();
+	this.check_glow_red_vis();
 	this.whiteShieldDecide();
 	this.regenerateHealth();
 	var dt = elapsedTime/1000;
@@ -557,16 +605,16 @@ HeroUnit.prototype.move = function(elapsedTime)
 	if (this.shieldScaleMode)
 	{
 		this.sheild.scaleX = this.sheild.scaleY = 1.5;
-		this.shieldWidth = 140;
+		this.shieldWidth = 150;
 		this.shieldHeight = 15;
-		this.shieldDist = 37.5;	 
+		this.shieldDist = 37.5;
 		
 		this.shieldScaleTime -= elapsedTime;
 		if (this.shieldScaleTime <= 0)
 		{
 			this.shieldScaleMode = false;
 			this.sheild.scaleX = this.sheild.scaleY = 1;
-			this.shieldWidth = 70;
+			this.shieldWidth = 100;
 			this.shieldHeight = 10;
 			this.shieldDist = 25;
 		}
@@ -615,8 +663,8 @@ HeroUnit.prototype.reflect = function(elapsedTime){
 	this.segments_arr_counted = false;
 	for (var i=0; i<global.BulletFactory.bullets.length; i++){
 		var bullet = global.BulletFactory.bullets[i];
-		if (Math.abs( bullet.x - this.x) < 1.0*this.shieldWidth){
-			if (Math.abs( bullet.y - this.y) < 1.0*this.shieldWidth){				
+		if (Math.abs( bullet.x - this.x) < 1*this.shieldWidth){
+			if (Math.abs( bullet.y - this.y) < 1*this.shieldWidth){				
 					this.hardReflect(bullet, elapsedTime);
 			}				
 		}			
@@ -629,7 +677,7 @@ HeroUnit.prototype.reflect = function(elapsedTime){
 HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 	if (!this.segments_arr_counted){
 		this.segments_arr_counted = true;
-		segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);		
+		segments_arr = this.getSieldSegmentsArray_usingOldandNow(100);	
 	}
 	var s = {};
 	s.x1 = b.x;

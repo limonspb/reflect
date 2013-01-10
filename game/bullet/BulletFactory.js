@@ -40,6 +40,9 @@ BulletFactory.prototype.addBullet = function(type, angle, x, y)
 
 BulletFactory.prototype.moveBullets = function(elapsedTime)
 {
+	for (var i=0; i<5; i++){
+		global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, 35+i, 100, 000);		
+	}
 	var len = this.bullets.length;
 	for (var i = 0; i < len; ++i)
 	{

@@ -20,7 +20,15 @@ PointsPanel.prototype.update = function(){
 	if ((mins!=this.mins)||(sex!=this.sex)){
 		this.mins = mins;
 		this.sex = sex;
-		$('#currentTime').text(mins.toString()+":"+sex.toString());		
+		var st_sex = this.sex.toString();
+		if (st_sex.length == 1){
+			st_sex = '0'+st_sex;
+		}
+		var st_min = this.mins.toString();		
+		if (st_min.length == 1){
+			st_min = '0'+st_min;
+		}
+		$('#currentTime').text(st_min+":"+st_sex);		
 	}
 	
 	if (this.points!=global.points){
