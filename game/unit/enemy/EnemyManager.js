@@ -633,8 +633,7 @@ EnemyManager.prototype.removeTypeEnemy = function(enemy, arrType)
 }
 
 EnemyManager.prototype.update = function(elapsedTime)
-{
-	return;
+{	
 	this.move(elapsedTime);
 	
 	for (var i = 0; i < this.WAVES.length; i++)

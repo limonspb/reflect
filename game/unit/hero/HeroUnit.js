@@ -343,7 +343,7 @@ HeroUnit.prototype.makeDamage = function(v){
 }
 
 HeroUnit.prototype.check_glow_green_vis = function(){
-	if (global.gameTime - this.glowGreen_start < 200){
+	if (global.gameTime - this.glowGreen_start < 500){
 		this.player_glow_green.visible = true;	
 	}else{
 		this.player_glow_green.visible = false;		
@@ -351,7 +351,7 @@ HeroUnit.prototype.check_glow_green_vis = function(){
 }
 
 HeroUnit.prototype.check_glow_red_vis = function(){
-	if (global.gameTime - this.glowRed_start < 200){
+	if (global.gameTime - this.glowRed_start < 500){
 		this.player_glow_red.visible = true;	
 	}else{
 		this.player_glow_red.visible = false;		
