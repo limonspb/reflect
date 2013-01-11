@@ -15,7 +15,7 @@ function BonusManager()
 	this.enemyScaleBonusTime = 30000 + Math.random()*60000;
 	this.shieldScaleBonusTime = 15000 + Math.random()*45000;
 	this.fullProtectBonusTime = 8000 + Math.random()*15000;
-	this.gunModeBonusTime = 1000//8000 + Math.random()*15000;
+	this.gunModeBonusTime = 8000 + Math.random()*15000;
 }
 
 BonusManager.prototype.addBonus = function(type, x, y)
@@ -305,7 +305,7 @@ BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 
 BonusManager.prototype.gunModeUpdate = function(elapsedTime)
 {
-	//if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%10 != 0) { return; }
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%5 != 0) { return; }
 	
 	this.gunModeBonusTime -= elapsedTime;
 	if (this.gunModeBonusTime < 0)
@@ -314,7 +314,7 @@ BonusManager.prototype.gunModeUpdate = function(elapsedTime)
 		var y = global.camera.lookAtY + global.hero.bodySize + Math.random() * (global.gameHeight - 2*global.hero.bodySize);
 		
 		this.addBonus(BonusTypes.GUN_MODE, x, y);
-		this.gunModeBonusTime = 1000//8000 + Math.random()*15000;
+		this.gunModeBonusTime = 8000 + Math.random()*15000;
 	}
 }
 
@@ -364,7 +364,7 @@ BonusManager.prototype.clearAll = function(elapsedTime)
 	this.enemyScaleBonusTime = 30000 + Math.random()*60000;
 	this.shieldScaleBonusTime = 15000 + Math.random()*45000;
 	this.fullProtectBonusTime = 8000 + Math.random()*15000;
-	this.gunModeBonusTime = 1000//8000 + Math.random()*15000;
+	this.gunModeBonusTime = 8000 + Math.random()*15000;
 	
 	//if (this.bonusesCont.parent) { this.bonusesCont.parent.removeChild(this.bonusesCont); }
 }
