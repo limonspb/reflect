@@ -17,12 +17,18 @@ ShotGunBullet.prototype.init = function(angle, x, y)
 
 ShotGunBullet.prototype.initView = function(x,y)
 {
-	var scale = 1.2;
+	var scale = 0.9;
 	
-	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
+	this.view = new createjs.Bitmap(global.preloader.imgs.simple_bullet2);
+	this.view2 = new createjs.Bitmap(global.preloader.imgs.simple_bullet);
+	
 	this.view.scaleX = this.view.scaleY = scale;
+	this.view2.scaleX = this.view2.scaleY = scale;
 	this.view.x = -global.preloader.imgs.simple_bullet.width/2*scale;
 	this.view.y = -global.preloader.imgs.simple_bullet.height/2*scale;
+	this.view2.x = this.view.x;
+	this.view2.y = this.view.y;
+	this.view2.visible = false;
 	
 	this.ss = new createjs.SpriteSheet({ "animations": {
 		"run": [0, 1, 2]},
@@ -44,9 +50,15 @@ ShotGunBullet.prototype.initView = function(x,y)
 	this.x2bullet.y = this.view.y;
 	
 	this.addChild(this.view);
+	this.addChild(this.view2);
 	
 	this.x = this.futureX = x;
 	this.y = this.futureY = y;
+}
+
+ShotGunBullet.prototype.makeReflected = function(){
+	this.view.visible = false;
+	this.view2.visible = true;
 }
 
 ShotGunBullet.prototype.initOptions = function(angle)

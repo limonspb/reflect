@@ -29,7 +29,7 @@ function EnemyManager()
 	this.timerToAddChase = 6000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 4000;
+	this.timerToAddTank = 40000;
 	
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
@@ -867,7 +867,7 @@ EnemyManager.prototype.clearAll = function()
 	this.timerAddChaseEnemy = 0;
 	this.timerToAddChase = 6000;
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 4000;
+	this.timerToAddTank = 40000;
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
 }

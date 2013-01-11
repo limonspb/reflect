@@ -52,8 +52,6 @@ function HeroUnit()
 	this.shieldHeight = 0;
 	this.shieldDist = 0;
 	
-	this.start_fire_time = -100000;
-	this.last_exp_time = -100000;
 	
 	
 	this.ss_fire = new createjs.SpriteSheet({ "animations": {
@@ -114,6 +112,10 @@ HeroUnit.prototype.zeroAll = function(){
 	this.o_ay = 0;
 	this.o_vx = 0;
 	this.o_vy = 0;
+	
+	this.start_fire_time = -100000;
+	this.last_exp_time = -100000;
+	
 	
 	this.o_a = 0;
 	this.o_v = 0;
@@ -804,6 +806,8 @@ HeroUnit.prototype.hardReflect = function(b, elapsedTime){
 		//это для бонуса двойного урона
 		b.setMyBullet();
 		if (global.BulletFactory.doubleDamage) { b.setFireBullet(); }
+		else
+			b.makeReflected();
 	}
 }
 
