@@ -305,7 +305,7 @@ BonusManager.prototype.fullProtectUpdate = function(elapsedTime)
 
 BonusManager.prototype.gunModeUpdate = function(elapsedTime)
 {
-	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%5 != 0) { return; }
+	if (global.EnemyManager.totalEnemyKills == 0 || global.EnemyManager.totalEnemyKills%3 != 0) { return; }
 	
 	this.gunModeBonusTime -= elapsedTime;
 	if (this.gunModeBonusTime < 0)

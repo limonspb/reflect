@@ -31,7 +31,7 @@ function EnemyManager()
 	this.timerToAddChase = 6000;
 	
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 40000;
+	this.timerToAddTank = 10000;
 	
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
@@ -643,7 +643,7 @@ EnemyManager.prototype.initWave = function(nums)
 		for (var j = 0; j < nums[i]; j++)
 		{
 			var tween = createjs.Tween.get(this, {loop:false});
-			tween.to( { },this.times[i]).call(this.addEnemy, [j]);
+			tween.to( { },this.times[i]).call(this.addEnemy, [i]);
 		}
 	}
 }
@@ -963,7 +963,7 @@ EnemyManager.prototype.clearAll = function()
 	this.timerAddChaseEnemy = 0;
 	this.timerToAddChase = 6000;
 	this.timerAddTankEnemy = 0;
-	this.timerToAddTank = 40000;
+	this.timerToAddTank = 10000;
 	this.timerAddVacuumEnemy = 0;
 	this.timerToAddVacuum = 10000;
 }
