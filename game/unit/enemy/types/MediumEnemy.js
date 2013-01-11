@@ -72,7 +72,7 @@ MediumEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*30*skill + 40;
 	this.rotationSpeed = 100;
-	this.health = 30*skill;
+	this.MAX_HEALTH = this.health = 30*skill;
 	this.damage = 10;
 	this.bulletRespawn = 3000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;

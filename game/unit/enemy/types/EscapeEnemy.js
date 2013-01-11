@@ -72,7 +72,7 @@ EscapeEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*30*skill + 50;
 	this.rotationSpeed = 70*skill;
-	this.health = 50*skill;
+	this.MAX_HEALTH = this.health = 50*skill;
 	this.damage = 12;
 	this.bulletRespawn = (2500 + Math.random()*1000)/skill;
 	this.bulletType = BulletTypes.SHOT_GUN;

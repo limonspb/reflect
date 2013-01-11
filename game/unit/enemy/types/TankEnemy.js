@@ -74,7 +74,7 @@ TankEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*20 + 230;
 	this.rotationSpeed = 200;
-	this.health = 9999999999;
+	this.MAX_HEALTH = this.health = 9999999999;
 	this.nearDamage = 9999999999;
 	this.minRange = 10;
 	this.maxRange = 20;

@@ -65,7 +65,7 @@ StrongEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*30*skill + 90;
 	this.rotationSpeed = 200;
-	this.health = 20*skill;
+	this.MAX_HEALTH = this.health = 20*skill;
 	this.damage = 10;
 	this.bulletRespawn = 4000 + Math.random()*3000;
 	this.bulletType = BulletTypes.SHOT_GUN;

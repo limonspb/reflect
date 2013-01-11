@@ -64,7 +64,7 @@ SimpleEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*30*skill + 50;
 	this.rotationSpeed = 40*skill;
-	this.health = 10*skill;
+	this.MAX_HEALTH = this.health = 10*skill;
 	this.damage = 5;
 	this.bulletRespawn = 2000 + Math.random()*2000;
 	this.bulletType = BulletTypes.SHOT_GUN;

@@ -64,13 +64,14 @@ function EnemyManager()
 	this.arrayTypes.push(this.simples, this.mediums, this.escapes, this.chases, this.strongs, this.vacuums, this.tanks);
 	
 	
+	//this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 3000, init: false });
 	this.WAVES.push({ time: 0, wave: this.wave1, timeToInit: 5000, init: false });
 	this.WAVES.push({ time: 0, wave: this.wave2, timeToInit: 30000, init: false });//50
 	this.WAVES.push({ time: 0, wave: this.wave3, timeToInit: 45000, init: false });//50
 	this.WAVES.push({ time: 0, wave: this.wave4, timeToInit: 50000, init: false });//60
 	this.WAVES.push({ time: 0, wave: this.wave5, timeToInit: 50000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave6, timeToInit: 60000, init: false });//90
-	this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 50000, init: false });//80
+	this.WAVES.push({ time: 0, wave: this.wave7, timeToInit: 50000, init: false });//50
 	this.WAVES.push({ time: 0, wave: this.wave8, timeToInit: 60000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave9, timeToInit: 80000, init: false });//80
 	this.WAVES.push({ time: 0, wave: this.wave10, timeToInit: 80000, init: false });//80

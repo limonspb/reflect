@@ -19,7 +19,15 @@ function BaseBonus()
 
 extend(BaseBonus,createjs.Container);
 
-BaseBonus.prototype.init = function(x,y) { }
+BaseBonus.prototype.init = function(x,y) { 
+	
+}
+
+BaseBonus.prototype.setToRemove = function()
+{
+	var tween = createjs.Tween.get(this, {loop:false});	
+	tween.to( { alpha: 0.2 } ,5000).call(this.testRemove);
+}
 
 BaseBonus.prototype.show = function()
 {
@@ -27,6 +35,8 @@ BaseBonus.prototype.show = function()
 	var tween = createjs.Tween.get(this, {loop:false});	
 	tween.to( { scaleX:1, scaleY: 1 },1000,createjs.Ease.bounceOut);
 	//.to( { scaleX:1, scaleY: 1 },300)
+	
+	this.setToRemove();
 }
 
 BaseBonus.prototype.hide = function()

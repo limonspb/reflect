@@ -93,10 +93,12 @@ BaseUnit.prototype.setUnitDamage = function(unit, damage)
 	playDamage();
 	if (unit == global.hero)
 	{
-		if (!unit.fullProtectMode) { global.hero.makeDamage(damage); }
-		return;
+		//if (!unit.fullProtectMode) { global.hero.makeDamage(damage); }
+		//return;
+		if (unit.fullProtectMode) { return; }
 	}
-	unit.health -= damage;
+	//unit.health -= damage;
+	unit.makeDamage(damage);
 	
 	unit.checkDestroy();
 }
