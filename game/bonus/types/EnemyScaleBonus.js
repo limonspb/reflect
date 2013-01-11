@@ -34,9 +34,6 @@ EnemyScaleBonus.prototype.init = function(x,y)
 	this.type = BonusTypes.ENEMY_SCALE;
 	
 	this.show();
-	
-	var tween = createjs.Tween.get(this, {loop:false});	
-	tween.to( { } ,5000).call(this.testRemove);
 }
 
 EnemyScaleBonus.prototype.testRemove = function()

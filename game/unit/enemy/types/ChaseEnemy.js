@@ -57,9 +57,9 @@ ChaseEnemy.prototype.initOptions = function ()
 	this.type = EnemyTypes.CHASE_ENEMY;
 	var skill = global.EnemyManager.skillKoeff;
 	
-	this.speed = Math.random()*30 + 110;
+	this.speed = Math.random()*30 + 80;
 	this.rotationSpeed = 120;
-	this.health = 20*skill;
+	this.MAX_HEALTH = this.health = 20*skill;
 	this.nearDamage = 20*skill;
 	this.minRange = 10;
 	this.maxRange = 20;

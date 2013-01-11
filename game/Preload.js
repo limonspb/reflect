@@ -158,6 +158,7 @@ Preloader.prototype.initConstants = function()
    this.addImage("img/bonus/enemi_scale.png","enemy_scale");
    this.addImage("img/bonus/full_protectionl.png","full_protect");
    this.addImage("img/bonus/shield_scale.png","shield_scale");
+   this.addImage("img/bonus/gun.png","gun_mode");
    
    this.addImage("img/bullets/bullet.png","simple_bullet");
    this.addImage("img/bullets/bullet2.png","simple_bullet2");

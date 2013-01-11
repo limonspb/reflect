@@ -50,6 +50,22 @@ EnemyUnit.prototype.init = function() {
 	this.initView();
 	this.initPosition();
 	this.initOptions();
+	this.setLifeBar();
+}
+
+EnemyUnit.prototype.setLifeBar = function() {
+	this.lifeBar = new createjs.Shape();
+	this.lifeBar.graphics.beginFill("#FF0000").drawRect(0,0,this.size,5);
+	this.lifeBar.alpha = 0.5;
+	this.lifeBar.regX = this.size/2;
+	this.lifeBar.regY = this.size/2+5;
+	
+	this.addChild(this.lifeBar);
+}
+
+EnemyUnit.prototype.makeDamage = function(v) {
+	this.health -= v;
+	this.lifeBar.scaleX = this.health/this.MAX_HEALTH;
 }
 
 EnemyUnit.prototype.initView = function() { }
@@ -276,7 +292,3 @@ EnemyUnit.prototype.update = function(target) {
 	this.y = this.position.y;
 }
 
-
-EnemyUnit.prototype.fireSound = function(){
-	playFire();
-}

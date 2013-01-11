@@ -31,12 +31,9 @@ ShieldScaleBonus.prototype.init = function(x,y)
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.type = BonusTypes.ENEMY_SCALE;
+	this.type = BonusTypes.SHIELD_SCALE;
 	
 	this.show();
-	
-	var tween = createjs.Tween.get(this, {loop:false});	
-	tween.to( { } ,5000).call(this.testRemove);
 }
 
 ShieldScaleBonus.prototype.testRemove = function()

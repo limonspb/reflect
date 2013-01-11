@@ -410,6 +410,10 @@ HeroUnit.prototype.initOptions = function ()
 	this.MAX_HEALTH = 10;
 	this.health = this.MAX_HEALTH;
 	
+	this.respawnCount = 0;
+	this.respawnBullet = 200;
+	this.damage = 5;
+	
 	this.current_forward = this.max_v_c_forward;
 	this.current_backward = this.max_v_c_backward;
 	
@@ -421,6 +425,9 @@ HeroUnit.prototype.initOptions = function ()
 	
 	this.fullProtectMode = false;
 	this.fullProtectTime = 0;
+	
+	this.gunMode = false;
+	this.gunModeTime = 0;
 	
 	this.protectIcon = new createjs.Bitmap(global.preloader.imgs.full_protect_icon);
 	this.protectIcon.regX = global.preloader.imgs.full_protect_icon.width/2;
@@ -682,9 +689,39 @@ HeroUnit.prototype.move = function(elapsedTime)
 			this.removeChild(this.protectIcon);
 			this.fullProtectMode = false;
 		}
+	}
+	
+	if (this.gunMode)
+	{
+		this.checkForShoot(elapsedTime);
+		
+		this.gunModeTime -= elapsedTime;
+		if (this.gunModeTime <= 0)
+		{
+			this.gunMode = false;
+		}
 	}	
 	
-}	
+}
+
+HeroUnit.prototype.checkForShoot = function(elapsedTime)
+{
+	this.respawnCount += elapsedTime;
+	
+	if (this.respawnCount >= this.respawnBullet)
+	{
+		this.fireSound();
+		var vec1 = rotateVec( {x:+20, y:0}, this.angle);
+		var bullet = global.BulletFactory.addBullet(BulletTypes.SHOT_GUN, this.rotation, this.x+vec1.x, this.y+vec1.y);
+		bullet.setMyBullet();
+		bullet.damage = this.damage;
+		if (global.BulletFactory.doubleDamage) { bullet.setFireBullet(); }
+		else { bullet.makeReflected(); }
+			
+		this.respawnCount = 0;
+	}
+}
+
 /**
  * Поворот щита относительно курсора
  */

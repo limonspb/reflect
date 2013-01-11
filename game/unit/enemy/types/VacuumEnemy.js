@@ -66,7 +66,7 @@ VacuumEnemy.prototype.initOptions = function ()
 	
 	this.speed = Math.random()*20*skill + 30;
 	this.rotationSpeed = 50;
-	this.health = 20*skill;
+	this.MAX_HEALTH = this.health = 20*skill;
 	this.nearDamage = 20*skill;
 	this.minRange = 10;
 	this.maxRange = 20;

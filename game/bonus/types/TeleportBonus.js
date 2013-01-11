@@ -29,9 +29,6 @@ TeleportBonus.prototype.init = function(x,y)
 	this.type = BonusTypes.TELEPORT;
 	
 	this.show();
-	
-	var tween = createjs.Tween.get(this, {loop:false});	
-	tween.to( { } ,5000).call(this.testRemove);
 }
 
 TeleportBonus.prototype.testRemove = function()
