@@ -119,3 +119,9 @@ BaseUnit.prototype.clearData = function()
 {
 	//TODO clearUnitData
 }
+
+
+BaseUnit.prototype.fireSound = function(){
+	playFire();
+}
+

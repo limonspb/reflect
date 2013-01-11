@@ -30,7 +30,7 @@ SpeedUpBonus.prototype.init = function(x,y)
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.type = BonusTypes.DOUBLE_DAMAGE;
+	this.type = BonusTypes.SPEED_UP;
 	this.showTime = 20;
 	
 	this.show();

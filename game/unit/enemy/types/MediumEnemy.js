@@ -173,11 +173,11 @@ MediumEnemy.prototype.shoot = function ()
 		this.fireSound();
 		this.fireSound();
 		
-		var vec1 = rotateVec( {x:-3,y:25}, this.gun.rotation);
+		var vec1 = rotateVec( {x:-3,y:25}, this.gun.rotation/180 * Math.PI);
 		this.bullet = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x + vec1.x, this.y + vec1.y);
 		this.bullet.damage = this.damage;
 		
-		var vec2 = rotateVec( {x:-3,y:-25}, this.gun.rotation);
+		var vec2 = rotateVec( {x:-3,y:-25}, this.gun.rotation/180 * Math.PI);
 		this.bullet2 = global.BulletFactory.addBullet(this.bulletType, this.gun.rotation, this.x + vec2.x, this.y + vec2.y);
 		this.bullet2.damage = this.damage;
 		

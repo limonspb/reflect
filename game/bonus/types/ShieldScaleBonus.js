@@ -31,7 +31,7 @@ ShieldScaleBonus.prototype.init = function(x,y)
 	if (this.width >= this.height) { this.size = this.height; }
 	else { this.size = this.width; }
 	
-	this.type = BonusTypes.ENEMY_SCALE;
+	this.type = BonusTypes.SHIELD_SCALE;
 	
 	this.show();
 }

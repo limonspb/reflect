@@ -292,7 +292,3 @@ EnemyUnit.prototype.update = function(target) {
 	this.y = this.position.y;
 }
 
-
-EnemyUnit.prototype.fireSound = function(){
-	playFire();
-}
