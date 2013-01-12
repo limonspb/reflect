@@ -1,5 +1,6 @@
 BonusPanel = function(){
 	
+	this.gunTr = $('#gunTr');
 	this.speedUpTR = $('#speedUpTR');
 	this.freezTr = $('#freezTr');
 	this.enemyScaleTr = $('#enemyScaleTr');
@@ -7,6 +8,7 @@ BonusPanel = function(){
 	this.shieldScaleTr = $('#shieldScaleTr');
 	this.x2DamageTr = $('#x2DamageTr');
 
+	this.s_gunTr = $('#gunSec');
 	this.s_speedUpTR = $('#speedUpSec');
 	this.s_freezTr = $('#freezSec');
 	this.s_enemyScaleTr = $('#enemyScaleSec');
@@ -23,6 +25,7 @@ BonusPanel = function(){
 	this.divs[3] = this.protectionTr;
 	this.divs[4] = this.shieldScaleTr;
 	this.divs[5] = this.x2DamageTr;
+	this.divs[6] = this.gunTr;
 	
 	this.divsSec[0] = this.s_speedUpTR;
 	this.divsSec[1] = this.s_freezTr;
@@ -30,11 +33,12 @@ BonusPanel = function(){
 	this.divsSec[3] = this.s_protectionTr;
 	this.divsSec[4] = this.s_shieldScaleTr;
 	this.divsSec[5] = this.s_x2DamageTr;
+	this.divsSec[6] = this.s_gunTr;
 	
 	this.values = [];
 	
 	
-	for (var i=0; i<6; i++){
+	for (var i=0; i<7; i++){
 		this.divs[i].showed = false;
 		this.divs[i].fadeOut();
 		this.values[i] = 0;
@@ -70,6 +74,9 @@ BonusPanel.prototype.getBonusTime = function(i){
 		case 5:
 			r = global.BulletFactory.doubleDamageTime
 			break
+		case 6:
+			r = global.hero.gunModeTime
+			break
 		default:
 			r = 0;
 	}
@@ -81,7 +88,7 @@ BonusPanel.prototype.update = function(){
 //	this.speedyMode = false;
 //	this.speedTime;
 	var temp = 0;
-	for (var i=0; i<6; i++){
+	for (var i=0; i<7; i++){
 		temp = this.getBonusTime(i);			
 		if (temp!=0){			
 			if (this.divs[i].showed==false){

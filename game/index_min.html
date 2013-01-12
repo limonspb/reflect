@@ -29,7 +29,105 @@
 		
 
 		
-<script type="text/javascript" src="reflect.min.2013.01.12.03.35.54.452.js"></script>
+<script type="text/javascript" src="reflect.min.2013.01.12.04.09.35.569.js"></script>
+		<script src="lib/jquery-1.8.3.min.js"></script>
+		<script src="browser.js"></script>
+		
+		<script src="lib/preloadjs-0.2.0.min.js"></script>
+<!--		<script src="lib/soundjs-0.3.0.min.js"></script>
+		<script src="lib/soundjs.flashplugin-0.3.0.min.js"></script> -->
+		
+		<script type="text/javascript" src="lib/srcsound/soundjs/SoundJS.js"></script>		
+		<script type="text/javascript" src="lib/srcsound/soundjs/HTMLAudioPlugin.js"></script>
+		<script type="text/javascript" src="lib/srcsound/swfobject.js"></script>
+		<script type="text/javascript" src="lib/srcsound/soundjs/FlashPlugin.js"></script>
+		<script type="text/javascript" src="Sound.js"></script>
+		
+		
+		<script src="lib/tweenjs-0.3.0.min.js"></script>
+		<!--<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script> -->
+		<script src="lib/jquery-ui.js"></script>
+		<script src="jq_ui.js"></script>
+		<script src="extend.js"></script>
+		<script src="functions.js"></script>
+		<script src="MenuButton.js"></script>
+		<script src="Music.js"></script>
+		
+		
+		<script src="Global.js"></script>
+		
+		<script src="vector/Vec2.js"></script>
+		
+		<script src="unit/BaseUnit.js"></script>
+		<script src="unit/hero/HeroUnit.js"></script>
+		<script src="unit/enemy/EnemyUnit.js"></script>
+		<script src="unit/enemy/types/SimpleEnemy.js"></script>
+		<script src="unit/enemy/types/MediumEnemy.js"></script>
+		<script src="unit/enemy/types/EscapeEnemy.js"></script>
+		<script src="unit/enemy/types/StrongEnemy.js"></script>
+		<script src="unit/enemy/types/TankEnemy.js"></script>
+		<script src="unit/enemy/types/ChaseEnemy.js"></script>
+		<script src="unit/enemy/types/VacuumEnemy.js"></script>
+		
+		
+		<script src="unit/enemy/EnemyTypes.js"></script>
+		<script src="unit/enemy/EnemyManager.js"></script>
+		
+		<script src="bullet/BaseBullet.js"></script>
+		<script src="bullet/types/ShotGunBullet.js"></script>
+		<script src="bullet/BulletTypes.js"></script>
+		<script src="bullet/BulletFactory.js"></script>
+		
+		
+		<script src="bonus/BaseBonus.js"></script>
+		<script src="bonus/types/SmallMedKitBonus.js"></script>
+		<script src="bonus/types/MediumMedKitBonus.js"></script>
+		<script src="bonus/types/PlusToLifeBonus.js"></script>
+		<script src="bonus/types/FreezBonus.js"></script>
+		<script src="bonus/types/DoubleDamageBonus.js"></script>
+		<script src="bonus/types/SpeedUpBonus.js"></script>
+		<script src="bonus/types/RegenerationBonus.js"></script>
+		<script src="bonus/types/TeleportBonus.js"></script>
+		<script src="bonus/types/EnemyScaleBonus.js"></script>
+		<script src="bonus/types/ShieldScaleBonus.js"></script>
+		<script src="bonus/types/FullProtectionBonus.js"></script>
+		<script src="bonus/types/GunModeBonus.js"></script>
+		
+		<script src="bonus/BonusTypes.js"></script>
+		<script src="bonus/BonusManager.js"></script>
+				
+		<script src="model/Keyboard.js"></script>
+		
+		<script src="view/BackGround.js"></script>
+		
+		<script src="scenes/gameScenePanels/VolumePanel.js"></script>
+		<script src="scenes/gameScenePanels/LifePanel.js"></script>
+		<script src="scenes/gameScenePanels/BonusPanel.js"></script>
+		<script src="scenes/gameScenePanels/PointsPanel.js"></script>
+		<script src="scenes/gameScenePanels/InfinityBonusPanel.js"></script>
+		
+		<script src="scenes/BaseScene.js"></script>		
+		<script src="scenes/MenuScene.js"></script>
+		<script src="scenes/CreditsScene.js"></script>
+		<script src="scenes/InfoScene.js"></script>
+		<script src="scenes/GameScene.js"></script>
+		<script src="scenes/SettingsScene.js"></script>
+		<script src="scenes/GameOverScene.js"></script>
+		<script src="scenes/RecordsScene.js"></script>
+		
+		<script src="scenes/SceneController.js"></script>
+		
+		<script src="Preload.js"></script>
+		<script src="Camera.js"></script>
+		<script src="cutsprite.js"></script>
+		
+		
+		<script src="main.js"></script>
+
+        <!--sharing-->
+        <script type="text/javascript" src="sharing/sharing.js"></script>
+        <script type="text/javascript" src="sharing/vk.js"></script>
+        <script type="text/javascript" src="sharing/fb.js"></script>
         <link rel="stylesheet" type="text/css" href="sharing/style.css" />
 
 	</head>
@@ -155,6 +253,15 @@
 -->
 		<div id="bonusPanel" class="gamePanel">
 			<table>
+				<tr id="gunTr">
+					<td>
+						<img src="img/bonus/gun.png"/ class="bonusPanelImg">
+					</td>
+					<td>
+						<span id="gunSec">14</span>
+						<span>sec.</span>
+					</td>
+				</tr>
 				<tr id="freezTr">
 					<td>
 						<img src="img/bonus/freeze.png"/ class="bonusPanelImg">

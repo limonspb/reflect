@@ -315,6 +315,7 @@ BonusManager.prototype.gunModeUpdate = function(elapsedTime)
 		
 		this.addBonus(BonusTypes.GUN_MODE, x, y);
 		this.gunModeBonusTime = 8000 + Math.random()*15000;
+		//this.gunModeBonusTime = 3000;
 	}
 }
 
