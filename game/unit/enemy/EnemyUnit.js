@@ -61,6 +61,8 @@ EnemyUnit.prototype.setLifeBar = function() {
 	this.lifeBar.regY = this.size/2+5;
 	
 	this.addChild(this.lifeBar);
+	
+	if (this.type == EnemyTypes.TANK_ENEMY) { this.removeChild(this.lifeBar); }
 }
 
 EnemyUnit.prototype.makeDamage = function(v) {
