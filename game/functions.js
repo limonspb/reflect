@@ -218,3 +218,12 @@ function checkOutOfStage(object)
 		
 	return true;
 }
+
+function checkOutOfGame(object)
+{
+	if (object.x > global.camera.lookAtX + global.gameWidth && object.x < global.camera.lookAtX) { return false; }
+	
+	if (object.y > global.camera.lookAtY + global.gameHeight && object.y < global.camera.lookAtY) { return false; }
+	
+	return true; 
+}

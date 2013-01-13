@@ -6,6 +6,7 @@ function TankEnemy()
 	this.tankMode = false;
 	this.lastTail_time = -10000;
 	this.iamtank = true;
+	this.onStage = false;
 }
 
 extend(TankEnemy,EnemyUnit);
@@ -131,7 +132,17 @@ TankEnemy.prototype.move = function (elapsedTime)
 		{
 			this.view.rotation += this.getGunRotation(this.view, ShotType.CLEVER_SHOT)*elapsedTime/1000;
 		}
-	} else { this.tankMode = true; }
+	} else {
+		if (this.onStage) { this.tankMode = true; }
+	}
+	
+	if (!this.onStage)
+	{
+		if (checkOutOfGame(this))
+		{
+			this.onStage = true;
+		}
+	}
 	
 	this.angle = this.view.rotation/180 * Math.PI;
 	dx = this.speed*Math.cos(this.angle)*elapsedTime/1000;
@@ -157,6 +168,8 @@ TankEnemy.prototype.move = function (elapsedTime)
 	{
 		if (!checkOutOfStage(this))
 		{
+			log("REMOVE TANK");
+			
 			global.EnemyManager.removeEnemy(this);
 		}
 	}
