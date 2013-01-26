@@ -60,9 +60,7 @@ EnemyUnit.prototype.setLifeBar = function() {
 	this.lifeBar.regX = this.size/2;
 	this.lifeBar.regY = this.size/2+5;
 	
-	this.addChild(this.lifeBar);
-	
-	if (this.type == EnemyTypes.TANK_ENEMY) { this.removeChild(this.lifeBar); }
+	if (this.type != EnemyTypes.TANK_ENEMY) { this.addChild(this.lifeBar); }
 }
 
 EnemyUnit.prototype.makeDamage = function(v) {
@@ -146,7 +144,7 @@ EnemyUnit.prototype.checkHitHero = function(elapsedTime)
 			if (this.nearRespawnCount >= this.nearRespawn)
 			{
 				this.setUnitDamage(global.hero, this.nearDamage);
-				if (!!this.iamtank){
+				if (!!this.iamtank && !global.hero.fullProtectMode){
 					global.hero.startFire();
 				}
 				

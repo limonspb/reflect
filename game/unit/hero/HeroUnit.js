@@ -95,7 +95,7 @@ HeroUnit.prototype.drawFire = function(){
 			expl.rotation = Math.random()*360;
 			expl.scaleX = expl.scaleY = 0.5;
 		}
-	
+		
 }
 
 HeroUnit.prototype.whiteShieldDecide = function(){
